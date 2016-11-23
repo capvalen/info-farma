@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Sistema Farmacia</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="iconfont/material-icons.css">
+		<link href="css/estilos.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Farmacia</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html"><i class="material-icons">home</i></a></li>
+				<li class="active"><a href="productos.html">Productos</a></li>
+				<li><a href="ventas.html">Ventas</a></li>
+				<li><a href="compras.html">Compras</a></li>
+				<li><a href="reportes.html">Reportes</a></li>
+			</ul>
+		 
+			<ul class="nav navbar-nav navbar-right">              
+			 <form class="navbar-form navbar-left" role="search">
+	 
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Buscar">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
+				</div>
+				
+			</form>        
+				<li><a href="configuraciones.html"><i class="material-icons">settings</i></a></li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">fingerprint</i> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#" data-toggle="modal" data-target=".modal-password">Cambiar contraseña</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">Cerrar sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+		
+	</nav>
+
+	<div class="section col-md-2 hidden-xs hidden-sm">
+		<div class="list-group">
+			<a href="index.html" class="list-group-item elementoMenu"><i class="material-icons">home</i> Principal</a>
+			<a href="productos.html" class="list-group-item elementoMenu list-group-item-warning"><i class="material-icons">loyalty</i> Productos</a>
+			<a href="ventas.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_cart</i> Ventas</a>
+			<a href="compras.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_basket</i> Compras</a>
+			<a href="seguridad.html" class="list-group-item elementoMenu"><i class="material-icons">security</i> Seguridad</a>
+			<a href="reportes.html" class="list-group-item elementoMenu"><i class="material-icons">assessment</i> Reportes</a>
+		</div>
+	</div>
+	<main class="col-md-8 col-lg-9 container">
+	<div class="row">
+		<ol class="breadcrumb col-sm-6">
+			<li><a href="index.html"><i class="material-icons">home</i>Inicio</a></li>
+			<li><a href="productos.html"><i class="material-icons">loyalty</i>Productos</a></li>
+			<li class="active"><i class="material-icons">add_location</i>Nuevo producto</li>
+		</ol>
+		<div class="col-sm-6 text-center"><small id="horaServer"></small> <small class="text-muted" id="fechaServer"></small> <p><small>Usuario:</small> <small class="text-primary">Carlos Pariona</small></p></div>
+	</div>
+	<h2>Control panel</h2>
+	<div class="panel panel-primary">
+		<div class="panel-heading">Ingreso de nuevo producto</div>
+		<div class="panel-body">
+			<p>Ingrese los campos requeridos</p>
+				
+				<div class="row container form-group form-inline" role="form">
+					<div class="input-group col-xs-12 col-sm-5 col-lg-6">
+						<span class="input-group-addon" id="sizzing-addon1">Nombre</span>
+						<input type="text" class="form-control" placeholder="Nombre de producto" aria-describedby="sizzing">
+					</div>
+
+					<div class="btn-group">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoría <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Tipo A</a></li>
+							<li><a href="#">Tipo B</a></li>
+							<li><a href="#">zTipo C</a></li>
+						</ul>
+					</div>
+
+					<div class="input-group col-sm-3 mitooltip" title="Precio por unidad">            
+						<input type="text" class="form-control " placeholder="Precio Unitario S/.">
+						<span class="input-group-btn">
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+						</span>
+					</div>
+
+					<div class="hidden-xs"><br></div>
+					<div class="input-group col-sm-3 col-lg-2 mitooltip" title="Costo por unidad">
+						<input type="text" class="form-control " placeholder="Costo x Unid. S/." >
+						<span class="input-group-btn">
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+						</span> 
+					</div>
+					<div class="input-group col-sm-3 col-lg-2 mitooltip" title="Stock mínimo">
+						<input type="text" class="form-control " placeholder="Stock min.">
+						<span class="input-group-btn">
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+						</span>
+					</div>
+					<div class="input-group col-sm-3 col-lg-2 mitooltip" title="Stock de inicial">
+						<input type="text" class="form-control " placeholder="Stock inicial">
+						<span class="input-group-btn">
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+							<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+						</span>
+					</div>
+				
+		</div>
+
+	</div>
+	<div class="panel-footer">
+		<div class="row"><div class="col-sm-3">
+			<a href="#" class="btn deep-purple white-text btn-circle mitooltip" title="Agregar barras"><i class="material-icons">assignment</i></a>
+			<a href="#" class="btn orange white-text btn-circle mitooltip" title="Agregar Pack" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="material-icons">extension</i></a></div>
+			<div class="col-sm-3">
+			<a href="#" class="btn green white-text btn-circle right mitooltip" title="Guardar producto"><i class="material-icons">archive</i></a>
+			<a href="productos.html" class="btn red white-text btn-circle mitooltip" title="Salir sin guardar"><i class="material-icons">reply</i></a></div>
+		</div>
+	</div>
+	</div></div>
+	</main>
+
+	<!--Modal de agregar pack-->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-tittle">Agregar pack</h4>
+				</div>
+				<div class="modal-body">
+					<p>A continuación agregue las cantidades para el pack</p>
+					<div class="row form-group form-inline">
+						<div class="input-group col-sm-4 mitooltip" title="Cantidad de unidades x pack">            
+							<input type="text" class="form-control " placeholder="Cantidad und">
+							<span class="input-group-btn">
+								<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+								<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+							</span>
+						</div>
+						<div class="input-group col-sm-4 mitooltip" title="Precio por el conjunto de unidades en pack">
+							<input type="text" class="form-control " placeholder="Precio S/.">
+							<span class="input-group-btn">
+								<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-top"></span></button>
+								<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+							</span>          
+						</div>
+						<button class="btn btn-info" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+					</div>
+					
+					<p>Packs agregados</p>
+					<div class="section ">
+						<div class="list-group">
+							<a href="#" class="list-group-item elementoMenu"><i class="material-icons">add_location</i> Pack de 15 unidades a S/. 35.50 <span class="close red-text">&times;</span></a>
+							<a href="#" class="list-group-item elementoMenu"><i class="material-icons">add_location</i> Pack de 30 unidades a S/. 70.00<span class="close red-text">&times;</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal Para cambiar contraseña-->
+	<div class="modal fade modal-password" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-tittle text-primary">Cambio de contraseña</h4>
+				</div>
+				<div class="modal-body">
+					<p>Ingrese las contraseñas a cambiar</p>
+					<div class="row container-fluid">
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior ">Contraseña anterior:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña anterior">
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior">Nueva contraseña:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña nueva">
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior">Repita la nueva contraseña:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Repita su contraseña">
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/inicializacion.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.mitooltip').tooltip();
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Sistema Farmacia</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="iconfont/material-icons.css">
+		<link href="css/estilos.css" rel="stylesheet">
+		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Farmacia</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="index.html"><i class="material-icons">home</i></a></li>
+				<li><a href="productos.html">Productos</a></li>
+				<li><a href="ventas.html">Ventas</a></li>
+				<li><a href="compras.html">Compras</a></li>
+				<li><a href="reportes.html">Reportes</a></li>
+			</ul>
+		 
+			<ul class="nav navbar-nav navbar-right">
+											 
+			 <form class="navbar-form navbar-left" role="search">
+	 
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Buscar">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
+				</div>
+				
+			</form>        
+				<li><a href="configuraciones.html"><i class="material-icons">settings</i></a></li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">fingerprint</i> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#" data-toggle="modal" data-target=".modal-password">Cambiar contraseña</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">Cerrar sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+		
+	</nav>
+
+	<div class="section col-md-2 hidden-xs hidden-sm">
+		<div class="list-group">
+			<a href="index.html" class="list-group-item elementoMenu list-group-item-warning"><i class="material-icons">home</i> Principal</a>
+			<a href="productos.html" class="list-group-item elementoMenu"><i class="material-icons">loyalty</i> Productos</a>
+			<a href="ventas.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_cart</i> Ventas</a>
+			<a href="compras.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_basket</i> Compras</a>
+			<a href="seguridad.html" class="list-group-item elementoMenu"><i class="material-icons">security</i> Seguridad</a>
+			<a href="reportes.html" class="list-group-item elementoMenu"><i class="material-icons">assessment</i> Reportes</a>
+		</div>
+	</div>
+	<main class="col-md-8 col-lg-9 container">
+
+	<div class="row">
+		<ol class="breadcrumb col-sm-6">
+		<li><a href="index.html"><i class="material-icons">home</i>Inicio</a></li>
+		<li class="active"><i class="material-icons">shopping_basket</i>Compras</li>
+	</ol>
+		<div class="col-sm-6 text-center"><small id="horaServer"></small> <small class="text-muted" id="fechaServer"></small> <p><small>Usuario:</small> <small class="text-primary">Carlos Pariona</small></p></div>
+	</div>
+	<h2>Compras de productos</h2>
+	
+	<ul class="nav nav-tabs">
+	<li class="active"><a href="#busqueda" data-toggle="tab">Búsqueda</a></li>
+	<li><a href="#nuevo" data-toggle="tab">Nueva compra</a></li>
+	<li><a href="#todos" data-toggle="tab">Todos los registros</a></li>
+	</ul>
+	
+	<div class="tab-content">
+	<!--Panel para buscar productos-->
+		<!--Clase para las tablas-->
+		<div class="tab-pane fade in active container" id="busqueda"><br>
+		<div class="panel panel-warning">
+			<div class="panel-heading">Búsqueda de compras</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Término para búsqueda...">
+						<span class="input-group-btn">
+							<button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search"></span></button>
+						</span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+				<br><br>
+				<h3 class="text-primary">Resultados de la búsqueda</h3>
+				
+				<!-- Tabla -->
+				<div class="table-responsive">
+				<table class="table table-hover tablaResultadosCompras"> 
+				<thead> <tr> <th>#</th> <th>Fecha</th> <th>Proveedor</th> <th>Tipo</th> <th>Serie</th> <th>Total S/.</th> <th><span class="glyphicon glyphicon-cog"></th></tr> </thead>
+				<tbody>
+				<tr> <th scope="row">1</th> <td>15/05/2016</td> <td>Laboratorio Mi Farma S.R.L.</td> <td class="mitooltipTipo"> <span id="tool1" >F</span></td> <td>001-061584</td> <td>749.28</td> <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle" data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td> </tr>
+				<tr> <th scope="row">2</th> <td>30/04/2016</td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool2" >B</span></td> <td>539-963215</td> <td>25.50</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">3</th> <td>29/04/2016</td> <td>Gesa EIRL</td> <td class="mitooltipTipo"> <span id="tool3" >T</span></td> <td>09-0251</td> <td>90.61</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">4</th> <td>25/04/2016</td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool4" >F</span></td> <td>539-963210</td> <td>59.10</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				</tbody>
+				</table></div>
+			</div>
+		</div>
+		</div>
+		<style>.divForm>.row{padding-bottom: 15px}</style>
+
+		<!--Panel para nueva compra-->
+		<div class="tab-pane fade " id="nuevo"><br>
+		<div class="panel panel-negro">
+			<div class="panel-heading">Datos generales de la nueva compra</div>
+			<div class="panel-body container divForm">
+				<div class="row">
+					<div class="col-sm-5">
+					<label for="">Razón social de proveedor:</label><br>
+					<select class="selectpicker" title="Seleccione uno..." data-live-search="true" data-width="100%">
+					  <option>Farma Ahorro Sac</option>
+					  <option>Botica Año Nuevo Eirl</option>
+					  <option>Laboratorio Clinico Control y Desarrollo Sac</option>
+					  <option>Clinica Femenina Eirl</option>
+					  <option>Nova Dental Clinica Odontologia Sac</option>
+					</select>
+
+					</div>
+					<div class="col-sm-3">
+					<label for="">Serie de comprobante:</label>
+					<input type="text" class="form-control">
+					</div>
+					<div class="col-sm-3">
+						<label for="">Fecha de compra:</label>
+						<input type="date" class="form-control"  id="dtpFechaComprobante" >
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<label for="">Considerar:</label>
+						<select class="selectpicker" data-width='100%'>
+							<option value=true>Con IGV</option>
+							<option value=false>Libre de Impuesto</option>
+						</select>
+					</div>
+					<div class="col-sm-2">
+						<label for="">Neto:</label>
+						<input type="text" class="form-control" id="txtNetoCompra" disabled>
+					</div>
+					<div class="col-sm-2">
+						<label for="">IGV:</label>
+						<input type="text" class="form-control" id="txtIGVCompra" disabled>
+					</div>
+					<div class="col-sm-2">
+						<label for="">Total:</label>
+						<input type="number" class="form-control" placeholder="S/. 0.00" min=0 step=0.1 lang="en" id="txtTotalCompra">
+					</div>
+					<div class="col-sm-3">
+						<label for="">¿Items con IGV?</label>
+						<select  class="selectpicker" data-width="60%">
+							<option value="1">Si</option>
+							<option value="2">No</option>
+						</select>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="panel panel-negro">
+			<div class="panel-heading">Buscar producto</div>
+			<div class="panel-body divForm">
+				<div class="row">
+					<div class="col-sm-9">
+						<label for="">Búsqueda del producto:</label>
+						<input type="text" class="form-control" placeholder="Puede buscar por nombre, por código o por lote del producto...">
+					</div>
+
+					<div class="col-sm-1"><label for=""></label>
+						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
+					</div>
+				</div>
+				
+				<div class="row"><hr>
+					<div class="col-sm-8">
+						<label for="">Nombre del producto:</label> <span id="lblNombreProductoCompra">Ibuprofeno</span>		
+					</div>
+					<div class="col-sm-4"><label for="">¿Vence?:</label> <select name="" id="cmbVenceCompra" class="selectpicker" data-width="50%">
+						<option value=true>Sí</option>
+						<option value=false>No</option></select>
+					</div>
+				</div>
+			<div class="row container">
+				<div class="col-sm-1"><label for="">Cantidad:</label> <input type="text" class="form-control" id="txtCantProductoCompra" placeholder="0"></div>				
+				<div class="col-sm-2"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
+				<div class="col-sm-3"><label for="">Fecha de vencimiento: </label><input type="date" class='form-control' id="dtpFechaVencimientoProductoCompra"></div>
+				<div class="col-sm-2"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
+				<div class="col-sm-1"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
+			</div>
+			<div class="row container">
+				
+				
+			</div>
+			</div>
+		</div>
+
+		<div class="panel panel-negro">
+			<div class="panel-heading">Detalles de la compra</div>
+			<div class="panel-body divForm">
+				<div class="row">
+					<div class="col-xs-1">#</div>
+					<div class="col-xs-4">Producto</div>
+					<div class="col-xs-1">Cantidad</div>
+					<div class="col-xs-1">Lote</div>
+					<div class="col-xs-2">Costo x Und.</div>
+					<div class="col-xs-2">Sub-Total</div>
+					<div class="col-xs-1"><span class="glyphicon glyphicon-flag"></span></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="tab-pane fade" id="todos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, placeat, a. Alias, amet perferendis molestias modi nobis labore voluptates debitis ab obcaecati quis quas eius inventore. Beatae, natus doloribus reprehenderit.</div>
+	</div>
+
+	</main>
+
+	<!-- Modal para mostrar el detalle de las facturas-->
+	<div class="modal fade modal-detalleCompras " tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg ">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button> <!--Boton para cerrar-->
+				<h4 class="modal-tittle text-primary">Detalle de Factura</h4></div>
+				<div class="modal-body">
+					<dl class="dl-horizontal">
+						<dt>Proveedor:</dt> <dd class="col-xs-offset-1">Laboratorio Mi Farma S.R.L.</dd>
+						<dt>Serie:</dt> <dd class="col-xs-offset-1">001-061584</dd>
+						<dt>Fecha de registro:</dt> <dd class="col-xs-offset-1">Domingo, 15 de marzo de 2016 11:34 a.m.</dd>
+						<dt>Registrador:</dt> <dd class="col-xs-offset-1">Carlos Pariona</dd>
+						</dl>            
+						<table class="table table-hover">
+							<thead>
+								<tr class="text-primary">
+									<th>#</th> <th>Cant.</th> <th>Descripción de producto</th> <th>Costo Und.</th> <th>Importe</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td> <td>16</td>
+									<td>Red Bull lata 350ml</td>
+									<td>5.00</td>
+									<td>S/. 80.00</td>
+								</tr>
+								<tr>
+									<td>2</td> <td>100</td>
+									<td>Bicarbonato sódico frasco frambuesa x20 cápsulas</td>
+									<td>1.60</td>
+									<td>S/. 160.00</td>
+								</tr>
+								<tr>
+									<td>3</td> <td>12</td>
+									<td>Aciclovid calox 400mg x 30 tabletas</td>
+									<td>22.79</td>
+									<td>S/. 273.48</td>
+								</tr>
+								<tr>
+									<td>4</td> <td>18</td>
+									<td>Dolocam plus jarabe 50ml</td>
+									<td>6.75</td>
+									<td>S/. 121.50</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-xs-6 col-xs-offset-3">
+							<dl class="dl-horizontal">
+							<dt>Neto:</dt><dd>634.98</dd>
+							<dt>IGV (18%):</dt><dd>114.30</dd>
+							<dt>Total:</dt><dd>749.28</dd>
+						</dl>
+						</div>
+						<br><br><br>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default">Ver cambios</button>
+					<button type="button" class="btn btn-primary">Editar</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>          
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal Para cambiar contraseña-->
+	<div class="modal fade modal-password" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button> <!--Boton para cerrar-->
+					<h4 class="modal-tittle text-primary">Cambio de contraseña</h4>
+				</div>
+				<div class="modal-body">
+					<p>Ingrese las contraseñas a cambiar</p>
+					<div class="row container-fluid">
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior ">Contraseña anterior:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña anterior">
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior">Nueva contraseña:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña nueva">
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="txtPassAnterior">Repita la nueva contraseña:</label>
+							<input type="password" class="form-control " id="txtPassAnterior" placeholder="Repita su contraseña">
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/inicializacion.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
+		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
+		$('.mitooltip').tooltip();
+		$('.mitooltipTipo').mouseover(function(){
+			var rowindex = $(this).closest('tr').index();
+			filaTool="#tool"+(rowindex+1)
+			//console.log(filaTool);
+			switch($(filaTool).html()){
+				case 'F': $(filaTool).attr('title','Factura'); break;
+				case 'B': $(filaTool).attr('title','Boleta'); break;
+				case 'T': $(filaTool).attr('title','Ticket'); break;
+			}
+			$(filaTool).tooltip('show');
+		});
+		$('.mitooltipTipo').mouseleave(function(){
+			var rowindex = $(this).closest('tr').index();
+			filaTool="#tool"+(rowindex+1)
+			$(filaTool).tooltip('destroy');
+		});
+
+		$('#txtTotalCompra').focusout(function () {
+			if($(this).val()<0){$(this).val(0);}
+			var neto=($(this).val()/1.18).toFixed(2);
+			var igvCalc= ($(this).val()-neto).toFixed(2);
+			$('#txtNetoCompra').val(neto);
+			$('#txtIGVCompra').val(igvCalc);
+
+
+		});
+
+		$('#cmbVenceCompra').on('changed.bs.select',function(){
+			console.log($(this).val())
+			if($(this).val()=='false'){console.log('deberia eliminar')
+			$('#dtpFechaVencimientoProductoCompra').attr('disabled', true);}
+		else{$('#dtpFechaVencimientoProductoCompra').attr('disabled', false);}
+		});
+
+		$('#btnAgregarListaCompras').click(function(){
+
+		})
+
+	});
+	</script>
+</body>
+</html>
