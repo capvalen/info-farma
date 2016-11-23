@@ -1,0 +1,28 @@
+Se necesita:
+
+* Medicamentos controlados: Se desea saber la cantidad de medicamentos que se vendió al día.
+* Implementar devoluciones o cambios de medicamentos
+* Implementar fecha de vencimiento: Se desea anticipar 3 meses antes los productos proximos a vender.
+
+Observaciones:
+
+* Los productos deben filtrarse y ubicarse por "Lote", cada lote tiene una fecha de vencimiento y viene en cada conjunto de producto y especificado por el comprobante de compra.
+Ejm:
+Cod.	¦		Nombre		¦ Clase	¦   Stock	¦ Lote
+0042	¦	Ibuprofeno 15ml Frasco	¦Medicina	¦ 19	¦ R14W
+0189	¦	Shampoo H&S 750ml Menta	¦ Aseo	¦ 55	¦ PMOM
+
+
+Tipos de producto:
+* Aseo (articulos de aseo personal)
+* Medicinas (jarabes = ampollas, tabletas, etc)
+* Galenicos (*pendiente de detalle*)
+* Regalos (peluches, joyas, incl. articulos de bebes)
+
+Especificación del producto
+Jarabe Lorelin Susp Iny 11.25mg 60ml
+
+ * Nombre: Lorelin Susp Iny
+ * Contenido: 11.25mg
+ * Cantidad: 60ml
+ * Presentación: Jarabe
