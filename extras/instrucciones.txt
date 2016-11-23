@@ -1,6 +1,8 @@
 Se necesita:
 
-* Medicamentos controlados: Se desea saber la cantidad de medicamentos que se vendió al día.
+* Compra y venta de articulos
+* Control de stock's reales mediante el ingreso de comprobantes de compra (boletas, facturas)
+* Medicamentos controlados: Se desea reportar la cantidad de medicamentos que se vendió al día.
 * Implementar devoluciones o cambios de medicamentos
 * Implementar fecha de vencimiento: Se desea anticipar 3 meses antes los productos proximos a vender.
 
