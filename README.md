@@ -1,5 +1,5 @@
 # info-farma
-Farma-Demo realizado con Bootstrap 3.x, jQuery 2.x, NodeJs 6.x
+Farma-Demo realizado con Bootstrap 3.x, jQuery 2.x, PHP 7.x
 
 Desarrolladores:
 * Carlos Pariona (Perú)
