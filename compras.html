@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Sistema Farmacia</title>
+	<title>Compras: Info-Farma</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">Farmacia</a>
+			<a class="navbar-brand" href="index.html">Info-Farma</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,7 +88,7 @@
 	<ul class="nav nav-tabs">
 	<li class="active"><a href="#busqueda" data-toggle="tab">Búsqueda</a></li>
 	<li><a href="#nuevo" data-toggle="tab">Nueva compra</a></li>
-	<li><a href="#todos" data-toggle="tab">Todos los registros</a></li>
+	<li><a href="#todos" data-toggle="tab">Todas las compras</a></li>
 	</ul>
 	
 	<div class="tab-content">
@@ -114,10 +114,10 @@
 				<table class="table table-hover tablaResultadosCompras"> 
 				<thead> <tr> <th>#</th> <th>Fecha</th> <th>Proveedor</th> <th>Tipo</th> <th>Serie</th> <th>Total S/.</th> <th><span class="glyphicon glyphicon-cog"></th></tr> </thead>
 				<tbody>
-				<tr> <th scope="row">1</th> <td>15/05/2016</td> <td>Laboratorio Mi Farma S.R.L.</td> <td class="mitooltipTipo"> <span id="tool1" >F</span></td> <td>001-061584</td> <td>749.28</td> <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle" data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td> </tr>
-				<tr> <th scope="row">2</th> <td>30/04/2016</td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool2" >B</span></td> <td>539-963215</td> <td>25.50</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
-				<tr> <th scope="row">3</th> <td>29/04/2016</td> <td>Gesa EIRL</td> <td class="mitooltipTipo"> <span id="tool3" >T</span></td> <td>09-0251</td> <td>90.61</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
-				<tr> <th scope="row">4</th> <td>25/04/2016</td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool4" >F</span></td> <td>539-963210</td> <td>59.10</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">1</th> <td class="miToopTipFechaCompra"><span id="toolFCpr1">15/05/2016</span></td> <td>Laboratorio Mi Farma S.R.L.</td> <td class="mitooltipTipo"> <span id="tool1" >F</span></td> <td>001-061584</td> <td>749.28</td> <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle" data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td> </tr>
+				<tr> <th scope="row">2</th> <td class="miToopTipFechaCompra"><span id="toolFCpr2">29/04/2016</span></td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool2" >B</span></td> <td>539-963215</td> <td>25.50</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">3</th> <td class="miToopTipFechaCompra"><span id="toolFCpr3">28/04/2016</span></td> <td>Gesa EIRL</td> <td class="mitooltipTipo"> <span id="tool3" >T</span></td> <td>09-0251</td> <td>90.61</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">4</th> <td class="miToopTipFechaCompra"><span id="toolFCpr4">23/11/2016</span></td> <td>Boticas arcangel</td> <td class="mitooltipTipo"> <span id="tool4" >F</span></td> <td>539-963210</td> <td>59.10</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
 				</tbody>
 				</table></div>
 			</div>
@@ -355,7 +355,7 @@
 		$('.mitooltip').tooltip();
 		$('.mitooltipTipo').mouseover(function(){
 			var rowindex = $(this).closest('tr').index();
-			filaTool="#tool"+(rowindex+1)
+			filaTool="#tool"+(rowindex+1);
 			//console.log(filaTool);
 			switch($(filaTool).html()){
 				case 'F': $(filaTool).attr('title','Factura'); break;
@@ -366,9 +366,24 @@
 		});
 		$('.mitooltipTipo').mouseleave(function(){
 			var rowindex = $(this).closest('tr').index();
-			filaTool="#tool"+(rowindex+1)
+			filaTool="#tool"+(rowindex+1);
 			$(filaTool).tooltip('destroy');
 		});
+		$('.miToopTipFechaCompra').mouseover(function() {
+			var rowindex = $(this).closest('tr').index();
+			filaTool="#toolFCpr"+(rowindex+1);
+			
+			var fecha= moment($(filaTool).text(),'DD/MM/YYYY');
+			fecha.locale('es')
+			$(filaTool).attr('title',fecha.format('dddd'));
+			$(filaTool).tooltip('show');
+		});
+		$('.miToopTipFechaCompra').mouseleave(function(){
+			var rowindex = $(this).closest('tr').index();
+			filaTool="#toolFCpr"+(rowindex+1);
+			$(filaTool).tooltip('destroy');
+		});
+
 
 		$('#txtTotalCompra').focusout(function () {
 			if($(this).val()<0){$(this).val(0);}
