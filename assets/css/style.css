@@ -92,20 +92,14 @@ a, a:hover, a:focus {
 
 .btn-theme {
   color: #fff;
-  background-color: #68dff0;
-  border-color: #48bcb4;
+  background-color: #7276ab;
+    border-color: #768685;
 }
 .btn-theme:hover,
 .btn-theme:focus,
 .btn-theme:active,
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
-  color: #fff;
-  background-color: #48bcb4;
-  border-color: #48bcb4;
-}
-
-.btn-theme02 {
   color: #fff;
   background-color: #ac92ec;
   border-color: #967adc;
@@ -1936,7 +1930,7 @@ label {
 	margin: 0;
 	padding: 25px 20px;
 	text-align: center;
-	background: #68dff0;
+	background: #1a4e73;
 	border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	color: #fff;
@@ -1945,6 +1939,7 @@ label {
 }
 .login-wrap {
 	padding: 20px;
+	background-color:  rgba(191, 116, 63, 0.08);
 }
 .login-wrap .registration {
 	text-align: center;
