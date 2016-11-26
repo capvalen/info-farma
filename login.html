@@ -17,6 +17,7 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -34,7 +35,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="index.html">
+		      <form class="form-login" id="divInicio" action="index.html">
 		        <h2 class="form-login-heading">Ingresar </h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" placeholder="Usuario" autofocus>
@@ -88,6 +89,7 @@
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("assets/img/fondo.jpg", {speed: 500});
+		$('#divInicio').addClass('animated bounceIn');
     </script>
 
 
