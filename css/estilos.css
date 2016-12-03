@@ -73,8 +73,11 @@ input[type=number] {-moz-appearance:textfield;}
 .tablaCalendario>tbody>tr>td:hover{background-color: #d1c4e9;transition: all 0.3s ;}
 
 .cabecera{font-size: 13px;}
-td[data-row='6'][data-column='0'] .btnIzq{visibility: hidden;}
-td[data-row='21'][data-column='45'] .btnDer{visibility: hidden;}
+
+/*.table-responsive>.table>tbody>tr>td,
+.table-responsive>.table>tbody>tr>th,*/
+.table-responsive>.table>thead>tr>td,
+.table-responsive>.table>thead>tr>th{white-space: normal;}
 
 
 .noselect {
