@@ -1,24 +1,89 @@
-.rojo{background-color:red;}
-.azul{background-color:blue;}
-.verde{background-color:green;}
-.icono-peque{font-size: 15px;}.icono-peque-18{font-size: 16px;}
+/************ Codigo generado por:
+************* Pariona Valencia, Carlos Alex
+************* Para:
+************* Farmacia Virgen Maria.
+*/
+.navbar-inverse{ background-color: #fcf4db;border-color: rgba(138, 109, 59, 0.35);}
+.navbar-inverse .navbar-nav>li>a{color: #5f3a3a;}
+.navbar-text{margin-left: 0;} .navbar-brand>img {margin-top: -10px; border-radius: 6px;-moz-border-radius: 6px;-webkit-border-radius: 6px;}
+.navbar-inverse .navbar-brand:hover{color: #523f3f;}
+.icono-peque{font-size: 15px;}.icono-peque-18{font-size: 16px;}.icono-grande{font-size: 40px;}
 .btn-circle{width: 40px; height: 40px; text-align: center; padding: 6px 0; font-size: 12px; line-height: 1.42; border-radius: 35px;}
-.btn-circle:hover{box-shadow:0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);}
-.navbar-collapse>ul>li:hover{background-color:#f0ad4e;}
-
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  
-  margin: auto;
-}
-
+.btn-circle:hover,.btn-circle-grande:hover{box-shadow:0 5px 5px 0 rgba(0,0,0,0.18),0 5px 5px 0 rgba(0,0,0,0.15);}
+.btn-circle-grande{width: 80px; height: 80px; text-align: center; padding: 16px 0; font-size: 18px; line-height: 1.42; border-radius: 65px;}
+.navbar-inverse .navbar-brand {color: rgb(87, 87, 84);}
+.navbar>.container-fluid .navbar-brand {margin-left: 15px;}
+.navbar-collapse>ul>li:hover{background-color:rgba(240, 205, 78, 0.62);}
+.navbar-inverse .navbar-nav>.active>a{background-color: rgba(148, 59, 26, 0.96);}
+.btnOpciones:hover{background-color:#ffe0b2;}
+.btnOpciones:focus{background-color:#fff8e1;}
+.btnIcono{padding: 0px 3px}
+.thumbnail:hover{
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3),0 0 40px rgba(20, 31, 48, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 31, 48, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 31, 48, 0.1) inset;}
+a{text-decoration: none;display: inline-block;}
 .panel-negro { border-color: #434A54;}
 .panel-negro > .panel-heading {color: #fff; background-color: #434A54; border-color: #434A54;}
 .panel-negro > .panel-heading + .panel-collapse > .panel-body {border-top-color: #bce8f1;}
 .panel-negro > .panel-heading .badge {color: #fff; background-color: #434A54;}
 .panel-negro > .panel-footer + .panel-collapse > .panel-body {border-bottom-color: #bce8f1;}
+.panel-verde{border-color: #a4f196;}
+.panel-verde>.panel-heading{color: #f5f7fa;background-color: #8CC152;border-color: #a0d468;}
+.panel-lavanda{border-color: #ac92ec;}
+.panel-lavanda>.panel-heading{color: #f5f7fa;background-color: #967ADC;border-color: #ac92ec;}
+.panel-cielo{border-color: #4a89dc;}
+.panel-cielo>.panel-heading{color: #f5f7fa;background-color: #5d9cec;border-color: #4a89dc;}
+.panel-menta{border-color: #37bc9b;}.panel-menta>.panel-heading{color: #f5f7fa;background-color: #48cfad;border-color: #37bc9b;}
+.panel-rosa{border-color: #d770ad;}.panel-rosa>.panel-heading{color: #f5f7fa;background-color: #ec87c0;border-color: #d770ad;}
+.panel-dulce{border-color: #e9573f;}.panel-dulce>.panel-heading{color: #f5f7fa;background-color: #fc6e51;border-color: #e9573f;}
+.panel-agua{border-color: #3bafda;}.panel-agua>.panel-heading{color: #f5f7fa;background-color: #4fc1e9;border-color: #3bafda;}
+.panel-dark{border-color: #434a54;}.panel-dark>.panel-heading{color: #f5f7fa;background-color: #656d78;border-color: #434a54;}
+.panel-sol{border-color: #f6bb42;}.panel-sol>.panel-heading{color: #f5f7fa;background-color: #F0AD38;border-color: #f6bb42;}
+.panel-rojizo{border-color: #da4453;}.panel-rojizo>.panel-heading{color: #f5f7fa;background-color: #ed5565;border-color: #da4453;}
+.well {margin-bottom: 0px;}
+.btn-negro {border-color: #434A54; color: #fff; background-color: #434A54;}
+.panelCuadre{padding-top: 0px;}
+.panelCuadre>ul>li:hover{background-color: #a286e8; cursor: default;}
+.btnAtencion{font-size: 17px;}
+#mi_camara{padding-left: 0;}
+#botonesDoctor{padding: 10px}
+.panel-sombreado{box-shadow: 1px 1px 3px #3a4c90;}
+.form-control:focus{    border-color: #FFEB3B;box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(255, 193, 7, 0.55);}
 
+
+.contenedorTablaFinal{height: 500px !important;overflow: scroll; }
+
+.btn-negro:hover {color: #fff;} .btn-negro:active {background-color: #1f2123;} .btn-negro:focus {color: #fff;}
+.btn-amarillo {border-color: #f8b127; color: #fff; background-color: #f8b127;}
+#one { position: sticky; top: 10px; }
+#cmbOcupacion>option{text-transform: capitalize;}
+.mayuscula{text-transform: capitalize;}
+.capital:first-letter{text-transform: uppercase !important;}
+.tablita>tbody>tr:hover{background-color: #fce7ba; cursor: default;}
+#listadoFinal>thead>tr{background-color: #0277bd; color: #fff;}
+#listadoFinal>tbody>tr>th{background-color: #e0f7fa;/* color: #37474f;*/}
+
+#listadoFinal>tbody>tr>td,#listadoFinal>tbody>tr>th{border-top: 1px solid rgba(16, 44, 183, 0.29);}
+
+.encabezado{color:rgb(89,89,89); text-align: center;}
+.tablaCalendario>tbody>tr:hover{background-color: #ffecb3; cursor: default; transition: all 0.3s ;}
+.tablaCalendario>tbody>tr>td:hover{background-color: #d1c4e9;transition: all 0.3s ;}
+
+.cabecera{font-size: 13px;}
+td[data-row='6'][data-column='0'] .btnIzq{visibility: hidden;}
+td[data-row='21'][data-column='45'] .btnDer{visibility: hidden;}
+
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
 .materialize-red{background-color:#e51c23 !important}.materialize-red-text{color:#e51c23 !important}.materialize-red.lighten-5{background-color:#fdeaeb !important}.materialize-red-text.text-lighten-5{color:#fdeaeb !important}.materialize-red.lighten-4{background-color:#f8c1c3 !important}.materialize-red-text.text-lighten-4{color:#f8c1c3 !important}
 .materialize-red.lighten-3{background-color:#f3989b !important}.materialize-red-text.text-lighten-3{color:#f3989b !important}.materialize-red.lighten-2{background-color:#ee6e73 !important}.materialize-red-text.text-lighten-2{color:#ee6e73 !important}
 .materialize-red.lighten-1{background-color:#ea454b !important}.materialize-red-text.text-lighten-1{color:#ea454b !important}.materialize-red.darken-1{background-color:#d0181e !important}.materialize-red-text.text-darken-1{color:#d0181e !important}
@@ -52,7 +117,7 @@
 .deep-purple-text.text-darken-4{color:#311b92 !important}.deep-purple.accent-1{background-color:#b388ff !important}.deep-purple-text.text-accent-1{color:#b388ff !important}.deep-purple.accent-2{background-color:#7c4dff !important}
 .deep-purple-text.text-accent-2{color:#7c4dff !important}.deep-purple.accent-3{background-color:#651fff !important}.deep-purple-text.text-accent-3{color:#651fff !important}.deep-purple.accent-4{background-color:#6200ea !important}
 .deep-purple-text.text-accent-4{color:#6200ea !important}.indigo{background-color:#3f51b5 !important}.indigo-text{color:#3f51b5 !important}.indigo.lighten-5{background-color:#e8eaf6 !important}.indigo-text.
-text-lighten-5{color:#e8eaf6 !important}.indigo.lighten-4{background-color:#c5cae9 !important}.indigo-text.text-lighten-4{color:#c5cae9 !important}.indigo.lighten-3{background-color:#9fa8da !important}
+.text-lighten-5{color:#e8eaf6 !important}.indigo.lighten-4{background-color:#c5cae9 !important}.indigo-text.text-lighten-4{color:#c5cae9 !important}.indigo.lighten-3{background-color:#9fa8da !important}
 .indigo-text.text-lighten-3{color:#9fa8da !important}.indigo.lighten-2{background-color:#7986cb !important}.indigo-text.text-lighten-2{color:#7986cb !important}.indigo.lighten-1{background-color:#5c6bc0 !important}
 .indigo-text.text-lighten-1{color:#5c6bc0 !important}.indigo.darken-1{background-color:#3949ab !important}.indigo-text.text-darken-1{color:#3949ab !important}.indigo.darken-2{background-color:#303f9f !important}
 .indigo-text.text-darken-2{color:#303f9f !important}.indigo.darken-3{background-color:#283593 !important}.indigo-text.text-darken-3{color:#283593 !important}.indigo.darken-4{background-color:#1a237e !important}
