@@ -116,12 +116,28 @@
 						<!-- Tabla -->
 						<div class="table-responsive">
 						<table class="table table-hover tablaResultadosCompras"> 
-						<thead> <tr> <th>#</th> <th>Producto</th> <th>Restar</th> <th>Cantidad</th> <th>Sumar</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> </tr> </thead>
+						<thead> <tr> <th>#</th> <th>Producto</th> <th class="text-center">Cantidad</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> </tr> </thead>
 						<tbody>
-						<tr> <th scope="row">1</th> <td class="col-sm-4">Elemento 1</td> <td><button class="btn btn-danger">-</button></td><td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
-						<tr> <th scope="row">2</th> <td class="col-sm-4">Elemento 2</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input  class="form-control"type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
-						<tr> <th scope="row">3</th> <td class="col-sm-4">Elemento 3</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
-						<tr> <th scope="row">4</th> <td class="col-sm-4">Elemento 4</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
+						<tr> <th >1</th> <td class="col-sm-4">Elemento 1</td> <td class="col-sm-2 text-center">
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">-</button>
+								</span>
+								<input type="text" class="form-control text-center" value="1">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">+</button>
+								</span>
+							</div><!-- /input-group --></td>
+						<td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
+						<tr> <th scope="row">2</th> <td class="col-sm-4">Elemento 2</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1">
+						<input  class="form-control"type="text"></td>
+						<td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
+						<tr> <th scope="row">3</th> <td class="col-sm-4">Elemento 3</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1">
+						<input class="form-control" type="text"></td>
+						<td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
+						<tr> <th scope="row">4</th> <td class="col-sm-4">Elemento 4</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1">
+						<input class="form-control" type="text"></td>
+						<td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
 						</tbody>
 						</table></div>
 					</div>
@@ -160,11 +176,11 @@
 					<div class="col-sm-5">
 					<label for="">Razón social de proveedor:</label><br>
 					<select class="selectpicker" title="Seleccione uno..." data-live-search="true" data-width="100%">
-					  <option>Farma Ahorro Sac</option>
-					  <option>Botica Año Nuevo Eirl</option>
-					  <option>Laboratorio Clinico Control y Desarrollo Sac</option>
-					  <option>Clinica Femenina Eirl</option>
-					  <option>Nova Dental Clinica Odontologia Sac</option>
+						<option>Farma Ahorro Sac</option>
+						<option>Botica Año Nuevo Eirl</option>
+						<option>Laboratorio Clinico Control y Desarrollo Sac</option>
+						<option>Clinica Femenina Eirl</option>
+						<option>Nova Dental Clinica Odontologia Sac</option>
 					</select>
 
 					</div>
