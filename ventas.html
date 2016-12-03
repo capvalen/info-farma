@@ -74,7 +74,7 @@
 			<a href="reportes.html" class="list-group-item elementoMenu"><i class="material-icons">assessment</i> Reportes</a>
 		</div>
 	</div>
-	<main class="col-md-8 col-lg-9 container">
+	<main class="col-md-9 col-lg-10 container">
 
 	<div class="row">
 		<ol class="breadcrumb col-sm-6">
@@ -86,65 +86,68 @@
 	<h2>Ventas de productos</h2>
 	
 	<ul class="nav nav-tabs">
-	<li class="active"><a href="#busqueda" data-toggle="tab">Búsqueda</a></li>
-	<li><a href="#nuevo" data-toggle="tab">Nueva Venta</a></li>
+	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar Venta</a></li>
+	<li><a href="#nuevo" data-toggle="tab">Detalle de ventas</a></li>
 	<li><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
 	</ul>
 	
 	<div class="tab-content">
 	<!--Panel para buscar productos-->
 		<!--Clase para las tablas-->
-		<div class="tab-pane fade in active container" id="busqueda"><br>
-		<div class="panel panel-warning">
-			<div class="panel-heading">Búsqueda de ventas</div>
-			<div class="col-md-9 col-md-8">
-			<div class="panel-body">
-				<div class="col-lg-9">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Término para búsqueda...">
-						<span class="input-group-btn">
-							<button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
-					</div><!-- /input-group -->
-				</div><!-- /.col-lg-6 -->
-				<br><br>
-				<h3 class="text-primary">Resultados de la búsqueda</h3>
-				
-				<!-- Tabla -->
-				<div class="table-responsive">
-				<table class="table table-hover tablaResultadosCompras"> 
-				<thead> <tr> <th>#</th> <th>Producto</th> <th>Restar</th> <th>Cantidad</th> <th>Sumar</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> </tr> </thead>
-				<tbody>
-				<tr> <th scope="row">1</th> <td>Elemento 1</td> <td><button class="btn btn-danger">-</button></td><td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
-				<tr> <th scope="row">2</th> <td>Elemento 2</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
-				<tr> <th scope="row">3</th> <td>Elemento 3</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
-				<tr> <th scope="row">4</th> <td>Elemento 4</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
-				</tbody>
-				</table></div>
-			</div>
-			</div>
-			
-			<div class="col-md-3 col-md-3">
-			<div class="panel panel-negro">
-			<div class="panel-heading">Datos generales de la nueva venta</div>
-			<div class="panel-body container divForm">
-				<div class="row">
-					<div class="col-sm-1">
-					<label for="">Total:</label><br>
-					<strong>$ 5000</strong>
-					</div>
-					<div class="col-sm-3">
-					<label for="">Su Saldo:</label><br>
-					</div>
 
-				</div>
-	
-				
+		<div class="tab-pane fade in active" id="tabRealizarVenta"><br>
+		<div class="container-fluid">
+			<div class="col-sm-9">
+				<div class="panel panel-warning">
+					<div class="panel-heading">Búsqueda de ventas</div>
+					
+					<div class="panel-body">
+						<div class="col-md-8">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Término para búsqueda...">
+								<span class="input-group-btn">
+									<button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+							</div><!-- /input-group -->
+						</div><!-- /.col-lg-6 -->
+						<br><br>
+						<h3 class="text-primary">Resultados de la búsqueda</h3>
+						
+						<!-- Tabla -->
+						<div class="table-responsive">
+						<table class="table table-hover tablaResultadosCompras"> 
+						<thead> <tr> <th>#</th> <th>Producto</th> <th>Restar</th> <th>Cantidad</th> <th>Sumar</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> </tr> </thead>
+						<tbody>
+						<tr> <th scope="row">1</th> <td class="col-sm-4">Elemento 1</td> <td><button class="btn btn-danger">-</button></td><td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
+						<tr> <th scope="row">2</th> <td class="col-sm-4">Elemento 2</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input  class="form-control"type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
+						<tr> <th scope="row">3</th> <td class="col-sm-4">Elemento 3</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
+						<tr> <th scope="row">4</th> <td class="col-sm-4">Elemento 4</td><td><button class="btn btn-danger">-</button></td> <td class="col-sm-1"><input class="form-control" type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
+						</tbody>
+						</table></div>
+					</div>
+					
+					</div><!-- fin de pane warning-->
 			</div>
+			<div class="col-sm-3">
+				<div class="panel panel-negro">
+					<div class="panel-heading">Datos generales de la nueva venta</div>
+					<div class="panel-body">
+						<div class=" text-center">
+							
+							<label class="">Total:</label><br>
+								<h4>$ 540.20</h4>
+								<label for="">Dinero del cliente ($):</label><br>
+								<input type="text" class="form-control text-center" value="550.00"><br>
+								<label for="">Cambio:</label><br>
+								<h4>$ 9.80</h4>
+						</div>
+					</div>
+				</div><!-- fin de pane negro-->
+			</div><!-- fin de sm-4 -->
 		</div>
-				
-			</div>
-		</div>
+
+		
+
 		</div>
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
