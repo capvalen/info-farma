@@ -97,7 +97,7 @@
 		<div class="tab-pane fade in active container" id="busqueda"><br>
 		<div class="panel panel-warning">
 			<div class="panel-heading">Búsqueda de ventas</div>
-			<div class="col-md-7 col-md-7">
+			<div class="col-md-9 col-md-8">
 			<div class="panel-body">
 				<div class="col-lg-9">
 					<div class="input-group">
@@ -113,12 +113,12 @@
 				<!-- Tabla -->
 				<div class="table-responsive">
 				<table class="table table-hover tablaResultadosCompras"> 
-				<thead> <tr> <th>#</th> <th>Producto</th> <th>Cantidad</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> <th><span class="glyphicon glyphicon-cog"></th></tr> </thead>
+				<thead> <tr> <th>#</th> <th>Producto</th> <th>Restar</th> <th>Cantidad</th> <th>Sumar</th> <th>Precio x Unidad</th> <th>Descuento</th> <th>Sub-Total</th> </tr> </thead>
 				<tbody>
-				<tr> <th scope="row">1</th> <td>Elemento 1</td> <td>1</td> <td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle" data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td> </tr>
-				<tr> <th scope="row">2</th> <td>Elemento 2</td> <td>2</td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
-				<tr> <th scope="row">3</th> <td>Elemento 3</td> <td>3</td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
-				<tr> <th scope="row">4</th> <td>Elemento 4</td> <td>4</td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  <td><button type="button" class="btn btn-primary btn-sm mitooltip"  title="Ver detalle"data-toggle="modal" data-target=".modal-detalleCompras"><span class="glyphicon glyphicon-th-large"></span></button></td></tr>
+				<tr> <th scope="row">1</th> <td>Elemento 1</td> <td><button class="btn btn-danger">-</button></td><td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
+				<tr> <th scope="row">2</th> <td>Elemento 2</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
+				<tr> <th scope="row">3</th> <td>Elemento 3</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
+				<tr> <th scope="row">4</th> <td>Elemento 4</td><td><button class="btn btn-danger">-</button></td> <td><input type="text"></td> <td><button class="btn btn-success">+</button></td> <td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
 				</tbody>
 				</table></div>
 			</div>
@@ -131,6 +131,7 @@
 				<div class="row">
 					<div class="col-sm-1">
 					<label for="">Total:</label><br>
+					<strong>$ 5000</strong>
 					</div>
 					<div class="col-sm-3">
 					<label for="">Su Saldo:</label><br>
