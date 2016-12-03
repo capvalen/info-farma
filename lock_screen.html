@@ -62,7 +62,7 @@
 				          <!-- modal -->
 		  				
 		  				
-	  				</div><! --/lock-screen -->
+	  				</div><!--/lock-screen -->
 	  			</div><!-- /col-lg-4 -->
 	  	
 	  	</div><!-- /container -->
@@ -82,13 +82,15 @@
         function getTime()
         {
             var today=new Date();
-            var h=today.getHours();
+            var h=today.getHours()% 12;
             var m=today.getMinutes();
             var s=today.getSeconds();
+            var isPM = today.getHours() >= 12;
+
             // add a zero in front of numbers<10
             m=checkTime(m);
             s=checkTime(s);
-            document.getElementById('showtime').innerHTML=h+":"+m+":"+s;
+            document.getElementById('showtime').innerHTML=h+":"+m+":"+s+(isPM ? ' p.m.' : ' a.m.');
             t=setTimeout(function(){getTime()},500);
         }
 
