@@ -74,7 +74,7 @@
 			<a href="reportes.html" class="list-group-item elementoMenu"><i class="material-icons">assessment</i> Reportes</a>
 		</div>
 	</div>
-	<main class="col-md-9 col-lg-10 container">
+	<main class="col-md-12 col-lg-10 ">
 
 	<div class="row">
 		<ol class="breadcrumb col-sm-6">
@@ -97,7 +97,7 @@
 
 		<div class="tab-pane fade in active" id="tabRealizarVenta"><br>
 		<div class="container-fluid">
-			<div class="col-sm-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="panel panel-warning">
 					<div class="panel-heading">Búsqueda de ventas</div>
 					
@@ -116,52 +116,52 @@
 						<!-- Tabla -->
 						<div class="table-responsive">
 						<table class="table table-hover tablaResultadosCompras"> 
-						<thead> <tr> <th>#</th> <th>Producto</th> <th class="text-center">Cantidad</th> <th class="text-center">Precio x Unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
+						<thead> <tr> <th>#</th> <th class="col-xs-4">Producto</th> <th class="text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
 						<tbody>
-						<tr> <th >1</th> <td class="col-sm-4">Elemento 1</td> <td class="col-sm-2 text-center">
+						<tr> <th >1</th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
 							<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
-									<button class="btn btn-success btnAumentarCantidad" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
+									<button class="btn btn-success btnAumentarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
 								</span>
 							</div><!-- /input-group --></td>
-						<td class="mitooltipTipo"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
-						<tr> <th>2</th> <td class="col-sm-4">Elemento 2</td><td class="col-sm-2 text-center">
+						<td class="mitooltipTipo col-sm-1"> <span id="tool1" >$ 43</span></td> <td>$ 0.69</td> <td>$ 42.00</td> </tr>
+						<tr> <th>2</th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
-									<button class="btn btn-success btnAumentarCantidad" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
+									<button class="btn btn-success btnAumentarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
 								</span>
 							</div><!-- /input-group --></td>
-						<td class="mitooltipTipo"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
-						<tr> <th>3</th> <td class="col-sm-4">Elemento 3</td> <td class="col-sm-2 text-center">
+						<td class="mitooltipTipo col-sm-1"> <span id="tool2" >$ 99</span></td> <td>$ 2.30</td> <td>$  198.00</td> </tr>
+						<tr> <th>3</th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
-									<button class="btn btn-success btnAumentarCantidad" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
+									<button class="btn btn-success btnAumentarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
 								</span>
 							</div><!-- /input-group --></td>
-						<td class="mitooltipTipo"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
-						<tr> <th>4</th> <td class="col-sm-4">Elemento 4</td> <td class="col-sm-2 text-center">
+						<td class="mitooltipTipo col-sm-1"> <span id="tool3" >$ 25</span></td> <td>$ 6.00</td> <td>$ 75.00</td>  </tr>
+						<tr> <th>4</th> <td class="col-xs-4">Elemento 4</td> <td class="col-xs-4 col-sm-3 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
-									<button class="btn btn-success btnAumentarCantidad" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
+									<button class="btn btn-success btnAumentarCantidad hidden-xs" type="button"><span class="glyphicon glyphicon-chevron-up"></span></button>
 								</span>
 							</div><!-- /input-group --></td>
-						<td class="mitooltipTipo"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
+						<td class="mitooltipTipo col-sm-1"> <span id="tool4" >$ 6</span></td> <td>$ 5.00</td> <td>$  24.00</td>  </tr>
 						</tbody>
 						</table></div>
 					</div>
