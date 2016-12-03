@@ -53,6 +53,7 @@ a{text-decoration: none;display: inline-block;}
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;} 
 input[type=number] {-moz-appearance:textfield;}
+.conInputPersonalizados input{font-weight: 600;} .form-control{color: #0277BD;}
 
 .contenedorTablaFinal{height: 500px !important;overflow: scroll; }
 
@@ -78,6 +79,7 @@ input[type=number] {-moz-appearance:textfield;}
 .table-responsive>.table>tbody>tr>th,*/
 .table-responsive>.table>thead>tr>td,
 .table-responsive>.table>thead>tr>th{white-space: normal;}
+h2{margin-top: 0px;} .breadcrumb{margin-bottom: 10px; }
 
 
 .noselect {
