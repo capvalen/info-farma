@@ -121,7 +121,7 @@
 						<tr> <th >1</th> <td class="col-sm-4">Elemento 1</td> <td class="col-sm-2 text-center">
 							<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
@@ -132,7 +132,7 @@
 						<tr> <th>2</th> <td class="col-sm-4">Elemento 2</td><td class="col-sm-2 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
@@ -143,7 +143,7 @@
 						<tr> <th>3</th> <td class="col-sm-4">Elemento 3</td> <td class="col-sm-2 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
@@ -154,7 +154,7 @@
 						<tr> <th>4</th> <td class="col-sm-4">Elemento 4</td> <td class="col-sm-2 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
+									<button class="btn btn-danger btnRestarCantidad" type="button"><span class="glyphicon glyphicon-chevron-down"></span></button>
 								</span>
 								<input type="number" class="form-control text-center" value="1" min=1>
 								<span class="input-group-btn">
@@ -459,7 +459,12 @@
 		$('.btnAumentarCantidad').click(function() {
 			var valorAnt=$(this).parent().parent().find('input').val();
 			$(this).parent().parent().find('input').val(parseInt(valorAnt)+1);
-		})
+		});
+		$('.btnRestarCantidad').click(function() {
+			var valorAnt=$(this).parent().parent().find('input').val();
+			if(valorAnt!=1){$(this).parent().parent().find('input').val(parseInt(valorAnt)-1);}
+			
+		});
 
 	});
 	</script>
