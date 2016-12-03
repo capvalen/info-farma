@@ -3,6 +3,8 @@
 ************* Para:
 ************* Farmacia Virgen Maria.
 */
+::selection {background: #fff2a8;}::-moz-selection {background: #fff2a8;
+}
 .navbar-inverse{ background-color: #fcf4db;border-color: rgba(138, 109, 59, 0.35);}
 .navbar-inverse .navbar-nav>li>a{color: #5f3a3a;}
 .navbar-text{margin-left: 0;} .navbar-brand>img {margin-top: -10px; border-radius: 6px;-moz-border-radius: 6px;-webkit-border-radius: 6px;}
@@ -91,6 +93,19 @@ h2{margin-top: 0px;} .breadcrumb{margin-bottom: 10px; }
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
 }
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{outline: 0 none;}
+.btn-outline {background-color: transparent; color: inherit;transition: all .5s;}
+.btn-primary.btn-outline {color: #428bca;}
+.btn-success.btn-outline {color: #5cb85c;}
+.btn-info.btn-outline {color: #5bc0de;}
+.btn-warning.btn-outline {color: #f0ad4e;}
+.btn-danger.btn-outline {color: #d9534f;}
+
+.btn-primary.btn-outline:focus,.btn-success.btn-outline:focus,.btn-info.btn-outline:focus,.btn-warning.btn-outline:focus,.btn-danger.btn-outline:focus,
+.btn-primary.btn-outline:active,.btn-success.btn-outline:active,.btn-info.btn-outline:active,.btn-warning.btn-outline:active,.btn-danger.btn-outline:active,
+.btn-primary.btn-outline:hover,.btn-success.btn-outline:hover,.btn-info.btn-outline:hover,.btn-warning.btn-outline:hover,.btn-danger.btn-outline:hover {
+    color: white;}
+
 .materialize-red{background-color:#e51c23 !important}.materialize-red-text{color:#e51c23 !important}.materialize-red.lighten-5{background-color:#fdeaeb !important}.materialize-red-text.text-lighten-5{color:#fdeaeb !important}.materialize-red.lighten-4{background-color:#f8c1c3 !important}.materialize-red-text.text-lighten-4{color:#f8c1c3 !important}
 .materialize-red.lighten-3{background-color:#f3989b !important}.materialize-red-text.text-lighten-3{color:#f3989b !important}.materialize-red.lighten-2{background-color:#ee6e73 !important}.materialize-red-text.text-lighten-2{color:#ee6e73 !important}
 .materialize-red.lighten-1{background-color:#ea454b !important}.materialize-red-text.text-lighten-1{color:#ea454b !important}.materialize-red.darken-1{background-color:#d0181e !important}.materialize-red-text.text-darken-1{color:#d0181e !important}
