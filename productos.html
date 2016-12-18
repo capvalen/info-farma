@@ -86,7 +86,76 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">Ingreso de nuevo producto</div>
 		<div class="panel-body">
-			<p>Ingrese los campos requeridos</p>
+			<div class="form-horizontal">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-sm-6">
+						<div class="form-group">
+								<label class="col-sm-3 control-label">Nombre del producto:</label>
+								<div class="col-sm-9"><input type="text" class="form-control text-capitalize"  id ="" placeholder="Nombre del producto"></div>
+							</div><!-- form-group -->
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<button class="btn btn-primary dropdown-toggle col-sm-3 " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoría <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Tipo A</a></li>
+									<li><a href="#">Tipo B</a></li>
+									<li><a href="#">zTipo C</a></li>
+								</ul>
+							</div><!-- form-group -->
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2 text-center">
+							<label for="">Precio Unit.</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-danger btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-down"></i></button>
+								</span>
+								<input type="number" class="form-control text-center" value="1" min=1>
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-up"></i></button>
+								</span>
+							</div><!-- /input-group --></div>
+						<div class="col-sm-2 text-center">
+							<label for="">Stock Min.</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-danger btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-down"></i></button>
+								</span>
+								<input type="number" class="form-control text-center" value="1" min=1>
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-up"></i></button>
+								</span>
+							</div><!-- /input-group -->
+						</div>
+						<div class="col-sm-2 text-center">
+							<label for="">Stock Inicial.</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-danger btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-down"></i></button>
+								</span>
+								<input type="number" class="form-control text-center" value="1" min=1>
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-up"></i></button>
+								</span>
+							</div><!-- /input-group -->
+						</div>
+						<div class="col-sm-2 text-center">
+							<label for="">Costo por Und.</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-danger btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-down"></i></button>
+								</span>
+								<input type="number" class="form-control text-center" value="1" min=1>
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-caret-up"></i></button>
+								</span>
+							</div><!-- /input-group -->
+						</div>	
+					</div>
+				</div>
 				
 				<div class="row container form-group form-inline" role="form">
 					<div class="input-group col-xs-12 col-sm-5 col-lg-6">
@@ -236,6 +305,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('.mitooltip').tooltip();
+		
 	});
 	</script>
 </body>

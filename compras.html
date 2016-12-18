@@ -96,7 +96,7 @@
 	<div class="tab-content">
 	<!--Panel para buscar productos-->
 		<!--Clase para las tablas-->
-		<div class="tab-pane fade in active container" id="busqueda"><br>
+		<div class="tab-pane fade   container" id="busqueda"><br>
 		<div class="panel panel-warning">
 			<div class="panel-heading">Búsqueda de compras</div>
 			<div class="panel-body">
@@ -128,7 +128,7 @@
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
 		<!--Panel para nueva compra-->
-		<div class="tab-pane fade " id="nuevo"><br>
+		<div class="tab-pane fade in active" id="nuevo"><br>
 		<div class="panel panel-negro">
 			<div class="panel-heading">Datos generales de la nueva compra</div>
 			<div class="panel-body container divForm">
@@ -175,7 +175,7 @@
 						<input type="number" class="form-control" placeholder="S/. 0.00" min=0 step=0.1 lang="en" id="txtTotalCompra">
 					</div>
 					<div class="col-sm-3">
-						<label for="">¿Items con IGV?</label>
+						<label for="">¿Items tienen IGV?</label>
 						<select  class="selectpicker" data-width="60%">
 							<option value="1">Si</option>
 							<option value="2">No</option>
@@ -192,15 +192,17 @@
 				<div class="row">
 					<div class="col-sm-9">
 						<label for="">Búsqueda del producto:</label>
-						<input type="text" class="form-control" placeholder="Puede buscar por nombre, por código o por lote del producto...">
+						<input type="text" class="form-control" id="txtBusquedaProductos" placeholder="Puede buscar por nombre, por código o por lote del producto...">
 					</div>
 
 					<div class="col-sm-1"><label for=""></label>
-						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
+						<button type="button" class="btn btn-success" id="btnFiltrarProductosCompra"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
 					</div>
 				</div>
-				
-				<div class="row"><hr>
+					<hr>
+				<div class="row" id="divProductoUbicado" hidden>
+			
+					
 					<div class="col-sm-8">
 						<label for="">Nombre del producto:</label> <span id="lblNombreProductoCompra">Ibuprofeno</span>		
 					</div>
@@ -208,14 +210,15 @@
 						<option value=true>Sí</option>
 						<option value=false>No</option></select>
 					</div>
-				</div>
-			<div class="row container">
-				<div class="col-sm-1"><label for="">Cantidad:</label> <input type="text" class="form-control" id="txtCantProductoCompra" placeholder="0"></div>				
-				<div class="col-sm-2"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
-				<div class="col-sm-3"><label for="">Fecha de vencimiento: </label><input type="date" class='form-control' id="dtpFechaVencimientoProductoCompra"></div>
-				<div class="col-sm-2"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
-				<div class="col-sm-1"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
+					<div class="row container">
+						<div class="col-sm-1"><label for="">Cantidad:</label> <input type="text" class="form-control" id="txtCantProductoCompra" value="1" placeholder="#"></div>				
+						<div class="col-sm-2"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
+						<div class="col-sm-3"><label for="">Fecha de vencimiento: </label><input type="date" class='form-control' id="dtpFechaVencimientoProductoCompra"></div>
+						<div class="col-sm-2"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
+						<div class="col-sm-1"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
+					</div>
 			</div>
+
 			<div class="row container">
 				
 				
@@ -344,6 +347,43 @@
 	</div>
 
 
+
+
+	<!-- Modal para mostrar los resultados que coinciden-->
+	<div class="modal fade modal-resultadosProductos">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header-success">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-laboratory"></i> Resultados que coinciden con: <em><span id="lblCoincidencias"></span></em></h4>
+			</div>
+			<div class="modal-body">
+				<small><strong>4</strong> coincidencias</small>
+				<table class="table table-condensed tablita">
+						<thead>
+							<tr>
+								<th class="text-center">#</th>
+								<th class="text-center">Código</th>
+								<th class="text-center">Nombre de producto</th>
+								<th class="text-center">Lote</th>								
+								<th class="text-center">@</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mani</td>
+								<td>Otto</td>
+								<td>0003</td>
+								<td class="text-center"><button class="btn btn-sm btn-success btn-outline btnAgregarItemDeResultado" role="button"><span class="glyphicon glyphicon-cloud-download"></span> Agregar</button></td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</div>
+		</div>
+	</div>
+
 	<script src="js/jquery-2.2.4.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/moment.js"></script>
@@ -351,6 +391,9 @@
 	<script src="js/bootstrap-select.min.js"></script>
 
 	<script type="text/javascript">
+	$.ajax({url:'php/config/dataInicial.php'}, type: 'POST').done(function (resultados) {
+		console.log(resultados);
+	});
 	$(document).ready(function(){
 		$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
@@ -405,8 +448,17 @@
 		});
 
 		$('#btnAgregarListaCompras').click(function(){
-
-		})
+			$('#divProductoUbicado').hide();
+		});
+		$('#btnFiltrarProductosCompra').click(function () {			
+			if($('#txtBusquedaProductos').val().length>2){
+			$('#lblCoincidencias').text($('#txtBusquedaProductos').val());
+			$('.modal-resultadosProductos').modal('show');}
+		});
+		$('.btnAgregarItemDeResultado').click(function () {
+			$('#divProductoUbicado').show();
+			$('.modal-resultadosProductos').modal('hide');
+		});
 
 	});
 	</script>

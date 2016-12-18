@@ -12,7 +12,7 @@ mysqli_query($conection,$sql2); //Ejecución simple para la sentencia sql2
 if ($llamadoSQL = $conection->query($sql)) { //Ejecución mas compleja con retorno de dato de sql del procedure.
     /* obtener el array de objetos */
     while ($resultado = $llamadoSQL->fetch_row()) {
-        echo $resultado[0];
+        echo $resultado[0]; //Retorna los resultados via post
     }
     /* liberar el conjunto de resultados */
     $llamadoSQL->close();
