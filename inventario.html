@@ -11,6 +11,9 @@
 		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
 		<link rel="shortcut icon" href="images/pet.png" />
+		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
+		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
+
 </head>
 <body>
 
@@ -103,14 +106,17 @@
 
 		</div>
 		<style>.aprovecharAncho {padding-left: 2px; padding-right: 2px; padding-bottom: 2px}
-		.aprovecharAncho i{font-size: 20px;}</style>
+		.aprovecharAncho i{font-size: 20px;}.affix {
+      top: 20px;
+  }</style>
 		
 
 		<!--Panel para nueva compra-->
 		<div class="tab-pane fade container" id="nuevoInventario"><br>
 		<!--Inicio de pestaña 01-->
 			<p>Ingrese todo su inventario inicial, seleccionando los campos correspondientes:</p>
-			<div class="row text-bold text-center"><strong>
+			<div id="listaProductosNuevoInventario">
+			<div class="row text-bold text-center " data-spy="affix" data-offset-top="200"><strong>
 				<div class="col-xs-3 aprovecharAncho">Nombre completo</div>
 				<div class="col-xs-1 aprovecharAncho">Cantidad</div>
 				<div class="col-xs-1 aprovecharAncho">Precio <span class="lblMonedaLocal">S/.</span></div>
@@ -123,64 +129,20 @@
 				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
 				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
 				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
-				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="1" placeholder="Min." min=0></div>
+				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="10" placeholder="Min." min=0></div>
 				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
-				<div class="col-xs-2 aprovecharAncho"><input type="date" class="form-control text-center" placeholder="Dia/Mes/Año"></div>
+				<div class="col-xs-2 aprovecharAncho" id="sandbox-container"><div class="input-group date">
+					<input type="text" class="form-control text-center"><span class="input-group-addon" style="background-color: #CDDC39; color: white; border: 1px solid rgba(204, 204, 204, 0.01);"><i class="glyphicon glyphicon-equalizer" style="font-size: 16px;"></i></span></div>
+				</div>
 				<div class="col-xs-2 aprovecharAncho text-center">
 					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
 					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
 					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
 				</div>
 			</div>
-			<div class="row ">
-				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
-				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="1" placeholder="Min." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
-				<div class="col-xs-2 aprovecharAncho"><input type="date" class="form-control text-center" placeholder="Dia/Mes/Año"></div>
-				<div class="col-xs-2 aprovecharAncho text-center">
-					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
-					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
-					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
-				</div>
-			</div><div class="row ">
-				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
-				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="1" placeholder="Min." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
-				<div class="col-xs-2 aprovecharAncho"><input type="date" class="form-control text-center" placeholder="Dia/Mes/Año"></div>
-				<div class="col-xs-2 aprovecharAncho text-center">
-					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
-					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
-					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
-				</div>
-			</div><div class="row ">
-				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
-				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="1" placeholder="Min." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
-				<div class="col-xs-2 aprovecharAncho"><input type="date" class="form-control text-center" placeholder="Dia/Mes/Año"></div>
-				<div class="col-xs-2 aprovecharAncho text-center">
-					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
-					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
-					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
-				</div>
-			</div><div class="row ">
-				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
-				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="1" placeholder="Min." min=0></div>
-				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
-				<div class="col-xs-2 aprovecharAncho"><input type="date" class="form-control text-center" placeholder="Dia/Mes/Año"></div>
-				<div class="col-xs-2 aprovecharAncho text-center">
-					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
-					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
-					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
-				</div>
+			
 			</div>
+			<div class="row"><br><p class="text-center"><button class="btn btn-success btn-outline" id="btnAgregarItem"><i class="icofont icofont-first-aid-alt"></i> Agregar nuevo item</button></p></div>
 			<p>Cantidad de items <strong><span id="itemsInventarioNuevo">5</span></strong> en la lista.</p>
 
 		<!--Fin de pestaña 01-->
@@ -199,7 +161,10 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/moment.js"></script>
 	<script src="js/inicializacion.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap-datepicker.min.js"></script>
+	<script src="js/bootstrap-datepicker.es.min.js"></script>
+
+
 
 	<script type="text/javascript">
 
@@ -210,10 +175,39 @@
         if (e.keyCode == 13)
         {
           $(this).parent().next().children().focus();
+          //$(this).parent().next().children().removeAttr('disabled'); //agregar atributo desabilitado
         } 
     });
 
+	habilitarDivFecha();
+
+	$('#btnAgregarItem').click(function () {
+		$('#itemsInventarioNuevo').text($('#listaProductosNuevoInventario .row').length);
+		$('#listaProductosNuevoInventario').append(`<div class="row ">
+				<div class="col-xs-3 aprovecharAncho"><input type="text" class="form-control" placeholder="Nombre"></div>
+				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Cant." min=0></div>
+				<div class="col-xs-1 aprovecharAncho"><input type="number" class="text-center form-control" placeholder="Precio" min=1></div>
+				<div class="col-xs-1 aprovecharAncho"><input class="text-center form-control" type="number" value="10" placeholder="Min." min=0></div>
+				<div class="col-xs-1 aprovecharAncho"><input type="text" class="form-control" placeholder="Lote"></div>
+				<div class="col-xs-2 aprovecharAncho" id="sandbox-container"><div class="input-group date">
+					<input type="text" class="form-control text-center"><span class="input-group-addon" style="background-color: #CDDC39; color: white; border: 1px solid rgba(204, 204, 204, 0.01);"><i class="glyphicon glyphicon-equalizer" style="font-size: 16px;"></i></span></div>
+				</div>
+				<div class="col-xs-2 aprovecharAncho text-center">
+					<button class="btn btn-negro btn-outline btn-sm"><i class="icofont icofont-navigation-menu"></i></button>
+					<button class="btn btn-warning btn-outline btn-sm"><i class="icofont icofont-cab"></i></button>
+					<button class="btn btn-success btn-outline btn-sm"><i class="icofont icofont-check"></i></button>
+				</div>
+			</div>
+			`);
+		habilitarDivFecha();
+
 	});
+	});
+function habilitarDivFecha(){
+	$('#sandbox-container .input-group.date').datepicker({
+		language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
+}
 	</script>
+}
 </body>
 </html>
