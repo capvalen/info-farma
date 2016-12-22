@@ -3524,7 +3524,7 @@ tbody.collapse.in {
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 1030;
   display: none;
   float: left;
   min-width: 160px;
@@ -4257,7 +4257,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 999;
 }
 @media (min-width: 768px) {
   .navbar-fixed-top,
