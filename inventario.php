@@ -63,7 +63,7 @@
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-options"></i> Configuraciones</a>
+						<a href="#"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
 				<li>
 						<a href="#!" class="ocultar-mostrar-menu"><i class="icofont icofont-logout"></i> Ocultar menú</a>
