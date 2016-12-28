@@ -108,7 +108,7 @@ li a i {font-size:24px; padding-right:10px}
 }
 .contenedorDeslizable{padding-bottom: 20px;}
 
-@media(min-width:993px) {
+@media(min-width:1000px) {
 	#wrapper {
 		padding-left: 250px;
 	}

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Info-Farma</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="iconfont/material-icons.css">
+    <link href="css/estilos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
+    <link rel="shortcut icon" href="images/pet.png" />
+
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><i class="icofont icofont-medical-sign-alt"></i> Info-Farma</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html"><i class="icofont icofont-home"></i></a></li>
+        <li><a href="usuarios.html"><i class="icofont icofont-users-alt-5"></i> Usuarios</a></li>
+        <li><a href="productos.html"><i class="icofont icofont-drug"></i> Productos</a></li>
+        <li><a href="ventas.html"><i class="icofont icofont-cart-alt"></i> Ventas</a></li>
+        <li><a href="compras.html"><i class="icofont icofont-oil-truck"></i> Compras</a></li>
+        <li><a href="reportes.html"><i class="icofont icofont-list"></i> Reportes</a></li>
+      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+       <form class="navbar-form navbar-left" role="search">
+   
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+        
+      </form>        
+        <li><a href="configuraciones.html"><i class="material-icons">settings</i></a></li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">fingerprint</i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" data-toggle="modal" data-target=".modal-password">Cambiar contraseña</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Cerrar sesión</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+		
+	</nav>
+
+	<div class="section col-md-2 hidden-xs hidden-sm">
+		<div class="list-group">
+		  <a href="index.html" class="list-group-item elementoMenu list-group-item-warning"><i class="material-icons">home</i> Principal</a>
+      <a href="usuarios.html" class="list-group-item elementoMenu"><i class="material-icons">supervisor_account</i> Usuarios</a>
+		  <a href="productos.html" class="list-group-item elementoMenu"><i class="material-icons">loyalty</i> Productos</a>
+		  <a href="ventas.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_cart</i> Ventas</a>
+		  <a href="compras.html" class="list-group-item elementoMenu"><i class="material-icons">shopping_basket</i> Compras</a>
+		  <a href="seguridad.html" class="list-group-item elementoMenu"><i class="material-icons">security</i> Seguridad</a>
+		  <a href="reportes.html" class="list-group-item elementoMenu"><i class="material-icons">assessment</i> Reportes</a>
+		</div>
+	</div>
+	<main class="col-md-8 col-lg-9">
+  
+
+  <div class="row">
+    <div class="alert alert-warning col-sm-6" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Info:</span>
+    Bienvenido usuario: <strong>Carlos Pariona</strong>
+    </div>
+    <div class="col-sm-6 text-center"><small id="horaServer"></small> <small class="text-muted" id="fechaServer"></small> <p><small>Usuario:</small> <small class="text-primary">Carlos Pariona</small></p></div>
+ 
+  </div>
+  
+  <div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
+    <!--Bontones bolita-->
+    <ol class="carousel-indicators">
+      <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="images/foto1.jpg" alt="ve" class="img-responsive">
+      </div>
+      <div class="item">
+        <img src="images/foto2.jpg" alt="..." class="img-responsive">
+      </div>
+      <div class="item">
+        <img src="images/foto3.jpg" alt="..." class="img-responsive">
+      </div>      
+    </div>
+
+    <!--Controles -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Siguiente</span>
+    </a>
+  </div>
+
+  <br>
+	
+  <h2>Compras de productos</h2>
+  
+  <p>Elija la opción que desee:</p>
+  <div class="row">
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Ingresar nueva compra</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+  </div>
+	</main>  
+
+  <!--Modal Para cambiar contraseña-->
+  <div class="modal fade modal-password" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-tittle text-primary">Cambio de contraseña</h4>
+        </div>
+        <div class="modal-body">
+          <p>Ingrese las contraseñas a cambiar</p>
+          <div class="row container-fluid">
+            <div class="form-group col-sm-6">
+              <label for="txtPassAnterior ">Contraseña anterior:</label>
+              <input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña anterior">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="txtPassAnterior">Nueva contraseña:</label>
+              <input type="password" class="form-control " id="txtPassAnterior" placeholder="Contraseña nueva">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="txtPassAnterior">Repita la nueva contraseña:</label>
+              <input type="password" class="form-control " id="txtPassAnterior" placeholder="Repita su contraseña">
+            </div>
+            
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/inicializacion.js"></script>
+
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.mitooltip').tooltip();
+  });
+  </script>
+</body>
+</html>
