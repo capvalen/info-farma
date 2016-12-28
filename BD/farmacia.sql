@@ -33,7 +33,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (1,'2016-12-21 15:21:29',0,0,0,41,1,1),(2,'2016-12-21 17:14:16',0,0,0,41,1,1),(3,'2016-12-21 17:16:24',0,0,0,41,1,1),(4,'2016-12-21 17:27:22',0,0,0,41,1,1),(5,'2016-12-21 17:30:24',0,0,0,41,1,1),(6,'2016-12-21 17:32:56',0,0,0,41,1,1),(7,'2016-12-21 17:33:23',0,0,0,41,1,1),(8,'2016-12-21 17:34:16',0,0,0,41,1,1),(9,'2016-12-21 17:34:48',0,0,0,41,1,1),(10,'2016-12-21 17:36:38',0,0,0,41,1,1),(11,'2016-12-21 17:46:31',0,0,0,41,1,1),(12,'2016-12-21 19:12:56',0,0,0,41,1,1),(13,'2016-12-21 19:15:28',0,0,0,41,1,1),(14,'2016-12-21 20:13:47',0,0,0,41,1,1),(15,'2016-12-21 20:16:35',0,0,0,41,1,1),(16,'2016-12-21 20:19:49',0,0,0,41,1,1),(17,'2016-12-21 20:24:18',0,0,0,41,1,1),(18,'2016-12-21 20:25:47',0,0,0,41,1,1),(19,'2016-12-21 20:33:13',0,0,0,41,1,1),(20,'2016-12-21 20:34:31',0,0,0,41,1,1),(21,'2016-12-21 20:35:20',0,0,0,41,1,1),(22,'2016-12-21 20:36:58',0,0,0,41,1,1),(23,'2016-12-21 20:41:00',0,0,0,41,1,1),(24,'2016-12-21 20:43:37',0,0,0,41,1,1),(25,'2016-12-21 20:46:05',0,0,0,41,1,1),(26,'2016-12-21 20:46:48',0,0,0,41,1,1),(27,'2016-12-21 20:47:45',0,0,0,41,1,1),(28,'2016-12-21 20:47:58',0,0,0,41,1,1),(29,'2016-12-21 20:50:08',0,0,0,41,1,1),(30,'2016-12-21 20:55:17',0,0,0,41,1,1),(31,'2016-12-21 20:55:52',0,0,0,41,1,1),(32,'2016-12-21 20:57:24',0,0,0,41,1,1),(33,'2016-12-21 20:57:53',0,0,0,41,1,1),(34,'2016-12-21 20:59:34',0,0,0,41,1,1);
+INSERT INTO `compras` VALUES (1,'Inventario','2015-12-21 15:21:29',0,0,0,41,1,1),(2,'Inventario','2016-11-21 17:14:16',0,0,0,41,1,1),(3,'Inventario','2016-12-21 17:16:24',0,0,0,41,1,1),(4,'Inventario','2016-12-21 17:27:22',0,0,0,41,1,1),(5,'Inventario','2016-12-21 17:30:24',0,0,0,41,1,1),(6,'Inventario','2016-12-21 17:32:56',0,0,0,41,1,1),(7,'Inventario','2016-12-21 17:33:23',0,0,0,41,1,1),(8,'Inventario','2016-12-21 17:34:16',0,0,0,41,1,1),(9,'Inventario','2016-12-21 17:34:48',0,0,0,41,1,1),(10,'Inventario','2016-12-21 17:36:38',0,0,0,41,1,1),(11,'Inventario','2016-12-21 17:46:31',0,0,0,41,1,1),(12,'Inventario','2016-12-21 19:12:56',0,0,0,41,1,1),(13,'Inventario','2016-12-21 19:15:28',0,0,0,41,1,1),(14,'Inventario','2016-12-21 20:13:47',0,0,0,41,1,1),(15,'Inventario','2016-12-21 20:16:35',0,0,0,41,1,1),(16,'Inventario','2016-12-21 20:19:49',0,0,0,41,1,1),(17,'Inventario','2016-12-21 20:24:18',0,0,0,41,1,1),(18,'Inventario','2016-12-21 20:25:47',0,0,0,41,1,1),(19,'Inventario','2016-12-21 20:33:13',0,0,0,41,1,1),(20,'Inventario','2016-12-21 20:34:31',0,0,0,41,1,1),(21,'Inventario','2016-12-21 20:35:20',0,0,0,41,1,1),(22,'Inventario','2016-12-21 20:36:58',0,0,0,41,1,1),(23,'Inventario','2016-12-21 20:41:00',0,0,0,41,1,1),(24,'Inventario','2016-12-21 20:43:37',0,0,0,41,1,1),(25,'Inventario','2016-12-21 20:46:05',0,0,0,41,1,1),(26,'Inventario','2016-12-21 20:46:48',0,0,0,41,1,1),(27,'Inventario','2016-12-21 20:47:45',0,0,0,41,1,1),(28,'Inventario','2016-12-21 20:47:58',0,0,0,41,1,1),(29,'Inventario','2016-12-21 20:50:08',0,0,0,41,1,1),(30,'Inventario','2016-12-21 20:55:17',0,0,0,41,1,1),(31,'Inventario','2016-12-21 20:55:52',0,0,0,41,1,1),(32,'Inventario','2016-12-21 20:57:24',0,0,0,41,1,1),(33,'Inventario','2016-12-21 20:57:53',0,0,0,41,1,1),(34,'Inventario','2016-12-21 20:59:34',0,0,0,41,1,1),(35,'Inventario','2016-12-22 11:53:42',0,0,0,41,1,1),(36,'Inventario','2016-12-23 15:15:57',0,0,0,41,1,1),(37,'Inventario','2016-12-23 15:23:45',0,0,0,41,1,1),(38,'Inventario','2016-12-23 15:24:53',0,0,0,41,1,1),(39,'Inventario','2016-12-23 15:25:03',0,0,0,41,1,1),(40,'Inventario','2016-12-23 15:25:44',0,0,0,41,1,1),(41,'Inventario','2016-12-23 15:45:13',0,0,0,41,1,1),(42,'Inventario','2016-12-23 15:46:49',0,0,0,41,1,1),(43,'Inventario','2016-12-23 15:48:57',0,0,0,41,1,1),(44,'Inventario','2016-12-23 15:49:49',0,0,0,41,1,1),(45,'Inventario','2016-12-23 15:50:37',0,0,0,41,1,1),(46,'Inventario','2016-12-23 15:52:22',0,0,0,41,1,1),(47,'Inventario','2016-12-23 16:02:43',0,0,0,41,1,1),(48,'Inventario','2016-12-23 16:03:34',0,0,0,41,1,1),(49,'Inventario','2016-12-23 16:23:40',0,0,0,41,1,1),(50,'Inventario','2016-12-23 16:25:48',0,0,0,41,1,1),(51,'Inventario','2016-12-23 16:28:41',0,0,0,41,1,1),(52,'Inventario','2016-12-23 16:32:23',0,0,0,41,1,1),(53,'Inventario','2016-12-23 16:32:30',0,0,0,41,1,1),(54,'Inventario','2016-12-23 16:40:10',0,0,0,41,1,1),(55,'Inventario','2016-12-23 16:40:18',0,0,0,41,1,1),(56,'Inventario','2016-12-23 16:40:38',0,0,0,41,1,1),(57,'Inventario','2016-12-23 16:41:07',0,0,0,41,1,1),(58,'Inventario','2016-12-23 16:41:24',0,0,0,41,1,1),(59,'Inventario','2016-12-23 16:42:27',0,0,0,41,1,1),(60,'Inventario','2016-12-23 16:44:47',0,0,0,41,1,1),(61,'Inventario','2016-12-23 17:07:42',0,0,0,41,1,1),(62,'Inventario','2016-12-23 17:32:51',0,0,0,41,1,1),(63,'Inventario','2016-12-23 17:58:01',0,0,0,41,1,1),(64,'Inventario','2016-12-26 20:07:18',0,0,0,41,1,1),(65,'Inventario','2016-12-26 21:06:14',0,0,0,41,1,1),(66,'Inventario','2016-12-26 22:21:43',0,0,0,41,1,1);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -43,7 +43,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `detallecompra` WRITE;
 /*!40000 ALTER TABLE `detallecompra` DISABLE KEYS */;
-INSERT INTO `detallecompra` VALUES (1,1,21,10,210),(2,2,4,2,8),(3,3,1,4,4),(3,4,6,20,120),(3,5,6,9,54),(4,6,4,65,260),(12,7,21,21,441),(1,1,12,12,144),(14,2,56,8,448),(16,3,21,21,441),(18,4,51,7,357),(19,5,15,2,30),(20,6,85,9,765),(23,7,1,51,51),(34,8,5,2,10);
+INSERT INTO `detallecompra` VALUES (1,1,21,10,210),(2,2,4,2,8),(3,3,1,4,4),(3,4,6,20,120),(3,5,6,9,54),(4,6,4,65,260),(12,7,21,21,441),(1,1,12,12,144),(14,2,56,8,448),(16,3,21,21,441),(18,4,51,7,357),(19,5,15,2,30),(20,6,85,9,765),(23,7,1,51,51),(34,8,5,2,10),(36,9,41,52,2132),(36,10,15,9,135),(40,11,52,41,2132),(41,12,51,1,51),(42,13,4,4,16),(43,14,2,5,10),(44,15,36,18,648),(45,16,15,99,1485),(46,17,21,31,651),(46,18,51,3,153),(49,19,25,51,1275),(49,20,51,5,255),(50,21,1,4,4),(50,22,69,12,828),(50,23,69,12,828),(51,24,99,6.6,653.4),(59,25,21,4,84),(60,26,9,97,873),(60,27,51,19,969),(61,28,22,5.6,123.2),(61,29,18,18.6,334.8),(61,30,19,7.3,138.7),(66,31,199,25.6,5094.4);
 /*!40000 ALTER TABLE `detallecompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,7 +53,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `detalleproductos` WRITE;
 /*!40000 ALTER TABLE `detalleproductos` DISABLE KEYS */;
-INSERT INTO `detalleproductos` VALUES (1,12,'fad','','22/12/2016','2016-12-21 20:10:09'),(2,8,'fsd','','04/01/2017','2016-12-21 20:14:08'),(3,21,'','','27/12/2016','2016-12-21 20:19:50'),(4,7,'vvfds','','03/01/2017','2016-12-21 20:25:49'),(5,2,'','','03/01/2017','2016-12-21 20:33:34'),(6,9,'12dsaw','','28/12/2016','2016-12-21 20:35:05'),(7,51,'','','27/12/2016','2016-12-21 20:41:16'),(8,2,'','','28/12/2016','2016-12-21 20:59:51');
+INSERT INTO `detalleproductos` VALUES (1,12,'fad','','22/12/2016','2016-12-21 20:10:09'),(2,8,'fsd','','04/01/2017','2016-12-21 20:14:08'),(3,21,'','','27/12/2016','2016-12-21 20:19:50'),(4,7,'vvfds','','03/01/2017','2016-12-21 20:25:49'),(5,2,'','','03/01/2017','2016-12-21 20:33:34'),(6,9,'12dsaw','','28/12/2016','2016-12-21 20:35:05'),(7,51,'','','27/12/2016','2016-12-21 20:41:16'),(8,2,'','','28/12/2016','2016-12-21 20:59:51'),(9,52,'fsd','','28/12/2016','2016-12-23 15:17:28'),(10,9,'posm','','03/01/2017','2016-12-23 15:20:16'),(11,41,'dasd8','','28/12/2016','2016-12-23 15:26:12'),(12,1,'','','04/01/2017','2016-12-23 15:45:41'),(13,4,'','','27/12/2016','2016-12-23 15:47:15'),(14,5,'','','03/01/2017','2016-12-23 15:49:19'),(15,18,'','','04/01/2017','2016-12-23 15:50:14'),(16,99,'FEQWQ','','03/01/2017','2016-12-23 15:51:12'),(17,31,'512dqw','','','2016-12-23 15:52:48'),(18,3,'jhgf','','','2016-12-23 15:53:17'),(19,51,'','','','2016-12-23 16:24:01'),(20,5,'dqgq36','','28/12/2016','2016-12-23 16:24:45'),(21,4,'da','','27/12/2016','2016-12-23 16:26:15'),(22,12,'51ffr','','27/12/2016','2016-12-23 16:26:45'),(23,12,'51ffr','','27/12/2016','2016-12-23 16:28:25'),(24,6.6,'2dq888','','31/12/2016','2016-12-23 16:29:30'),(25,4,'51','','04/01/2017','2016-12-23 16:43:11'),(26,97,'dsdwq','','08/01/2017','2016-12-23 16:45:17'),(27,19,'pommyt','','02/07/2017','2016-12-23 16:51:18'),(28,5.6,'','','28/12/2016','2016-12-23 17:08:14'),(29,18.6,'dqwdq','','28/12/2016','2016-12-23 17:09:09'),(30,7.3,'','','08/01/2017','2016-12-23 17:11:20'),(31,25.6,'43dde','','07/01/2017','2016-12-26 22:22:34');
 /*!40000 ALTER TABLE `detalleproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'ca','',12,'41',6,2,NULL),(2,'qtq v','',56,'10',26,2,7),(3,'dqw 51','',21,'10',15,3,8),(4,'tqwt ew','',51,'10',26,1,7),(5,'esmeralda x6 und','',15,'10',6,2,5),(6,'shampoo h&s limon 720ml','',85,'10',12,1,2),(7,'dasd1 qw','',1,'10',1,1,6),(8,'black 21','',5,'5',12,1,3);
+INSERT INTO `producto` VALUES (1,'ca','',12,'41',6,2,NULL),(2,'qtq v','',56,'10',26,2,7),(3,'dqw 51','',21,'10',15,3,8),(4,'tqwt ew','',51,'10',26,1,7),(5,'esmeralda x6 und','',15,'10',6,2,5),(6,'shampoo h&s limon 720ml','',85,'10',12,1,2),(7,'dasd1 qw','',1,'10',1,1,6),(8,'black 21','',5,'5',12,1,3),(9,'Cloruro de sodio vijosa 2% 50ml','',41,'10',12,3,5),(10,'vitamina a natural ford pote x 25caps','',15,'10',29,3,4),(11,'heno de pravia jabon','',52,'10',6,1,5),(12,'jabon palmolive barra 51gr','',51,'10',6,2,4),(13,'palmolive primavera jabon 51gr','',4,'10',29,2,6),(14,'cloro pim jarabe 5ml','',2,'10',22,1,2),(15,'rodalon solución 15ml','',36,'8',6,2,6),(16,'complejo b vitamina 8-12 54ml','',15,'15',29,2,6),(17,'zentel tabletas 150und','',21,'10',6,2,5),(18,'acid mantle crema pote','',51,'10',7,3,7),(19,'caballa jabon 41gr','',25,'10',29,2,6),(20,'Ferridoce formula 5 caja x8 und','',51,'10',7,3,8),(21,'primiec gotas 21ml','',1,'10',29,2,5),(22,'bendramin tabletas 26mg','',69,'10',7,3,7),(23,'bendramin tabletas 26mg','',69,'10',7,3,7),(24,'Sedobital 100gr','',99,'19',10,1,5),(25,'Ampiben 50mg','',21,'10',28,1,11),(26,'funji sil crema forte 55gr','',9,'10',6,3,8),(27,'Metrodinazol inyectable 42ml','',51,'10',11,2,6),(28,'sanagrip tableta x16 und','',22,'11',22,1,2),(29,'polyabem 502ml','',18,'10',27,2,3),(30,'flubidron x10 cápsulas','',19,'10',13,1,11),(31,'talco Jhonson babys 170gr','',199,'10',27,1,2);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,6 +259,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `returnNombreUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `returnNombreUsuario`(idUser int) RETURNS text CHARSET utf8
+BEGIN
+declare nombr text;
+select usuUser into nombr from usuario
+where idUsuario = idUser;
+
+RETURN nombr;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `actualizarInventarioInicio` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -275,6 +298,76 @@ UPDATE `farmacia`.`compras`
 SET
 `comptFecha` = now()
 WHERE `idCompras` =1;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `actualizarProductoPorInventario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarProductoPorInventario`(in idProduct int,
+in nombre text, in stk int, in stkmin int, in categ text, in precio float, in lote text,
+in vence text, in iduser int, in idcompr int, in labo text, in propi text)
+BEGIN
+UPDATE `farmacia`.`producto`
+SET
+`prodNombre` = nombre,
+`prodDescripcion` = '',
+`prodStock` = stk,
+`prodStockMinimo` = stkmin,
+`idCategoriaProducto` = returnIdCategoriaProducto(categ),
+`idPropiedadProducto` = returnIdPropiedad(propi),
+`idLaboratorio` = returnIdLaboratorio(labo)
+WHERE `idProducto` =idProduct;
+
+
+UPDATE `farmacia`.`detalleproductos`
+SET
+`prodPrecioUnitario` = precio,
+`prodLote` = lote,
+`prodCodigoBarra` = '',
+`prodFechaVencimiento` = vence
+WHERE `idProducto`=idProduct;
+
+
+UPDATE `farmacia`.`detallecompra`
+SET
+`detcomprCantidad` = stk,
+`detcomprPrecioUnitario` = precio,
+`detcomprSubTotal` = stk*precio
+WHERE `idCompra` =  idcompr and `idProducto`=idProduct;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `buscarProductoInventario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarProductoInventario`(in nombr text)
+BEGIN
+select * from producto
+where prodDescripcion like concat(nombr , '%');
 
 END ;;
 DELIMITER ;
@@ -362,7 +455,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarNuevoInventario`(in iduser int)
 BEGIN
 INSERT INTO `farmacia`.`compras`
-(`idCompras`,
+(`idCompras`,compTitulo,
 `comptFecha`,
 `comprSubTotal`,
 `comprIGV`,
@@ -371,7 +464,7 @@ INSERT INTO `farmacia`.`compras`
 `idProveedor`,
 `idUsuario`)
 VALUES
-(null,
+(null,'Inventario',
 now(),
 0,
 0,
@@ -476,6 +569,32 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `listarDetalleInventarioPorId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarDetalleInventarioPorId`(in idInv int)
+BEGIN
+SET @row=0;
+SELECT concat((@row:=@row+1), '. ', pro.prodNombre) as prodNombre,
+detcomprCantidad,
+round(detcomprPrecioUnitario,2) as detcomprPrecioUnitario,
+round(detcomprSubTotal,2) as detcomprSubTotal
+ FROM detallecompra det
+inner join producto pro on pro.idProducto=det.idProducto
+where idcompra = idInv;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `listarLaboratorios` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -519,6 +638,76 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `listarTodoInventarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarTodoInventarios`(in anio int, in mes int)
+BEGIN
+SELECT 
+concat('INV-',right(concat('0000',idCompras), 5)) as idCompras,
+idCompras as idSimple,
+comptFecha ,
+returnNombreUsuario(idUsuario) as Usuario,
+round(sum(detcomprSubTotal),2) as total FROM compras co
+inner join detallecompra det on co.idcompras=det.idcompra
+where idTipoComprobante =41 and compTitulo='Inventario'
+and year(comptFecha) =anio and month(comptFecha)=mes
+group by idcompras;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `retornarAñosCompras` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `retornarAñosCompras`()
+BEGIN
+SELECT distinct  year(comptFecha) as ano FROM compras
+order by comptFecha desc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `retornarMesesAñoCompras` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `retornarMesesAñoCompras`(in ano int)
+BEGIN
+SELECT distinct month(comptFecha) as mes FROM compras
+where year(comptFecha)= ano
+order by comptFecha asc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -529,4 +718,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-21 21:01:45
+-- Dump completed on 2016-12-27 20:19:50
