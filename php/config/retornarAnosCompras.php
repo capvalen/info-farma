@@ -7,4 +7,4 @@ while($row = mysqli_fetch_array($log))
 	printf('<option>'.$row['ano'].'</option>');
 }
 ?>
- 
+  

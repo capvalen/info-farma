@@ -142,7 +142,7 @@
 					<div class="panel-body">
 						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto:</label>
 							<div class="input-group"> 
-								<input type="text" class="form-control control-morado" placeholder="Busque por Nombre, Cod. interno, # de Lote">
+								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote">
 								<span class="input-group-btn">
 									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoVenta" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
@@ -649,8 +649,7 @@
 <script src="js/moment.js"></script>
 <script src="js/inicializacion.js"></script>
 <script src="js/bootstrap-select.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
-<script src="js/bootstrap-datepicker.es.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script> <script src="js/bootstrap-datepicker.es.min.js"></script>
 
 <!-- Menu Toggle Script -->
 <script>
@@ -706,6 +705,7 @@ $(document).ready(function(){
 			var valorAnt=$(this).parent().parent().find('input').val();
 			if(valorAnt!=1){$(this).parent().parent().find('input').val(parseInt(valorAnt)-1);}
 		});
+	$('#txtBuscarProductoVenta').focus();
 
 	
 	$('.selectpicker').selectpicker('refresh');
@@ -1071,6 +1071,19 @@ $('#btn-BuscarProductoVenta').click(function () {
 							</div><!-- /input-group --></td>
 						<td class="col-sm-1 text-center"> <span>S/. 43</span></td> <td class="text-center">S/. 0.69</td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>`);
 	calcularRowTabla();
+});
+$('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
+	if(code==13){	e.preventDefault();
+		//console.log('enter')
+		var filtro= String($('#txtBuscarProductoVenta').val());
+		if(esNumero(filtro)){//es numero llamar al procedure por numero
+			console.log(filtro) 
+		}
+		else{//es letras llamar al procedure para que haga el filtro
+			console.log(filtro.replace(/\ /g,'%')) 
+		}
+		
+	}
 });
 
 

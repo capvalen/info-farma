@@ -21,3 +21,15 @@ $(document).ready(function(){
 
 });
 $.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static'; //Para que no cierre el modal, cuando hacen clic en cualquier parte
+
+function esNumero(cadena) //true para si es número sólo
+{
+			if (cadena.match(/^[0-9]+$/))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+}
