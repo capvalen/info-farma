@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Ventas: Info-Farma</title>
+		<title>Compras: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -52,12 +52,12 @@
 						<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-blood"></i> Productos</a>
-				</li>
-				<li class="active">
-						<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
+						<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
 				</li>
 				<li>
+						<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
+				</li>
+				<li  class="active">
 						<a href="compras.php"><i class="icofont icofont-truck-alt"></i> Compras</a>
 				</li>
 				<li>
@@ -121,133 +121,37 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-brand-aliexpress"></i> Ventas de productos</h2>
+				 <h2><i class="icofont icofont-truck-loaded"></i> Compras</h2>
 	
 	<ul class="nav nav-tabs">
-	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una venta</a></li>
-	<li><a href="#nuevo" data-toggle="tab">Detalle de ventas</a></li>
-	<li><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
+	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una compra</a></li>
+	<li><a href="#nuevo" data-toggle="tab">Agregar proveedor</a></li>
+	<li><a href="#todos" data-toggle="tab">Todas las compras</a></li>
 	</ul>
 	
 	<div class="tab-content">
 	<!--Panel para buscar productos-->
 		<!--Clase para las tablas-->
 
-		<div class="tab-pane fade in active" id="tabRealizarVenta"><br>
-		<div class="container-fluid">
-			<div class="col-sm-12 col-md-9">
-				<div class="panel panel-morado">
-					<div class="panel-heading">Detalle de la venta</div>
-					
-					<div class="panel-body">
-						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto:</label>
-							<div class="input-group"> 
-								<input type="text" class="form-control control-morado" placeholder="Busque por Nombre, Cod. interno, # de Lote">
-								<span class="input-group-btn">
-									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoVenta" type="button"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
-							</div><!-- /input-group -->
-						</div><!-- /.col-lg-6 -->
-						
-						
-						
-						<!-- Tabla -->
-						<div class="row col-md-12 table-responsive purple-text text-darken-3">
-						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
-						<thead> <tr> <th>#</th> <th class="col-xs-4">Producto</th> <th class="text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
-						<tbody>
-						<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 1.</th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 43</span></td> <td class="text-center">S/. 0.69</td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 2.</th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn ">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 99</span></td> <td class="text-center">S/. 2.30</td> <td class="text-center">S/.  <span class="spanSubTotal">198.0</span>0</td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 3.</th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 25</span></td> <td class="text-center">S/. 6.00</td> <td class="text-center">S/. <span class="	">75.00</span></td>  </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 4.</th> <td class="col-xs-4">Elemento 4</td> <td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 6</span></td> <td class="text-center">S/. 5.00</td> <td class="text-center">S/.  <span class="spanSubTotal">24.00</span></td>  </tr>
-						</tbody>
-						</table></div>
-						<p class="row col-sm-12 purple-text text-darken-3"><em>Total de items en la cesta: <strong id="itemsCesta">0</strong></em></p>
-
-					</div>
-					
-					</div><!-- fin de pane warning-->
-			</div>
-			<div class="col-sm-3">
-				<div class="panel panel-morado text-muted conInputPersonalizados">
-					<div class="panel-heading">Datos generales de la nueva venta</div>
-					<div class="panel-body">
-						<div class=" text-center">
-							
-							<label class="">Total de venta:</label><br>
-								<h4>S/. <span id="spanTotalVenta">540.20</span></h4>
-								<label for="">Dinero del cliente (S/.):</label><br>
-								<div class="input-group">
-									<span class="input-group-btn mitooltip" title="Abrir el asistente de contador de monedas" >
-										<button class="btn btn-morado btn-outline" type="button" id="btnContarMoneda" ><i class="icofont icofont-chart-pie-alt"></i></button>
-									</span>
-									<input type="number" class="form-control text-center txtMonedas control-morado" id="txtMonedaEnDuro" value="0" min=0 step=1><br>
-								</div><!-- /input-group -->
-								
-								<label for="">Cambio a entregar:</label><br>
-								<h4>S/. <span id="spanResiduoCambio">9.80</span></h4>
-						</div>
-					</div>
-				</div><!-- fin de pane cielo-->
-				<div class="row text-center" style="line-height: 60px;">
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-calculator"></i> Completar la compra</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
-				</div>
-			</div><!-- fin de sm-3 -->
-		</div>
-
 		
-
-		</div>
-		<style>.divForm>.row{padding-bottom: 15px}</style>
+		<style>.divForm input{margin-bottom: 15px}</style>
 
 		<!--Panel para nueva compra-->
-		<div class="tab-pane fade " id="nuevo"><br>
+		<div class="tab-pane active fade in" id="tabRealizarVenta">
 		<div class="panel panel-negro">
-			<div class="panel-heading">Datos generales de la nueva venta</div>
-			<div class="panel-body container divForm">
+			<div class="panel-heading">Datos pricipales del comprobante de compra</div>
+			<div class="panel-body container-fluid divForm">
 				<div class="row">
+					<div class="col-sm-3">
+						<label>Tipo de Comprobante</label>
+						<select class="selectpicker" title="Seleccione uno..." data-live-search="true" data-width="100%">
+						<option>Ticket</option>
+						<option>Boleta</option>
+						<option>Compra interna</option>
+						<option>Guía de reminisión</option>
+						<option>Factura</option>
+					</select>
+					</div>
 					<div class="col-sm-5">
 					<label for="">Razón social de proveedor:</label><br>
 					<select class="selectpicker" title="Seleccione uno..." data-live-search="true" data-width="100%">
@@ -263,13 +167,12 @@
 					<label for="">Serie de comprobante:</label>
 					<input type="text" class="form-control">
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<label for="">Fecha de venta:</label>
-						<input type="date" class="form-control"  id="dtpFechaComprobante" >
+						<span class="sandbox-container"><input type="text" class="form-control text-center"  id="dtpFechaComprobante" ></span>
 					</div>
 
-				</div>
-				<div class="row">
+				
 					<div class="col-sm-2">
 						<label for="">Considerar:</label>
 						<select class="selectpicker" data-width='100%'>
@@ -289,10 +192,12 @@
 						<label for="">Total:</label>
 						<input type="number" class="form-control" placeholder="S/. 0.00" min=0 step=0.1 lang="en" id="txtTotalCompra">
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-sm-3">
-						<label for="">¿Items con IGV?</label>
+						<label for="">¿Los items tienen IGV?</label>
 						<select  class="selectpicker" data-width="60%">
-							<option value="1">Si</option>
+							<option value="1">Sí</option>
 							<option value="2">No</option>
 						</select>
 					</div>
@@ -301,43 +206,53 @@
 			</div>
 		</div>
 
+		<div class="col-sm-5" sytle="padding-left:0px;">
 		<div class="panel panel-negro">
 			<div class="panel-heading">Buscar producto</div>
 			<div class="panel-body divForm">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-12">
 						<label for="">Búsqueda del producto:</label>
-						<input type="text" class="form-control" placeholder="Puede buscar por nombre, por código o por lote del producto...">
+						<input type="text" class="form-control" placeholder="Buscar por nombre, código o lote del producto...">
 					</div>
-
-					<div class="col-sm-1"><label for=""></label>
-						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
 					</div>
 				</div>
 				
-				<div class="row"><hr>
-					<div class="col-sm-8">
-						<label for="">Nombre del producto:</label> <span id="lblNombreProductoCompra">Ibuprofeno</span>		
-					</div>
-					<div class="col-sm-4"><label for="">¿Vence?:</label> <select name="" id="cmbVenceCompra" class="selectpicker" data-width="50%">
-						<option value=true>Sí</option>
-						<option value=false>No</option></select>
-					</div>
-				</div>
-			<div class="row container">
-				<div class="col-sm-1"><label for="">Cantidad:</label> <input type="text" class="form-control" id="txtCantProductoCompra" placeholder="0"></div>				
-				<div class="col-sm-2"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
-				<div class="col-sm-3"><label for="">Fecha de vencimiento: </label><input type="date" class='form-control' id="dtpFechaVencimientoProductoCompra"></div>
-				<div class="col-sm-2"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
-				<div class="col-sm-1"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
+			
+			
 			</div>
-			<div class="row container">
+		</div>
+		</div>
+
+		<div class="col-sm-7 divForm">
+			<div class="panel panel-negro">
+				<div class="panel-heading">Detalle de producto</div>
+			<div class="panel-body">
+				<div class="row">
+				<div class="col-sm-12">
+					<label for="">Nombre del producto:</label> <span id="lblNombreProductoCompra">Ibuprofeno</span>		
+				</div>
 				
-				
+				</div>
+				<div class="row container-fluid">
+					<div class="col-sm-2"><label for="">¿Vence?:</label> <select id="cmbVenceCompra" class="selectpicker" data-width="100%">
+					<option value=true>Sí</option>
+					<option value=false>No</option></select>
+					</div>
+					<div class="col-sm-2"><label for="">Cantidad:</label> <input type="number" class="form-control text-center" id="txtCantProductoCompra" placeholder="Cantidad" value="1"></div>				
+					<div class="col-sm-4"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
+					<div class="col-sm-4"><label for="">Fecha de vencimiento: </label><span class="sandbox-container"><input type="text" class='form-control text-center' id="dtpFechaVencimientoProductoCompra"></span></div>
+					<div class="col-sm-4"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
+					<div class="col-sm-4"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
 			</div>
 			</div>
 		</div>
 
+		<div class="col-sm-12">
 		<div class="panel panel-negro">
 			<div class="panel-heading">Detalles de la venta</div>
 			<div class="panel-body divForm">
@@ -353,6 +268,11 @@
 			</div>
 		</div>
 		</div>
+		</div>
+
+		</div><!-- Fin de pestaña principal -->
+
+		<div class="tab-pane fade" id="nuevo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, placeat, a. Alias, amet perferendis molestias modi nobis labore voluptates debitis ab obcaecati quis quas eius inventore. Beatae, natus doloribus reprehenderit.</div>
 		<div class="tab-pane fade" id="todos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, placeat, a. Alias, amet perferendis molestias modi nobis labore voluptates debitis ab obcaecati quis quas eius inventore. Beatae, natus doloribus reprehenderit.</div>
 	</div>
 					<!-- Fin de meter contenido principal -->
@@ -655,60 +575,62 @@
 <!-- Menu Toggle Script -->
 <script>
 $(document).ready(function(){
-	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
-		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
-		$('.mitooltip').tooltip();
-		$('.mitooltipTipo').mouseover(function(){
-			var rowindex = $(this).closest('tr').index();
-			filaTool="#tool"+(rowindex+1)
-			//console.log(filaTool);
-			switch($(filaTool).html()){
-				case 'F': $(filaTool).attr('title','Factura'); break;
-				case 'B': $(filaTool).attr('title','Boleta'); break;
-				case 'T': $(filaTool).attr('title','Ticket'); break;
-			}
-			$(filaTool).tooltip('show');
-		});
-		$('.mitooltipTipo').mouseleave(function(){
-			var rowindex = $(this).closest('tr').index();
-			filaTool="#tool"+(rowindex+1)
-			$(filaTool).tooltip('destroy');
-		});
+	$('#dtpFechaComprobante').val(moment().format('DD/MM/YYYY'));
+	$('#dtpFechaVencimientoProductoCompra').val(moment().format('DD/MM/YYYY'));
+	$('.mitooltip').tooltip();
+	$('.mitooltipTipo').mouseover(function(){
+		var rowindex = $(this).closest('tr').index();
+		filaTool="#tool"+(rowindex+1)
+		//console.log(filaTool);
+		switch($(filaTool).html()){
+			case 'F': $(filaTool).attr('title','Factura'); break;
+			case 'B': $(filaTool).attr('title','Boleta'); break;
+			case 'T': $(filaTool).attr('title','Ticket'); break;
+		}
+		$(filaTool).tooltip('show');
+	});
+	$('.mitooltipTipo').mouseleave(function(){
+		var rowindex = $(this).closest('tr').index();
+		filaTool="#tool"+(rowindex+1)
+		$(filaTool).tooltip('destroy');
+	});
 
-		$('#txtTotalCompra').focusout(function () {
-			if($(this).val()<0){$(this).val(0);}
-			var neto=($(this).val()/1.18).toFixed(2);
-			var igvCalc= ($(this).val()-neto).toFixed(2);
-			$('#txtNetoCompra').val(neto);
-			$('#txtIGVCompra').val(igvCalc);
+	$('#txtTotalCompra').focusout(function () {
+		if($(this).val()<0){$(this).val(0);}
+		var neto=($(this).val()/1.18).toFixed(2);
+		var igvCalc= ($(this).val()-neto).toFixed(2);
+		$('#txtNetoCompra').val(neto);
+		$('#txtIGVCompra').val(igvCalc);
 
 
-		});
-		$("input").focus(function(){	   
-			this.select();
-		});
+	});
+	$("input").focus(function(){	   
+		this.select();
+	});
 
-		$('#cmbVenceCompra').on('changed.bs.select',function(){
-			console.log($(this).val())
-			if($(this).val()=='false'){console.log('deberia eliminar')
+	$('#cmbVenceCompra').on('changed.bs.select',function(){
+		console.log($(this).val())
+		if($(this).val()=='false'){console.log('deberia eliminar')
 			$('#dtpFechaVencimientoProductoCompra').attr('disabled', true);}
 		else{$('#dtpFechaVencimientoProductoCompra').attr('disabled', false);}
-		});
+		$('#txtCantProductoCompra').focus();
+	});
 
-		$('#btnAgregarListaCompras').click(function(){
+	$('#btnAgregarListaCompras').click(function(){
 
-		});
-		$('.tablaResultadosCompras').on('click', '.btnAumentarCantidad',function () {
-			var valorAnt=$(this).parent().parent().find('input').val();
-			$(this).parent().parent().find('input').val(parseInt(valorAnt)+1);
-		});
-		$('.tablaResultadosCompras').on('click', '.btnRestarCantidad',function () {
-			var valorAnt=$(this).parent().parent().find('input').val();
-			if(valorAnt!=1){$(this).parent().parent().find('input').val(parseInt(valorAnt)-1);}
-		});
+	});
+	$('.tablaResultadosCompras').on('click', '.btnAumentarCantidad',function () {
+		var valorAnt=$(this).parent().parent().find('input').val();
+		$(this).parent().parent().find('input').val(parseInt(valorAnt)+1);
+	});
+	$('.tablaResultadosCompras').on('click', '.btnRestarCantidad',function () {
+		var valorAnt=$(this).parent().parent().find('input').val();
+		if(valorAnt!=1){$(this).parent().parent().find('input').val(parseInt(valorAnt)-1);}
+	});
 
 	
 	$('.selectpicker').selectpicker('refresh');
+	 habilitarDivFecha()
 
 
 
@@ -757,8 +679,7 @@ function agregarRowInventario() {
 		
 }
 function habilitarDivFecha(){
-	$('#sandbox-container .input-group.date').datepicker({
-		language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
+	$('.sandbox-container input').datepicker({todayBtn: "linked", clearBtn: true, language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
 }
 $('body').on('focusout','.txtMonedas',function () {
 	var valor = parseFloat($(this).val());
@@ -1072,6 +993,9 @@ $('#btn-BuscarProductoVenta').click(function () {
 						<td class="col-sm-1 text-center"> <span>S/. 43</span></td> <td class="text-center">S/. 0.69</td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>`);
 	calcularRowTabla();
 });
+
+
+/////////-------------Script de compras
 
 
 </script>

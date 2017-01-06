@@ -23,7 +23,7 @@
 
 		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
-		<link rel="shortcut icon" href="images/pet.png" />
+		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
 
@@ -57,7 +57,7 @@
 						<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-truck-alt"></i> Compras</a>
+						<a href="compras.php"><i class="icofont icofont-truck-alt"></i> Compras</a>
 				</li>
 				<li>
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
@@ -335,8 +335,7 @@ function agregarRowInventario() {
 		
 }
 function habilitarDivFecha(){
-	$('#sandbox-container .input-group.date').datepicker({
-		language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
+	$('#sandbox-container .input-group.date').datepicker({todayBtn: "linked", clearBtn: true, language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
 }
 $('#listaProductosNuevoInventario').on('focusout','.txtMonedas',function () {
 	var valor = parseFloat($(this).val());
