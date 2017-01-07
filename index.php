@@ -127,71 +127,81 @@
   <div class="row">
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+     <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Ingresar Producto</h3>
-        <p>...</p>
-        <p><a href="productos.html" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>realizar una venta nueva</h3>
+        <p>Realiza una venta de manera sencilla</p>
+        <p><a href="ventas.php" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+     <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Ingresar Inventario</h3>
-        <p>...</p>
-        <p><a href="inventario.php#nuevoInventario" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>crear producto nuevo</h3>
+        <p>Añade un producto nuevo</p>
+        <p><a href="productos.html" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+      <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Realizar Venta</h3>
-        <p>...</p>
-        <p><a href="ventas.php" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>cerrar caja</h3>
+        <p>Comprueba los resultados</p>
+        <p><a href="ventas.php" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+      <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Cambiar Contraseña</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>ingresar compra nueva</h3>
+        <p>haz una compra de tu conveniencia</p>
+        <p><a href="compras.php" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
     <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+      <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Agregar Proveedor</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>Ingresar un proveedor</h3>
+        <p>añade a un proveedor nuevo</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
     <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+      <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Listar Ventas</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>Ver todas las compras</h3>
+        <p>Muestra una lista de todas las compras realizadas</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
     <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img src="images/cara.jpg" alt="...">
+      <!-- <img src="images/cara.jpg" alt="...">-->
       <div class="caption">
-        <h3>Cerrar Caja</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>Listar inventarios</h3>
+        <p>Muestra todos los inventarios</p>
+        <p><a href="inventario.php#invRegist" class="btn btn-primary" role="button">Button</a> 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <!-- <img src="images/cara.jpg" alt="...">-->
+      <div class="caption">
+        <h3>Solicitar reportes</h3>
+        <p>Muestra los reportes</p>
+        <p><a href="reportes.php" class="btn btn-primary" role="button">Button</a> 
       </div>
     </div>
   </div>
