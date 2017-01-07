@@ -133,7 +133,7 @@
 						<!--Clase para las tablas-->
 						<div class="tab-pane fade in active container-fluid" id="invRegist">
 						<!--Inicio de pestaña 01-->
-							<div class="row">Selecione año luego en el boton filtrar y vea por pestañas.</div>
+							<div class="row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar la lista de inventario.</div>
 							<div class="row">
 								<div class="col-xs-6 col-sm-2" id="divAñoInventario"><select class="selectpicker"  title="Año..." data-container="body" data-width="100%" >
 									<?php require('php/config/retornarAnosCompras.php'); ?>

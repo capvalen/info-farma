@@ -346,7 +346,9 @@
 			</div>
 		</div>
 		</div>
-		<div class="tab-pane fade" id="todos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, placeat, a. Alias, amet perferendis molestias modi nobis labore voluptates debitis ab obcaecati quis quas eius inventore. Beatae, natus doloribus reprehenderit.</div>
+		<div class="tab-pane fade" id="todos">
+			<div class="container-fluid row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar sus ventas.</div>
+		</div>
 	</div>
 					<!-- Fin de meter contenido principal -->
 					</div>

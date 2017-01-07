@@ -121,9 +121,9 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-animal-cat-alt-4"></i> Bienvenido a Info-Farma 1.0</h2>
+				 <h2><i class="icofont icofont-animal-cat-alt-4"></i> Bienvenido a Info-Farma 1.0 <small>2017.01.07</small></h2>
   
-  <p>Elija la opción que desee:</p>
+  <p>Elija una opción de los siguientes atajos:</p>
   <div class="row">
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
