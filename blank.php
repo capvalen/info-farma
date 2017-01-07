@@ -62,10 +62,10 @@
 				<li>
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 				</li>
-				<li class="active">
+				<li>
 						<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
 				</li>
-				<li>
+				<li class="active">
 						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
 				<li>
@@ -120,58 +120,20 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-prescription"></i> Inventario de los productos</h2>
+				 <h2><i class="icofont icofont-options"></i> Panel de configuraciones generales</h2>
 
 					<ul class="nav nav-tabs">
-					<li class="active"><a href="#invRegist" data-toggle="tab">Inventarios registrados</a></li>
-					<li><a href="#nuevoInventario" data-toggle="tab">Agregar inventario</a></li>
+					<li class="active"><a href="#tabAgregarLabo" data-toggle="tab">Agregar laboratorio</a></li>
+					<li><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li>
 					
 					</ul>
 					
 					<div class="tab-content">
 					<!--Panel para buscar productos-->
 						<!--Clase para las tablas-->
-						<div class="tab-pane fade in active container-fluid" id="invRegist">
+						<div class="tab-pane fade in active container-fluid" id="tabAgregarLabo">
 						<!--Inicio de pestaña 01-->
-							<div class="row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar la lista de inventario.</div>
-							<div class="row">
-								<div class="col-xs-6 col-sm-2" id="divAñoInventario"><select class="selectpicker"  title="Año..." data-container="body" data-width="100%" >
-									<?php require('php/config/retornarAnosCompras.php'); ?>
-								</select></div>
-								<button class="btn btn-success btn-outline" id="btnBuscarPorAñoInventario"><i class="icofont icofont-search-alt-1"></i></button>
-								
-							</div>
-							<div class="row"><br>
-								<ul class="nav nav-tabs nav-tabs-meses">
-									<li class="hidden"><a href="#mes0" data-toggle="tab">Enero</a></li>
-									<li class="hidden"><a href="#mes1" data-toggle="tab">Febrero</a></li>
-									<li class="hidden"><a href="#mes2" data-toggle="tab">Marzo</a></li>
-									<li class="hidden"><a href="#mes3" data-toggle="tab">Abril</a></li>
-									<li class="hidden"><a href="#mes4" data-toggle="tab">Mayo</a></li>
-									<li class="hidden"><a href="#mes5" data-toggle="tab">Junio</a></li>
-									<li class="hidden"><a href="#mes6" data-toggle="tab">Julio</a></li>
-									<li class="hidden"><a href="#mes7" data-toggle="tab">Agosto</a></li>
-									<li class="hidden"><a href="#mes8" data-toggle="tab">Septiembre</a></li>
-									<li class="hidden"><a href="#mes9" data-toggle="tab">Octubre</a></li>
-									<li class="hidden"><a href="#mes10" data-toggle="tab">Noviembre</a></li>
-									<li class="hidden"><a href="#mes11" data-toggle="tab">Diciembre</a></li>
-									
-								</ul>
-							</div>
-							<div class="tab-content tabConenidoMeses">
-								<div class="tab-pane fade " id="mes0"></div>
-								<div class="tab-pane fade " id="mes1"></div>
-								<div class="tab-pane fade " id="mes2"></div>
-								<div class="tab-pane fade " id="mes3"></div>
-								<div class="tab-pane fade " id="mes4"></div>
-								<div class="tab-pane fade " id="mes5"></div>
-								<div class="tab-pane fade " id="mes6"></div>
-								<div class="tab-pane fade " id="mes7"></div>
-								<div class="tab-pane fade " id="mes8"></div>
-								<div class="tab-pane fade " id="mes9"></div>
-								<div class="tab-pane fade " id="mes10"></div>
-								<div class="tab-pane fade " id="mes11"></div>
-							</div>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, eos vero cum tenetur minus eius enim eaque at saepe in nulla fugit molestiae libero nostrum inventore aperiam unde provident nesciunt.
 
 						<!--Fin de pestaña 01-->
 						</div>
@@ -179,31 +141,10 @@
 						
 
 						<!--Panel para nueva compra-->
-						<div class="tab-pane fade container-fluid" id="nuevoInventario"><br>
-						<!--Inicio de pestaña 01-->
-						<div class="col-sm-6 col-sm-push-3"><button class="form-control btn btn-primary btn-outline activarNuevoInventario" ><i class="icofont icofont-space-shuttle"></i> Crear nuevo inventario</button>
-						</div>
-						<div class="col-xs-12 hidden" id="rellenoNuevoInventario">
-							<p>Ingrese los productos de su inventario inicial, rellenando	 los campos correspondientes:</p>
-							<div id="listaProductosNuevoInventario">
-								<!--<div class="row text-bold text-center " data-spy="affix" data-offset-top="200"><strong>
-									<div class="col-xs-6 col-sm-3 aprovecharAncho">Nombre completo</div>
-									<div class="col-xs-6 col-sm-2 aprovecharAncho">Composición</div>
-									<div class="col-xs-6 col-sm-1 aprovecharAncho">Cantidad</div>
-									<div class="col-xs-6 col-sm-1 aprovecharAncho">Precio <span class="lblMonedaLocal">S/.</span></div>
-									<div class="col-xs-6 col-sm-1 aprovecharAncho">Stock Mínimo</div>
-									<div class="col-xs-6 col-sm-1 aprovecharAncho">Lote</div>
-									<div class="col-xs-6 col-sm-2 aprovecharAncho">Grupo</div>
-									<div class="col-xs-6 col-sm-2 aprovecharAncho">Vencimiento</div>
-									<div class="col-xs-6 col-sm-1 aprovecharAncho mitooltip" title="Comandos"><i class="icofont icofont-dna-alt-1" style="font-size: 24px;"></i></div></strong>
-								</div>-->
-								
-							</div>
-							<div class="row"><br><p class="text-center"><button class="btn btn-success btn-outline hidden" id="btnAgregarItem"><i class="icofont icofont-first-aid-alt"></i> Agregar nuevo item</button></p></div>
-							<p>Cantidad de items en la lista: <strong><span id="itemsInventarioNuevo">1</span></strong> </p>
-						</div>
-
-						<!--Fin de pestaña 01-->
+						<div class="tab-pane fade container-fluid" id="tabCambiarPassUser">
+						<!--Inicio de pestaña 02-->
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, quis, facilis beatae recusandae optio molestias ipsam quibusdam aliquid rerum voluptatem incidunt in vero quo illo natus? Asperiores, ipsum placeat dolorum.
+						<!--Fin de pestaña 02-->
 						</div>
 						
 					</div>
@@ -468,6 +409,29 @@ $('#listaProductosNuevoInventario').on('click','.btnGuardarItemInventario',funct
 });
 
 
+$(".ocultar-mostrar-menu").click(function() {
+	ocultar()
+});
+function ocultar(){console.log('oc')
+	$("#wrapper").toggleClass("toggled");
+	//$('.navbar-fixed-top').css('left','0');
+	$('.navbar-fixed-top').toggleClass('encoger');
+	$('#btnColapsador').addClass('collapsed');
+	$('#btnColapsador').attr('aria-expanded','false');
+	$('#navbar').removeClass('in');
+}
+$('.has-clear').mouseenter(function(){$(this).find('input').focus();})
+
+$('.has-clear input[type="text"]').on('input propertychange', function() {
+	var $this = $(this);
+	var visible = Boolean($this.val());
+	$this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+	$(this).siblings('input[type="text"]').val('')
+		.trigger('propertychange').focus();
+});
 $('.activarNuevoInventario').click(function () {
 	$.ajax('php/compras/insertarNuevoInventario.php').done(function (respuesta) {
 		if(respuesta!=0){
@@ -479,10 +443,9 @@ $('.activarNuevoInventario').click(function () {
 
 	});
 });
-
 $('#listaProductosNuevoInventario').on('lostfocus','.txtNomProducto',function () {
 	
-});
+})
 function filtrarAñosSelect(){
 	$('.nav-tabs-meses li').addClass('hidden');
 	$('.tabConenidoMeses .tab-pane').children().remove();

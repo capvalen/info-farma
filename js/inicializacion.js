@@ -33,3 +33,38 @@ function esNumero(cadena) //true para si es número sólo
 				return false;
 			}
 }
+
+$(".ocultar-mostrar-menu").click(function() {
+	ocultar()
+});
+function ocultar(){console.log('oc')
+	$("#wrapper").toggleClass("toggled");
+	//$('.navbar-fixed-top').css('left','0');
+	$('.navbar-fixed-top').toggleClass('encoger');
+	$('#btnColapsador').addClass('collapsed');
+	$('#btnColapsador').attr('aria-expanded','false');
+	$('#navbar').removeClass('in');
+}
+$('.has-clear').mouseenter(function(){$(this).find('input').focus();})
+
+$('.has-clear input[type="text"]').on('input propertychange', function() {
+	var $this = $(this);
+	var visible = Boolean($this.val());
+	$this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+	$(this).siblings('input[type="text"]').val('')
+		.trigger('propertychange').focus();
+});
+$('.activarNuevoInventario').click(function () {
+	$.ajax('php/compras/insertarNuevoInventario.php').done(function (respuesta) {
+		if(respuesta!=0){
+			$('.activarNuevoInventario').attr('id',respuesta);
+			//console.log($('.activarNuevoInventario').attr('id'))//El boton contiene el id del inventario
+			$('.activarNuevoInventario').addClass('hidden');
+			$('#rellenoNuevoInventario').removeClass('hidden');
+		}
+
+	});
+});

@@ -67,7 +67,7 @@
 						<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-options"></i> Configuración</a>
+						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
 				<li>
 						<a href="#!" class="ocultar-mostrar-menu"><i class="icofont icofont-logout"></i> Ocultar menú</a>
@@ -137,7 +137,7 @@
 		<div class="container-fluid">
 			<div class="col-sm-12 col-md-9">
 				<div class="panel panel-morado">
-					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items en la cesta: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
+					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
 					
 					<div class="panel-body">
 						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto: <span class="red-text text-darken-1 hidden" id="spanSinCoincidencias"> No se encontraron coincidencias</span></label>
@@ -153,7 +153,7 @@
 						
 						
 						<!-- Tabla -->
-						<div class="row col-md-12 table-responsive purple-text text-darken-3">
+						<div class="row col-md-12 purple-text text-darken-3">
 						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
 						<thead> <tr> <th>#</th> <th class="col-xs-4">Producto</th> <th class="text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
 						<tbody>
@@ -235,117 +235,10 @@
 		</div>
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
-		<!--Panel para nueva compra-->
+		<!--Panel para ver las ventas del día-->
 		<div class="tab-pane fade " id="nuevo"><br>
-		<div class="panel panel-negro">
-			<div class="panel-heading">Datos generales de la nueva venta</div>
-			<div class="panel-body container divForm">
-				<div class="row">
-					<div class="col-sm-5">
-					<label for="">Razón social de proveedor:</label><br>
-					<select class="selectpicker" title="Seleccione uno..." data-live-search="true" data-width="100%">
-						<option>Farma Ahorro Sac</option>
-						<option>Botica Año Nuevo Eirl</option>
-						<option>Laboratorio Clinico Control y Desarrollo Sac</option>
-						<option>Clinica Femenina Eirl</option>
-						<option>Nova Dental Clinica Odontologia Sac</option>
-					</select>
-
-					</div>
-					<div class="col-sm-3">
-					<label for="">Serie de comprobante:</label>
-					<input type="text" class="form-control">
-					</div>
-					<div class="col-sm-2">
-						<label for="">Fecha de venta:</label>
-						<input type="date" class="form-control"  id="dtpFechaComprobante" >
-					</div>
-
-				</div>
-				<div class="row">
-					<div class="col-sm-2">
-						<label for="">Considerar:</label>
-						<select class="selectpicker" data-width='100%'>
-							<option value=true>Con IGV</option>
-							<option value=false>Libre de Impuesto</option>
-						</select>
-					</div>
-					<div class="col-sm-2">
-						<label for="">Neto:</label>
-						<input type="text" class="form-control" id="txtNetoCompra" disabled>
-					</div>
-					<div class="col-sm-2">
-						<label for="">IGV:</label>
-						<input type="text" class="form-control" id="txtIGVCompra" disabled>
-					</div>
-					<div class="col-sm-2">
-						<label for="">Total:</label>
-						<input type="number" class="form-control" placeholder="S/. 0.00" min=0 step=0.1 lang="en" id="txtTotalCompra">
-					</div>
-					<div class="col-sm-3">
-						<label for="">¿Items con IGV?</label>
-						<select  class="selectpicker" data-width="60%">
-							<option value="1">Si</option>
-							<option value="2">No</option>
-						</select>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-
-		<div class="panel panel-negro">
-			<div class="panel-heading">Buscar producto</div>
-			<div class="panel-body divForm">
-				<div class="row">
-					<div class="col-sm-9">
-						<label for="">Búsqueda del producto:</label>
-						<input type="text" class="form-control" placeholder="Puede buscar por nombre, por código o por lote del producto...">
-					</div>
-
-					<div class="col-sm-1"><label for=""></label>
-						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
-					</div>
-				</div>
-				
-				<div class="row"><hr>
-					<div class="col-sm-8">
-						<label for="">Nombre del producto:</label> <span id="lblNombreProductoCompra">Ibuprofeno</span>		
-					</div>
-					<div class="col-sm-4"><label for="">¿Vence?:</label> <select name="" id="cmbVenceCompra" class="selectpicker" data-width="50%">
-						<option value=true>Sí</option>
-						<option value=false>No</option></select>
-					</div>
-				</div>
-			<div class="row container">
-				<div class="col-sm-1"><label for="">Cantidad:</label> <input type="text" class="form-control" id="txtCantProductoCompra" placeholder="0"></div>				
-				<div class="col-sm-2"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
-				<div class="col-sm-3"><label for="">Fecha de vencimiento: </label><input type="date" class='form-control' id="dtpFechaVencimientoProductoCompra"></div>
-				<div class="col-sm-2"><label for="">SubTotal</label><input type="text" class="form-control" id="txtSubTotalProductoCompra" placeholder="S/. 0.00"></div>				
-				<div class="col-sm-1"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
-			</div>
-			<div class="row container">
-				
-				
-			</div>
-			</div>
-		</div>
-
-		<div class="panel panel-negro">
-			<div class="panel-heading">Detalles de la venta</div>
-			<div class="panel-body divForm">
-				<div class="row">
-					<div class="col-xs-1">#</div>
-					<div class="col-xs-4">Producto</div>
-					<div class="col-xs-1">Cantidad</div>
-					<div class="col-xs-1">Lote</div>
-					<div class="col-xs-2">Costo x Und.</div>
-					<div class="col-xs-2">Sub-Total</div>
-					<div class="col-xs-1"><span class="glyphicon glyphicon-flag"></span></div>
-				</div>
-			</div>
-		</div>
-		</div>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, aliquid, minima, libero, optio odit eveniet incidunt consectetur voluptas vel quam laudantium quod eligendi earum placeat reiciendis. Sint, ut architecto saepe!
+		</div> <!--fin de tab pane 2-->
 		<div class="tab-pane fade fondoGeo" id="todos">
 			<div class="container-fluid row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar sus ventas.</div>
 			<div class="row">

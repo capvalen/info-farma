@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Inicio: Info-Farma</title>
+		<title>Inventario: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -20,11 +20,10 @@
 		<link rel="stylesheet" href="css/cssBarraTop.css">
 		<link rel="stylesheet" href="css/icofont.css">
 		<link rel="stylesheet" href="css/animate.css">
-		<link rel="stylesheet" href="css/pacifico.css">
 
 		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
-		<link rel="shortcut icon" href="images/pet.png" />
+		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
 
@@ -45,7 +44,7 @@
 				<div class="logoEmpresa">
 					<img class="img-responsive" src="images/empresa.png" alt="">
 				</div>
-				<li class="active">
+				<li >
 						<a href="index.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
 				</li>
 				<li>
@@ -63,10 +62,10 @@
 				<li>
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 				</li>
-				<li >
+				<li>
 						<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
 				</li>
-				<li>
+				<li class="active">
 						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
 				<li>
@@ -80,7 +79,7 @@
 			<nav class="navbar navbar-fixed-top encoger">
 				<div class="container">
 					<div class="navbar-header ">
-					<a class="navbar-brand ocultar-mostrar-menu" href="#"><img class="img-responsive" src="images/logo.png"  alt=""></a>
+					<a class="navbar-brand ocultar-mostrar-menu" href="#"><img class="img-responsive" src="images/logo.png" alt=""></a>
 							<button type="button" class="navbar-toggle collapsed" id="btnColapsador" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 							<span class="sr-only">Toggle navigation</span>
 							<span class="icon-bar"></span>
@@ -119,117 +118,43 @@
 <div id="page-content-wrapper">
 	<div class="container-fluid">				 
 			<div class="row">
-				<div class="col-lg-12 contenedorDeslizable fondoGeo">
+				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2 class="blue-text text-darken-1"><i class="icofont icofont-animal-cat-alt-4"></i> Bienvenido: <small>Software Info-Farma v1.0</small> <small class="blue-text text-lighten-3">2017.01.07</small></h2>
-	
-	
-				<div class="row">
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-					 <!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="ventas.php" class="btn btn-warning btn-outline btn-circle-grande" role="button"><i class="icofont icofont-cart-alt"></i></a> </p>
-							<h3 class="text-center">Realizar una nueva venta</h3 >
-							
-							
+				 <h2><i class="icofont icofont-options"></i> Panel de configuraciones generales</h2>
+
+					<ul class="nav nav-tabs">
+					<li class="active"><a href="#tabAgregarLabo" data-toggle="tab">Agregar laboratorio</a></li>
+					<li><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li>
+					
+					</ul>
+					
+					<div class="tab-content">
+					<!--Panel para buscar productos-->
+						<!--Clase para las tablas-->
+						<div class="tab-pane fade in active container-fluid" id="tabAgregarLabo">
+						<!--Inicio de pestaña 01-->
+							<p>Listado de todos los laboratorios registrados:</p>
+							<div class="row">
+								<div class="col-sm-1">Cod. Int</div>
+								<div class="col-sm-4">Nombre de Laboratorio</div>
+							</div>
+							<div id="divListadoLaboratorio">
+								
+							</div>
+
+						<!--Fin de pestaña 01-->
 						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-					 <!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-success btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-herbal"></i></a> </p>
-							<h3 class="text-center">Crear un producto nuevo</h3 >
-							
+
+						
+
+						<!--Panel para nueva compra-->
+						<div class="tab-pane fade container-fluid" id="tabCambiarPassUser">	
+						<!--Inicio de pestaña 02-->
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, quis, facilis beatae recusandae optio molestias ipsam quibusdam aliquid rerum voluptatem incidunt in vero quo illo natus? Asperiores, ipsum placeat dolorum.
+						<!--Fin de pestaña 02-->
 						</div>
+						
 					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="ventas.php" class="btn btn-negro btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-money-bag"></i></a> </p>
-							<h3 class="text-center">Cerrar caja</h3 class="text-center">
-							
-							
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="compras.php" class="btn btn-info btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-meeting-add"></i></a> </p>
-							<h3 class="text-center">Ingresar nueva compra</h3 >
-							
-							
-						</div>
-					</div>
-				</div>
-					<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-morado btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-businessman"></i></a> </p>
-							<h3 class="text-center">Ingresar un proveedor</h3>
-							
-							
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-morita btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-industries-alt-5"></i></a> </p>
-							<h3 class="text-center">Ingresar un Laboratorio</h3>
-							
-							
-						</div>
-					</div>
-				</div>
-					<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-primary btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-growth"></i></a> </p>
-							<h3 class="text-center">Ver todas las compras</h3>        
-							
-						</div>
-					</div>
-				</div>
-					<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="inventario.php#nuevoInventario" class="btn btn-indigo btn-outline btn-circle-grande" role="button"><i class="icofont icofont-list"></i></a> </p>
-							<h3 class="text-center">Ingresar inventario</h3>
-											
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-success btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-files"></i></a> </p>
-							<h3 class="text-center">Solicitar reportes</h3>
-											
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<!-- <img src="images/cara.jpg" alt="...">-->
-						<div class="caption">
-							<p class="text-center"><a href="#" class="btn btn-danger btn-outline btn-circle-grande	" role="button"><i class="icofont icofont-paw"></i></a> </p>
-							<h3 class="text-center">Otras configuraciones</h3>
-											
-						</div>
-					</div>
-				</div>
 					<!-- Fin de meter contenido principal -->
 					</div>
 					
@@ -259,7 +184,7 @@
 				</div>
 				<div class="row container-fluid text-right" style="padding-right: 100px"><strong>Total valorizado:</strong> <span id="spanvalorInvent">S/. 3.00</span></div>
 			</div>
-			<div class="modal-footer"> <button class="btn btn-primary btn-outline btn-outline" data-dismiss="modal"></i><i class="icofont icofont-alarm"></i> Aceptar</button></div>
+			<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"></i><i class="icofont icofont-alarm"></i> Aceptar</button></div>
 		</div>
 		</div>
 	</div>
@@ -296,11 +221,28 @@
 <!-- Menu Toggle Script -->
 <script>
 $(document).ready(function(){
+	
+	$('.selectpicker').selectpicker('refresh');
+	$('.mitooltip').tooltip();
+	listarLabs();	
 
-$('.caption').click(function () {
-	//$(this).find('a').click();
-})
 });
+function listarLabs(){
+	$.ajax({url: 'php/config/listarLaboratoriosJSON.php', type:'POST'}).done(function(resp){
+		
+		$.each(JSON.parse(resp), function(index, elem){
+			console.log(elem)
+			$('#divListadoLaboratorio').append(`<div class="row">
+			<div class="col-sm-1">${elem.idLaboratorio}</div>
+			<div class="col-sm-4 mayuscula">${elem.labNombre}</div>
+		</div>`);
+		})
+		
+	});
+	
+}
+
+
 </script>
 
 </body>
