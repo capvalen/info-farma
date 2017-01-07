@@ -129,9 +129,9 @@
     <div class="thumbnail">
       <img src="images/cara.jpg" alt="...">
       <div class="caption">
-        <h3>Ingresar nueva compra</h3>
+        <h3>Ingresar Producto</h3>
         <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p><a href="productos.html" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
     </div>
   </div>
@@ -139,9 +139,9 @@
     <div class="thumbnail">
       <img src="images/cara.jpg" alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
+        <h3>Ingresar Inventario</h3>
         <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p><a href="inventario.php#nuevoInventario" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
     </div>
   </div>
@@ -149,9 +149,9 @@
     <div class="thumbnail">
       <img src="images/cara.jpg" alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
+        <h3>Realizar Venta</h3>
         <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p><a href="ventas.php" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
     </div>
   </div>
@@ -159,7 +159,37 @@
     <div class="thumbnail">
       <img src="images/cara.jpg" alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
+        <h3>Cambiar Contraseña</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Agregar Proveedor</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Listar Ventas</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="images/cara.jpg" alt="...">
+      <div class="caption">
+        <h3>Cerrar Caja</h3>
         <p>...</p>
         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
