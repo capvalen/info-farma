@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `farmacia` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `farmacia`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: farmacia
@@ -28,7 +26,7 @@ CREATE TABLE `categoriaproducto` (
   `idCategoriaProducto` int(11) NOT NULL AUTO_INCREMENT,
   `catprodDescipcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idCategoriaProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +35,7 @@ CREATE TABLE `categoriaproducto` (
 
 LOCK TABLES `categoriaproducto` WRITE;
 /*!40000 ALTER TABLE `categoriaproducto` DISABLE KEYS */;
-INSERT INTO `categoriaproducto` VALUES (1,'Cosmética y belleza'),(2,'Nutrición'),(3,'Vitaminas'),(4,'Suplementos'),(5,'Higiene corporal'),(6,'Botiquín'),(7,'Complementos'),(8,'Regalos'),(9,'Perfumería'),(10,'Pastillas'),(11,'Jarabes'),(12,'Anticonceptivos'),(13,'Enemas'),(14,'Soluciones'),(15,'Cremas'),(16,'Jabones'),(17,'Polvos'),(18,'Gels'),(19,'Supositorios'),(20,'Inyectables'),(21,'Ungüentos'),(22,'Analgésicos'),(23,'Sueros'),(24,'Instrumentos quirúrgicos'),(25,'Gotas'),(26,'Cápsulas'),(27,'Antibióticos'),(28,'Antigripales'),(29,'Antisépticos'),(30,'Laxantes'),(31,'Mucolíticos'),(32,'Otros');
+INSERT INTO `categoriaproducto` VALUES (1,'Cosmética y belleza'),(2,'Nutrición'),(3,'Vitaminas'),(4,'Suplementos'),(5,'Higiene corporal'),(6,'Botiquín'),(7,'Complementos'),(8,'Regalos'),(9,'Perfumería'),(10,'Pastillas'),(11,'Jarabes'),(12,'Anticonceptivos'),(13,'Enemas'),(14,'Soluciones'),(15,'Cremas'),(16,'Jabones'),(17,'Polvos'),(18,'Gels'),(19,'Supositorios'),(20,'Inyectables'),(21,'Ungüentos'),(22,'Analgésicos'),(23,'Sueros'),(24,'Instrumentos quirúrgicos'),(25,'Gotas'),(26,'Cápsulas'),(27,'Antibióticos'),(28,'Antigripales'),(29,'Antisépticos'),(30,'Laxantes'),(31,'Mucolíticos'),(32,'Otros'),(33,'Aseo personal'),(34,'Limpieza');
 /*!40000 ALTER TABLE `categoriaproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +63,7 @@ CREATE TABLE `compras` (
   CONSTRAINT `fkCompr_Proveedor` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fkCompr_Tipo` FOREIGN KEY (`idTipoComprobante`) REFERENCES `tipocomprobante` (`idTipoComprobante`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fkCompr_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +72,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (1,'Inventario','2015-12-21 15:21:29',0,0,0,41,1,1),(2,'Inventario','2016-11-21 17:14:16',0,0,0,41,1,1),(3,'Inventario','2016-12-21 17:16:24',0,0,0,41,1,1),(4,'Inventario','2016-12-21 17:27:22',0,0,0,41,1,1),(5,'Inventario','2016-12-21 17:30:24',0,0,0,41,1,1),(6,'Inventario','2016-12-21 17:32:56',0,0,0,41,1,1),(7,'Inventario','2016-12-21 17:33:23',0,0,0,41,1,1),(8,'Inventario','2016-12-21 17:34:16',0,0,0,41,1,1),(9,'Inventario','2016-12-21 17:34:48',0,0,0,41,1,1),(10,'Inventario','2016-12-21 17:36:38',0,0,0,41,1,1),(11,'Inventario','2016-12-21 17:46:31',0,0,0,41,1,1),(12,'Inventario','2016-12-21 19:12:56',0,0,0,41,1,1),(13,'Inventario','2016-12-21 19:15:28',0,0,0,41,1,1),(14,'Inventario','2016-12-21 20:13:47',0,0,0,41,1,1),(15,'Inventario','2016-12-21 20:16:35',0,0,0,41,1,1),(16,'Inventario','2016-12-21 20:19:49',0,0,0,41,1,1),(17,'Inventario','2016-12-21 20:24:18',0,0,0,41,1,1),(18,'Inventario','2016-12-21 20:25:47',0,0,0,41,1,1),(19,'Inventario','2016-12-21 20:33:13',0,0,0,41,1,1),(20,'Inventario','2016-12-21 20:34:31',0,0,0,41,1,1),(21,'Inventario','2016-12-21 20:35:20',0,0,0,41,1,1),(22,'Inventario','2016-12-21 20:36:58',0,0,0,41,1,1),(23,'Inventario','2016-12-21 20:41:00',0,0,0,41,1,1),(24,'Inventario','2016-12-21 20:43:37',0,0,0,41,1,1),(25,'Inventario','2016-12-21 20:46:05',0,0,0,41,1,1),(26,'Inventario','2016-12-21 20:46:48',0,0,0,41,1,1),(27,'Inventario','2016-12-21 20:47:45',0,0,0,41,1,1),(28,'Inventario','2016-12-21 20:47:58',0,0,0,41,1,1),(29,'Inventario','2016-12-21 20:50:08',0,0,0,41,1,1),(30,'Inventario','2016-12-21 20:55:17',0,0,0,41,1,1),(31,'Inventario','2016-12-21 20:55:52',0,0,0,41,1,1),(32,'Inventario','2016-12-21 20:57:24',0,0,0,41,1,1),(33,'Inventario','2016-12-21 20:57:53',0,0,0,41,1,1),(34,'Inventario','2016-12-21 20:59:34',0,0,0,41,1,1),(35,'Inventario','2016-12-22 11:53:42',0,0,0,41,1,1),(36,'Inventario','2016-12-23 15:15:57',0,0,0,41,1,1),(37,'Inventario','2016-12-23 15:23:45',0,0,0,41,1,1),(38,'Inventario','2016-12-23 15:24:53',0,0,0,41,1,1),(39,'Inventario','2016-12-23 15:25:03',0,0,0,41,1,1),(40,'Inventario','2016-12-23 15:25:44',0,0,0,41,1,1),(41,'Inventario','2016-12-23 15:45:13',0,0,0,41,1,1),(42,'Inventario','2016-12-23 15:46:49',0,0,0,41,1,1),(43,'Inventario','2016-12-23 15:48:57',0,0,0,41,1,1),(44,'Inventario','2016-12-23 15:49:49',0,0,0,41,1,1),(45,'Inventario','2016-12-23 15:50:37',0,0,0,41,1,1),(46,'Inventario','2016-12-23 15:52:22',0,0,0,41,1,1),(47,'Inventario','2016-12-23 16:02:43',0,0,0,41,1,1),(48,'Inventario','2016-12-23 16:03:34',0,0,0,41,1,1),(49,'Inventario','2016-12-23 16:23:40',0,0,0,41,1,1),(50,'Inventario','2016-12-23 16:25:48',0,0,0,41,1,1),(51,'Inventario','2016-12-23 16:28:41',0,0,0,41,1,1),(52,'Inventario','2016-12-23 16:32:23',0,0,0,41,1,1),(53,'Inventario','2016-12-23 16:32:30',0,0,0,41,1,1),(54,'Inventario','2016-12-23 16:40:10',0,0,0,41,1,1),(55,'Inventario','2016-12-23 16:40:18',0,0,0,41,1,1),(56,'Inventario','2016-12-23 16:40:38',0,0,0,41,1,1),(57,'Inventario','2016-12-23 16:41:07',0,0,0,41,1,1),(58,'Inventario','2016-12-23 16:41:24',0,0,0,41,1,1),(59,'Inventario','2016-12-23 16:42:27',0,0,0,41,1,1),(60,'Inventario','2016-12-23 16:44:47',0,0,0,41,1,1),(61,'Inventario','2016-12-23 17:07:42',0,0,0,41,1,1),(62,'Inventario','2016-12-23 17:32:51',0,0,0,41,1,1),(63,'Inventario','2016-12-23 17:58:01',0,0,0,41,1,1),(64,'Inventario','2016-12-26 20:07:18',0,0,0,41,1,1),(65,'Inventario','2016-12-26 21:06:14',0,0,0,41,1,1),(66,'Inventario','2016-12-26 22:21:43',0,0,0,41,1,1);
+INSERT INTO `compras` VALUES (1,'Inventario','2015-12-21 15:21:29',0,0,0,41,1,1),(2,'Inventario','2016-11-21 17:14:16',0,0,0,41,1,1),(3,'Inventario','2016-12-21 17:16:24',0,0,0,41,1,1),(4,'Inventario','2016-12-21 17:27:22',0,0,0,41,1,1),(5,'Inventario','2016-12-21 17:30:24',0,0,0,41,1,1),(6,'Inventario','2016-12-21 17:32:56',0,0,0,41,1,1),(7,'Inventario','2016-12-21 17:33:23',0,0,0,41,1,1),(8,'Inventario','2016-12-21 17:34:16',0,0,0,41,1,1),(9,'Inventario','2016-12-21 17:34:48',0,0,0,41,1,1),(10,'Inventario','2016-12-21 17:36:38',0,0,0,41,1,1),(11,'Inventario','2016-12-21 17:46:31',0,0,0,41,1,1),(12,'Inventario','2016-12-21 19:12:56',0,0,0,41,1,1),(13,'Inventario','2016-12-21 19:15:28',0,0,0,41,1,1),(14,'Inventario','2016-12-21 20:13:47',0,0,0,41,1,1),(15,'Inventario','2016-12-21 20:16:35',0,0,0,41,1,1),(16,'Inventario','2016-12-21 20:19:49',0,0,0,41,1,1),(17,'Inventario','2016-12-21 20:24:18',0,0,0,41,1,1),(18,'Inventario','2016-12-21 20:25:47',0,0,0,41,1,1),(19,'Inventario','2016-12-21 20:33:13',0,0,0,41,1,1),(20,'Inventario','2016-12-21 20:34:31',0,0,0,41,1,1),(21,'Inventario','2016-12-21 20:35:20',0,0,0,41,1,1),(22,'Inventario','2016-12-21 20:36:58',0,0,0,41,1,1),(23,'Inventario','2016-12-21 20:41:00',0,0,0,41,1,1),(24,'Inventario','2016-12-21 20:43:37',0,0,0,41,1,1),(25,'Inventario','2016-12-21 20:46:05',0,0,0,41,1,1),(26,'Inventario','2016-12-21 20:46:48',0,0,0,41,1,1),(27,'Inventario','2016-12-21 20:47:45',0,0,0,41,1,1),(28,'Inventario','2016-12-21 20:47:58',0,0,0,41,1,1),(29,'Inventario','2016-12-21 20:50:08',0,0,0,41,1,1),(30,'Inventario','2016-12-21 20:55:17',0,0,0,41,1,1),(31,'Inventario','2016-12-21 20:55:52',0,0,0,41,1,1),(32,'Inventario','2016-12-21 20:57:24',0,0,0,41,1,1),(33,'Inventario','2016-12-21 20:57:53',0,0,0,41,1,1),(34,'Inventario','2016-12-21 20:59:34',0,0,0,41,1,1),(35,'Inventario','2016-12-22 11:53:42',0,0,0,41,1,1),(36,'Inventario','2016-12-23 15:15:57',0,0,0,41,1,1),(37,'Inventario','2016-12-23 15:23:45',0,0,0,41,1,1),(38,'Inventario','2016-12-23 15:24:53',0,0,0,41,1,1),(39,'Inventario','2016-12-23 15:25:03',0,0,0,41,1,1),(40,'Inventario','2016-12-23 15:25:44',0,0,0,41,1,1),(41,'Inventario','2016-12-23 15:45:13',0,0,0,41,1,1),(42,'Inventario','2016-12-23 15:46:49',0,0,0,41,1,1),(43,'Inventario','2016-12-23 15:48:57',0,0,0,41,1,1),(44,'Inventario','2016-12-23 15:49:49',0,0,0,41,1,1),(45,'Inventario','2016-12-23 15:50:37',0,0,0,41,1,1),(46,'Inventario','2016-12-23 15:52:22',0,0,0,41,1,1),(47,'Inventario','2016-12-23 16:02:43',0,0,0,41,1,1),(48,'Inventario','2016-12-23 16:03:34',0,0,0,41,1,1),(49,'Inventario','2016-12-23 16:23:40',0,0,0,41,1,1),(50,'Inventario','2016-12-23 16:25:48',0,0,0,41,1,1),(51,'Inventario','2016-12-23 16:28:41',0,0,0,41,1,1),(52,'Inventario','2016-12-23 16:32:23',0,0,0,41,1,1),(53,'Inventario','2016-12-23 16:32:30',0,0,0,41,1,1),(54,'Inventario','2016-12-23 16:40:10',0,0,0,41,1,1),(55,'Inventario','2016-12-23 16:40:18',0,0,0,41,1,1),(56,'Inventario','2016-12-23 16:40:38',0,0,0,41,1,1),(57,'Inventario','2016-12-23 16:41:07',0,0,0,41,1,1),(58,'Inventario','2016-12-23 16:41:24',0,0,0,41,1,1),(59,'Inventario','2016-12-23 16:42:27',0,0,0,41,1,1),(60,'Inventario','2016-12-23 16:44:47',0,0,0,41,1,1),(61,'Inventario','2016-12-23 17:07:42',0,0,0,41,1,1),(62,'Inventario','2016-12-23 17:32:51',0,0,0,41,1,1),(63,'Inventario','2016-12-23 17:58:01',0,0,0,41,1,1),(64,'Inventario','2016-12-26 20:07:18',0,0,0,41,1,1),(65,'Inventario','2016-12-26 21:06:14',0,0,0,41,1,1),(66,'Inventario','2016-12-26 22:21:43',0,0,0,41,1,1),(67,'Inventario','2017-01-05 17:07:50',0,0,0,41,1,1);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +100,7 @@ CREATE TABLE `detallecompra` (
 
 LOCK TABLES `detallecompra` WRITE;
 /*!40000 ALTER TABLE `detallecompra` DISABLE KEYS */;
-INSERT INTO `detallecompra` VALUES (1,1,21,10,210),(2,2,4,2,8),(3,3,1,4,4),(3,4,6,20,120),(3,5,6,9,54),(4,6,4,65,260),(12,7,21,21,441),(1,1,12,12,144),(14,2,56,8,448),(16,3,21,21,441),(18,4,51,7,357),(19,5,15,2,30),(20,6,85,9,765),(23,7,1,51,51),(34,8,5,2,10),(36,9,41,52,2132),(36,10,15,9,135),(40,11,52,41,2132),(41,12,51,1,51),(42,13,4,4,16),(43,14,2,5,10),(44,15,36,18,648),(45,16,15,99,1485),(46,17,21,31,651),(46,18,51,3,153),(49,19,25,51,1275),(49,20,51,5,255),(50,21,1,4,4),(50,22,69,12,828),(50,23,69,12,828),(51,24,99,6.6,653.4),(59,25,21,4,84),(60,26,9,97,873),(60,27,51,19,969),(61,28,22,5.6,123.2),(61,29,18,18.6,334.8),(61,30,19,7.3,138.7),(66,31,199,25.6,5094.4);
+INSERT INTO `detallecompra` VALUES (1,1,21,10,210),(2,2,4,2,8),(3,3,1,4,4),(3,4,6,20,120),(3,5,6,9,54),(4,6,4,65,260),(12,7,21,21,441),(1,1,12,12,144),(14,2,56,8,448),(16,3,21,21,441),(18,4,51,7,357),(19,5,15,2,30),(20,6,85,9,765),(23,7,1,51,51),(34,8,5,2,10),(36,9,41,52,2132),(36,10,15,9,135),(40,11,52,41,2132),(41,12,51,1,51),(42,13,4,4,16),(43,14,2,5,10),(44,15,36,18,648),(45,16,15,99,1485),(46,17,21,31,651),(46,18,51,3,153),(49,19,25,51,1275),(49,20,51,5,255),(50,21,1,4,4),(50,22,69,12,828),(50,23,69,12,828),(51,24,99,6.6,653.4),(59,25,21,4,84),(60,26,9,97,873),(60,27,51,19,969),(61,28,22,5.6,123.2),(61,29,18,18.6,334.8),(61,30,19,7.3,138.7),(66,31,199,25.6,5094.4),(67,32,5,16,80),(1,7,1,51,51),(1,7,1,51,51),(1,7,1,51,51);
 /*!40000 ALTER TABLE `detallecompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +129,7 @@ CREATE TABLE `detalleproductos` (
 
 LOCK TABLES `detalleproductos` WRITE;
 /*!40000 ALTER TABLE `detalleproductos` DISABLE KEYS */;
-INSERT INTO `detalleproductos` VALUES (1,12,'fad','','22/12/2016','2016-12-21 20:10:09'),(2,8,'fsd','','04/01/2017','2016-12-21 20:14:08'),(3,21,'','','27/12/2016','2016-12-21 20:19:50'),(4,7,'vvfds','','03/01/2017','2016-12-21 20:25:49'),(5,2,'','','03/01/2017','2016-12-21 20:33:34'),(6,9,'12dsaw','','28/12/2016','2016-12-21 20:35:05'),(7,51,'','','27/12/2016','2016-12-21 20:41:16'),(8,2,'','','28/12/2016','2016-12-21 20:59:51'),(9,52,'fsd','','28/12/2016','2016-12-23 15:17:28'),(10,9,'posm','','03/01/2017','2016-12-23 15:20:16'),(11,41,'dasd8','','28/12/2016','2016-12-23 15:26:12'),(12,1,'','','04/01/2017','2016-12-23 15:45:41'),(13,4,'','','27/12/2016','2016-12-23 15:47:15'),(14,5,'','','03/01/2017','2016-12-23 15:49:19'),(15,18,'','','04/01/2017','2016-12-23 15:50:14'),(16,99,'FEQWQ','','03/01/2017','2016-12-23 15:51:12'),(17,31,'512dqw','','','2016-12-23 15:52:48'),(18,3,'jhgf','','','2016-12-23 15:53:17'),(19,51,'','','','2016-12-23 16:24:01'),(20,5,'dqgq36','','28/12/2016','2016-12-23 16:24:45'),(21,4,'da','','27/12/2016','2016-12-23 16:26:15'),(22,12,'51ffr','','27/12/2016','2016-12-23 16:26:45'),(23,12,'51ffr','','27/12/2016','2016-12-23 16:28:25'),(24,6.6,'2dq888','','31/12/2016','2016-12-23 16:29:30'),(25,4,'51','','04/01/2017','2016-12-23 16:43:11'),(26,97,'dsdwq','','08/01/2017','2016-12-23 16:45:17'),(27,19,'pommyt','','02/07/2017','2016-12-23 16:51:18'),(28,5.6,'','','28/12/2016','2016-12-23 17:08:14'),(29,18.6,'dqwdq','','28/12/2016','2016-12-23 17:09:09'),(30,7.3,'','','08/01/2017','2016-12-23 17:11:20'),(31,25.6,'43dde','','07/01/2017','2016-12-26 22:22:34');
+INSERT INTO `detalleproductos` VALUES (1,12,'fad','','22/12/2016','2016-12-21 20:10:09'),(2,8,'fsd','','04/01/2017','2016-12-21 20:14:08'),(3,21,'','','27/12/2016','2016-12-21 20:19:50'),(4,7,'vvfds','','03/01/2017','2016-12-21 20:25:49'),(5,2,'','','03/01/2017','2016-12-21 20:33:34'),(6,9,'12dsaw','','28/12/2016','2016-12-21 20:35:05'),(7,51,'','','27/12/2016','2016-12-21 20:41:16'),(8,2,'','','28/12/2016','2016-12-21 20:59:51'),(9,52,'fsd','','28/12/2016','2016-12-23 15:17:28'),(10,9,'posm','','03/01/2017','2016-12-23 15:20:16'),(11,41,'dasd8','','28/12/2016','2016-12-23 15:26:12'),(12,1,'','','04/01/2017','2016-12-23 15:45:41'),(13,4,'','','27/12/2016','2016-12-23 15:47:15'),(14,5,'','','03/01/2017','2016-12-23 15:49:19'),(15,18,'','','04/01/2017','2016-12-23 15:50:14'),(16,99,'FEQWQ','','03/01/2017','2016-12-23 15:51:12'),(17,31,'512dqw','','','2016-12-23 15:52:48'),(18,3,'jhgf','','','2016-12-23 15:53:17'),(19,51,'','','','2016-12-23 16:24:01'),(20,5,'dqgq36','','28/12/2016','2016-12-23 16:24:45'),(21,4,'da','','27/12/2016','2016-12-23 16:26:15'),(22,12,'51ffr','','27/12/2016','2016-12-23 16:26:45'),(23,12,'51ffr','','27/12/2016','2016-12-23 16:28:25'),(24,6.6,'2dq888','','31/12/2016','2016-12-23 16:29:30'),(25,4,'51','','04/01/2017','2016-12-23 16:43:11'),(26,97,'dsdwq','','08/01/2017','2016-12-23 16:45:17'),(27,19,'pommyt','','02/07/2017','2016-12-23 16:51:18'),(28,5.6,'','','28/12/2016','2016-12-23 17:08:14'),(29,18.6,'dqwdq','','28/12/2016','2016-12-23 17:09:09'),(30,7.3,'','','08/01/2017','2016-12-23 17:11:20'),(31,25.6,'43dde','','07/01/2017','2016-12-26 22:22:34'),(32,16,'okmmaj','','24/01/2017','2017-01-05 17:08:51');
 /*!40000 ALTER TABLE `detalleproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,6 +159,7 @@ CREATE TABLE `detalleventas` (
 
 LOCK TABLES `detalleventas` WRITE;
 /*!40000 ALTER TABLE `detalleventas` DISABLE KEYS */;
+INSERT INTO `detalleventas` VALUES (2,7,1,51,51),(1,7,2,51,102),(1,32,3,16,48),(7,7,2,51,102),(7,32,3,16,48),(11,7,2,51,102),(11,32,3,16,48),(46,7,1,51,51),(47,7,1,51,51),(48,7,1,51,51),(51,7,1,51,51),(60,7,1,51,51),(61,7,1,51,51),(64,7,1,51,51),(66,7,1,51,51),(68,7,1,51,51),(69,7,1,51,51),(70,7,1,51,51),(71,7,1,51,51),(72,7,1,51,51),(73,7,1,51,51),(74,7,1,51,51),(74,32,1,16,16),(75,7,1,51,51),(75,32,2,16,32),(75,18,3,3,9),(75,5,2,2,4),(75,28,2,5.6,11.2),(78,7,1,51,51),(78,32,2,16,32),(78,18,3,3,9),(78,5,2,2,4),(78,28,2,5.6,11.2),(79,7,1,51,51),(79,32,2,16,32),(79,18,3,3,9),(79,5,2,2,4),(79,28,2,5.6,11.2);
 /*!40000 ALTER TABLE `detalleventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +344,7 @@ CREATE TABLE `producto` (
   CONSTRAINT `fkProduc_categoria` FOREIGN KEY (`idCategoriaProducto`) REFERENCES `categoriaproducto` (`idCategoriaProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fkProduc_laboratorio` FOREIGN KEY (`idLaboratorio`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fkProduc_propiedad` FOREIGN KEY (`idPropiedadProducto`) REFERENCES `propiedadproducto` (`idpropiedadProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +353,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'ca','',12,'41',6,2,NULL),(2,'qtq v','',56,'10',26,2,7),(3,'dqw 51','',21,'10',15,3,8),(4,'tqwt ew','',51,'10',26,1,7),(5,'esmeralda x6 und','',15,'10',6,2,5),(6,'shampoo h&s limon 720ml','',85,'10',12,1,2),(7,'dasd1 qw','',1,'10',1,1,6),(8,'black 21','',5,'5',12,1,3),(9,'Cloruro de sodio vijosa 2% 50ml','',41,'10',12,3,5),(10,'vitamina a natural ford pote x 25caps','',15,'10',29,3,4),(11,'heno de pravia jabon','',52,'10',6,1,5),(12,'jabon palmolive barra 51gr','',51,'10',6,2,4),(13,'palmolive primavera jabon 51gr','',4,'10',29,2,6),(14,'cloro pim jarabe 5ml','',2,'10',22,1,2),(15,'rodalon solución 15ml','',36,'8',6,2,6),(16,'complejo b vitamina 8-12 54ml','',15,'15',29,2,6),(17,'zentel tabletas 150und','',21,'10',6,2,5),(18,'acid mantle crema pote','',51,'10',7,3,7),(19,'caballa jabon 41gr','',25,'10',29,2,6),(20,'Ferridoce formula 5 caja x8 und','',51,'10',7,3,8),(21,'primiec gotas 21ml','',1,'10',29,2,5),(22,'bendramin tabletas 26mg','',69,'10',7,3,7),(23,'bendramin tabletas 26mg','',69,'10',7,3,7),(24,'Sedobital 100gr','',99,'19',10,1,5),(25,'Ampiben 50mg','',21,'10',28,1,11),(26,'funji sil crema forte 55gr','',9,'10',6,3,8),(27,'Metrodinazol inyectable 42ml','',51,'10',11,2,6),(28,'sanagrip tableta x16 und','',22,'11',22,1,2),(29,'polyabem 502ml','',18,'10',27,2,3),(30,'flubidron x10 cápsulas','',19,'10',13,1,11),(31,'talco Jhonson babys 170gr','',199,'10',27,1,2);
+INSERT INTO `producto` VALUES (1,'ca','',10,'41',6,2,NULL),(2,'qtq v','',54,'10',26,2,7),(3,'dqw 51','',21,'10',15,3,8),(4,'tqwt ew','',51,'10',26,1,7),(5,'esmeralda x6 und','',11,'10',6,2,5),(6,'shampoo h&s limon 720ml','',85,'10',12,1,2),(7,'dasd1 qw','',-1,'10',1,1,6),(8,'black 21','',5,'5',12,1,3),(9,'Cloruro de sodio vijosa 2% 50ml','',41,'10',12,3,5),(10,'vitamina a natural ford pote x 25caps','',15,'10',29,3,4),(11,'heno de pravia jabon','',52,'10',6,1,5),(12,'jabon palmolive barra 51gr','',51,'10',6,2,4),(13,'palmolive primavera jabon 51gr','',4,'10',29,2,6),(14,'cloro pim jarabe 5ml','',2,'10',22,1,2),(15,'rodalon solución 15ml','',36,'8',6,2,6),(16,'complejo b vitamina 8-12 54ml','',15,'15',29,2,6),(17,'zentel tabletas 150und','',21,'10',6,2,5),(18,'acid mantle crema pote','',45,'10',7,3,7),(19,'caballa jabon 41gr','',25,'10',29,2,6),(20,'Ferridoce formula 5 caja x8 und','',51,'10',7,3,8),(21,'primiec gotas 21ml','',1,'10',29,2,5),(22,'bendramin tabletas 26mg','',69,'10',7,3,7),(23,'bendramin tabletas 26mg','',69,'10',7,3,7),(24,'Sedobital 100gr','',99,'19',10,1,5),(25,'Ampiben 50mg','',21,'10',28,1,11),(26,'funji sil crema forte 55gr','',9,'10',6,3,8),(27,'Metrodinazol inyectable 42ml','',51,'10',11,2,6),(28,'sanagrip tableta x16 und','',18,'11',22,1,2),(29,'polyabem 502ml','',18,'10',27,2,3),(30,'flubidron x10 cápsulas','',19,'10',13,1,11),(31,'talco Jhonson babys 170gr','',199,'10',27,1,2),(32,'shampoo h&s citrico 785ml','',1,'10',32,2,3);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,10 +502,12 @@ CREATE TABLE `ventas` (
   `ventIGV` float DEFAULT NULL,
   `ventTotal` float DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
+  `ventMonedaEnDuro` float DEFAULT NULL,
+  `ventCambioVuelto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idVenta`),
   KEY `idUsuario_idx` (`idUsuario`),
   CONSTRAINT `idUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -515,6 +516,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,'2017-01-06 22:31:06',34.75,6.25,41,1,0,'-'),(2,'2017-01-06 22:31:20',0,0,0,1,0,'-'),(3,'2017-01-06 23:14:23',127.12,22.88,150,1,0,'-'),(4,'2017-01-06 23:15:42',127.12,22.88,150,1,0,'-'),(5,'2017-01-06 23:18:05',127.12,22.88,150,1,0,'-'),(6,'2017-01-06 23:18:24',127.12,22.88,150,1,0,'-'),(7,'2017-01-06 23:19:00',127.12,22.88,150,1,0,'-'),(8,'2017-01-06 23:19:54',127.12,22.88,150,1,0,'-'),(9,'2017-01-06 23:20:13',127.12,22.88,150,1,0,'-'),(10,'2017-01-06 23:20:33',127.12,22.88,150,1,0,'-'),(11,'2017-01-06 23:20:58',127.12,22.88,150,1,0,'-'),(12,'2017-01-06 23:21:51',127.12,22.88,150,1,0,'-'),(13,'2017-01-06 23:22:36',127.12,22.88,150,1,0,'-'),(14,'2017-01-06 23:22:54',127.12,22.88,150,1,0,'-'),(15,'2017-01-06 23:26:26',127.12,22.88,150,1,0,'-'),(16,'2017-01-06 23:27:13',127.12,22.88,150,1,0,'-'),(17,'2017-01-06 23:27:39',127.12,22.88,150,1,0,'-'),(18,'2017-01-06 23:28:35',127.12,22.88,150,1,0,'-'),(19,'2017-01-06 23:29:15',127.12,22.88,150,1,0,'-'),(20,'2017-01-06 23:30:48',127.12,22.88,150,1,0,'-'),(21,'2017-01-06 23:30:54',127.12,22.88,150,1,0,'-'),(22,'2017-01-06 23:31:31',127.12,22.88,150,1,0,'-'),(23,'2017-01-06 23:31:49',127.12,22.88,150,1,0,'-'),(24,'2017-01-06 23:32:00',127.12,22.88,150,1,0,'-'),(25,'2017-01-06 23:32:39',127.12,22.88,150,1,0,'-'),(26,'2017-01-06 23:32:50',127.12,22.88,150,1,0,'-'),(27,'2017-01-06 23:33:34',127.12,22.88,150,1,0,'-'),(28,'2017-01-06 23:33:39',127.12,22.88,150,1,0,'-'),(29,'2017-01-06 23:33:51',127.12,22.88,150,1,0,'-'),(30,'2017-01-06 23:35:44',127.12,22.88,150,1,0,'-'),(31,'2017-01-06 23:35:50',127.12,22.88,150,1,0,'-'),(32,'2017-01-06 23:36:10',127.12,22.88,150,1,0,'-'),(33,'2017-01-06 23:47:19',43.22,7.78,51,1,0,'-'),(34,'2017-01-06 23:47:30',43.22,7.78,51,1,0,'-'),(35,'2017-01-06 23:47:58',43.22,7.78,51,1,0,'-'),(36,'2017-01-06 23:49:07',43.22,7.78,51,1,0,'-'),(37,'2017-01-06 23:49:20',43.22,7.78,51,1,0,'-'),(38,'2017-01-06 23:49:30',43.22,7.78,51,1,0,'-'),(39,'2017-01-06 23:50:08',43.22,7.78,51,1,0,'-'),(40,'2017-01-06 23:50:27',43.22,7.78,51,1,0,'-'),(41,'2017-01-06 23:50:59',43.22,7.78,51,1,0,'-'),(42,'2017-01-06 23:51:32',43.22,7.78,51,1,0,'-'),(43,'2017-01-06 23:51:43',43.22,7.78,51,1,0,'-'),(44,'2017-01-06 23:52:49',43.22,7.78,51,1,0,'-'),(45,'2017-01-06 23:53:34',43.22,7.78,51,1,0,'-'),(46,'2017-01-06 23:53:48',43.22,7.78,51,1,0,'-'),(47,'2017-01-06 23:54:21',43.22,7.78,51,1,0,'-'),(48,'2017-01-06 23:55:09',43.22,7.78,51,1,0,'-'),(49,'2017-01-06 23:55:15',43.22,7.78,51,1,0,'-'),(50,'2017-01-06 23:55:20',43.22,7.78,51,1,0,'-'),(51,'2017-01-06 23:55:25',43.22,7.78,51,1,0,'-'),(52,'2017-01-06 23:56:08',43.22,7.78,51,1,0,'-'),(53,'2017-01-06 23:56:32',43.22,7.78,51,1,0,'-'),(54,'2017-01-06 23:57:57',43.22,7.78,51,1,0,'-'),(55,'2017-01-06 23:58:09',43.22,7.78,51,1,0,'-'),(56,'2017-01-07 00:00:07',43.22,7.78,51,1,0,'-'),(57,'2017-01-07 00:00:20',43.22,7.78,51,1,0,'-'),(58,'2017-01-07 00:00:29',43.22,7.78,51,1,0,'-'),(59,'2017-01-07 00:01:15',43.22,7.78,51,1,0,'-'),(60,'2017-01-07 00:01:36',43.22,7.78,51,1,0,'-'),(61,'2017-01-07 00:02:08',43.22,7.78,51,1,0,'-'),(62,'2017-01-07 00:02:35',43.22,7.78,51,1,0,'-'),(63,'2017-01-07 00:02:55',43.22,7.78,51,1,0,'-'),(64,'2017-01-07 00:03:17',43.22,7.78,51,1,0,'-'),(65,'2017-01-07 00:04:22',43.22,7.78,51,1,0,'-'),(66,'2017-01-07 00:04:38',43.22,7.78,51,1,0,'-'),(67,'2017-01-07 00:06:13',43.22,7.78,51,1,0,'-'),(68,'2017-01-07 00:06:21',43.22,7.78,51,1,0,'-'),(69,'2017-01-07 00:07:04',43.22,7.78,51,1,0,'-'),(70,'2017-01-07 00:07:12',43.22,7.78,51,1,0,'-'),(71,'2017-01-07 00:07:25',43.22,7.78,51,1,0,'-'),(72,'2017-01-07 00:08:02',43.22,7.78,51,1,0,'-'),(73,'2017-01-07 00:09:20',43.22,7.78,51,1,0,'-'),(74,'2017-01-07 00:09:32',56.78,10.22,67,1,0,'-'),(75,'2017-01-07 00:09:58',90.85,16.35,107.2,1,0,'-'),(76,'2017-01-07 00:29:11',90.85,16.35,107.2,1,0,'-'),(77,'2017-01-07 00:29:19',90.85,16.35,107.2,1,0,'-'),(78,'2017-01-07 00:30:08',90.85,16.35,107.2,1,0,'-'),(79,'2017-01-07 00:30:35',90.85,16.35,107.2,1,0,'-');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -703,6 +705,60 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `buscarProductoXNombreOLote` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarProductoXNombreOLote`(in filtro text)
+BEGIN
+SELECT prd.idProducto, prodNombre, prodPrecioUnitario , catprodDescipcion,
+case prodLote when '' then '-' else  upper(prodLote) end as lote,
+prodFechaVencimiento, prodStock
+FROM `producto` as prd
+INNER JOIN `detalleproductos` as det ON prd.`idProducto`=det.`idProducto`
+inner join categoriaproducto as cat on cat.idcategoriaproducto= prd.idcategoriaproducto
+WHERE concat(catprodDescipcion , ' ',prodnombre  ) like filtro
+or prodLote like filtro
+ORDER BY prd.`prodNombre` asc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insertarDetalleVentaProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarDetalleVentaProducto`(in idvent int, in idprod int,in ventCant float,in ventPrec float,in VentParc float)
+BEGIN
+insert INTO `detalleventas` (`idVenta`,`idProducto`,`detventCantidad`,`detventPrecio`,`detentPrecioparcial`)
+values
+(idvent, idprod ,ventCant ,ventPrec ,VentParc );
+
+UPDATE `producto`
+SET
+`prodStock` =`prodStock` - ventCant
+WHERE `idProducto` = idprod;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `insertarEconomia` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -877,6 +933,46 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insertarVentas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarVentas`(in sub float,in igv float,in total float, in iduser int, in moneda float, in vuelto text)
+BEGIN
+	INSERT INTO `farmacia`.`ventas`
+(`idVenta`,
+`ventFecha`,
+`ventSubtotal`,
+`ventIGV`,
+`ventTotal`,
+`idUsuario`,
+`ventMonedaEnDuro`,
+`ventCambioVuelto`)
+VALUES
+(null,
+now(),
+sub,
+igv,
+total,
+iduser,
+moneda,
+vuelto);
+
+set @id = (select LAST_INSERT_ID());
+select @id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `listarCategoriaProducto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -987,8 +1083,8 @@ round(sum(detcomprSubTotal),2) as total FROM compras co
 inner join detallecompra det on co.idcompras=det.idcompra
 where idTipoComprobante =41 and compTitulo='Inventario'
 and year(comptFecha) =anio and month(comptFecha)=mes
-group by idcompras;
-
+group by idcompras
+order by comptFecha desc;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1046,4 +1142,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-28 11:33:48
+-- Dump completed on 2017-01-07  0:36:42

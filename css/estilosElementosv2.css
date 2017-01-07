@@ -93,6 +93,7 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .modal-header-primary {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #428bca;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 .modal-header-morado {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #694D9F;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 .modal-header-wysteria {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #8F44AD;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.modal-header-indigo {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #3E50B4;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -123,12 +124,17 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: : black;}
 .nav .icofont{font-size: 24px;}.navbar-brand{font-size: 24px;}
 .modal-backdrop.in{filter:alpha(opacity=60);opacity:.6}
-.modal-content{box-shadow: 0 5px 15px rgba(114, 99, 222, 0.65);}
+.modal-content{box-shadow: 0 0px 15px rgba(255, 255, 255, 0.65);}
 .resulDiv:hover{background-color: #ffeec9; border-radius: 6px;}
 .resulDiv{padding-top:6px; padding-bottom:6px;transition: all .7s;}
 #detProductoInv>.row{padding-top:6px; padding-bottom:6px;}
 .modal-title >i{color: rgba(5, 16, 16, 0.69);}
 /*.modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
+
+#listadoDivs>.row:hover{ border-radius: 6px; background-color: #fce7ba; cursor: default;transition: all .6s;}
+#listadoDivs>.row{min-height: 37px}
+.close{opacity: 0.5; color: #fff;}
+.badge-morado{background-color: #fff;color: #694D9F;}
 
 .materialize-red{background-color:#e51c23 !important}.materialize-red-text{color:#e51c23 !important}.materialize-red.lighten-5{background-color:#fdeaeb !important}.materialize-red-text.text-lighten-5{color:#fdeaeb !important}.materialize-red.lighten-4{background-color:#f8c1c3 !important}.materialize-red-text.text-lighten-4{color:#f8c1c3 !important}
 .materialize-red.lighten-3{background-color:#f3989b !important}.materialize-red-text.text-lighten-3{color:#f3989b !important}.materialize-red.lighten-2{background-color:#ee6e73 !important}.materialize-red-text.text-lighten-2{color:#ee6e73 !important}

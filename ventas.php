@@ -137,16 +137,17 @@
 		<div class="container-fluid">
 			<div class="col-sm-12 col-md-9">
 				<div class="panel panel-morado">
-					<div class="panel-heading">Detalle de la venta</div>
+					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items en la cesta: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
 					
 					<div class="panel-body">
-						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto:</label>
+						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto: <span class="red-text text-darken-1 hidden" id="spanSinCoincidencias"> No se encontraron coincidencias</span></label>
 							<div class="input-group"> 
 								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote">
 								<span class="input-group-btn">
 									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoVenta" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
 							</div><!-- /input-group -->
+
 						</div><!-- /.col-lg-6 -->
 						
 						
@@ -156,7 +157,7 @@
 						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
 						<thead> <tr> <th>#</th> <th class="col-xs-4">Producto</th> <th class="text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
 						<tbody>
-						<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 1.</th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
+						<!--<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">1. </span></th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
 							<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -165,9 +166,9 @@
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
 								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 43</span></td> <td class="text-center">S/. 0.69</td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 2.</th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
+							</div></td>
+						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">43</span> </span></td> <td class="text-center">S/. <span class="spanDescuento">0.69</span></td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>
+						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">2. </span></th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -176,9 +177,9 @@
 								<span class="input-group-btn ">
 									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
 								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 99</span></td> <td class="text-center">S/. 2.30</td> <td class="text-center">S/.  <span class="spanSubTotal">198.0</span>0</td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 3.</th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
+							</div></td>
+						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">99</span></span></td> <td class="text-center">S/. <span class="spanDescuento">0.23</span></td> <td class="text-center">S/.  <span class="spanSubTotal">198.00</span></td> </tr>
+						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">3. </span></th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
 						<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -187,22 +188,11 @@
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
 								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 25</span></td> <td class="text-center">S/. 6.00</td> <td class="text-center">S/. <span class="	">75.00</span></td>  </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 4.</th> <td class="col-xs-4">Elemento 4</td> <td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 6</span></td> <td class="text-center">S/. 5.00</td> <td class="text-center">S/.  <span class="spanSubTotal">24.00</span></td>  </tr>
+							</div></td>
+						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">25</span></span></td> <td class="text-center">S/. <span class="spanDescuento">6.3</span></td> <td class="text-center">S/. <span class="spanSubTotal">75.00</span></td>  </tr>-->
+						
 						</tbody>
 						</table></div>
-						<p class="row col-sm-12 purple-text text-darken-3"><em>Total de items en la cesta: <strong id="itemsCesta">0</strong></em></p>
 
 					</div>
 					
@@ -213,9 +203,12 @@
 					<div class="panel-heading">Datos generales de la nueva venta</div>
 					<div class="panel-body">
 						<div class=" text-center">
-							
-							<label class="">Total de venta:</label><br>
-								<h4>S/. <span id="spanTotalVenta">540.20</span></h4>
+							<label class="">Sub-Total de venta:</label>
+							<h4><strong>S/. <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
+							<label class="">Impuesto:</label>
+							<h4><strong>S/. <span id="spanImpuestoVenta">0.00</span></strong></h4>
+							<label class="">Total de venta:</label>
+							<h4><strong>S/. <span id="spanTotalVenta">0.00</span></strong></h4>
 								<label for="">Dinero del cliente (S/.):</label><br>
 								<div class="input-group">
 									<span class="input-group-btn mitooltip" title="Abrir el asistente de contador de monedas" >
@@ -225,12 +218,12 @@
 								</div><!-- /input-group -->
 								
 								<label for="">Cambio a entregar:</label><br>
-								<h4>S/. <span id="spanResiduoCambio">9.80</span></h4>
+								<h4>S/. <span id="spanResiduoCambio">-</span></h4>
 						</div>
 					</div>
 				</div><!-- fin de pane cielo-->
 				<div class="row text-center" style="line-height: 60px;">
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-calculator"></i> Completar la compra</button>
+				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar la venta</button>
 				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
 				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
 				</div>
@@ -364,66 +357,31 @@
 <!-- /#page-content-wrapper -->
 </div><!-- /#wrapper -->
 
-	<!-- Modal para mostrar el detalle de las facturas-->
-	<div class="modal fade modal-detalleCompras " tabindex="-1" role="dialog">
+	<!-- Modal para mostrar el detalle de Producto Encontrado-->
+	<div class="modal fade modal-detalleProductoEncontrado " tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg ">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header-indigo">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button> <!--Boton para cerrar-->
-				<h4 class="modal-tittle purple-text text-darken-3">Detalle de Factura</h4></div>
+				<h4 class="modal-tittle "><i class="icofont icofont-help-robot"></i> <span id="lblCantidadProd"></span> Productos coincidentes con: <span id="terminoBusq"></span></h4></div>
 				<div class="modal-body">
-					<dl class="dl-horizontal">
-						<dt>Proveedor:</dt> <dd class="col-xs-offset-1">Laboratorio Mi Farma S.R.L.</dd>
-						<dt>Serie:</dt> <dd class="col-xs-offset-1">001-061584</dd>
-						<dt>Fecha de registro:</dt> <dd class="col-xs-offset-1">Domingo, 15 de marzo de 2016 11:34 a.m.</dd>
-						<dt>Registrador:</dt> <dd class="col-xs-offset-1">Carlos Pariona</dd>
-						</dl>            
-						<table class="table table-hover">
-							<thead>
-								<tr class="purple-text text-darken-3">
-									<th>#</th> <th>Cant.</th> <th>Descripción de producto</th> <th>Costo Und.</th> <th>Importe</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td> <td>16</td>
-									<td>Red Bull lata 350ml</td>
-									<td>5.00</td>
-									<td>S/. 80.00</td>
-								</tr>
-								<tr>
-									<td>2</td> <td>100</td>
-									<td>Bicarbonato sódico frasco frambuesa x20 cápsulas</td>
-									<td>1.60</td>
-									<td>S/. 160.00</td>
-								</tr>
-								<tr>
-									<td>3</td> <td>12</td>
-									<td>Aciclovid calox 400mg x 30 tabletas</td>
-									<td>22.79</td>
-									<td>S/. 273.48</td>
-								</tr>
-								<tr>
-									<td>4</td> <td>18</td>
-									<td>Dolocam plus jarabe 50ml</td>
-									<td>6.75</td>
-									<td>S/. 121.50</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="col-xs-6 col-xs-offset-3">
-							<dl class="dl-horizontal">
-							<dt>Neto:</dt><dd>634.98</dd>
-							<dt>IGV (18%):</dt><dd>114.30</dd>
-							<dt>Total:</dt><dd>749.28</dd>
-						</dl>
+					<div class="container-fluid">
+						<div class="row"> <strong>
+							<div class="col-sm-4 text-center">Producto</div>
+							<div class="col-sm-1 text-center">Precio</div>
+							<div class="col-sm-2 text-center">Clase</div>
+							<div class="col-sm-2 text-center">Lote</div>
+							<div class="col-sm-1 text-center">Vencimiento</div>
+							<div class="col-sm-1 text-center">Stock</div>
+							<div class="col-sm-1 text-center"><i class="icofont icofont-robot"></i></div>
+						</strong></div>
+						<div id="listadoDivs">
+							
 						</div>
-						<br><br><br>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default">Ver cambios</button>
-					<button type="button" class="btn btn-primary">Editar</button>
-					<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>          
+					<button type="button" class="btn btn-info btn-outline" data-dismiss="modal"><i class="icofont icofont-close-circled"></i> Cancelar búsqueda</button>
 				</div>
 			</div>
 		</div>
@@ -623,6 +581,24 @@
 		</div>
 		</div>
 	</div>
+
+<!-- Modal para indicar que falta completar campos o datos con error -->
+	<div class="modal fade modal-ventaGuardada" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header-primary">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Venta guardada</h4>
+			</div>
+			<div class="modal-body">
+				<strong><i class="icofont icofont-social-smugmug"></i> Enhorabuena,</strong> su venta fue guardada. ¿Desea imprimir su voucher?
+			</div>
+			<div class="modal-footer"> 
+			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, acabó todo</button>
+			<button class="btn btn-primary btn-outline" data-dismiss="modal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
+		</div>
+		</div>
+	</div>
 		
 <!-- Modal para indicar que falta completar campos o datos con error -->
 	<div class="modal fade modal-faltaCompletar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -635,7 +611,10 @@
 			<div class="modal-body">
 				Ups, un error: <i class="icofont icofont-animal-squirrel"></i> <strong id="lblFalta"></strong>
 			</div>
-			<div class="modal-footer"> <button class="btn btn-danger btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok, revisaré</button></div>
+			<div class="modal-footer"> 
+			
+			<button class="btn btn-danger btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok, revisaré</button>
+			</div>
 		</div>
 		</div>
 	</div>
@@ -697,14 +676,35 @@ $(document).ready(function(){
 		$('#btnAgregarListaCompras').click(function(){
 
 		});
+
 		$('.tablaResultadosCompras').on('click', '.btnAumentarCantidad',function () {
-			var valorAnt=$(this).parent().parent().find('input').val();
-			$(this).parent().parent().find('input').val(parseInt(valorAnt)+1);
+			var indexRow=$(this).parent().parent().parent().parent().index();
+
+			var valorNue=parseInt($('tbody tr').eq(indexRow).find('input').val())+1;
+			//$(this).parent().parent().find('input').val(parseInt(valorNue)+1);
+			$('tbody tr').eq(indexRow).find('input').val(valorNue);
+			var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
+			var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
+			if(isNaN(PrecDescuento )){PrecDescuento=0}
+			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)-PrecDescuento).toFixed(2));
+		 	sumarSubTotalesInstante()
 		});
+
 		$('.tablaResultadosCompras').on('click', '.btnRestarCantidad',function () {
-			var valorAnt=$(this).parent().parent().find('input').val();
-			if(valorAnt!=1){$(this).parent().parent().find('input').val(parseInt(valorAnt)-1);}
+			var indexRow=$(this).parent().parent().parent().parent().index();
+			var valorNue=parseInt($('tbody tr').eq(indexRow).find('input').val())-1;
+			if(valorNue>=1){
+				$('tbody tr').eq(indexRow).find('input').val(valorNue);
+			var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
+			var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
+			if(isNaN(PrecDescuento )){PrecDescuento=0}
+			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)-PrecDescuento).toFixed(2));
+			sumarSubTotalesInstante()
+			}
+			
+			
 		});
+	
 	$('#txtBuscarProductoVenta').focus();
 
 	
@@ -713,6 +713,19 @@ $(document).ready(function(){
 
 
 });
+function sumarSubTotalesInstante(){ var sumTot=0; var imp=0; var sub=0;
+		$('.tablaResultadosCompras .spanSubTotal').each(function ( ) {
+			sumTot+=parseFloat($(this).text());
+			//console.log( 'elemento '+ $(this).text() + ' suma hasta elemento: ' + sumTot)
+		});
+		sub=sumTot/1.18;
+		imp=sumTot-sub;
+		
+		$('#spanSubTotalVentaFinal').text(parseFloat(sub).toFixed(2));
+		$('#spanImpuestoVenta').text(parseFloat(imp).toFixed(2));
+		$('#spanTotalVenta').text(parseFloat(sumTot).toFixed(2));
+
+	}
 function agregarRowInventario() {
 	$('#itemsInventarioNuevo').text($('#listaProductosNuevoInventario .row').length+1);
 		$.ajax({url: 'php/productos/listarCategorias.php', type:'POST'}).success(function(resCategoria){
@@ -1052,39 +1065,150 @@ $('#btnPasarMonedas').click(function () {
 	$('#txtMonedaEnDuro').focusout();
 });
 $('.tablaResultadosCompras').on('click', '.eliminarRowVenta',function () {
-	$(this).parent().parent().remove();calcularRowTabla()
+
+	//$('#spanTotalVenta').text( (parseFloat($('#spanTotalVenta').text()) - parseFloat($(this).parent().parent().find('.spanSubTotal').text())).toFixed(2));
+	
+	rowEliminar=$(this).parent().parent().index();
+		
+	$(this).parent().parent().addClass('animated fadeOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		//$(this).parent().parent().remove();
+		//$('.tablaResultadosCompras tbody tr').eq(rowEliminar).remove();
+		$('.tablaResultadosCompras tbody tr').each(function (){
+			if($(this).hasClass('fadeOutLeft')){$(this).remove()};
+		})
+		sumarSubTotalesInstante();
+		calcularRowTabla();
+		$('.SpanNum').map(function (index, elem) {
+			$(this).text(index+1 + '. ' );
+		})
+	});
+	
 });
 
 function calcularRowTabla(){
+	$('#itemsCesta').addClass('animated jello').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+		$('#itemsCesta').removeClass('animated jello');
+	});
 	$('#itemsCesta').text($('.tablaResultadosCompras tbody tr').length)
 }
 $('#btn-BuscarProductoVenta').click(function () {
-	$('.tablaResultadosCompras tbody').append(`<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> 1.</th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
+	llamarBuscarProducto();
+});
+$('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
+	if(code==13   ){	e.preventDefault();
+		//console.log('enter')
+		llamarBuscarProducto();
+	}
+});
+
+function llamarBuscarProducto() {
+	var filtr= String($('#txtBuscarProductoVenta').val());
+	if(esNumero(filtr)){//es numero llamar al procedure por numero
+		}
+	else{//es letras llamar al procedure para que haga el filtro
+			filtr='%'+filtr.replace(/\ /g,'%')+'%'		
+	}
+
+	if($('#txtBuscarProductoVenta').val()!=''){
+		$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
+		$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
+		}).success(function (resp) {
+			if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden'); }
+			else{$('#spanSinCoincidencias').addClass('hidden');}
+			$('#lblCantidadProd').text(JSON.parse(resp).length);
+			$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+			JSON.parse(resp).map(function (dato, index) {
+				moment.locale('es');
+				var vence=moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
+				
+				$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+				<div class="row"> 
+					<div class="hidden" id="mProdID">${dato.idProducto}</div>
+					<div class="col-sm-4 mayuscula" id="mProdNombre">${dato.prodNombre}</div>
+					<div class="col-sm-1 text-center" id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+					<div class="col-sm-2"><small>${dato.catprodDescipcion}</small></div>
+					<div class="col-sm-2 text-center">${dato.lote}</div>
+					<div class="col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><small>${vence}</small></div>
+					<div class="col-sm-1 text-center">${dato.prodStock}</div>
+					<div class="col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+
+				</div>
+				`);
+			$('.modal-detalleProductoEncontrado').modal('show');
+
+			});
+			$('.mitooltip').tooltip();			
+		});
+	}
+	
+}
+$('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
+	var indexSelec=$(this).attr('id');
+	
+
+	$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft"> <th >
+		<button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">${$('.tablaResultadosCompras  tr').length}. </span> </th>
+		<td class="mProdID hidden">${$('#listadoDivs .row').eq(indexSelec).find('#mProdID').text()}</td>
+		 <td class="col-xs-4 mayuscula">${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
 							<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
 								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
+								<input type="number" class="form-control text-center control-morado txtCantidadVariableProd" value="1" min=1>
 								<span class="input-group-btn">
 									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
 								</span>
 							</div><!-- /input-group --></td>
-						<td class="col-sm-1 text-center"> <span>S/. 43</span></td> <td class="text-center">S/. 0.69</td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>`);
+						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">${$('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()}</span></span></td> <td class="text-center">S/. <span class="spanDescuento">-</span></td> <td class="text-center">S/. <span class="spanSubTotal">${$('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()}</span></td> </tr>`);
+	sumarSubTotalesInstante();
 	calcularRowTabla();
+	
+	//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
+	$('.modal-detalleProductoEncontrado').modal('hide');
 });
-$('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
-	if(code==13){	e.preventDefault();
-		//console.log('enter')
-		var filtro= String($('#txtBuscarProductoVenta').val());
-		if(esNumero(filtro)){//es numero llamar al procedure por numero
-			console.log(filtro) 
-		}
-		else{//es letras llamar al procedure para que haga el filtro
-			console.log(filtro.replace(/\ /g,'%')) 
-		}
-		
-	}
+$('#btnGuardarVenta').click(function () {
+var Jencabezado=[];
+var Jdata=[];
+Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
+	'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text()
 });
+
+if($('.tablaResultadosCompras tbody tr').length!=0){
+	$('.tablaResultadosCompras tbody tr').map(function (argument, index) {
+	
+	var indProd=$(this).find('.mProdID').text();
+	var cantProd=$(this).find('.txtCantidadVariableProd').val();
+	var precioProd=$(this).find('.spanPrecio').text();
+	var SubTotalProd=$(this).find('.spanSubTotal').text();
+
+	Jdata.push({'id': indProd, 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
+	
+	
+	})
+	//console.log(data) agrega todo en un solo JSON;
+	$.ajax({
+    type: 'POST',
+    url: 'php/ventas/insertarVentas.php',
+    data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata)}
+	}).done(function (resp) { //console.log('recibido: ')
+		//console.log(resp);
+		$('.modal-ventaGuardada').modal('show');
+
+	});
+}
+
+
+	
+});
+
+$('#btnAcaboVenta').click(function () {
+	/*$('.tablaResultadosCompras tbody').children().remove();
+	sumarSubTotalesInstante();
+	$('#txtMonedaEnDuro').val(0).focusout();
+	$('#txtBuscarProductoVenta').val('').focus();
+	$('.modal-ventaGuardada').modal('hide');*/
+	window.location.href ='ventas.php';
+})
 
 
 </script>
