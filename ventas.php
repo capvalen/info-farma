@@ -125,7 +125,7 @@
 	
 	<ul class="nav nav-tabs">
 	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una venta</a></li>
-	<li><a href="#nuevo" data-toggle="tab">Detalle de ventas</a></li>
+	<li><a href="#nuevo" data-toggle="tab">Ventas del día</a></li>
 	<li><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
 	</ul>
 	
@@ -346,8 +346,49 @@
 			</div>
 		</div>
 		</div>
-		<div class="tab-pane fade" id="todos">
+		<div class="tab-pane fade fondoGeo" id="todos">
 			<div class="container-fluid row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar sus ventas.</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-2" id="divAñoInventario"><select class="selectpicker"  title="Año..." data-container="body" data-width="100%" >
+					<?php require('php/ventas/retornarAnosVentas.php'); ?>
+
+				</select></div>
+				<button class="btn btn-success btn-outline" id="btnBuscarPorAñoInventario"><i class="icofont icofont-search-alt-1"></i></button>
+				
+			</div>
+			<div class="container row "><br>
+				<ul class="nav nav-tabs nav-tabs-meses">
+					<li class="hidden"><a href="#mes0" data-toggle="tab">Enero</a></li>
+					<li class="hidden"><a href="#mes1" data-toggle="tab">Febrero</a></li>
+					<li class="hidden"><a href="#mes2" data-toggle="tab">Marzo</a></li>
+					<li class="hidden"><a href="#mes3" data-toggle="tab">Abril</a></li>
+					<li class="hidden"><a href="#mes4" data-toggle="tab">Mayo</a></li>
+					<li class="hidden"><a href="#mes5" data-toggle="tab">Junio</a></li>
+					<li class="hidden"><a href="#mes6" data-toggle="tab">Julio</a></li>
+					<li class="hidden"><a href="#mes7" data-toggle="tab">Agosto</a></li>
+					<li class="hidden"><a href="#mes8" data-toggle="tab">Septiembre</a></li>
+					<li class="hidden"><a href="#mes9" data-toggle="tab">Octubre</a></li>
+					<li class="hidden"><a href="#mes10" data-toggle="tab">Noviembre</a></li>
+					<li class="hidden"><a href="#mes11" data-toggle="tab">Diciembre</a></li>
+					
+				</ul>
+			</div>
+			<div class="tab-content tabConenidoMeses ">
+				<div class="tab-pane fade " id="mes0"></div>
+				<div class="tab-pane fade " id="mes1"></div>
+				<div class="tab-pane fade " id="mes2"></div>
+				<div class="tab-pane fade " id="mes3"></div>
+				<div class="tab-pane fade " id="mes4"></div>
+				<div class="tab-pane fade " id="mes5"></div>
+				<div class="tab-pane fade " id="mes6"></div>
+				<div class="tab-pane fade " id="mes7"></div>
+				<div class="tab-pane fade " id="mes8"></div>
+				<div class="tab-pane fade " id="mes9"></div>
+				<div class="tab-pane fade " id="mes10"></div>
+				<div class="tab-pane fade " id="mes11"></div>
+			</div>
+
+		<!--Fin de pestaña 03-->
 		</div>
 	</div>
 					<!-- Fin de meter contenido principal -->
@@ -601,7 +642,34 @@
 		</div>
 		</div>
 	</div>
-		
+
+
+
+<!-- Modal para indicar que falta completar campos o datos con error -->
+	<div class="modal fade modal-mostrarDetalleInventario" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header-morado">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Detalles de la venta: <span id="spanIdInventario"></span></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row container"> <strong>
+					<div class="col-xs-4">Producto</div>
+					<div class="col-xs-1">Cantidad</div>
+					<div class="col-xs-2">Precio</div>
+					<div class="col-xs-2">Sub-Total</div></strong>
+				</div>
+				<div class="row container" id="detProductoInv">
+					
+				</div>
+				<div class="row container-fluid text-right" style="padding-right: 100px"><strong>Total valorizado:</strong> <span id="spanvalorInvent">S/. 3.00</span></div>
+			</div>
+			<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"></i><i class="icofont icofont-alarm"></i> Aceptar</button></div>
+		</div>
+		</div>
+	</div>
+
 <!-- Modal para indicar que falta completar campos o datos con error -->
 	<div class="modal fade modal-faltaCompletar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
@@ -941,9 +1009,8 @@ $('.activarNuevoInventario').click(function () {
 });
 $('#listaProductosNuevoInventario').on('lostfocus','.txtNomProducto',function () {
 	
-})
-
-$('#btnBuscarPorAñoInventario').click(function () {
+});
+function filtrarAñosSelect(){
 	$('.nav-tabs-meses li').addClass('hidden');
 	$('.tabConenidoMeses .tab-pane').children().remove();
 	var anioSeleccionado=$('#divAñoInventario button').attr('title');
@@ -954,6 +1021,13 @@ $('#btnBuscarPorAñoInventario').click(function () {
 		});
 	$('.nav-tabs-meses li').removeClass('active')
 	});
+}
+
+$('#btnBuscarPorAñoInventario').click(function () {
+	filtrarAñosSelect()
+});
+$('body').on('click', '.bootstrap-select .open', function () {
+	filtrarAñosSelect()
 });
 $('.nav-tabs-meses li').click(function () {
 	var sumaValoriz =0;
@@ -963,19 +1037,19 @@ $('.nav-tabs-meses li').click(function () {
 	$(`.tabConenidoMeses #mes${indMes}`).children().remove();
 	
 	var anioSeleccionado=$('#divAñoInventario button').attr('title');
-	$.ajax({url:'php/productos/listarTodoInventarios.php', type: 'POST', data: {anio:anioSeleccionado, mes: (indMes+1) }}).done(function(res){
-		$(`.tabConenidoMeses #mes${indMes}`).append(`<div class="row"><strong><div class="col-xs-2">Cod.</div><div class="col-xs-3">Fecha</div><div class="col-xs-2">Valorizado.</div><div class="col-xs-2">Creador</div><div class="col-xs-1">Detalles</div></strong></div>`);
+	$.ajax({url:'php/ventas/listarTodoVentas.php', type: 'POST', data: {anio:anioSeleccionado, mes: (indMes+1) }}).done(function(res){
+		$(`.tabConenidoMeses #mes${indMes}`).append(`<div class="row"><strong><div class="col-xs-2 col-sm-1">Cod.</div><div class="col-xs-3 text-center">Fecha de venta</div><div class="col-xs-2">Venta Total</div><div class="col-xs-2">Vuelto</div><div class="col-xs-2">Vendedor</div><div class="col-xs-1">Detalles</div></strong></div>`);
 		//console.log(res)
 		$.each(JSON.parse(res), function (i, arg) {
 			moment.locale('es')
 			sumaValoriz+=parseFloat(arg.total);
-			var dia=moment(arg.comptFecha);
+			var dia=moment(arg.ventFecha);
 			$(`.tabConenidoMeses #mes${indMes}`).append(`
-				<div class="row resulDiv noselect" style="cursor:default"><div class="col-xs-2 codDivInv" >${arg.idCompras}</div><div class="col-xs-3">${dia.format('dddd, DD h:mm a')}</div><div class="col-xs-2 argTotal">S/. ${arg.total}</div><div class="col-xs-2">${arg.Usuario}</div> <div class="col-xs-1"><button class="btn btn-danger btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				<div class="row resulDiv noselect" style="cursor:default"><div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div><div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div><div class="col-xs-2 argTotal">S/. ${arg.total}</div><div class="col-xs-2">Vuelto</div><div class="col-xs-2">${arg.Usuario}</div> <div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
 				`);
 			//console.log(arg.comptFecha)
 		});
-		$(`.tabConenidoMeses #mes${indMes}`).prepend(`<p class="text-center"><strong>Suma valorizada: </strong> S/. ${sumaValoriz.toFixed(2)}</p>`);
+		$(`.tabConenidoMeses #mes${indMes}`).prepend(`<h4 class="text-center"><strong>Suma valorizada: </strong> S/. ${sumaValoriz.toFixed(2)}</h4>`);
 	});
 	
 	
@@ -1210,7 +1284,9 @@ $('#btnAcaboVenta').click(function () {
 	$('#txtBuscarProductoVenta').val('').focus();
 	$('.modal-ventaGuardada').modal('hide');*/
 	window.location.href ='ventas.php';
-})
+});
+
+
 
 
 </script>

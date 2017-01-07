@@ -198,7 +198,7 @@
 								</div>-->
 								
 							</div>
-							<div class="row"><br><p class="text-center"><button class="btn btn-success btn-outline" id="btnAgregarItem"><i class="icofont icofont-first-aid-alt"></i> Agregar nuevo item</button></p></div>
+							<div class="row"><br><p class="text-center"><button class="btn btn-success btn-outline hidden" id="btnAgregarItem"><i class="icofont icofont-first-aid-alt"></i> Agregar nuevo item</button></p></div>
 							<p>Cantidad de items en la lista: <strong><span id="itemsInventarioNuevo">1</span></strong> </p>
 						</div>
 
@@ -335,7 +335,7 @@ function agregarRowInventario() {
 		
 }
 function habilitarDivFecha(){
-	$('#sandbox-container .input-group.date').datepicker({todayBtn: "linked", clearBtn: true, language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
+	$('#sandbox-container .input-group.date').datepicker({language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
 }
 $('#listaProductosNuevoInventario').on('focusout','.txtMonedas',function () {
 	var valor = parseFloat($(this).val());
@@ -504,8 +504,7 @@ $('.activarNuevoInventario').click(function () {
 $('#listaProductosNuevoInventario').on('lostfocus','.txtNomProducto',function () {
 	
 })
-
-$('#btnBuscarPorAñoInventario').click(function () {
+function filtrarAñosSelect(){
 	$('.nav-tabs-meses li').addClass('hidden');
 	$('.tabConenidoMeses .tab-pane').children().remove();
 	var anioSeleccionado=$('#divAñoInventario button').attr('title');
@@ -516,6 +515,12 @@ $('#btnBuscarPorAñoInventario').click(function () {
 		});
 	$('.nav-tabs-meses li').removeClass('active')
 	});
+}
+$('#btnBuscarPorAñoInventario').click(function () {
+	 filtrarAñosSelect()
+});
+$('body').on('click', '.bootstrap-select .open', function () {
+	filtrarAñosSelect()
 });
 $('.nav-tabs-meses li').click(function () {
 	var sumaValoriz =0;
