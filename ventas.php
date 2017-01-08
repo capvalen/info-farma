@@ -193,6 +193,14 @@
 						
 						</tbody>
 						</table></div>
+						<div class="row">
+						  <div class="col-sm-1">#</div>
+						  <div class="col-sm-3">Producto</div>
+						  <div class="col-sm-2">Cantidad</div>
+						  <div class="col-sm-2">Precio x unidad</div>
+						  <div class="col-sm-2">Descuento</div>
+						  <div class="col-sm-2">Sub-Total</div>
+						</div>
 
 					</div>
 					
