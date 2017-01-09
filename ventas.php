@@ -985,7 +985,7 @@ $('.nav-tabs-meses li').click(function () {
 	
 	
 });
-$('.tabConenidoMeses').on('click','.btnDetalleInvLista',function () {
+$('body').on('click','.btnDetalleInvLista',function () {
 	var idReg =$(this).attr('id');
 	var index=$(this).parent().parent().index()-2 ; // se pone -2  por la etiqueta P y la etiqueta div cabecera
 	//console.log(index);
