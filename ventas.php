@@ -125,7 +125,7 @@
 	
 	<ul class="nav nav-tabs">
 	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una venta</a></li>
-	<li><a href="#nuevo" data-toggle="tab">Ventas del día</a></li>
+	<li><a href="#tabListadoVentas" data-toggle="tab">Ventas del día</a></li>
 	<li><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
 	</ul>
 	
@@ -140,7 +140,7 @@
 					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
 					
 					<div class="panel-body">
-						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto: <span class="red-text text-darken-1 hidden" id="spanSinCoincidencias"> No se encontraron coincidencias</span></label>
+						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto: <span class="red-text text-darken-1 hidden" id="spanSinCoincidencias"> No se encontraron coincidencias <em><span></span></em></span></label>
 							<div class="input-group"> 
 								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote">
 								<span class="input-group-btn">
@@ -155,7 +155,18 @@
 						<!-- Tabla -->
 						<div class="row col-md-12 purple-text text-darken-3">
 						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
-						<thead> <tr> <th>#</th> <th class="col-xs-4">Producto</th> <th class="text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="text-center">Descuento</th> <th class="text-center">Sub-Total</th> </tr> </thead>
+						<thead>
+						<tr>
+						<th>#</th> <th class="col-xs-6">Producto</th> <th class="col-xs-1 text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="col-xs-1 text-center">Descuento</th> <th class="col-xs-1 text-center">Sub-Total</th> </tr>
+						</thead>
+						<strong>
+						<div class="col-xs-1">#</div>
+						<div class="col-xs-6">Producto</div>
+						<div class="col-xs-3">Cant.</div>
+						<div class="col-xs-3">Precio</div>
+						<div class="col-xs-3">Desc <span class="hidden-xs">uento</span></div>
+						<div class="col-xs-6">Sub-Total</div></strong>
+						
 						<tbody>
 						<!--<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">1. </span></th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
 							<div class="input-group">
@@ -246,8 +257,10 @@
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
 		<!--Panel para ver las ventas del día-->
-		<div class="tab-pane fade " id="nuevo"><br>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, aliquid, minima, libero, optio odit eveniet incidunt consectetur voluptas vel quam laudantium quod eligendi earum placeat reiciendis. Sint, ut architecto saepe!
+		<div class="tab-pane fade " id="tabListadoVentas"><br>
+			<p>Ventas realizadas hasta el momento:</p>
+			<h4 class="text-center">Monto en caja por todas las ventas: S/. <span id="spanSumaDelDia"></span></h4>
+			<div class="row container-fluid" id="listadoVentaDelDia"></div>
 		</div> <!--fin de tab pane 2-->
 		<div class="tab-pane fade fondoGeo" id="todos">
 			<div class="container-fluid row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar sus ventas.</div>
@@ -558,9 +571,10 @@
 			</div>
 			<div class="modal-body">
 				<div class="row container"> <strong>
-					<div class="col-xs-4">Producto</div>
+					<div class="col-xs-4">Nombre de producto vendido</div>
 					<div class="col-xs-1">Cantidad</div>
-					<div class="col-xs-2">Precio</div>
+					<div class="col-xs-1">Precio</div>
+					<div class="col-xs-1">Desc.</div>
 					<div class="col-xs-2">Sub-Total</div></strong>
 				</div>
 				<div class="row container" id="detProductoInv">
@@ -876,7 +890,7 @@ $('#listaProductosNuevoInventario').on('click','.btnGuardarItemInventario',funct
 });
 
 
-$(".ocultar-mostrar-menu").click(function() {
+/*$(".ocultar-mostrar-menu").click(function() {
 	ocultar()
 });
 function ocultar(){console.log('oc')
@@ -898,7 +912,7 @@ $('.has-clear input[type="text"]').on('input propertychange', function() {
 $('.form-control-clear').click(function() {
 	$(this).siblings('input[type="text"]').val('')
 		.trigger('propertychange').focus();
-});
+});*/
 $('.activarNuevoInventario').click(function () {
 	$.ajax('php/compras/insertarNuevoInventario.php').done(function (respuesta) {
 		if(respuesta!=0){
@@ -941,14 +955,28 @@ $('.nav-tabs-meses li').click(function () {
 	
 	var anioSeleccionado=$('#divAñoInventario button').attr('title');
 	$.ajax({url:'php/ventas/listarTodoVentas.php', type: 'POST', data: {anio:anioSeleccionado, mes: (indMes+1) }}).done(function(res){
-		$(`.tabConenidoMeses #mes${indMes}`).append(`<div class="row"><strong><div class="col-xs-2 col-sm-1">Cod.</div><div class="col-xs-3 text-center">Fecha de venta</div><div class="col-xs-2">Venta Total</div><div class="col-xs-2">Vuelto</div><div class="col-xs-2">Vendedor</div><div class="col-xs-1">Detalles</div></strong></div>`);
+		$(`.tabConenidoMeses #mes${indMes}`).append(`<div class="row"><strong>
+			<div class="col-xs-2 col-sm-1">Cod.</div>
+			<div class="col-xs-3 text-center">Fecha de venta</div>
+			<div class="col-xs-2">Venta Total</div>
+			<div class="col-xs-2">Pagó con</div>
+			<div class="col-xs-2">Vuelto</div>
+			<div class="col-xs-1">Vendedor</div>
+			<div class="col-xs-1">Detalles</div></strong></div>`);
 		//console.log(res)
 		$.each(JSON.parse(res), function (i, arg) {
 			moment.locale('es')
 			sumaValoriz+=parseFloat(arg.total);
 			var dia=moment(arg.ventFecha);
 			$(`.tabConenidoMeses #mes${indMes}`).append(`
-				<div class="row resulDiv noselect" style="cursor:default"><div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div><div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div><div class="col-xs-2 argTotal">S/. ${arg.total}</div><div class="col-xs-2">Vuelto</div><div class="col-xs-2">${arg.Usuario}</div> <div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				<div class="row resulDiv noselect" style="cursor:default">
+				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
+				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
+				<div class="col-xs-2 argTotal">S/. ${arg.total}</div>
+				<div class="col-xs-2">S/. ${parseFloat(arg.ventMonedaEnDuro).toFixed(2)}</div>
+				<div class="col-xs-2">${arg.ventCambioVuelto}</div>
+				<div class="col-xs-1">${arg.Usuario}</div>
+				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
 				`);
 			//console.log(arg.comptFecha)
 		});
@@ -964,14 +992,14 @@ $('.tabConenidoMeses').on('click','.btnDetalleInvLista',function () {
 	$('#spanIdInventario').text($('.tabConenidoMeses .resulDiv ').eq(index).find('.codDivInv').text());
 	$('#spanvalorInvent').text($('.tabConenidoMeses .resulDiv ').eq(index).find('.argTotal').text())
 	
-	$.ajax({url: 'php/productos/listarDetalleInventarioPorId.php', type:'POST', data:{idInv: idReg}}).done(function (res) {
+	$.ajax({url: 'php/ventas/listarDetalleVentaxId.php', type:'POST', data:{idVent: idReg}}).done(function (res) {
 		console.log(res)
 		$('#detProductoInv').children().remove();
 		$.each(JSON.parse(res), function (i, elem) {
-			$('#detProductoInv').append(`<div class="row container  "><div class="col-xs-4 text-capitalize">${elem.prodNombre}</div>
-					<div class="col-xs-1 ">${elem.detcomprCantidad}</div>
-					<div class="col-xs-2">${elem.detcomprPrecioUnitario}</div>
-					<div class="col-xs-2">S/. ${elem.detcomprSubTotal}</div></div>`);
+			$('#detProductoInv').append(`<div class="row container  "><div class="col-xs-4 text-capitalize"><strong>${i+1}.</strong> ${elem.prodNombre}</div>
+					<div class="col-xs-1">${elem.detventCantidad}</div>
+					<div class="col-xs-1">S/. ${parseFloat(elem.detventPrecio).toFixed(2)}</div><div class="col-xs-1">-</div>
+					<div class="col-xs-2">S/. ${parseFloat(elem.detentPrecioparcial).toFixed(2)}</div></div>`);
 		});
 
 		$('.modal-mostrarDetalleInventario').modal('show');
@@ -1077,6 +1105,7 @@ $('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
 	if(code==13   ){	e.preventDefault();
 		//console.log('enter')
 		llamarBuscarProducto();
+		
 	}
 });
 
@@ -1092,8 +1121,9 @@ function llamarBuscarProducto() {
 		$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
 		$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
 		}).success(function (resp) {
-			if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden'); }
+			if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden').find('span').text('con '+$('#txtBuscarProductoVenta').val()); }
 			else{$('#spanSinCoincidencias').addClass('hidden');}
+			$('#txtBuscarProductoVenta').val('');
 			$('#lblCantidadProd').text(JSON.parse(resp).length);
 			$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
 			JSON.parse(resp).map(function (dato, index) {
@@ -1118,6 +1148,7 @@ function llamarBuscarProducto() {
 			});
 			$('.mitooltip').tooltip();			
 		});
+
 	}
 	
 }
@@ -1188,8 +1219,46 @@ $('#btnAcaboVenta').click(function () {
 	$('.modal-ventaGuardada').modal('hide');*/
 	window.location.href ='ventas.php';
 });
+$('.tablaResultadosCompras ').on('keyup','.txtCantidadVariableProd', function () {
+	
+	var indexRow=$(this).parent().parent().parent().index();
+	console.log(indexRow)
+	var valorNue=0;
+	if($(this).val()!=''){valorNue=parseInt($(this).val())}
+	
+	var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
+	var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
+	if(isNaN(PrecDescuento )){PrecDescuento=0}
+	$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*valorNue-PrecDescuento).toFixed(2));
+	
+	//console.log(valorNue +' ' +PrecUnidad+' '+ PrecDescuento);
+ 	sumarSubTotalesInstante()
+});
 
-
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  if(target=='#tabListadoVentas'){//solo selecciona el tabListadoVentas
+  	var sumaValoriz=0
+  	$.ajax({url:'php/ventas/listarSoloVentasHoy.php', type:'POST'}).done(function (resp) {
+  		$.each(JSON.parse(resp), function (i, arg) {
+			moment.locale('es')
+			sumaValoriz+=parseFloat(arg.total);
+			var dia=moment(arg.ventFecha);
+			$(`#listadoVentaDelDia`).append(`
+				<div class="row resulDiv noselect" style="cursor:default">
+				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
+				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
+				<div class="col-xs-2 argTotal">S/. ${arg.total}</div>
+				<div class="col-xs-2">S/. ${parseFloat(arg.ventMonedaEnDuro).toFixed(2)}</div>
+				<div class="col-xs-2">${arg.ventCambioVuelto}</div>
+				<div class="col-xs-1">${arg.Usuario}</div>
+				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				`);
+			$('#spanSumaDelDia').text(parseFloat(sumaValoriz).toFixed(2));
+		});
+  	})
+  }
+});
 
 
 </script>

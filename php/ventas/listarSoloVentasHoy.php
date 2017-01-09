@@ -2,7 +2,7 @@
 include 'conectkarl.php';
 
 $filas=array();
-$log = mysqli_query($conection,"call listarTodoVentas(".$_POST['anio'].", ".$_POST['mes'].");");
+$log = mysqli_query($conection,"call listarSoloVentasHoy();");
 while($row = mysqli_fetch_array($log))
 {
 	$filas[]= array('idVenta' => $row['idVenta'],

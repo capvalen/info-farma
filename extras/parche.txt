@@ -1,0 +1,38 @@
+update: ventas.php, lisartodoventas.php
+add listardetalleventaxid
+/*********modificar procedure*/
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarTodoVentas`(in anio int, in mes int)
+BEGIN
+SELECT 
+concat('VEN-',right(concat('0000',ve.idVenta), 5)) as idVenta,
+ve.idVenta as idSimple,
+ventFecha ,
+returnNombreUsuario(idUsuario) as Usuario,
+round(ventTotal,2) as total, ventMonedaEnDuro, 
+case ventCambioVuelto when '-' then 'Sin vuelto' else  ventCambioVuelto end as ventCambioVuelto
+ FROM ventas ve
+inner join detalleventas det on ve.idventa=det.idventa
+where /*idTipoComprobante =41 and compTitulo='Inventario'and*/
+year(ventFecha) =anio and month(ventFecha)=mes
+group by idventa
+order by ventFecha desc;
+END
+
+
+
+
+
+/******************* crear***************/
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarVentasPorId`(in idVent int)
+BEGIN
+select det.idproducto, det.detventCantidad, det.detventPrecio , detentPrecioparcial,  pro.prodNombre
+from detalleventas det 
+inner join producto pro on det.idproducto=pro.idproducto
+where det.idventa= idvent
+order by det.idventa desc;
+
+END
+
