@@ -1238,6 +1238,7 @@ $('.tablaResultadosCompras ').on('keyup','.txtCantidadVariableProd', function ()
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href") // activated tab
   if(target=='#tabListadoVentas'){//solo selecciona el tabListadoVentas
+  	$(`#listadoVentaDelDia`).children().remove();
   	var sumaValoriz=0
   	$.ajax({url:'php/ventas/listarSoloVentasHoy.php', type:'POST'}).done(function (resp) {
   		$.each(JSON.parse(resp), function (i, arg) {
