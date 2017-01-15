@@ -41,7 +41,7 @@
 								Control Panel
 						</a>
 				</div>
-				<div class="logoEmpresa">
+				<div class="logoEmpresa ocultar-mostrar-menu">
 					<img class="img-responsive" src="images/empresa.png" alt="">
 				</div>
 				<li >
@@ -51,7 +51,7 @@
 						<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-blood"></i> Productos</a>
+						<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
 				</li>
 				<li>
 						<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>

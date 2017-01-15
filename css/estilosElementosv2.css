@@ -148,6 +148,9 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .fondoCuadro{ background: #fafafa url(../images/square_bg.png);}
 .thumbnail{background-color: rgba(232, 232, 232, 0.35);} .thumbnail:hover{box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 5px rgba(20, 31, 48, 0.1) inset;}
 
+.btnEliminarCode{margin-right: 8px; margin-bottom: 3px}
+.form-control[disabled]{cursor: default;}
+
 .materialize-red{background-color:#e51c23 !important}.materialize-red-text{color:#e51c23 !important}.materialize-red.lighten-5{background-color:#fdeaeb !important}.materialize-red-text.text-lighten-5{color:#fdeaeb !important}.materialize-red.lighten-4{background-color:#f8c1c3 !important}.materialize-red-text.text-lighten-4{color:#f8c1c3 !important}
 .materialize-red.lighten-3{background-color:#f3989b !important}.materialize-red-text.text-lighten-3{color:#f3989b !important}.materialize-red.lighten-2{background-color:#ee6e73 !important}.materialize-red-text.text-lighten-2{color:#ee6e73 !important}
 .materialize-red.lighten-1{background-color:#ea454b !important}.materialize-red-text.text-lighten-1{color:#ea454b !important}.materialize-red.darken-1{background-color:#d0181e !important}.materialize-red-text.text-darken-1{color:#d0181e !important}

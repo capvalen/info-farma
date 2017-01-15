@@ -41,7 +41,7 @@
 								Control Panel
 						</a>
 				</div>
-				<div class="logoEmpresa">
+				<div class="logoEmpresa ocultar-mostrar-menu">
 					<img class="img-responsive" src="images/empresa.png" alt="">
 				</div>
 				<li >

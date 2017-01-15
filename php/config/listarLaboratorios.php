@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include 'conexion.php';
 
 header("Content-Type: text/plain");
 

@@ -1,3 +1,230 @@
+update 14/01/2017
+********** crear procedure para productodetalles
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarProductoDetalles`(in idProd int,
+in nombre text, in descipt text, in stk int, in stkmin int, in categ text, in precio float, in lote text,
+in iduser int, in idcompr int, in labo text, in propi text, in costo float, in porcent int)
+BEGIN
+update `producto`
+set 
+`prodNombre`=nombre,
+`prodDescripcion`=descipt,
+`prodStockMinimo`=stkmin,
+`idCategoriaProducto`=returnIdCategoriaProducto(categ),
+`idPropiedadProducto`=returnIdPropiedad(propi),
+`idLaboratorio`=returnIdLaboratorio(labo),
+`prodPrecio`=precio, `prodCosto`=costo, `prodPorcentaje`= porcent
+where `idProducto`=idprod;
+
+END
+
+
+
+************ eliminacion logica de codigo de barras
+ALTER TABLE `farmacia`.`productobarras` 
+ADD COLUMN `barActivo` BIT NULL DEFAULT true COMMENT 'true para activo, false para inactivo' AFTER `idProducto`;
+
+
+************ procedura para las barras comprobacion
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarBarraEnUso`(in barra text)
+BEGIN
+select prodNombre
+from producto prod inner join
+productobarras barr on barr.idproducto=prod.idproducto
+where barrascode = barra and barActivo=1 ;
+END
+
+
+************ procedure para las listado barras
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarBarrasId`(in idprod int)
+BEGIN
+SELECT barrasCode FROM farmacia.productobarras
+where idproducto = idprod and barActivo=1
+order by barrasCode asc;
+END
+
+
+************ procedure para el insert de barras
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarBarraPorId`(in barra text, in idproduct int)
+BEGIN
+INSERT INTO `productobarras`
+(`barrasCode`,
+`idProducto`)
+VALUES
+(barra,
+idproduct);
+select 1;
+END
+
+
+************ procedure para los lotes y fechas
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarLotesYVencimientoPorID`(in idprod int)
+BEGIN
+SELECT 
+case prodLote when '' then '-' else prodLote end as prodLote
+, prodFechaVencimiento, prodFechaRegistro 
+FROM farmacia.detalleproductos
+where idproducto = idprod
+order by prodFechaRegistro desc;
+END
+
+
+
+
+********** agregar para las barras
+CREATE TABLE IF NOT EXISTS `productoBarras` (
+  `barrasCode` VARCHAR(45) NULL,
+  `idProducto` INT NULL,
+  INDEX `fk_Prod_barra_idx` (`idProducto` ASC),
+  CONSTRAINT `fk_Prod_barra`
+    FOREIGN KEY (`idProducto`)
+    REFERENCES `farmacia`.`producto` (`idProducto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
+********** agregar la procedure para detallar produtos
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarDetalleProductoPorId`(in idproduct int)
+BEGIN
+SELECT idProducto, prodNombre, prodDescripcion, prodStock, prodStockMinimo, idCategoriaProducto, idPropiedadProducto, idLaboratorio, prodPrecio, prodCosto, prodPorcentaje
+FROM producto
+where idProducto= idproduct;
+END
+
+
+
+*********************** actualizar los costos en la nueva tabla
+update producto
+set prodCosto = format(prodPrecio/1.3,2),
+prodPorcentaje= 30
+
+
+
+
+
+************ actualizar los proceduresde inventario
+USE `farmacia`;
+DROP procedure IF EXISTS `insertarProductoPorInventario`;
+
+DELIMITER $$
+USE `farmacia`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarProductoPorInventario`(
+in nombre text, in stk int, in stkmin int, in categ text, in precio float, in lote text,
+in vence text, in iduser int, in idcompr int, in labo text, in propi text)
+BEGIN
+INSERT INTO `farmacia`.`producto`
+(`idProducto`,
+`prodNombre`,
+`prodDescripcion`,
+`prodStock`,
+`prodStockMinimo`,
+`idCategoriaProducto`, `idPropiedadProducto`, `idLaboratorio`,
+prodPrecio, prodCosto, prodPorcentaje)
+VALUES
+(null,
+nombre,
+'',
+stk,
+stkmin,
+returnIdCategoriaProducto(categ),returnIdPropiedad(propi), returnIdLaboratorio(labo),
+precio, format(precio/1.3,2) ,30
+);
+
+set @idProducto = (select LAST_INSERT_ID());
+
+INSERT INTO `farmacia`.`detalleproductos`
+(`idProducto`,
+`prodPrecioUnitario`,
+`prodLote`,
+`prodCodigoBarra`,
+`prodFechaVencimiento`, `prodFechaRegistro`)
+VALUES
+(@idProducto,
+precio,
+lote,
+'',
+vence, now());
+
+
+INSERT INTO `farmacia`.`detallecompra`
+(`idCompra`,
+`idProducto`,
+`detcomprCantidad`,
+`detcomprPrecioUnitario`,
+`detcomprSubTotal`)
+VALUES
+(idcompr,
+@idProducto,
+stk,
+precio,
+stk*precio);
+
+
+select @idProducto as idProducto;
+
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+*********** urgente esta sql para pasar todos los precios a la tabla producto principal
+update producto pro left join
+detalleproductos det
+on pro.idproducto = det.idproducto
+set pro.prodprecio = det.prodPreciounitario;
+
+**********************
+actualizar sql
+
+
+
+ALTER TABLE `farmacia`.`producto` 
+ADD COLUMN `prodPrecio` FLOAT NULL AFTER `idLaboratorio`,
+ADD COLUMN `prodCosto` FLOAT NULL AFTER `prodPrecio`,
+ADD COLUMN `prodPorcentaje` INT NULL AFTER `prodCosto`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************/
+
 update: ventas.php, lisartodoventas.php
 add listardetalleventaxid
 /*********modificar procedure*/

@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include 'conectkarl.php';
 
 $log = mysqli_query($conection,"call listarPropiedadProducto();");
 while($row = mysqli_fetch_array($log))
