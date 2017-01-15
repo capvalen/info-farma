@@ -253,7 +253,7 @@
 		<!--Panel para ver las ventas del día-->
 		<div class="tab-pane fade " id="tabListadoVentas"><br>
 			<p>Ventas realizadas hasta el momento:</p>
-			<h4 class="text-center">Monto en caja por todas las ventas: S/. <span id="spanSumaDelDia"></span></h4>
+			<h4 class="text-center">Monto en caja por todas las ventas: S/. <span id="spanSumaDelDia">0.00</span></h4>
 			<div class="row container-fluid" id="listadoVentaDelDia"></div>
 		</div> <!--fin de tab pane 2-->
 		<div class="tab-pane fade fondoGeo" id="todos">

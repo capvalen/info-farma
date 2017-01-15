@@ -172,7 +172,7 @@
 								</div>
 								<div class="col-sm-2">
 									<div class="form-group">
-									<label>Porcentaje Ganancia %</label>
+									<label>% Ganancia </label>
 									<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario" >
 									</div>
 								</div>
@@ -736,16 +736,21 @@ $('#btnActualizarDataProducto').click(function () {
 	console.log(' categ ' + $('#cmbProdCateg').parent().find('button').attr('title'));
 	console.log(' propied ' + $('#cmbProdProp').parent().find('button').attr('title'));
 	console.log(' labota ' + $('#cmbProdLaboratorio').parent().find('button').attr('title'));*/
+	if(!$(this).hasClass('disabled')){
+		$.ajax({url: 'php/productos/actualizarProductoDetalles.php', type:'POST', data: {
+			idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title')
+		}}).done(function (resp) { console.log(resp)
+			if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
+							$('.modal-felicitacion').modal('show');
+						}
+						if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
+							$('.modal-faltaCompletar').modal('show');}
+				$('#btnActualizarDataProducto').removeClass('disabled');
+		})
 
-$.ajax({url: 'php/productos/actualizarProductoDetalles.php', type:'POST', data: {
-	idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title')
-}}).done(function (resp) { console.log(resp)
-	if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
-					$('.modal-felicitacion').modal('show');
-				}
-				if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
-					$('.modal-faltaCompletar').modal('show');}
-})
+	}
+
+
 
 });
 
@@ -765,6 +770,31 @@ function calculoCostos(tipoCaso){
 	
 }
 
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  if(target=='#tabProximosVencer'){//solo selecciona el tabListadoVentas
+	$(`#listasProdVencimiento`).children().remove();
+	
+	$.ajax({url:'php/productos/listarSoloVentasHoy.php', type:'POST'}).done(function (resp) {
+		$.each(JSON.parse(resp), function (i, arg) {
+			moment.locale('es')
+			sumaValoriz+=parseFloat(arg.total);
+			var dia=moment(arg.ventFecha);
+			$(`#listadoVentaDelDia`).append(`
+				<div class="row resulDiv noselect" style="cursor:default">
+				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
+				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
+				<div class="col-xs-2 argTotal">S/. ${arg.total}</div>
+				<div class="col-xs-2">S/. ${parseFloat(arg.ventMonedaEnDuro).toFixed(2)}</div>
+				<div class="col-xs-2">${arg.ventCambioVuelto}</div>
+				<div class="col-xs-1">${arg.Usuario}</div>
+				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				`);
+			$('#spanSumaDelDia').text(parseFloat(sumaValoriz).toFixed(2));
+		});
+	})
+  }
+});
 </script>
 
 </body>

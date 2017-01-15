@@ -42,7 +42,7 @@
 								Control Panel
 						</a>
 				</div>
-				<div class="logoEmpresa">
+				<div class="logoEmpresa ocultar-mostrar-menu">
 					<img class="img-responsive" src="images/empresa.png" alt="">
 				</div>
 				<li class="active">
@@ -52,7 +52,7 @@
 						<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>
 				</li>
 				<li>
-						<a href="#"><i class="icofont icofont-blood"></i> Productos</a>
+						<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
 				</li>
 				<li>
 						<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
@@ -121,7 +121,6 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable fondoGeo">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2 class="blue-text text-darken-1"><i class="icofont icofont-animal-cat-alt-4"></i> Bienvenido: <small>Software Info-Farma v1.0.1.a</small> <small class="blue-text text-lighten-3">2017.01.10</small></h2>
 	
 	
 				<div class="row">
