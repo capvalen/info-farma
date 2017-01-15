@@ -121,6 +121,7 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable fondoGeo">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
+				 <h2 class="blue-text text-darken-1"><i class="icofont icofont-animal-cat-alt-4"></i> Bienvenido: <small>Software Info-Farma v1.1.0.1</small> <small class="blue-text text-lighten-3">2017.01.15</small></h2>
 	
 	
 				<div class="row">
