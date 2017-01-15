@@ -251,9 +251,17 @@
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
 		<!--Panel para ver las ventas del día-->
-		<div class="tab-pane fade " id="tabListadoVentas"><br>
+		<div class="tab-pane fade fondoGeo  " id="tabListadoVentas"><br>
 			<p>Ventas realizadas hasta el momento:</p>
 			<h4 class="text-center">Monto en caja por todas las ventas: S/. <span id="spanSumaDelDia">0.00</span></h4>
+			<div class="row"><strong>
+			<div class="col-xs-2 col-sm-1">Cod.</div>
+			<div class="col-xs-3 text-center">Fecha de venta</div>
+			<div class="col-xs-2">Venta Total</div>
+			<div class="col-xs-2">Pagó con</div>
+			<div class="col-xs-2">Vuelto</div>
+			<div class="col-xs-1">Vendedor</div>
+			<div class="col-xs-1">Detalles</div></strong></div>
 			<div class="row container-fluid" id="listadoVentaDelDia"></div>
 		</div> <!--fin de tab pane 2-->
 		<div class="tab-pane fade fondoGeo" id="todos">
@@ -982,19 +990,22 @@ $('.nav-tabs-meses li').click(function () {
 $('body').on('click','.btnDetalleInvLista',function () {
 	var idReg =$(this).attr('id');
 	var index=$(this).parent().parent().index()-2 ; // se pone -2  por la etiqueta P y la etiqueta div cabecera
+	var sumaXTicket=0;
 	//console.log(index);
 	$('#spanIdInventario').text($('.tabConenidoMeses .resulDiv ').eq(index).find('.codDivInv').text());
-	$('#spanvalorInvent').text($('.tabConenidoMeses .resulDiv ').eq(index).find('.argTotal').text())
+	//$('#spanvalorInvent').text($('.tabConenidoMeses .resulDiv ').eq(index).find('.argTotal').text())
 	
 	$.ajax({url: 'php/ventas/listarDetalleVentaxId.php', type:'POST', data:{idVent: idReg}}).done(function (res) {
-		console.log(res)
+		//console.log(res)
 		$('#detProductoInv').children().remove();
 		$.each(JSON.parse(res), function (i, elem) {
 			$('#detProductoInv').append(`<div class="row container  "><div class="col-xs-4 text-capitalize"><strong>${i+1}.</strong> ${elem.prodNombre}</div>
 					<div class="col-xs-1">${elem.detventCantidad}</div>
 					<div class="col-xs-1">S/. ${parseFloat(elem.detventPrecio).toFixed(2)}</div><div class="col-xs-1">-</div>
 					<div class="col-xs-2">S/. ${parseFloat(elem.detentPrecioparcial).toFixed(2)}</div></div>`);
+			sumaXTicket+=parseFloat(elem.detentPrecioparcial);
 		});
+		$('#spanvalorInvent').text(sumaXTicket.toFixed(2));
 
 		$('.modal-mostrarDetalleInventario').modal('show');
 
