@@ -60,3 +60,6 @@ $('.form-control-clear').click(function() {
 /*function returnNumDecimal(numSinFormato){
 return parseFloat(numSinFormato).tof()
 }*/
+$("input").focus(function(){
+  this.select();
+});

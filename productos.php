@@ -276,12 +276,15 @@
 						<!--Inicio de pestaña 02-->
 						<p>La siguiente lista se compone de los productos vencidos hace un mes y los próximoa a vencer en los próximos 3 meses que vienen.</p>
 						<div >
-							<div class="col-sm-2">Código</div>
-							<div class="col-sm-2">Lote</div>
-							<div class="col-sm-3">Vencimiento</div>
-							<div class="col-sm-3">Fecha</div>
-							<div class="col-sm-2">Estado</div>
-							<div id="listasProdVencimiento"></div>
+							<div class="row container-fluid"><strong>
+							<div class="col-sm-1 text-center">Código</div>
+							<div class="col-sm-3">Nombre</div>
+							<div class="col-sm-1 text-center">Lote</div>
+							<div class="col-sm-2 text-center">Vencimiento</div>
+							<div class="col-sm-2 text-center">Fecha</div>
+							<div class="col-sm-2">Estado</div></strong>
+							</div>
+							<div class="row container-fluid" id="listasProdVencimiento"></div>
 						</div>
 						<!--Fin de pestaña 02-->
 						</div>
@@ -522,17 +525,11 @@
 <!-- Menu Toggle Script -->
 <script>
 $(document).ready(function(){
-	agregarRowInventario();
+	
 	$('.selectpicker').selectpicker('refresh');
 
 		$('.mitooltip').tooltip();
-		$('input').keypress(function (e) {
-			if (e.keyCode == 13)
-			{
-				$(this).parent().next().children().focus();
-				//$(this).parent().next().children().removeAttr('disabled'); //agregar atributo desabilitado
-			} 
-		});
+
 
 	habilitarDivFecha();
 
@@ -547,49 +544,6 @@ $(document).ready(function(){
 
 
 
-function agregarRowInventario() {
-	$('#itemsInventarioNuevo').text($('#listaProductosNuevoInventario .row').length+1);
-		$.ajax({url: 'php/productos/listarCategorias.php', type:'POST'}).success(function(resCategoria){
-			$.ajax({url: 'php/config/listarLaboratorios.php', type:'POST'}).success(function(resLaboratorio){
-				$.ajax({url: 'php/productos/listarPropiedadProducto.php', type:'POST'}).success(function(resPropiedad){
-				$('#listaProductosNuevoInventario').append(`<div class="row animated fadeIn filaDeProductoInventario">
-				<div class="col-xs-6 col-sm-3 aprovecharAncho"><input type="text" class="form-control text-capitalize txtNomProducto" placeholder="Nombre"></div>
-				<div class="col-xs-6 col-sm-2 aprovecharAncho"><input type="text" class="form-control text-capitalize txtComposicion" placeholder="Composición (und, gr, ml)"></div>
-				<div class="col-xs-6 col-sm-1 aprovecharAncho"><input type="number" class="text-center form-control txtCantidad" placeholder="Cantidad" min=0></div>
-				<div class="col-xs-6 col-sm-1 aprovecharAncho"><input type="number" class="text-center form-control txtMonedas" placeholder="Precio S/." min=1></div>
-				<div class="col-xs-6 col-sm-1 aprovecharAncho"><input class="text-center form-control txtStockMinimo mitooltip" type="number" value="10" placeholder="Min." min=0 title="Cant. mínima para una alerta"></div>
-				<div class="col-xs-6 col-sm-1 aprovecharAncho"><input type="text" class="form-control text-uppercase txtLote" placeholder="Lote"></div>
-				
-				<div class="col-xs-6 col-sm-2 aprovecharAncho" id="sandbox-container"><div class="input-group date txtFechaVencimiento mitooltip" title="Fecha de vencimiento">
-					<input type="text" class="form-control text-center"><span class="input-group-addon" style="background-color: #CDDC39; color: white; border: 1px solid rgba(204, 204, 204, 0.01);"><i class="glyphicon glyphicon-equalizer" style="font-size: 16px;"></i></span></div>
-				</div>
-				<div class="col-xs-6 col-sm-2 aprovecharAncho"><select class="selectpicker cmbCategorias" title="Categorías..." data-container="body" data-live-search="true" data-width="100%">
-						${resCategoria}
-					</select></div>
-				<div class="col-xs-6 col-sm-2 aprovecharAncho"><select class="selectpicker cmbLaboratorios" title="Laboratorios..." data-container="body" data-live-search="true" data-width="100%" >
-						${resLaboratorio}
-					</select></div>
-					<div class="col-xs-6 col-sm-2 aprovecharAncho"><select class="selectpicker cmbPropiedades" title="Tipo de propiedad..." data-container="body" data-live-search="true" data-width="100%" >
-						${resPropiedad}
-					</select></div>
-
-				<div class="col-xs-6 col-sm-1 pull-right aprovecharAncho text-center">
-					<button class="btn btn-success btn-outline btn-sm btnGuardarItemInventario"><i class="icofont icofont-check"></i></button>
-					<button class="btn btn-negro btn-outline btn-sm btnActualizarItemInventario hidden"><i class="icofont icofont-save"></i></button>
-					<button class="btn btn-primary btn-outline btn-sm btnModificarItemInventario hidden"><i class="icofont icofont-marker"></i></button>
-				</div>
-				
-			</div>
-			`);
-				$('.selectpicker').selectpicker('refresh'); habilitarDivFecha();
-				$('.mitooltip').tooltip();
-			
-				});
-			});
-			
-		});
-		
-}
 function habilitarDivFecha(){
 	$('.sandbox-container input').datepicker({language: "es", orientation: "top auto", daysOfWeekHighlighted: "0", autoclose: true, todayHighlight: true});
 }
@@ -717,49 +671,88 @@ function llamarBuscarProducto() {$('#divResultadoProducto').addClass('hidden');
 	var filtr= $.trim($('#txtBuscarProductoProd').val());
 
 	if(esNumero(filtr)){//es numero llamar al procedure por numero
+
+			if($.trim($('#txtBuscarProductoProd').val())!=''){
+				$('#terminoBusq').text($('#txtBuscarProductoProd').val());
+				$.ajax({url: 'php/productos/buscarProductoXId.php', type: "POST", data: {filtro: filtr }
+				}).success(function (resp) {//console.log(resp)
+
+					if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«'+$('#txtBuscarProductoProd').val()+'»'); }
+					else{$('#spanSinCoincidencias').addClass('hidden');}
+					$('#txtBuscarProductoProd').val('');
+					$('#lblCantidadProd').text(JSON.parse(resp).length);
+					$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+					JSON.parse(resp).map(function (dato, index) {
+						moment.locale('es');
+						var vence='Sin fecha';
+						if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
+						
+						
+						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+						<div class="row"> 
+							<div class="hidden" id="mProdID">${dato.idProducto}</div>
+							<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${dato.prodNombre}</span></div>
+							<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
+							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
+							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+
+						</div>
+						`);
+					$('.modal-detalleProductoEncontrado').modal('show');
+
+					});
+					$('.mitooltip').tooltip();			
+				});
+
+			}
 		}
 	else{//es letras llamar al procedure para que haga el filtro
 		if(filtr!=''){
 			filtr='%'+filtr.replace(/\ /g,'%')+'%';
+
+				if($.trim($('#txtBuscarProductoProd').val())!=''){
+					$('#terminoBusq').text($('#txtBuscarProductoProd').val());
+					$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
+					}).success(function (resp) {
+
+						if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«'+$('#txtBuscarProductoProd').val()+'»'); }
+						else{$('#spanSinCoincidencias').addClass('hidden');}
+						$('#txtBuscarProductoProd').val('');
+						$('#lblCantidadProd').text(JSON.parse(resp).length);
+						$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+						JSON.parse(resp).map(function (dato, index) {
+							moment.locale('es');
+							var vence='Sin fecha';
+							if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
+							
+							
+							$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+							<div class="row"> 
+								<div class="hidden" id="mProdID">${dato.idProducto}</div>
+								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${dato.prodNombre}</span></div>
+								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
+								<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+								<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
+								<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+
+							</div>
+							`);
+						$('.modal-detalleProductoEncontrado').modal('show');
+
+						});
+						$('.mitooltip').tooltip();			
+					});
+
+				}
 		}
 	}
 
-	if($.trim($('#txtBuscarProductoProd').val())!=''){
-		$('#terminoBusq').text($('#txtBuscarProductoProd').val());
-		$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
-		}).success(function (resp) {
 
-			if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«'+$('#txtBuscarProductoProd').val()+'»'); }
-			else{$('#spanSinCoincidencias').addClass('hidden');}
-			$('#txtBuscarProductoProd').val('');
-			$('#lblCantidadProd').text(JSON.parse(resp).length);
-			$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-			JSON.parse(resp).map(function (dato, index) {
-				moment.locale('es');
-				var vence='Sin fecha';
-				if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
-				
-				
-				$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-				<div class="row"> 
-					<div class="hidden" id="mProdID">${dato.idProducto}</div>
-					<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${dato.prodNombre}</span></div>
-					<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
-					<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-					<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
-					<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
-					<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-					<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
-
-				</div>
-				`);
-			$('.modal-detalleProductoEncontrado').modal('show');
-
-			});
-			$('.mitooltip').tooltip();			
-		});
-
-	}
 	
 }
 
@@ -890,23 +883,24 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href") // activated tab
   if(target=='#tabProximosVencer'){//solo selecciona el tabListadoVentas
 	$(`#listasProdVencimiento`).children().remove();
+	var sumaValoriz;
 	
-	$.ajax({url:'php/productos/listarLotesYVencimientoPorID.php', type:'POST'}).done(function (resp) {
-		$.each(JSON.parse(resp), function (i, arg) {
+	$.ajax({url:'php/productos/listarProximosAVencer.php', type:'POST'}).done(function (resp) {
+		$.each(JSON.parse(resp), function (i, arg) { console.log(arg)
 			moment.locale('es')
-			sumaValoriz+=parseFloat(arg.total);
-			var dia=moment(arg.ventFecha);
-			$(`#listadoVentaDelDia`).append(`
+			sumaValoriz+=parseFloat(arg.prodPrecio);
+			var dia=moment(arg.prodFechaVencimiento, 'DD/MM/YYYY');
+			$(`#listasProdVencimiento`).append(`
 				<div class="row resulDiv noselect" style="cursor:default">
-				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
-				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
-				<div class="col-xs-2 argTotal">S/. ${arg.total}</div>
-				<div class="col-xs-2">S/. ${parseFloat(arg.ventMonedaEnDuro).toFixed(2)}</div>
-				<div class="col-xs-2">${arg.ventCambioVuelto}</div>
-				<div class="col-xs-1">${arg.Usuario}</div>
-				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+					<div class="col-xs-2 col-sm-1 text-center codDivInv" >${arg.idproducto}</div>
+					<div class="col-xs-3 mayuscula"> ${arg.prodNombre}</div>
+					<div class="col-xs-1 text-center argTotal">${arg.prodLote}</div>
+					<div class="col-xs-2 text-center argTotal">${dia.endOf('day').fromNow()}</div>
+					<div class="col-xs-2 text-center argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</div>
+					<div class="col-xs-1 hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
 				`);
-			$('#spanSumaDelDia').text(parseFloat(sumaValoriz).toFixed(2));
+			$('.mitooltip').tooltip();
+			
 		});
 	})
   }
