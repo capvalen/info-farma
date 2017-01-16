@@ -727,7 +727,7 @@ $('.modal-barras').on('click', '.btnEliminarCode', function () {
 	})
 });
 $('#btnActualizarDataProducto').click(function () {
-	$(this).addClass('disabled');
+	
 	/*console.log('Para guardar:');
 	console.log(` id: `+ $('#txtprodCodigo').val()+ ' nombre: ' + $.trim($('#txtprodNombre').val()));
 	console.log(` desc: `+ $('#txtprodDescripcion').val()+ ' costo: ' + $('#txtprodCosto').val());
@@ -736,10 +736,13 @@ $('#btnActualizarDataProducto').click(function () {
 	console.log(' categ ' + $('#cmbProdCateg').parent().find('button').attr('title'));
 	console.log(' propied ' + $('#cmbProdProp').parent().find('button').attr('title'));
 	console.log(' labota ' + $('#cmbProdLaboratorio').parent().find('button').attr('title'));*/
-	if(!$(this).hasClass('disabled')){
+	
+	if($(this).hasClass('disabled')){}
+	else{
+		$(this).addClass('disabled');
 		$.ajax({url: 'php/productos/actualizarProductoDetalles.php', type:'POST', data: {
 			idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title')
-		}}).done(function (resp) { console.log(resp)
+		}}).done(function (resp) { //console.log(resp)
 			if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 							$('.modal-felicitacion').modal('show');
 						}

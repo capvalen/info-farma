@@ -11,7 +11,7 @@ while($row = mysqli_fetch_array($log))
 		'idProducto' => $row['idProducto'],
 		'lote' => $row['lote'],
 		'prodFechaVencimiento' => $row['prodFechaVencimiento'],
-		'prodPrecioUnitario' => $row['prodPrecioUnitario'],
+		'prodPrecioUnitario' => $row['prodPrecio'],
 		'prodStock' => $row['prodStock']
 	);
 	
