@@ -185,7 +185,7 @@
 								<div class="col-sm-2">
 									<div class="form-group">
 									<label>Stock en inventario: </label>
-									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" disabled>
+									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" >
 									</div>
 								</div>
 								<div class="col-sm-2">
@@ -741,7 +741,7 @@ $('#btnActualizarDataProducto').click(function () {
 	else{
 		$(this).addClass('disabled');
 		$.ajax({url: 'php/productos/actualizarProductoDetalles.php', type:'POST', data: {
-			idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title')
+			idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title'), stock: $('#txtprodStock').val()
 		}}).done(function (resp) { //console.log(resp)
 			if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 							$('.modal-felicitacion').modal('show');
