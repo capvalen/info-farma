@@ -122,15 +122,16 @@
 				 <h2><i class="icofont icofont-blood"></i> Panel de configuraciones de productos</h2>
 
 					<ul class="nav nav-tabs">
-					<li class="active"><a href="#tabBusquedaProducto" data-toggle="tab">Editar un producto</a></li>
+					<li class="active"><a href="#tabDetallarProducto" data-toggle="tab">Editar un producto</a></li>
 					<li><a href="#tabProximosVencer" data-toggle="tab">Productos por vencerse</a></li>
+					<li><a href="#tabCrearProducto" data-toggle="tab">Crear nuevo producto</a></li>
 					
 					</ul>
 					
 					<div class="tab-content">
 					<!--Panel para buscar productos-->
 						<!--Clase para las tablas-->
-						<div class="tab-pane fade in active container-fluid" id="tabBusquedaProducto">
+						<div class="tab-pane fade in active container-fluid" id="tabDetallarProducto">
 						<!--Inicio de pestaña 01-->
 							<div class="row"><p>Primero ubique el producto a modificar o detallar:</p>
 							<div class="col-sm-6">
@@ -217,7 +218,7 @@
 									<div class="form-group">
 									<label> Laboratorio</label>
 									<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-									<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true">
+									<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true" title="Seleccione un laboratorio">
 										<?php require 'php/config/listarLaboratorios.php'; ?>
 									</select>
 									</div>
@@ -285,6 +286,110 @@
 						<!--Fin de pestaña 02-->
 						</div>
 						
+						<div class="tab-pane fade in  container-fluid" id="tabCrearProducto">
+						<!--Inicio de pestaña 03-->
+							<p>Rellene los campos para crear nuevo producto:</p>
+							<div id="divNuevoProducto">
+							<div class="row">
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>Código interno </label>
+									<input type="text" class="form-control text-center" id="txtprodCodigo" value="Automático" placeholder="Código de producto" disabled>
+									</div>
+								</div>
+								<div class="col-sm-8 ">
+									<div class="form-group">
+									<label> Nombre de producto</label>
+									<input type="text" class="form-control mayuscula" id="txtprodNombre" placeholder="Ubique el producto por Código, Nombre o Lote">
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-3">
+									<div class="form-group">
+									<label> Descripción</label>
+									<textarea type="text" rows="5" class="form-control mayuscula"  id="txtprodDescripcion" placeholder="Ingrese alguna descripción o algún dato extra que desee recordar luego."></textarea>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>Costo unitario S/.</label>
+									<input type="number" class="form-control text-center" id="txtprodCostoNuevo" placeholder="Precio unitario" value=0.00 step=1 min=0 disabled>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>% Ganancia </label>
+									<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="Precio unitario" value=30 step=1 min=0>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>Precio unitario: S/.</label>
+									<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>Stock en inventario: </label>
+									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" value=0 step=1 min=0>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label>Alerta de escasez:</label>
+									<input type="number" class="form-control text-center" id="txtprodMinimo" placeholder="Alerta unidades" value=10 step=1 min=0>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label> Categoría</label>
+									<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+									<select class="selectpicker mayuscula" id="cmbProdCateg" data-width="auto" data-live-search="true" title="Tipo de categoría..." >
+										<?php require 'php/productos/listarCategorias.php'; ?>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+									<label> Propiedad</label>
+									<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+									<select class="selectpicker mayuscula" id="cmbProdProp" data-width="auto" data-live-search="true" title="Tipo de propiedad..." >
+										<?php require 'php/productos/listarPropiedadProducto.php'; ?>
+									</select>
+									</div>
+								</div>
+
+								<div class="col-sm-2 ">
+									<div class="form-group">
+									<label> Laboratorio</label>
+									<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+									<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true" title="Laboratorio..." >
+										<?php require 'php/config/listarLaboratorios.php'; ?>
+									</select>
+									</div>
+								</div>
+								<div class="clearfix visible-lg"></div>
+								<div class="col-sm-3 hidden">
+									<div class="form-group">
+									<label> Códigos de barra</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
+										<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="glyphicon glyphicon-upload"></span></button></span>
+									</div>
+									<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-settings"></i> Ver todos los códigos <small id="spanCantBarr"></small></button>
+									</div>
+								</div>
+								
+							</div>
+
+								
+							</div>
+							<div class="row col-sm-12">
+							<button class="btn btn-success btn-outline pull-right btn-lg" id="btnCrearNuevoProducto"><i class="icofont icofont-diskette"></i> Crear nuevo producto</button>
+							</div>
+
+							<!--Fin de pestaña 03-->
+							</div>
+						</div>
 					</div>
 					<!-- Fin de meter contenido principal -->
 					</div>
@@ -742,14 +847,14 @@ $('#btnActualizarDataProducto').click(function () {
 		$(this).addClass('disabled');
 		$.ajax({url: 'php/productos/actualizarProductoDetalles.php', type:'POST', data: {
 			idProd: $('#txtprodCodigo').val(), nombre: $.trim($('#txtprodNombre').val()), descipt: $('#txtprodDescripcion').val(), stkmin: $('#txtprodMinimo').val(), categ: $('#cmbProdCateg').parent().find('button').attr('title'), precio: $('#txtprodPrecio').val(), labo:  $('#cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#txtprodCosto').val(), porcent: $('#txtprodPorcentaje').val(), propi: $('#cmbProdProp').parent().find('button').attr('title'), stock: $('#txtprodStock').val()
-		}}).done(function (resp) { //console.log(resp)
+		}}).done(function (resp) { console.log(resp)
 			if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 							$('.modal-felicitacion').modal('show');
 						}
 						if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
 							$('.modal-faltaCompletar').modal('show');}
 				$('#btnActualizarDataProducto').removeClass('disabled');
-		})
+		});
 
 	}
 
@@ -761,15 +866,23 @@ $('#txtprodCosto').keyup(function () {calculoCostos(1);});
 $('#txtprodPorcentaje').keyup(function () {calculoCostos(2);});
 $('#txtprodPrecio').keyup(function () {calculoCostos(3);});
 
+$('#txtprodPorcentajeNuevo').keyup(function () {calculoCostos(4);});
+$('#txtprodPrecioNuevo').keyup(function () {calculoCostos(4);});
+
+
+
 function calculoCostos(tipoCaso){
 	var vproCost, vproGana, vproPrec;
-	if ($('#txtprodCosto').val()==0){vproCost=0}else{vproCost=$('#txtprodCosto').val()}
-	if ($('#txtprodPorcentaje').val()==0){vproGana=0}else{vproGana=$('#txtprodPorcentaje').val()}
-	if ($('#txtprodPrecio').val()==0){vproPrec=0}else{vproPrec=$('#txtprodPrecio').val()}
+	if ($('#txtprodCosto').val()==0 ){vproCost=0}else{vproCost=$('#txtprodCosto').val()}
+	if ($('#txtprodPorcentaje').val()==0 ){vproGana=0}else{vproGana=$('#txtprodPorcentaje').val()}
+	if ($('#txtprodPrecio').val()==0  ){vproPrec=0}else{vproPrec=$('#txtprodPrecio').val()}
 
 	if(tipoCaso==1){$('#txtprodPrecio').val(parseFloat(vproCost*(1+vproGana)/100).toFixed(2))}
 	if(tipoCaso==2){$('#txtprodPrecio').val(parseFloat(vproCost*(1+vproGana)/100).toFixed(2))}
 	if(tipoCaso==3){$('#txtprodCosto').val(parseFloat(vproPrec/(1+vproGana/100)).toFixed(2))}
+
+	if(tipoCaso==4){$('#txtprodCostoNuevo').val(parseFloat($('#txtprodPrecioNuevo').val()/(1+$('#txtprodPorcentajeNuevo').val()/100)).toFixed(2))}
+
 	
 }
 
@@ -778,7 +891,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   if(target=='#tabProximosVencer'){//solo selecciona el tabListadoVentas
 	$(`#listasProdVencimiento`).children().remove();
 	
-	$.ajax({url:'php/productos/listarSoloVentasHoy.php', type:'POST'}).done(function (resp) {
+	$.ajax({url:'php/productos/listarLotesYVencimientoPorID.php', type:'POST'}).done(function (resp) {
 		$.each(JSON.parse(resp), function (i, arg) {
 			moment.locale('es')
 			sumaValoriz+=parseFloat(arg.total);
@@ -797,7 +910,62 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		});
 	})
   }
+
 });
+function limpiarCamposNuevo() {
+	activarBtnNuevo();
+	$('#tabCrearProducto #txtprodNombre').val('');
+	$('#tabCrearProducto #txtprodDescripcion').val('');
+	$('#tabCrearProducto #txtprodMinimo').val('0.00');
+	$('#tabCrearProducto #txtprodPrecioNuevo').val('0.00');
+	$('#tabCrearProducto #txtprodCostoNuevo').val('0.00');
+	$('#tabCrearProducto #txtprodStock').val('0.00');
+	$('#tabCrearProducto #txtprodPorcentajeNuevo').val('30');
+	$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '');
+	$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '');
+	$('#tabCrearProducto #cmbProdProp').selectpicker('val', '');
+
+}
+function activarBtnNuevo(){$('#btnCrearNuevoProducto').removeClass('disabled');}
+
+$('#btnCrearNuevoProducto').click(function () {
+	
+	if(!$('#btnCrearNuevoProducto').hasClass('disabled')){
+		$(this).addClass('disabled');
+
+		var categProd=$('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title');
+		var laborat=$('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title');
+		var propieda=$('#tabCrearProducto #cmbProdProp').parent().find('button').attr('title');
+
+		if($('#tabCrearProducto #txtprodNombre').val()==''){$('#lblFalta').text('Te olvidaste del nombre para el producto'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
+		else if( $('#txtprodPrecioNuevo').val()<=0 || $('#txtprodPrecioNuevo').val()=='' ){$('#lblFalta').text('Verifique la casilla de precios'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
+		else if( $('#tabCrearProducto #txtprodMinimo').val()<0 ){$('#lblFalta').text('Verifique la casilla de alerta no puede ser negativo'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
+		else if(categProd=='' || categProd=='Tipo de categoría...'  ){$('#lblFalta').text('Debes seleccionar una «Categoría de producto» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
+		else if(laborat=='' || laborat=='Laboratorio...'  ){$('#lblFalta').text('Debes seleccionar una «Propiedad de producto» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
+		else if(propieda=='' || propieda=='Tipo de propiedad...'  ){$('#lblFalta').text('Debes seleccionar un «Laboratorio» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
+		else{
+			$.ajax({url: 'php/productos/insertarProductoNuevo.php', type:'POST', data: {
+				nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()), descipt: $('#tabCrearProducto #txtprodDescripcion').val(), stkmin: $('#tabCrearProducto #txtprodMinimo').val(), categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'), precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(), labo:  $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#tabCrearProducto #txtprodCostoNuevo').val(), porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(), propi: $('#tabCrearProducto #cmbProdProp').parent().find('button').attr('title'), stock: $('#tabCrearProducto #txtprodStock').val()
+			}}).done(function (resp) { console.log(resp)
+				limpiarCamposNuevo();
+				if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
+								$('.modal-felicitacion').modal('show');
+							}
+				if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
+					$('.modal-faltaCompletar').modal('show');}
+
+				
+		});
+		}
+
+
+		
+
+		
+
+	}
+	
+})
 </script>
 
 </body>
