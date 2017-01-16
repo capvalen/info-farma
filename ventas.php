@@ -26,6 +26,7 @@
 		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
+		<link rel="stylesheet" href="css/panel-with-nav-tabs.css"> <!-- extraído de: http://bootsnipp.com/snippets/featured/panels-with-nav-tabs-->
 
 
 </head>
@@ -161,12 +162,12 @@
 						</thead>
 						<div class="container-fluid">
 							<div class="row ">
-							  <div class="col-xs-4 col-sm-5">N° - Nombre de producto</div>
-							  <div class="col-xs-4 col-sm-1 text-center">Lote</div>
-							  <div class="col-xs-4 col-sm-1 text-center">Cantidad</div>
-							  <div class="col-xs-4 col-sm-2 text-center">Precio<span class="hidden-xs"> x unidad</span></div>
-							  <div class="col-xs-4 col-sm-1 text-center">Desc<span class="hidden-xs">uento</span></div>
-							  <div class="col-xs-4 col-sm-2 text-center">Sub-Total</div>
+								<div class="col-xs-4 col-sm-5">N° - Nombre de producto</div>
+								<div class="col-xs-4 col-sm-1 text-center">Lote</div>
+								<div class="col-xs-4 col-sm-1 text-center">Cantidad</div>
+								<div class="col-xs-4 col-sm-2 text-center">Precio<span class="hidden-xs"> x unidad</span></div>
+								<div class="col-xs-4 col-sm-1 text-center">Desc<span class="hidden-xs">uento</span></div>
+								<div class="col-xs-4 col-sm-2 text-center">Sub-Total</div>
 							</div>
 						</div>
 
@@ -252,17 +253,48 @@
 
 		<!--Panel para ver las ventas del día-->
 		<div class="tab-pane fade fondoGeo  " id="tabListadoVentas"><br>
-			<p>Ventas realizadas hasta el momento:</p>
-			<h4 class="text-center">Monto en caja por todas las ventas: S/. <span id="spanSumaDelDia">0.00</span></h4>
-			<div class="row"><strong>
-			<div class="col-xs-2 col-sm-1">Cod.</div>
-			<div class="col-xs-3 text-center">Fecha de venta</div>
-			<div class="col-xs-2">Venta Total</div>
-			<div class="col-xs-2">Pagó con</div>
-			<div class="col-xs-2">Vuelto</div>
-			<div class="col-xs-1">Vendedor</div>
-			<div class="col-xs-1">Detalles</div></strong></div>
-			<div class="row container-fluid" id="listadoVentaDelDia"></div>
+
+			<!-- Inicio de panel decorado para turnos -->
+			<div class="panel with-nav-tabs panel-warning">
+				<div class="panel-heading">
+					<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab1warning" data-toggle="tab">Turno día</a></li>
+							<li><a href="#tab2warning" data-toggle="tab">Turno Noche</a></li>
+					</ul>
+					</div>
+					<div class="panel-body">
+						<div class="tab-content">
+								<div class="tab-pane fade in active" id="tab1warning">
+									<p><strong id="strConteoDia">0</strong> realizadas, valorizadas en un total de <strong>S/. <span id="spanSumaDelDia">0.00</span></strong></p>
+									<div class="row"><strong>
+									<div class="col-xs-2 col-sm-1">Cod.</div>
+									<div class="col-xs-3 text-center">Fecha de venta</div>
+									<div class="col-xs-2">Venta Total</div>
+									<div class="col-xs-2">Pagó con</div>
+									<div class="col-xs-2">Vuelto</div>
+									<div class="col-xs-1">Vendedor</div>
+									<div class="col-xs-1">Detalles</div></strong></div>
+									<div class="row container-fluid" id="listadoVentaDelDiaDiurno"></div>
+								</div>
+
+								<div class="tab-pane fade" id="tab2warning">
+									<p><strong id="strConteoNoche">0</strong> realizadas, valorizadas en un total de <strong>S/. <span id="spanSumaDelaNoche">0.00</span></strong></p>
+									<div class="row"><strong>
+									<div class="col-xs-2 col-sm-1">Cod.</div>
+									<div class="col-xs-3 text-center">Fecha de venta</div>
+									<div class="col-xs-2">Venta Total</div>
+									<div class="col-xs-2">Pagó con</div>
+									<div class="col-xs-2">Vuelto</div>
+									<div class="col-xs-1">Vendedor</div>
+									<div class="col-xs-1">Detalles</div></strong></div>
+									<div class="row container-fluid" id="listadoVentaDelDiaNocturno"></div>
+								</div>
+								
+						</div>
+					</div>
+				</div>
+				<!-- Fin de panel decorado para turnos -->
+
 		</div> <!--fin de tab pane 2-->
 		<div class="tab-pane fade fondoGeo" id="todos">
 			<div class="container-fluid row">Selecione año, luego de click en el botón <strong>Filtrar</strong> y navegue por las pestañas para que pueda visualizar sus ventas.</div>
@@ -1280,16 +1312,24 @@ $('.tablaResultadosCompras ').on('keyup','.txtCantidadVariableProd', function ()
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  var target = $(e.target).attr("href") // activated tab
-  if(target=='#tabListadoVentas'){//solo selecciona el tabListadoVentas
-	$(`#listadoVentaDelDia`).children().remove();
-	var sumaValoriz=0
+	var target = $(e.target).attr("href") // activated tab
+	if(target=='#tabListadoVentas'){//solo selecciona el tabListadoVentas
+	$(`.listadoVentaDelDia`).children().remove();
+	var sumaValoriz=0, sumaDia=0, sumaNoche=0;
+	var horaTurno=moment('14:00:00', 'HH:mm:ss');
 	$.ajax({url:'php/ventas/listarSoloVentasHoy.php', type:'POST'}).done(function (resp) {
 		$.each(JSON.parse(resp), function (i, arg) {
 			moment.locale('es')
 			sumaValoriz+=parseFloat(arg.total);
+			
 			var dia=moment(arg.ventFecha);
-			$(`#listadoVentaDelDia`).append(`
+			
+			var hora1=moment(dia.format('HH:mm:ss'), 'HH:mm:ss');
+			
+			
+			if(hora1.isAfter(horaTurno)){//true para indicar que es de turno noche, false para indicar que es turno día
+				sumaNoche+=parseFloat(arg.total);
+				$(`#listadoVentaDelDiaNocturno`).append(`
 				<div class="row resulDiv noselect" style="cursor:default">
 				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
 				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
@@ -1299,10 +1339,35 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 				<div class="col-xs-1">${arg.Usuario}</div>
 				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
 				`);
-			$('#spanSumaDelDia').text(parseFloat(sumaValoriz).toFixed(2));
+				
+
+			}
+			else{
+				sumaDia+=parseFloat(arg.total);
+				$(`#listadoVentaDelDiaDiurno`).append(`
+				<div class="row resulDiv noselect" style="cursor:default">
+				<div class="col-xs-2 col-sm-1 codDivInv" >${arg.idVenta}</div>
+				<div class="col-xs-3 text-center">${dia.format('dddd, DD h:mm a')}</div>
+				<div class="col-xs-2 argTotal">S/. ${arg.total}</div>
+				<div class="col-xs-2">S/. ${parseFloat(arg.ventMonedaEnDuro).toFixed(2)}</div>
+				<div class="col-xs-2">${arg.ventCambioVuelto}</div>
+				<div class="col-xs-1">${arg.Usuario}</div>
+				<div class="col-xs-1"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				`);
+				
+				
+			}
+			
+
 		});
-	})
-  }
+		
+		$('#spanSumaDelaNoche').text(parseFloat(sumaNoche).toFixed(2));
+		$('#spanSumaDelDia').text(parseFloat(sumaDia).toFixed(2));
+		});
+
+	$('#strConteoDia').text( $('#listadoVentaDelDiaDiurno .row').length+1);
+	$('#strConteoNoche').text( $('#listadoVentaDelDiaNocturno .row').length+1);
+	}
 });
 
 
