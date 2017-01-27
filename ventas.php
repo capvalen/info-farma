@@ -1395,6 +1395,10 @@ $('#btnImprimirVentaFinal').click(function () {
 		texto: retornarCadenaImprimir(),
 		hora: fechaImpr
 	}}).done(function (argument) {
+		$('#tablaResultadosCompras tbody').children().remove();
+		calcularRowTabla();
+		sumarSubTotalesInstante();
+
 });
 function retornarCadenaImprimir(){
 	var totalImprimir=40;
