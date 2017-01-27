@@ -240,7 +240,7 @@
 				</div><!-- fin de pane cielo-->
 				<div class="row text-center" style="line-height: 60px;">
 				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar la venta</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
+				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
 				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
 				</div>
 			</div><!-- fin de sm-3 -->
@@ -588,7 +588,7 @@
 			</div>
 			<div class="modal-footer"> 
 			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, acabó todo</button>
-			<button class="btn btn-primary btn-outline" data-dismiss="modal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
+			<button class="btn btn-primary btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
 		</div>
 		</div>
 	</div>
@@ -654,6 +654,7 @@
 <!-- Menu Toggle Script -->
 <script>
 $(document).ready(function(){
+	$.impresion=[];
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
 		$('.mitooltip').tooltip();
@@ -1230,12 +1231,13 @@ function llamarBuscarProducto() {
 }
 $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 	var indexSelec=$(this).attr('id');
+	$.impresion.push({cantItem: 1, 'nombItem': $('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text(), })
 	
 
 	$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft"> <th >
 		<button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">${$('.tablaResultadosCompras  tr').length}. </span> </th>
 		<td class="mProdID hidden">${$('#listadoDivs .row').eq(indexSelec).find('#mProdID').text()}</td>
-		 <td class="col-xs-4 mayuscula">${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
+		 <td class="col-xs-4 mayuscula mProdNom">${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -1253,6 +1255,8 @@ $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 	$('.modal-detalleProductoEncontrado').modal('hide');
 });
 $('#btnGuardarVenta').click(function () {
+	
+$.ticket = [];
 var Jencabezado=[];
 var Jdata=[];
 Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
@@ -1266,8 +1270,9 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	var cantProd=$(this).find('.txtCantidadVariableProd').val();
 	var precioProd=$(this).find('.spanPrecio').text();
 	var SubTotalProd=$(this).find('.spanSubTotal').text();
+	var nomProImp= $(this).find('.mProdNom').text();
 
-	Jdata.push({'id': indProd, 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
+	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' und. '+ nomProImp , 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
 	
 	
 	})
@@ -1281,7 +1286,8 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 		$('.modal-ventaGuardada').modal('show');
 
 	});
-}
+	}
+ $.ticket=Jdata;
 
 
 	
@@ -1369,7 +1375,75 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 	$('#strConteoNoche').text( $('#listadoVentaDelDiaNocturno .row').length+1);
 	}
 });
+$('#btnGuardarMemoria').click(function () {
+	$.impresion.push({'z': 31});
+	console.log($.impresion)
+});
 
+$('#btnImprimirVentaFinal').click(function () {
+	moment.locale('es');
+	var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
+	var vuelto =''
+	if($('#spanResiduoCambio').val()=='-'){ vuelto='Sin cambio'}
+	
+	/////// Cambiar URL
+	$.ajax({url: 'localhost		/vendor/windows-lpt.php',
+	 type:'POST', data:{
+		total: 'S/. '+$('#spanTotalVenta').text(),
+		dineroDado: 'S/. '+$('#txtMonedaEnDuro').val(),
+		dineroVuelto: 'S/. '+vuelto,
+		texto: retornarCadenaImprimir(),
+		hora: fechaImpr
+	}}).done(function (argument) {
+});
+function retornarCadenaImprimir(){
+	var totalImprimir=40;
+	var funProducto = '';
+	var funPrecio = '';
+	var lineaImpr='';
+	var espacioslibres='';
+	var lineaEntera ='';
+	var cantlibres=0;
+	
+
+$.each($.ticket, function (i, elem) {
+	funProducto= elem.nomProducto;
+	funPrecio= 'S/. '+elem.sub;
+	lineaEntera = funProducto+funPrecio;
+	cantlibres=0;
+
+// console.log('tamaño total: '+ lineaEntera.length)
+// console.log('calculo de linea '+lineaEntera.length/totalImprimir)
+
+
+	if (lineaEntera.length/totalImprimir>1){
+		// console.log('dos lineas')
+		cantlibres=40-lineaEntera.length%40;
+		// console.log('espacios libres para ultima linea '+ cantlibres)
+
+	for (var i = cantlibres - 1; i >= 0; i--) {
+		espacioslibres+=' ';
+	};
+	lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+	// console.log(lineaImpr)
+	// console.log(lineaImpr.length)
+	}
+	else{//console.log('una linea');
+	cantlibres=parseInt(totalImprimir-lineaEntera.length);
+	//console.log('espacios libres en ultima linea '+ parseInt(totalImprimir-lineaEntera.length))
+
+	for (var i = cantlibres - 1; i >= 0; i--) {
+		espacioslibres+=' ';
+	};
+	lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+	//console.log(lineaImpr)
+	//console.log(lineaImpr.length)
+
+	}
+});
+
+return lineaImpr;
+}
 
 </script>
 
