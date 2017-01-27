@@ -1387,18 +1387,17 @@ $('#btnImprimirVentaFinal').click(function () {
 	if($('#spanResiduoCambio').val()=='-'){ vuelto='Sin cambio'}
 	
 	/////// Cambiar URL
-	$.ajax({url: 'localhost		/vendor/windows-lpt.php',
-	 type:'POST', data:{
+	$.ajax({url: 'localhost/vendor/windows-lpt.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+$('#txtMonedaEnDuro').val(),
 		dineroVuelto: 'S/. '+vuelto,
 		texto: retornarCadenaImprimir(),
 		hora: fechaImpr
-	}}).done(function (argument) {
+	}}).done(function () {
 		$('#tablaResultadosCompras tbody').children().remove();
 		calcularRowTabla();
 		sumarSubTotalesInstante();
-
+	});
 });
 function retornarCadenaImprimir(){
 	var totalImprimir=40;
@@ -1433,18 +1432,18 @@ $.each($.ticket, function (i, elem) {
 	// console.log(lineaImpr.length)
 	}
 	else{//console.log('una linea');
-	cantlibres=parseInt(totalImprimir-lineaEntera.length);
-	//console.log('espacios libres en ultima linea '+ parseInt(totalImprimir-lineaEntera.length))
+		cantlibres=parseInt(totalImprimir-lineaEntera.length);
+		//console.log('espacios libres en ultima linea '+ parseInt(totalImprimir-lineaEntera.length))
 
-	for (var i = cantlibres - 1; i >= 0; i--) {
-		espacioslibres+=' ';
-	};
-	lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
-	//console.log(lineaImpr)
-	//console.log(lineaImpr.length)
+		for (var i = cantlibres - 1; i >= 0; i--) {
+			espacioslibres+=' ';
+		};
+		lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+		//console.log(lineaImpr)
+		//console.log(lineaImpr.length)
 
 	}
-});
+	});
 
 return lineaImpr;
 }
