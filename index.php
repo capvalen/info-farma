@@ -15,7 +15,7 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 
 		<!-- Custom CSS -->
-		<link href="css/estilosElementosv2.css" rel="stylesheet">	
+		<link href="css/estilosElementosv2.css" rel="stylesheet">
 		<link href="css/sidebarDeslizable.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/cssBarraTop.css">
 		<link rel="stylesheet" href="css/icofont.css">

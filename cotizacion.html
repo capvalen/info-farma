@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Cotización Info-Farma</title>
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/estilosElementosv2.css" rel="stylesheet">
+	<link href="css/icofont.css" rel="stylesheet">
+
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<style>
+*{font-family: 'Oxygen', sans-serif; }
+.main, .results{    background-color: #fff;
+border-radius: 8px;
+margin-bottom: 20px;
+padding-bottom: 20px;
+
+padding-top: 10px;
+box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+
+}
+/*.interior{ border-bottom: 1px solid #ddd; }*/
+.main, .text-primary {color: #55518a;}
+
+.text-success { color: #4caf50;}
+.form-control,.interior,
+.form-group .form-control {
+  border: 0;
+  background-image: linear-gradient(#fbc02d, #fbc02d), linear-gradient(#D2D2D2, #D2D2D2);  /*el primer linear es para establecer cuando esta focus, cuando no no*/
+  background-size: 0 2px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: center bottom, center calc(100% - 1px);
+  background-color: transparent;
+  transition: background 0s ease-out;
+  
+  box-shadow: none;
+  border-radius: 0;
+  font-weight: 400;
+}
+.interior{background-image: linear-gradient(#f55145, #f55145), linear-gradient(#D2D2D2, #D2D2D2);}
+.interior.is-focused,.form-group.is-focused .form-control {
+  outline: none;
+  background-size: 100% 2px, 100% 1px;  
+  transition-duration: 0.3s;
+}
+.footer{width:100%; float:left; background:#A35BB4; height:130px; color:white; padding-top: 10px}
+.footer p{margin-top:10px} .footer{margin-top:8px}
+.results i{font-size: 50px}
+ @media (max-width: 768px) {
+      .col-xs-12.text-right, .col-xs-12.text-left {
+              text-align: center;
+       } 
+    }
+}
+}
+}
+
+
+</style>
+<hr>
+<div class='container main'>
+<h3 class="text-center">Cotización de precios: Info-farma</h3>
+
+<div class="row ">
+	<div class="col-xs-12 col-sm-4 text-right"><label for="" style="margin-top: 8px">Búsqueda del producto:</label></div>
+	<div class="col-sm-4">
+	<input class="form-control text-center" id="txtCajaBusqueda" type="text" value ="" placeholder="Ubique un producto por nombre...">
+	</div>
+	<div class="col-xs-12 col-sm-4 text-text-left">
+	<button class="btn btn-morado btn-outline" id="btnBuscarProd"><i class="icofont icofont-search-alt-1"></i> Buscar</button>
+	<button class="btn btn-danger btn-outline" id="limpiarCasilla"><i class="icofont icofont-eraser"></i> Limpiar todo</button></div>
+
+</div>
+</div>
+<div class="container results">
+	 <div class="row container">
+	<div class="container-fluid interior">
+		<div class="col-xs-12"><h4 class="text-primary"><i class="icofont icofont-animal-cat-alt-3"></i> <strong>Esperando para realizar búsquedas</strong> <br><small>Ingrese datos para que pueda filtrarlos</small></h4></div>
+	</div>
+	</div>
+	<!--	
+	<div class="row container ">
+	<div class="container-fluid interior">
+		<div class="col-xs-8 col-sm-6"><h4 class="text-primary"><strong>Producto ABC</strong> <br><small>Pastilla</small></h4></div>
+		<div class="col-xs-4 col-sm-4"><h4 class="text-primary"> <strong>S/. 12.00</strong></h4></div>
+		<div class="col-sm-2"><h5 class="text-success "><br> Disponible en stock</h5></div>
+	</div>
+	</div> -->
+</div>
+
+<footer>
+  <div class="footer container-fluid">
+  <div class="col-xs-5 col-sm-2 col-sm-offset-2 text-right"><img src="images/logoCat.svg" class="img-responsive" alt=""></div>
+  <div class="col-xs-7 col-sm-6 text-left"><p>
+  	<span><strong>Apoyando a:</strong> Farmacia ABC</span><br>
+  	<span><strong>Desarrollado por:</strong> Carlos Pariona ® 2016-2017 </span><br>
+  	<span><strong>Contacto:</strong> infocat2.0@gmail.com </span><br>
+  	<span><strong>Versión:</strong> 1.0 2017.02.21 </span>
+  </p>
+  </div>
+  
+  </div>
+</footer>
+	
+<!-- jQuery -->
+<script src="js/jquery-2.2.4.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/material.min.js"></script>
+<script>
+	$(document).ready(function () {
+		
+		$.material.init();
+		calcularFooter()
+		
+		$('#txtCajaBusqueda').focus();
+	});
+	function calcularFooter() {
+		var docHeight = $(window).height();
+		var footerHeight = $('.footer').height();
+		var footerTop = $('.footer').position().top + footerHeight;
+
+		if (footerTop < docHeight) {
+		$('.footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
+		}
+	}
+
+	$('.results').on('mouseenter', '.interior', function () {
+		$(this).addClass('is-focused');
+	});
+	$('.results').on('mouseleave', '.interior', function () {
+		$(this).removeClass('is-focused');
+	});
+
+
+	// $('.interior').mouseenter(function(){
+	// 	$(this).addClass('is-focused');
+	// });
+	// $('.interior').mouseleave(function(){
+	// 	$(this).removeClass('is-focused');
+	// });
+
+	
+$('#txtCajaBusqueda').keyup(function (e) {var code = e.which;
+	if(code==13){	e.preventDefault();
+		//console.log('enter')
+		$('#btnBuscarProd').click();
+		
+	}
+});
+$('#limpiarCasilla').click(function () {
+	$('#txtCajaBusqueda').val('');
+	$('.results').children().remove();
+	$('.results').append(`<div class="col-xs-12"><h4 class="text-primary"><i class="icofont icofont-animal-cat-alt-3"></i> <strong>Esperando para realizar búsquedas</strong> <br><small>Ingrese datos para que pueda filtrarlos</small></h4></div>`);
+	$('#txtCajaBusqueda').focus();
+})
+
+$('#btnBuscarProd').click(function () {
+	if( $('#txtCajaBusqueda').val()!= ''){
+		$('.results').children().remove();
+		$.ajax({ url: 'php/productos/buscarProductoXNombreOLote.php', type: 'POST', data:{
+			filtro:'%'+$('#txtCajaBusqueda').val()+'%'
+		}}).done(function (resp) { //console.log(JSON.parse(resp).length)
+			$.each(JSON.parse(resp), function(i, elem){ console.log(elem)
+				var disponText='';
+				if(elem.prodStock>0){disponText='<h5 class="text-success "><br> Disponible en stock</h5>';}
+				else{disponText='<h5 class="text-danger "><br> Sin stock</h5>';}
+				$('.results').append(`<div class="row container">
+					<div class="container-fluid interior">
+						<div class="col-xs-8 col-sm-6"><h4 class="text-primary"><strong class="mayuscula">${elem.prodNombre}</strong> <br><small>${elem.catprodDescipcion}</small></h4></div>
+						<div class="col-xs-4 col-sm-4"><h4 class="text-primary"> <strong>S/. ${parseFloat(elem.prodPrecioUnitario).toFixed(2)}</strong></h4></div>
+						<div class="col-sm-2">${disponText}</div>
+					</div>
+					</div>`);
+			});
+			if(JSON.parse(resp).length==0){
+				$('.results').append(`<div class="row container">
+					<div class="container-fluid interior">
+						<div class="col-xs-12"><h4 class="text-primary"><strong ><i class="icofont icofont-animal-cat-alt-4"></i> Lo sentimos, ningun producto coincide con el térmido «${$('#txtCajaBusqueda').val()}»</strong> <br><small>Vuelva a intentarlo con otro término</small></h4></div>
+						
+					</div>
+					</div>`);
+			}
+			
+			calcularFooter()
+			
+		})
+	}
+	else{
+		$('.results').children().remove();
+		$('.results').append(`<div class="row container">
+					<div class="container-fluid interior">
+						<div class="col-xs-8 col-sm-6"><h4 class="text-primary"><i class="icofont icofont-animal-cat-alt-4"></i> <strong>Debe ingresar texto para realizar búsquedas.</strong> <br><small>Intenténtelo de nuevo, por favor.</small></h4></div>
+						<div class="col-xs-4 col-sm-4"><h4 class="text-primary"> <strong>S/. 0.00</strong></h4></div>
+						<div class="col-sm-2"></div>
+					</div>
+					</div>`);
+	}
+});
+
+
+</script>
+</body>
+</html>
