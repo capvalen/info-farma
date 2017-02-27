@@ -24,14 +24,14 @@ $.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static'; //Par
 
 function esNumero(cadena) //true para si es número sólo
 {
-			if (cadena.match(/^[0-9]+$/))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+	if (cadena.match(/^[0-9]+$/))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 $(".ocultar-mostrar-menu").click(function() {

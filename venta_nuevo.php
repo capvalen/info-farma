@@ -114,42 +114,101 @@
 			</nav>
 	</div>
 </div>
+<style>
+.rowEsp>div{background-color: #FFF; cursor: default; 
+  }
+.rowEsp>.divMonto{ padding-bottom: 10px;
+	border: 0;
+  background-image: linear-gradient(#A35BB4, #A35BB4), linear-gradient(#fff, #fff); 
+  background-size: 0 2px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: center bottom, center calc(100% - 1px);
+  background-color: transparent;
+  transition: background 0s ease-out;  
+  box-shadow: none;
+  border-radius: 0;
+  }
+.rowEsp>.divMonto:hover{outline: none;
+  background-size: 100% 2px, 100% 1px;  
+  transition-duration: 0.3s;}
+.rowEsp .cabe{font-size: 14px}.rowEsp .monto{font-size: 24px; }
+.monto{color:#A162C1;}
+body {color: #797979;}
+h1,h2,h3, h4, strong{ margin-top: 10px; color: #4a4a4a;}
+h4{font-size: 22px;}
+/*#rowVentas{margin-right: 20px}*/
+#cajaContador{/*border: 1px solid #4a4a4a; ; cambiado porque es blanco con sombra*/
+padding: 8px 0 8px 0 ;
+border-top: 1px solid rgba(0, 0, 0, 0.2);;
+border-bottom: 1px solid rgba(0, 0, 0, 0.2);;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+@media (min-width: 768px){
+.contenedorDeslizable>.col-sm-2 {width: 20%;
+}
+</style>
 <!-- Page Content -->
 <div id="page-content-wrapper">
-	<div class="container-fluid">				 
-			<div class="row">
-				<div class="col-lg-12 contenedorDeslizable">
+	<div class="container-fluid">
+	<div class="row rowEsp contenedorDeslizable">
+			<div class="col-xs-6 col-sm-2 text-center divMonto"><span class="cabe">Sub-Total</span>
+				<br><span class="monto">S/. 0.00</span>
+				</div>
+			<div class="col-xs-6 col-sm-2 text-center divMonto"><span class="cabe">IGV</span>
+				<br><span class="monto">S/. 0.00</span>
+				</div>
+			<div class="col-xs-6 col-sm-2 text-center divMonto"><span class="cabe">Total</span>
+				<br><span class="monto">S/. 0.00</span>
+				</div>
+			<div class="col-xs-6 col-sm-2 text-center divMonto"><span class="cabe">Cambio</span>
+				<br><span class="monto">S/. 0.00</span>
+				</div>
+			<div class="col-xs-6 col-sm-2 text-center">
+				<span ><button class="btn btn-sm btn-negro btn-outline" style="margin-bottom: 3px">Ingresar cambio</button><br><button class="btn btn-sm btn-danger btn-outline">Cancelar Venta</button></span>
+				</div>
+	</div>
+
+			<div class="row ">
+				<div class="col-sm-5 contenedorDeslizable" id='rowVentas'>
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-options"></i> Panel de configuraciones generales</h2>
-
-					<ul class="nav nav-tabs">
-					<li class="active"><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
-					<!-- <li><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li> -->
-					
-					</ul>
-					
-					<div class="tab-content">
-					<!--Panel para buscar productos-->
-						<!--Clase para las tablas-->
-						<div class="tab-pane fade in active container-fluid" id="tabAgregarLabo">
-						<!--Inicio de pestaña 01-->
-							<a class="btn btn-negro btn-outline btn-lg" href="php/productos/reporte_productos_excel.php"><i class="icofont icofont-file-excel"></i> Listado de productos en excel</a>
-
-						<!--Fin de pestaña 01-->
+					<div class="row">
+						<div class="col-xs-2"><h4>1</h4></div>
+						<div class="col-xs-6">
+							<h4>Celular Motorola</h4>
 						</div>
-
-						
-
-						<!--Panel para nueva compra-->
-						<div class="tab-pane fade container-fluid" id="tabCambiarPassUser">
-						<!--Inicio de pestaña 02-->
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, quis, facilis beatae recusandae optio molestias ipsam quibusdam aliquid rerum voluptatem incidunt in vero quo illo natus? Asperiores, ipsum placeat dolorum.
-						<!--Fin de pestaña 02-->
-						</div>
-						
+						<div class="col-xs-4"><h4>S/. 150.00</h4></div>
 					</div>
-					<!-- Fin de meter contenido principal -->
+					<div class="row text-center" id="cajaContador">
+						<div class="col-xs-4"><button class="btn btn-circle btn-morado pull-right"><i class="icofont icofont-minus"></i></button></div>
+						<div class="col-xs-4"><span class="text-center">1<br>Cant</span></div>
+						<div class="col-xs-4"><button class="btn btn-circle btn-morado pull-left"><i class="icofont icofont-plus"></i></button> </div>
+
 					</div>
+				<!-- Fin de meter contenido principal -->
+				</div>
+				<div class="col-sm-7 contenedorDeslizable">
+				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
+					<h3>Canasta de productos</h3>
+				<!-- Fin de meter contenido principal -->
+				</div>
 					
 				</div>
 		</div>
@@ -407,7 +466,6 @@ $('#listaProductosNuevoInventario').on('click','.btnGuardarItemInventario',funct
 		});
 	} // Fin de ultimo else grande validador
 });
-
 
 
 $('.activarNuevoInventario').click(function () {

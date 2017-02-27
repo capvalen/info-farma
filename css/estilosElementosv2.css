@@ -11,9 +11,9 @@ main, .contenedorDeslizable{background-color: #fff; border-radius:8px; margin-bo
 
 .breadcrumb {margin-left:20px; margin-top: 10px;margin-right: -20px;}
 .icono-peque{font-size: 15px;}.icono-peque-18{font-size: 16px;}.icono-grande{font-size: 40px;}
-.btn-circle{width: 40px; height: 40px; text-align: center; padding: 6px 0; font-size: 12px; line-height: 1.42; border-radius: 35px;}
+/*.btn-circle{width: 40px; height: 40px; text-align: center; padding: 6px 0; font-size: 12px; line-height: 1.42; border-radius: 35px;}
 .btn-circle:hover,.btn-circle-grande:hover{box-shadow:0 5px 5px 0 rgba(0,0,0,0.18),0 5px 5px 0 rgba(0,0,0,0.15);}
-.btn-circle-grande{width: 80px; height: 80px; text-align: center; padding: 16px 0; font-size: 36px; line-height: 1.42; border-radius: 65px; }
+.btn-circle-grande{width: 80px; height: 80px; text-align: center; padding: 16px 0; font-size: 36px; line-height: 1.42; border-radius: 65px; }*/
 .btnOpciones:hover{background-color:#ffe0b2;}
 .btnOpciones:focus{background-color:#fff8e1;}
 .btnIcono{padding: 0px 3px}
