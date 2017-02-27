@@ -30,6 +30,11 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
     <td bgcolor="#F8E3B4"><strong>Laboratorio</strong></td>
   </tr>
   
+  <style>
+  	.num {
+  mso-number-format:"0\.00"
+}
+  </style>
 <?php
 		
 $sql=mysql_query("SELECT @rownum:=@rownum+1 AS Num, p.prodNombre, format( p.prodPrecio,2) as Precio, cp.catprodDescipcion, l.labNombre FROM 
@@ -49,7 +54,7 @@ while($res=mysql_fetch_array($sql)){
  <tr>
 	<td><?php echo $i;  ?></td>
 	<td><?php echo ucwords($prodNombre); ?></td>
-	<td><?php echo $Precio; ?></td>
+	<td class="num"><?php echo $Precio; ?></td>
 	<td><?php echo $catprodDescipcion; ?></td>
 	<td><?php echo $labNombre; ?></td>
  </tr> 
