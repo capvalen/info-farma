@@ -306,15 +306,83 @@ $('#btnBuscar').click(function(){
 	if($('#txtBuscar').val().length==8){
 		if(esNumero($('#txtBuscar').val())){ //sólo letras devuelve true, combinado letras con números es false
 			//buscar en dnis
-			socket.emit('buscarClientePorDni',$('#txtBuscar').val());
+			//socket.emit('buscarClientePorDni',$('#txtBuscar').val());
+			$.ajax({url: 'php/buscarClientePorDni.php', type: 'POST', data: {texto: $('#txtBuscar').val() }}).done(function (resp) {
+				//console.log(JSON.parse(resp))
+				
+				
+				$('.modal-resultadosBusqueda').modal('show').find('tbody').empty();
+				$('.modal-resultadosBusqueda').find('strong').html(JSON.parse(resp).length);
+				if(JSON.parse(resp).length==0){$('.modal-resultadosBusqueda').find('table').hide();}
+				else{$('.modal-resultadosBusqueda').find('table').show();}
+				$.each(JSON.parse(resp), function (index, element) { console.log(element)
+					var cumple=moment(element.cliFechaNacimiento, "YYYY-MM-DD");	
+					cumple.locale('es');			
+					
+					//console.log(moment(cumple).preciseDiff(moment.().format('YYYY')));
+					$('.modal-resultadosBusqueda').find('tbody').append(`<tr>
+								<th scope="row">${index +1}</th>
+								<td>${element.idHistoria}</td>
+								<td>${element.nombres}</td>
+								<td class="hidden id">${element.idCliente}</td>
+								<td class="">${moment(cumple).toNow(true)}</td>
+								<td><a class="btn btn-sm btn-success" href="ClientePanel.php?id=${element.idCliente}" role="button">Ver <span class="glyphicon glyphicon-user"></span></a></td>
+							</tr>`);
+				});
+			});
 		}
 	}
 	else{
-		socket.emit('buscarClientePorNumeroHistoria',$('#txtBuscar').val());
+		//socket.emit('buscarClientePorNumeroHistoria',$('#txtBuscar').val());
+		$.ajax({url: 'php/buscarClientePorNumeroHistoria.php', type: 'POST', data: {texto: $('#txtBuscar').val() }}).done(function (resp) {
+				//console.log(JSON.parse(resp))
+				
+				
+				$('.modal-resultadosBusqueda').modal('show').find('tbody').empty();
+				$('.modal-resultadosBusqueda').find('strong').html(JSON.parse(resp).length);
+				if(JSON.parse(resp).length==0){$('.modal-resultadosBusqueda').find('table').hide();}
+				else{$('.modal-resultadosBusqueda').find('table').show();}
+				$.each(JSON.parse(resp), function (index, element) { console.log(element)
+					var cumple=moment(element.cliFechaNacimiento, "YYYY-MM-DD");	
+					cumple.locale('es');			
+					
+					//console.log(moment(cumple).preciseDiff(moment.().format('YYYY')));
+					$('.modal-resultadosBusqueda').find('tbody').append(`<tr>
+								<th scope="row">${index +1}</th>
+								<td>${element.idHistoria}</td>
+								<td>${element.nombres}</td>
+								<td class="hidden id">${element.idCliente}</td>
+								<td class="">${moment(cumple).toNow(true)}</td>
+								<td><a class="btn btn-sm btn-success" href="ClientePanel.php?id=${element.idCliente}" role="button">Ver <span class="glyphicon glyphicon-user"></span></a></td>
+							</tr>`);
+				});
+			});
 	}
 
 	if(!esNumero($('#txtBuscar').val()) && $('#txtBuscar').val().length>=3){//buscar en nombres
-		socket.emit('buscarClientePorApellido',$('#txtBuscar').val());
+		//socket.emit('buscarClientePorApellido',$('#txtBuscar').val());
+		$.ajax({url: 'php/buscarClientePorNombre.php', type: 'POST', data: {texto: $('#txtBuscar').val() }}).done(function (resp) {
+				//console.log(JSON.parse(resp))
+				
+				$('.modal-resultadosBusqueda').modal('show').find('tbody').empty();
+				$('.modal-resultadosBusqueda').find('strong').html(JSON.parse(resp).length);
+				if(JSON.parse(resp).length==0){$('.modal-resultadosBusqueda').find('table').hide();}
+				else{$('.modal-resultadosBusqueda').find('table').show();}
+				$.each(JSON.parse(resp), function (index, element) { console.log(element)
+					var cumple=moment(element.cliFechaNacimiento, "YYYY-MM-DD");	
+					cumple.locale('es');			
+					
+					//console.log(moment(cumple).preciseDiff(moment.().format('YYYY')));
+					$('.modal-resultadosBusqueda').find('tbody').append(`<tr>
+								<th scope="row">${index +1}</th>
+								<td>${element.idHistoria}</td>
+								<td>${element.nombres}</td>
+								<td class="hidden id">${element.idCliente}</td>
+								<td class="">${moment(cumple).toNow(true)}</td>
+								<td><a class="btn btn-sm btn-success" href="ClientePanel.php?id=${element.idCliente}" role="button">Ver <span class="glyphicon glyphicon-user"></span></a></td>
+							</tr>`);
+				});
+			});
 	}
 	$('#txtBuscar').val('');
 });
@@ -720,7 +788,7 @@ $('#btnAgregarConsultaHorario').click(function(){
 								<div class="panel-heading " role="tab">
 								  <h4 class="panel-title">
 									<span role="button" data-toggle="collapse" data-parent="#accordion" href="#Reg${dato.id}" aria-expanded="true" aria-controls="${dato.id}">
-									  <strong>Revaluación</strong> <span class="lblTiempoCita">${moment(fechaHoraC).fromNow()}</span>  <span class="moneda"></span></span>
+									  <strong>Procedimiento</strong> ${motivProcedimiento} <span class="lblTiempoCita">${moment(fechaHoraC).fromNow()}</span>  <span class="moneda"></span></span>
 								  </h4>
 								</div>
 								<div id="Reg${dato.id}" class="panel-collapse collapse in" role="tabpanel" >
@@ -729,7 +797,7 @@ $('#btnAgregarConsultaHorario').click(function(){
 									<br><span class="text-muted"><small>Registrado el: <span class="creadoEn">${moment().format('dddd[,] DD [de] MMMM [de] YYYY')}</span>. </small></span></p>
 									<p class="pagos"></p>
 									<div class="form-group">
-										<button type="button" class="btn btn-success btn-outline btnImprimirConsulta" id="btnImprimirRevaluación${dato.id}" ><span class="glyphicon glyphicon-print"></span> Imprimir voucher</button>
+										<button type="button" class="btn btn-success btn-outline btnImprimirConsulta" id="btnImprimirProcedimiento${dato.id}" ><span class="glyphicon glyphicon-print"></span> Imprimir voucher</button>
 										<button type="button" class="btn btn-amarillo btn-outline btnPagar" id="btnPagar${dato.id}" ><span class="glyphicon glyphicon-piggy-bank"></span> Pagar</button>
 										<button type="button" class="btn btn-info btn-outline btnModificar" id="btnModificar${dato.id}"><span class="glyphicon glyphicon-export"></span> Mover fecha</button>
 										<button type="button" class="btn btn-danger btn-outline btnCancelarControl" id="btnCancelarControl${dato.id}"><span class="glyphicon glyphicon-fire"></span> Cancelar control</button>
@@ -917,7 +985,15 @@ function bloquearCeldasHoyxHora() {
 		}
 }
 $('#btnCancelarCita').click(function(){
-	socket.emit('eliminarCita',parseInt(idRegistroMovible), usuario.nombre);
+
+	//socket.emit('eliminarCita',parseInt(idRegistroMovible), usuario.nombre);
+	$.ajax({url: 'php/eliminarCita.php', type: 'POST', data: {idCita: parseInt(idRegistroMovible)}}).done(function (resp) {
+		console.log(resp)
+		if(resp ==1){
+			$('.modal-cancelarCita').modal('hide');
+ 			$('#listRegistro').find(`#Reg${parseInt(idRegistroMovible)}`).parent().remove();
+		}
+	})
 });
 $('#btnAdelantarFecha').click(function() {
 	if($('#txtAdelantarFecha').val()!=''){
@@ -1055,14 +1131,29 @@ $('#txtPassReNuevo').focusout(function () {
 $('#guardarContraseña').click(function() {
 	if($('.modal-password .alert-danger').hasClass('sr-only') && $('#txtPassNuevo').val().length>0){
 		$('.modal-password .alert-danger').addClass('sr-only');
-		socket.emit('actualizarContraseña', usuario.idUsuario, $('#txtPassReNuevo').val());
+		//socket.emit('actualizarContraseña', usuario.idUsuario, $('#txtPassReNuevo').val());
+		$.ajax({url: 'php/actualizarContrasena.php', type: 'POST', data:{pssNuevo: $('#txtPassReNuevo').val()}}).done(function (resp) {
+			if(resp==1){$('.modal-password').modal('hide');}
+			else{$('.modal-password .alert-danger').find('#texto').text('Hubo un error con la consexión.');
+			$('.modal-password .alert-danger').removeClass('sr-only');}
+		})
 	}else{
 		$('.modal-password .alert-danger').find('#texto').text('Ingrese una contraseña nueva');
 		$('.modal-password .alert-danger').removeClass('sr-only');
 	}
 });
 $('#txtPassAnterior').focusout(function() {
-	socket.emit('confirmarContrasena',usuario.idUsuario,$(this).val());
+	//socket.emit('confirmarContrasena',usuario.idUsuario,$(this).val());
+	$.ajax({url: 'php/confirmarContrasena.php', type: 'POST', data: {campo: $(this).val()}}).done(function (estadoCoincide) {
+		//console.log(estadoCoincide)
+		if(!estadoCoincide){console.log('no coincide')//no coincide la contraseña anterior
+		$('.modal-password .alert-danger').find('#texto').text('La contraseña inicial no es correcta.');
+		$('.modal-password').find('.alert-danger').removeClass('sr-only');}
+		else{$('.modal-password .alert-danger').addClass('sr-only');}
+		
+	});
+
+
 });
 $('.modal-password').on('show.bs.modal', function (e) {
 	$('.modal-password').find('.alert-danger').addClass('sr-only');

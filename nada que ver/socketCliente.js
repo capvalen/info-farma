@@ -34,7 +34,7 @@ function grabarCliente(tipo) {
 		dni: $('#txtDni').val(),
 		tipoDni: $('#cmbTipoPersona').val(),
 		paterno: $('#txtApellidoPaterno').val(),
-		materno: $('#txtApellidoMaterno').val(), 
+		materno: $('#txtApellidoMaterno').val(),
 		nombre: $('#txtNombres').val(),
 		fecha: $('#dtpFechaNacimiento').val(),
 		civil: $('#cmbEstadoCivil').val(),
@@ -65,7 +65,7 @@ if(tipo=='grabar'){
 		direccion: $('#txtDireccion').val(),
 		telefono: $('#txtTelefono').val(),
 		celular: $('#txtCelular').val()
-	}}).success(function (resp) {
+	}}).success(function (resp) { console.log(resp);
 		$( "#btnGuardarCliente" ).html('<i class="icofont icofont-folder-open"></i> Guardar cliente')
 		$( "#btnGuardarCliente" ).prop( "disabled", false );
 		if(resp == null){
@@ -75,39 +75,14 @@ if(tipo=='grabar'){
 			location.href = `ClientePanel.php?id=${JSON.parse(resp).id}&n=1`;
 		}
 		
-	});
-}
-else if(tipo=='actualizar'){
-	//datos[0].idCliente=datosGenerales.idCliente;
-	//console.log(datos);
-	//socket.emit('actualizarCliente',datos,usuario.idUsuario);}
-	$.ajax({url:'php/actualizarClienteDatos.php', type: 'POST', data:{
-		idCli: datosGenerales.idCliente,
-		procedencia: $('#cmbProcedencia').val(),
-		dni: $('#txtDni').val(),
-		tipoDni: $('#cmbTipoPersona').val(),
-		paterno: $('#txtApellidoPaterno').val(),
-		materno: $('#txtApellidoMaterno').val(),
-		nombre: $('#txtNombres').val(),
-		fecha: $('#dtpFechaNacimiento').val(),
-		civil: $('#cmbEstadoCivil').val(),
-		sexo: vSexo,
-		grado: $('#cmbGrado').val(),
-		ocupacion: $('#cmbOcupacion').val(),
-		direccion: $('#txtDireccion').val(),
-		telefono: $('#txtTelefono').val(),
-		celular: $('#txtCelular').val()
-	}}).success(function (resp) {
-		console.log(resp);
-		if(resp == null){
-			$("#contenidoErrorCliente").html(`Hubo un error intentando guardar, por favor, intente otra vez o comuníquelo a Soporte.`);
-
-		}else{//console.log(JSON.parse(resp).id);
-			location.href = `ClientePanel.php?id=${datosGenerales.idCliente}&n=2`;
-		}
+		
 		
 	});
 }
+else if(tipo=='actualizar'){datos[0].idCliente=datosGenerales.idCliente;
+	console.log(datos);
+	socket.emit('actualizarCliente',datos,usuario.idUsuario);}
+	//
 }
 
 // socket.on('retornoClienteCreado',function (id,tipo){
@@ -291,28 +266,28 @@ socket.on('idHistoriaCreada',function(dato) {
 // 	//console.log(dato)
 	
 // });
-// socket.on('listadoClientesEncontrados',function(dato){
-// 	//console.log(dato);
-// 	$('.modal-resultadosBusqueda').modal('show').find('tbody').empty();
-// 	$('.modal-resultadosBusqueda').find('strong').html(dato.length);
-// 	if(dato.length==0){$('.modal-resultadosBusqueda').find('table').hide();}
-// 	else{$('.modal-resultadosBusqueda').find('table').show();}
-// 	dato.map(function(element,index) {
-// 		var cumple=moment(element.cliFechaNacimiento, "YYYY-MM-DD");	
-// 		cumple.locale('es');			
+/*socket.on('listadoClientesEncontrados',function(dato){
+	//console.log(dato);
+	$('.modal-resultadosBusqueda').modal('show').find('tbody').empty();
+	$('.modal-resultadosBusqueda').find('strong').html(dato.length);
+	if(dato.length==0){$('.modal-resultadosBusqueda').find('table').hide();}
+	else{$('.modal-resultadosBusqueda').find('table').show();}
+	dato.map(function(element,index) {
+		var cumple=moment(element.cliFechaNacimiento, "YYYY-MM-DD");	
+		cumple.locale('es');			
 		
-// 		//console.log(moment(cumple).preciseDiff(moment.().format('YYYY')));
-// 		$('.modal-resultadosBusqueda').find('tbody').append(`<tr>
-// 								<th scope="row">${index +1}</th>
-// 								<td>${element.idHistoria}</td>
-// 								<td>${element.nombres}</td>
-// 								<td class="hidden id">${element.idCliente}</td>
-// 								<td class="">${moment(cumple).toNow(true)}</td>
-// 								<td><a class="btn btn-sm btn-success" href="ClientePanel.php?id=${element.idCliente}" role="button">Ver <span class="glyphicon glyphicon-user"></span></a></td>
-// 							</tr>`);
-// 	});
-// });
-
+		//console.log(moment(cumple).preciseDiff(moment.().format('YYYY')));
+		$('.modal-resultadosBusqueda').find('tbody').append(`<tr>
+								<th scope="row">${index +1}</th>
+								<td>${element.idHistoria}</td>
+								<td>${element.nombres}</td>
+								<td class="hidden id">${element.idCliente}</td>
+								<td class="">${moment(cumple).toNow(true)}</td>
+								<td><a class="btn btn-sm btn-success" href="ClientePanel.php?id=${element.idCliente}" role="button">Ver <span class="glyphicon glyphicon-user"></span></a></td>
+							</tr>`);
+	});
+});
+*/
 // socket.on('pagosCliente',function(pagos) {
 // 	console.log(pagos)
 // 	$('#listRegistro').prepend(`<div class="panel panel-warning sr-only" id="panelPago">
