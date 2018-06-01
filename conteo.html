@@ -48,9 +48,8 @@ var lineaImpr=producto+ espacioslibres+precio;
 
 }
 moment.locale('es');
-var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
 
-$.ajax({url: 'localhost		/vendor/windows-lpt.php', type:'POST', data:{hora: fechaImpr }}).done(function (argument) {
+$.ajax({url: 'localhost/vendor/windows-lpt.php', type:'POST', data:{hora: moment().format('dddd[,] DD/MMMM/YYYY h:mm a') }}).done(function (argument) {
 	// body...
 })
   </script>

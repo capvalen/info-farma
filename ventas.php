@@ -1056,6 +1056,12 @@ function calcularVentaVsMonedas(moneda ){
 $('#txtMonedaEnDuro').focusout(function () {
 	calcularVentaVsMonedas($(this).val());
 });
+$('#txtMonedaEnDuro').keyup(function () {
+	if($(this).val()==""){calcularVentaVsMonedas(0);}
+		else{calcularVentaVsMonedas($(this).val());}
+	
+	
+});
 $('#btnContarMoneda').click(function () {
 	$('.modal-contarMonedas').modal('show');
 });
@@ -1384,19 +1390,22 @@ $('#btnImprimirVentaFinal').click(function () {
 	moment.locale('es');
 	var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
 	var vuelto =''
-	if($('#spanResiduoCambio').val()=='-'){ vuelto='Sin cambio'}
+	if($('#spanResiduoCambio').text()=='-'){ vuelto='Sin cambio'}
+		else{vuelto = parseFloat($('#spanResiduoCambio').text()).toFixed(2)}
 	
 	/////// Cambiar URL
-	$.ajax({url: 'localhost/vendor/windows-lpt.php', type: 'POST', data:{
+	$.ajax({url: 'windows-lpt.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
-		dineroDado: 'S/. '+$('#txtMonedaEnDuro').val(),
+		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,
 		texto: retornarCadenaImprimir(),
 		hora: fechaImpr
-	}}).done(function () {
-		$('#tablaResultadosCompras tbody').children().remove();
+	}}).done(function (resp) { console.log(resp)
+		/*$('#tablaResultadosCompras tbody').children().remove();
 		calcularRowTabla();
-		sumarSubTotalesInstante();
+		sumarSubTotalesInstante();*/
+		window.location.href ='ventas.php';
+
 	});
 });
 function retornarCadenaImprimir(){

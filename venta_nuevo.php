@@ -69,7 +69,7 @@
 						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
 				<li>
-						<a href="#!" class="ocultar-mostrar-menu"><i class="icofont icofont-logout"></i> Ocultar menú</a>
+						<a href="#!" class="ocultar-mostrar-menu"><i class="icofont icofont-swoosh-left"></i> Ocultar menú</a>
 				</li>
 		</ul>
 	</div>
