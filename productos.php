@@ -12,19 +12,21 @@
 		<title>Productos detalle: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.css" >
 
 		<!-- Custom CSS -->
-		<link href="css/estilosElementosv2.css" rel="stylesheet">	
-		<link href="css/sidebarDeslizable.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/cssBarraTop.css">
+		<link rel="stylesheet" href="css/estilosElementosv2.css">	
+		<link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.1" >
+		<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.1">
 		<link rel="stylesheet" href="css/icofont.css">
 		<link rel="stylesheet" href="css/animate.css">
 
-		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" > <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
 		<link rel="shortcut icon" href="images/pet2.png" />
+		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
+		<link rel="stylesheet" href="css/panel-with-nav-tabs.css"> <!-- extraído de: http://bootsnipp.com/snippets/featured/panels-with-nav-tabs-->
 
 </head>
 
@@ -35,7 +37,7 @@
 	<!-- Sidebar -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
-				<div class="sidebar-brand ocultar-mostrar-menu" >
+				<div class="sidebar-brand ocultar-mostrar-menu hidden" >
 						<a href="#">
 								Control Panel
 						</a>
@@ -103,7 +105,7 @@
 										<span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden"></span>
 									</div>
 								 </li>
-								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario">Carlos Pariona</span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
+								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
 									
 				<li class="text-center"><a href="#!"><span class="visible-xs">Cerrar Sesión</span><i class="icofont icofont-sign-out"></i></a></li>
 							</ul>
@@ -274,7 +276,7 @@
 						<!--Panel para nueva compra-->
 						<div class="tab-pane fade container-fluid" id="tabProximosVencer">
 						<!--Inicio de pestaña 02-->
-						<p>La siguiente lista se compone de los productos vencidos hace un mes y los próximoa a vencer en los próximos 3 meses que vienen.</p>
+						<p>Productos vencidos hace 1 mes y por vencer en 2 meses próximos.</p>
 						<div >
 							<div class="row container-fluid"><strong>
 							<div class="col-sm-1 text-center">Código</div>
@@ -472,7 +474,7 @@
 					
 				</div>
 			</div>
-			<div class="modal-footer"> <button class="btn btn-danger btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok, revisaré</button></div>
+			<div class="modal-footer"> <button class="btn btn-default btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button></div>
 		</div>
 		</div>
 	</div>
@@ -489,7 +491,7 @@
 			<div class="modal-body">
 				<i class="icofont icofont-animal-squirrel"></i> <span id="lblMensajeBien"></span> <i class="icofont icofont-social-smugmug"></i>
 			</div>
-			<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button></div>
+			<div class="modal-footer"> <button class="btn btn-morado btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button></div>
 		</div>
 		</div>
 	</div>

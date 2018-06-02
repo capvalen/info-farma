@@ -511,7 +511,7 @@ $('.nav-tabs-meses li').click(function () {
 	var anioSeleccionado=$('#divAñoInventario button').attr('title');
 	$.ajax({url:'php/productos/listarTodoInventarios.php', type: 'POST', data: {anio:anioSeleccionado, mes: (indMes+1) }}).done(function(res){
 		$(`.tabConenidoMeses #mes${indMes}`).append(`<div class="row"><strong><div class="col-xs-2">Cod.</div><div class="col-xs-3">Fecha</div><div class="col-xs-2">Valorizado.</div><div class="col-xs-2">Creador</div><div class="col-xs-1">Detalles</div></strong></div>`);
-		//console.log(res)
+		console.log(res)
 		$.each(JSON.parse(res), function (i, arg) {
 			moment.locale('es')
 			sumaValoriz+=parseFloat(arg.total);

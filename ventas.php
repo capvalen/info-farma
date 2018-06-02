@@ -12,16 +12,16 @@
 		<title>Ventas: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.css" >
 
 		<!-- Custom CSS -->
-		<link href="css/estilosElementosv2.css" rel="stylesheet">	
-		<link href="css/sidebarDeslizable.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/cssBarraTop.css">
+		<link rel="stylesheet" href="css/estilosElementosv2.css">	
+		<link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.1" >
+		<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.1">
 		<link rel="stylesheet" href="css/icofont.css">
 		<link rel="stylesheet" href="css/animate.css">
 
-		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" > <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
 		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
@@ -38,10 +38,10 @@
 	<!-- Sidebar -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
-				<div class="sidebar-brand ocultar-mostrar-menu" >
-						<a href="#">
-								Control Panel
-						</a>
+				<div class="sidebar-brand ocultar-mostrar-menu hidden" >
+					<a href="#">
+							Control Panel
+					</a>
 				</div>
 				<div class="logoEmpresa ocultar-mostrar-menu">
 					<img class="img-responsive" src="images/empresa.png" alt="">
@@ -106,7 +106,7 @@
 										<span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden"></span>
 									</div>
 								 </li>
-								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario">Carlos Pariona</span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
+								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
 									
 				<li class="text-center"><a href="#!"><span class="visible-xs">Cerrar Sesión</span><i class="icofont icofont-sign-out"></i></a></li>
 							</ul>
@@ -134,14 +134,14 @@
 	<!--Panel para buscar productos-->
 		<!--Clase para las tablas-->
 
-		<div class="tab-pane fade in active" id="tabRealizarVenta"><br>
-		<div class="container-fluid">
-			<div class="col-sm-12 col-md-9">
+		<div class="tab-pane fade in active" id="tabRealizarVenta">
+		<div class="container-fluid" style="padding: 0;">
+			<div class="col-sm-12 col-md-9" >
 				<div class="panel panel-morado">
 					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
 					
 					<div class="panel-body">
-						<div class="row col-md-8"><label class="purple-text text-darken-3">Ubique el producto: </label> <span class="red-text  hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
+						<div class="row col-md-8" style="padding-bottom: 2rem;"><label class="purple-text text-darken-3">Ubique el producto: </label> <span class="red-text  hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
 							<div class="input-group"> 
 								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote">
 								<span class="input-group-btn">
@@ -154,13 +154,13 @@
 						
 						
 						<!-- Tabla -->
-						<div class="row col-md-12 purple-text text-darken-3">
+						<div class="col-md-12 purple-text text-darken-3 table-responsive">
 						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
 						<thead>
 						<tr>
-						<th>#</th> <th class="col-xs-6">Producto</th> <th class="col-xs-1 text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x unidad</th> <th class="col-xs-1 text-center">Descuento</th> <th class="col-xs-1 text-center">Sub-Total</th> </tr>
+						<th>#</th> <th class="col-xs-6">Producto</th> <th class="col-xs-1 text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x Und.</th> <th class="col-xs-1 text-center">Descuento</th> <th class="col-xs-1 text-center">Sub-Total</th> </tr>
 						</thead>
-						<div class="container-fluid">
+						<!-- <div class="container-fluid">
 							<div class="row ">
 								<div class="col-xs-4 col-sm-5">N° - Nombre de producto</div>
 								<div class="col-xs-4 col-sm-1 text-center">Lote</div>
@@ -169,7 +169,7 @@
 								<div class="col-xs-4 col-sm-1 text-center">Desc<span class="hidden-xs">uento</span></div>
 								<div class="col-xs-4 col-sm-2 text-center">Sub-Total</div>
 							</div>
-						</div>
+						</div> -->
 
 						
 						<tbody>
@@ -208,7 +208,8 @@
 						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">25</span></span></td> <td class="text-center">S/. <span class="spanDescuento">6.3</span></td> <td class="text-center">S/. <span class="spanSubTotal">75.00</span></td>  </tr>-->
 						
 						</tbody>
-						</table></div>
+						</table>
+					</div>
 						
 					</div>
 					
@@ -240,8 +241,8 @@
 				</div><!-- fin de pane cielo-->
 				<div class="row text-center" style="line-height: 60px;">
 				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar la venta</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
+				<button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
+				<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
 				</div>
 			</div><!-- fin de sm-3 -->
 		</div>
@@ -374,7 +375,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info btn-outline" data-dismiss="modal"><i class="icofont icofont-close-circled"></i> Cancelar búsqueda</button>
+					<button type="button" class="btn btn-default btn-outline" data-dismiss="modal"><i class="icofont icofont-close-circled"></i>Cerrar</button>
 				</div>
 			</div>
 		</div>
@@ -382,7 +383,7 @@
 
 <!-- Modal para contar monedas -->
 	<div class="modal fade modal-contarMonedas" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog " role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header-wysteria">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -392,8 +393,8 @@
 				<p>Ingrese las unidades en cada valor de moneda:</p>
 				<label for="">Billetes y monedas en Perú:</label>
 				<div class="row espacioDoble">
-					<div class="container-fluid">
-						<div class="col-sm-2 text-right">
+				<div class="container-fluid">
+					<div class="col-sm-2 text-right">
 					<label class="">S/. 200: </label> <small></small>
 
 					</div>
@@ -616,7 +617,7 @@
 				</div>
 				<div class="row container-fluid text-right" style="padding-right: 100px"><strong>Total valorizado:</strong> <span id="spanvalorInvent">S/. 3.00</span></div>
 			</div>
-			<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"></i><i class="icofont icofont-alarm"></i> Aceptar</button></div>
+			<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Aceptar</button></div>
 		</div>
 		</div>
 	</div>
@@ -1165,17 +1166,17 @@ function llamarBuscarProducto() {
 			$('#txtBuscarProductoVenta').val('');
 			$('#lblCantidadProd').text(JSON.parse(resp).length);
 			$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+
 			JSON.parse(resp).map(function (dato, index) {
 				moment.locale('es');
 				var vence='Sin fecha';
 				if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
 				
-				
 				$('.modal-detalleProductoEncontrado #listadoDivs').append(`
 				<div class="row"> 
 					<div class="hidden" id="mProdID">${dato.idProducto}</div>
-					<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span id="mProdNombre">${dato.prodNombre}</span></div>
-					<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <span id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</span></div>
+					<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong></span>  <span id="mProdNombre">${dato.prodNombre}</span></div>
+					<div class="col-xs-6 col-sm-1 text-center"><s	pan class="visible-xs-inline"><strong>S/. </strong></span> <span id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</span></div>
 					<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 					<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 					<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
@@ -1207,12 +1208,10 @@ function llamarBuscarProducto() {
 						moment.locale('es');
 						var vence='Sin fecha';
 						if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
-						
-						
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
 						<div class="row"> 
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span id="mProdNombre">${dato.prodNombre}</span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <span id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</span></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
@@ -1241,9 +1240,9 @@ $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 	
 
 	$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft"> <th >
-		<button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">${$('.tablaResultadosCompras  tr').length}. </span> </th>
+		<span class="SpanNum">${$('.tablaResultadosCompras  tr').length}. </span> </th>
 		<td class="mProdID hidden">${$('#listadoDivs .row').eq(indexSelec).find('#mProdID').text()}</td>
-		 <td class="col-xs-4 mayuscula mProdNom">${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
+		 <td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button>  ${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>

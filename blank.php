@@ -12,20 +12,21 @@
 		<title>Inventario: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.css" >
 
 		<!-- Custom CSS -->
-		<link href="css/estilosElementosv2.css" rel="stylesheet">	
-		<link href="css/sidebarDeslizable.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/estilosElementosv2.css">	
+		<link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.1" >
 		<link rel="stylesheet" href="css/cssBarraTop.css">
 		<link rel="stylesheet" href="css/icofont.css">
 		<link rel="stylesheet" href="css/animate.css">
 
-		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" > <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
 		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
+		<link rel="stylesheet" href="css/panel-with-nav-tabs.css"> <!-- extraído de: http://bootsnipp.com/snippets/featured/panels-with-nav-tabs-->
 
 </head>
 
@@ -104,7 +105,7 @@
 										<span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden"></span>
 									</div>
 								 </li>
-								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario">Carlos Pariona</span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
+								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
 									
 				<li class="text-center"><a href="#!"><span class="visible-xs">Cerrar Sesión</span><i class="icofont icofont-sign-out"></i></a></li>
 							</ul>

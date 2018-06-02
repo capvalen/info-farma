@@ -12,20 +12,21 @@
 		<title>Compras: Info-Farma</title>
 
 		<!-- Bootstrap Core CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.css" >
 
 		<!-- Custom CSS -->
-		<link href="css/estilosElementosv2.css" rel="stylesheet">	
-		<link href="css/sidebarDeslizable.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/estilosElementosv2.css">	
+		<link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.1" >
 		<link rel="stylesheet" href="css/cssBarraTop.css">
 		<link rel="stylesheet" href="css/icofont.css">
 		<link rel="stylesheet" href="css/animate.css">
 
-		<link href="css/bootstrap-select.min.css" rel="stylesheet"> <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" > <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 		<link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
 		<link rel="shortcut icon" href="images/pet2.png" />
 		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
+		<link rel="stylesheet" href="css/panel-with-nav-tabs.css"> <!-- extraído de: http://bootsnipp.com/snippets/featured/panels-with-nav-tabs-->
 
 
 </head>
@@ -37,7 +38,7 @@
 	<!-- Sidebar -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
-				<div class="sidebar-brand ocultar-mostrar-menu" >
+				<div class="sidebar-brand ocultar-mostrar-menu hidden" >
 						<a href="#">
 								Control Panel
 						</a>
@@ -105,7 +106,7 @@
 										<span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden"></span>
 									</div>
 								 </li>
-								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario">Carlos Pariona</span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
+								 <li id="liDatosPersonales"><a href="#!"><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
 									
 				<li class="text-center"><a href="#!"><span class="visible-xs">Cerrar Sesión</span><i class="icofont icofont-sign-out"></i></a></li>
 							</ul>
@@ -206,27 +207,29 @@
 			</div>
 		</div>
 
-		<div class="col-sm-5" sytle="padding-left:0px;">
-		<div class="panel panel-negro">
-			<div class="panel-heading">Buscar producto</div>
-			<div class="panel-body divForm">
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="">Búsqueda del producto:</label>
-						<input type="text" class="form-control" placeholder="Buscar por nombre, código o lote del producto...">
+		<div class="rowcontainer-fluid">
+			<div class="col-sm-5" sytle="padding-left:0px;">
+			<div class="panel panel-negro">
+				<div class="panel-heading">Buscar producto</div>
+				<div class="panel-body divForm">
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="">Búsqueda del producto:</label>
+							<input type="text" class="form-control" placeholder="Buscar por nombre, código o lote del producto...">
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
+					<div class="row">
+						<div class="col-sm-12">
+							<button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span> Filtrar resultados</button>
+						</div>
 					</div>
-				</div>
+		</div>
 				
 			
 			
 			</div>
 		</div>
-		</div>
+		
 
 		<div class="col-sm-7 divForm">
 			<div class="panel panel-negro">
@@ -239,9 +242,11 @@
 				
 				</div>
 				<div class="row container-fluid">
-					<div class="col-sm-2"><label for="">¿Vence?:</label> <select id="cmbVenceCompra" class="selectpicker" data-width="100%">
-					<option value=true>Sí</option>
-					<option value=false>No</option></select>
+					<div class="col-sm-2"><label for="">¿Vence?:</label>
+					<select id="cmbVenceCompra" class="selectpicker" data-width="100%">
+						<option value=true>Sí</option>
+						<option value=false>No</option>
+					</select>
 					</div>
 					<div class="col-sm-2"><label for="">Cantidad:</label> <input type="number" class="form-control text-center" id="txtCantProductoCompra" placeholder="Cantidad" value="1"></div>				
 					<div class="col-sm-4"><label for="">Lote:</label> <input type="text" class="form-control" id="txtLoteProductoCompra" placeholder="Ejm: LX11"></div>
@@ -250,6 +255,7 @@
 					<div class="col-sm-4"><br><button class="btn btn-primary" id="btnAgregarListaCompras"><span class="glyphicon glyphicon-download"></span> Agregar Elemento</button></div>
 			</div>
 			</div>
+		</div>
 		</div>
 
 		<div class="col-sm-12">
@@ -351,7 +357,7 @@
 
 <!-- Modal para contar monedas -->
 	<div class="modal fade modal-contarMonedas" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog " role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header-wysteria">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -362,7 +368,7 @@
 				<label for="">Billetes y monedas en Perú:</label>
 				<div class="row espacioDoble">
 					<div class="container-fluid">
-						<div class="col-sm-2 text-right">
+						<div class="col-sm-2 text-left">
 					<label class="">S/. 200: </label> <small></small>
 
 					</div>
@@ -377,7 +383,7 @@
 							</span>
 						</div>
 					</div>
-					<div class="col-sm-2 text-right">
+					<div class="col-sm-2 text-left">
 						<label>S/. 100: </label> <small></small>
 					</div>
 					<div class="col-sm-4">
@@ -394,7 +400,7 @@
 					</div>
 
 					<div class="container-fluid">
-						<div class="col-sm-2 text-right">
+						<div class="col-sm-2 text-left">
 					<label class="">S/. 50: </label> <small></small>
 					</div>
 					<div class="col-sm-4">

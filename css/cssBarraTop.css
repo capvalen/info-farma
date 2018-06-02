@@ -8,7 +8,7 @@ body{
 .ocultar-mostrar-menu:focus{outline: none;}
 @media only screen and (max-width: 1000px) {
    .encoger{left:0px; }
-#page-content-wrapper{margin-top:70px;}
+#page-content-wrapper{padding: 0; margin-top:70px;}
 .navbar-brand > img{display: inherit;  max-width: 75%;}
 }
 .navbar {/*.dropdown-menu llama mal al metodo*/

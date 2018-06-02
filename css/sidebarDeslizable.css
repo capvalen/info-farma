@@ -4,7 +4,8 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
  body {
-	overflow-x: hidden;font-family: 'Futura Bk BT',Verdana ;
+	overflow-x: hidden;
+	font-family: 'Calibri', sans-serif !important;
  }
 
 /* Toggle Styles */
