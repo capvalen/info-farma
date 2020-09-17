@@ -139,8 +139,8 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .modal-title >i{color: rgba(5, 16, 16, 0.69);}
 /*.modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
 
-#listadoDivs>.row:hover{ border-radius: 6px; background-color: #fce7ba; cursor: default;transition: all .6s;}
-#listadoDivs>.row{min-height: 37px}
+#listadoDivs>.row:hover{ border-radius: 3px; background-color: #d3e6f9cc; cursor: pointer; transition: all .3s; color: #1e2d82; }
+#listadoDivs>.row{min-height: 37px; padding-top: 10px;}
 .close{opacity: 0.5; color: #fff;}
 .badge-morado{background-color: #fff;color: #694D9F;}
 

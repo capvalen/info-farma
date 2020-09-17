@@ -34,7 +34,7 @@ $sql22= 'insert INTO `detalleventas` (`idVenta`,`idProducto`,`detventCantidad`,`
 mysqli_query($conection,$sql22) or die(mysql_error()); //Ejecución simple para la sentencia sql2 con envio completo de una JSON con variable unica*/
 
 foreach ($Js as $row) {
-$sql33= 'call insertarDetalleVentaProducto('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].');' ;
+$sql33= 'call insertarDetalleVentaProducto('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].', '.$_POST['usuario'].');' ;
 mysqli_query($conection,$sql33) or die(mysql_error());
 }
 

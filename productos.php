@@ -63,9 +63,9 @@
 				<li>
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 				</li>
-				<li>
+				<!-- <li>
 						<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
-				</li>
+				</li> -->
 				<li>
 						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
@@ -121,7 +121,7 @@
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-blood"></i> Panel de configuraciones de productos</h2>
+				 <h2><i class="icofont icofont-blood"></i> Panel para productos</h2>
 
 					<ul class="nav nav-tabs">
 					<li class="active"><a href="#tabDetallarProducto" data-toggle="tab">Editar un producto</a></li>
@@ -138,7 +138,7 @@
 							<div class="row"><p>Primero ubique el producto a modificar o detallar:</p>
 							<div class="col-sm-6">
 								<div class="input-group"> 
-								<input type="text" class="form-control control-morado" id="txtBuscarProductoProd" placeholder="Busque por Nombre, Cod. interno, # de Lote">
+								<input type="text" class="form-control control-morado" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras">
 								<span class="input-group-btn">
 									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoProd" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
@@ -188,7 +188,7 @@
 								<div class="col-sm-2">
 									<div class="form-group">
 									<label>Stock en inventario: </label>
-									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" >
+									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" readonly>
 									</div>
 								</div>
 								<div class="col-sm-2">
@@ -226,45 +226,111 @@
 									</div>
 								</div>
 								<div class="clearfix visible-lg"></div>
-								<div class="col-sm-3">
-									<div class="form-group">
+								<div class="col-sm-5">
 									<label> Códigos de barra</label>
-									<div class="input-group">
-										<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
-										<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="glyphicon glyphicon-upload"></span></button></span>
-									</div>
-									<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-settings"></i> Ver todos los códigos <small id="spanCantBarr"></small></button>
-									</div>
-								</div>
-								
-							</div>
-							<div class="row" >
-								<div class="container" id="rowLotes">
-									<div class="col-sm-2"><label>Lotes</label>
-										<div id="spanRowLote"></div>
-									</div>
-									<div class="col-sm-2"><label>Fecha de vencimiento</label>
-										<div id="spanRowFechaVen"></div>
-									</div>
-								</div>
-								<!-- <div class="col-sm-2">
-									<div class="form-group">
-									<label> Lote registrado</label>
-									<input type="text" class="form-control"  id="txtprodLote" placeholder="Ubique el producto por Código, Nombre o Lote">
-									</div>
-								</div>
-								<div class="col-sm-2">
-									<div class="form-group">
-									<label> Fecha de vencimiento</label>
-									<input type="text" class="form-control" id="txtprodFecha" placeholder="Ubique el producto por Código, Nombre o Lote">
-									</div>
-								</div> -->
-								
-							</div>
-							<div class="row col-sm-12"><p>Producto registrado el <em id="emFechaProd">Martes, 13 de noviembre de 2016</em></p>
-							<button class="btn btn-primary btn-outline pull-right btn-lg" id="btnActualizarDataProducto"><i class="icofont icofont-checked"></i> Guardar cambios</button>
-							</div>
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div class="col-sm-9">
+											<div class="input-group">
+												<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
+												<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="icofont icofont-clip"></span></button></span>
+											</div>
+											</div>
+											<div class="col-sm-3">
+											<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-idea"></i> Ver códigos <small>(<span id="spanCantBarr"></span>)</small></button>
 
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+							
+									<label> Lotes</label>
+									<div class="panel panel-default">
+											<div class="panel-body">
+												<div class="col-sm-4">
+													<input type="text" class="form-control text-center" id="txtCodigoLote" placeholder="Cod. Lote" autocomplete='nope'>
+												</div>
+												<div class="col-sm-4">
+													<input type="date" class="form-control text-center" id="txtFechaLote" placeholder="Fecha" value="<?= date('Y-m-d');?>">
+												</div>
+												<div class="col-sm-3">
+													<div class="input-group">
+														<input type="number" class="form-control text-center" id="txtCantLote" placeholder="Cant" value="1">
+														<div class="input-group-btn">
+															<button class="btn btn-warning btn-outline" id="btnInsertarVencimiento" type="button"><span class="icofont icofont-clip"></span></button>
+														</div>
+													</div>
+													
+												</div>
+												<!-- <div class="col-sm-3">
+													<button class="btn btn-default btn-outline" id="btnVerLotes"><i class="icofont icofont-idea"></i> Ver lotes</button>
+												</div> -->
+										</div>
+
+									</div>
+									
+									
+								</div>
+								
+								<div>
+									<button class="btn btn-primary btn-outline pull-right btn-lg" id="btnActualizarDataProducto" style="margin-bottom:20px;"><i class="icofont icofont-checked"></i> Guardar cambios</button>
+								</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="row">
+										<div class="col-sm-7">
+											<h4>Movimientos:</h4>
+										</div>
+										<div class="col-sm-4">
+											<button class="btn btn-default"  id="btnAddStock"> <i class="icofont icofont-circled-up"></i> Agregar Stock </button>
+											<button class="btn btn-default"  id="btnLessStock"> <i class="icofont icofont-circled-down"></i> Restar Stock </button>
+										</div>
+										</div>
+										<table class="table table-dark table-hover" >
+											<thead>
+												<tr>
+													<th>N°</th>
+													<th>Tipo de movimiento</th>
+													<th>Cantidad</th>
+													<th>Fecha</th>
+													<th>Usuario</th>
+												</tr>
+											</thead>
+											<tbody id="divEntradasYSalidas">
+												
+											</tbody>
+										</table>
+										
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<h4>Vencimientos:</h4>
+										<table class="table table-dark table-hover" >
+											<thead>
+												<tr>
+													<th>N°</th>
+													<th>Cod. Lote</th>
+													<th>Fecha Vencimiento</th>
+													<th>Unidades</th>
+													<th>@</th>
+												</tr>
+											</thead>
+											<tbody id="divLotesResumen">
+												
+											</tbody>
+										</table>
+									
+
+									</div>
+								</div>
+							
+						
+							
 							</div>
 
 
@@ -276,15 +342,15 @@
 						<!--Panel para nueva compra-->
 						<div class="tab-pane fade container-fluid" id="tabProximosVencer">
 						<!--Inicio de pestaña 02-->
-						<p>Productos vencidos hace 1 mes y por vencer en 2 meses próximos.</p>
+						<p>Productos ya vencidos y por vencer en  los próximos 3 meses:</p>
 						<div >
 							<div class="row container-fluid"><strong>
-							<div class="col-sm-1 text-center">Código</div>
-							<div class="col-sm-3">Nombre</div>
-							<div class="col-sm-1 text-center">Lote</div>
-							<div class="col-sm-2 text-center">Vencimiento</div>
-							<div class="col-sm-2 text-center">Fecha</div>
-							<div class="col-sm-2">Estado</div></strong>
+								<div class="col-sm-1 text-center">Código</div>
+								<div class="col-sm-3">Nombre</div>
+								<div class="col-sm-1 text-center">Lote</div>
+								<div class="col-sm-2 text-center">Vencimiento</div>
+								<div class="col-sm-2 text-center">Fecha</div>
+							</strong>
 							</div>
 							<div class="row container-fluid" id="listasProdVencimiento"></div>
 						</div>
@@ -357,7 +423,7 @@
 									<div class="form-group">
 									<label> Propiedad</label>
 									<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-									<select class="selectpicker mayuscula" id="cmbProdProp" data-width="auto" data-live-search="true" title="Tipo de propiedad..." >
+									<select class="selectpicker mayuscula" id="cmbProdPropN" data-width="auto" data-live-search="true" title="Tipo de propiedad..." >
 										<?php require 'php/productos/listarPropiedadProducto.php'; ?>
 									</select>
 									</div>
@@ -372,17 +438,7 @@
 									</select>
 									</div>
 								</div>
-								<div class="clearfix visible-lg"></div>
-								<div class="col-sm-3 hidden">
-									<div class="form-group">
-									<label> Códigos de barra</label>
-									<div class="input-group">
-										<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
-										<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="glyphicon glyphicon-upload"></span></button></span>
-									</div>
-									<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-settings"></i> Ver todos los códigos <small id="spanCantBarr"></small></button>
-									</div>
-								</div>
+								
 								
 							</div>
 
@@ -440,13 +496,13 @@
 				<div class="modal-body">
 					<div class="container-fluid">
 						<div class="row hidden-xs"> <strong>
-							<div class="col-sm-4 text-center">Producto</div>
-							<div class="col-sm-1 text-center">Precio</div>
-							<div class="col-sm-2 text-center">Clase</div>
-							<div class="col-sm-2 text-center">Lote</div>
-							<div class="col-sm-1 text-center">Vencimiento</div>
-							<div class="col-sm-1 text-center">Stock</div>
-							<div class="col-sm-1 text-center"><i class="icofont icofont-robot"></i></div>
+							<div class="col-sm-4 ">N° - Producto</div>
+							<div class="col-sm-1 ">Precio</div>
+							<div class="col-sm-2 ">Clase</div>
+							<div class="col-sm-2 ">Lote</div>
+							<div class="col-sm-1 ">Vencimiento</div>
+							<div class="col-sm-1 ">Stock</div>
+							<!-- <div class="col-sm-1 text-center"><i class="icofont icofont-robot"></i></div> -->
 						</strong></div>
 						<div id="listadoDivs">
 							
@@ -508,6 +564,47 @@
 				Ups, un error: <i class="icofont icofont-animal-squirrel"></i> <strong id="lblFalta"></strong>
 			</div>
 			<div class="modal-footer"> <button class="btn btn-danger btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok, revisaré</button></div>
+		</div>
+		</div>
+	</div>
+
+<!-- Modal para Agregar o Reducir stock -->
+	<div class="modal fade modalModificarStock" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header-morado">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Modificar stock</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Cuántas unidades desea <span id="spModSumaStock">sumar</span> al stock?</p>
+				<input type="number" class="form-control text-center" id="txtMovimientoCant" step="1">
+				<p>Seleccione el tipo de movimiento:</p>
+				
+				<select id="sltOpcionesMovimiento" class="form-control" name="">
+				</select>
+				<p>¿Observación?</p>
+				<input type="text" class="form-control " id="txtMovimientoObs" >
+
+				
+			</div>
+			<div class="modal-footer"> <button class="btn btn-default" data-dismiss="modal" id="btnModificarSctock"><i class="icofont icofont-clip"></i> Modificar</button></div>
+		</div>
+		</div>
+	</div>
+	<!-- Modal para Anular Lote -->
+	<div class="modal fade modalModificarLotes" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Anular Lote</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Desea descartar el lote?</p>
+				
+			</div>
+			<div class="modal-footer"> <button class="btn btn-danger" data-dismiss="modal" id="btnModificarLotes"><i class="icofont icofont-clip"></i> Sí, anular</button></div>
 		</div>
 		</div>
 	</div>
@@ -637,6 +734,8 @@ $.ajax({url: 'php/productos/validarBarraEnUso.php', type: 'POST', data: {barra: 
 		$.ajax({url: 'php/productos/insertarBarraPorId.php', type: 'POST', data: {barra: $('#txtprodBarra').val() , idProd: $('#txtprodCodigo').val() }}).done(function (resp) {
 				//console.log(resp)
 				if(resp==1){$('#lblMensajeBien').text('El código '+ $('#txtprodBarra').val() + ' se guardó correctamente');
+					let num = parseInt($('#spanCantBarr').text())+1;
+					$('#spanCantBarr').text(num);
 					$('.modal-felicitacion').modal('show');
 				}
 				if(resp==0){$('#lblFalta').text('No se guardó el código, inténtelo de nuevo.');
@@ -669,7 +768,8 @@ $('#txtBuscarProductoProd').keyup(function (e) {var code = e.which;
 	}
 });
 
-function llamarBuscarProducto() {$('#divResultadoProducto').addClass('hidden');
+function llamarBuscarProducto() {
+	$('#divResultadoProducto').addClass('hidden');
 	var filtr= $.trim($('#txtBuscarProductoProd').val());
 
 	if(esNumero(filtr)){//es numero llamar al procedure por numero
@@ -685,21 +785,22 @@ function llamarBuscarProducto() {$('#divResultadoProducto').addClass('hidden');
 					$('#lblCantidadProd').text(JSON.parse(resp).length);
 					$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
 					JSON.parse(resp).map(function (dato, index) {
+						
 						moment.locale('es');
 						var vence='Sin fecha';
 						if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
 						
 						
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row"> 
+						<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${dato.prodNombre}</span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+							<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
 						</div>
 						`);
@@ -732,15 +833,15 @@ function llamarBuscarProducto() {$('#divResultadoProducto').addClass('hidden');
 							
 							
 							$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-							<div class="row"> 
+							<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
 								<div class="hidden" id="mProdID">${dato.idProducto}</div>
-								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${dato.prodNombre}</span></div>
+								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
 								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 								<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 								<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-								<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
 							</div>
 							`);
@@ -759,11 +860,11 @@ function llamarBuscarProducto() {$('#divResultadoProducto').addClass('hidden');
 }
 
 $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
-	var indexSelec=$(this).attr('id');
-	var idProd= $('#listadoDivs .row').eq(indexSelec).find('#mProdID').text();
+	mostrarProducto($(this).attr('id'));
+});
+function mostrarProducto(idProd){
+	//var idProd= $('#listadoDivs .row').eq(indexSelec).find('#mProdID').text();
 	$('#divResultadoProducto').removeClass('hidden');
-
-	
 	$.ajax({url: 'php/productos/listarDetalleProductoPorId.php', type: 'POST', data: {idPro: idProd}}).done(function (resp) {
 		JSON.parse(resp).map(function (dato, index) {
 			//console.log(dato);
@@ -778,33 +879,41 @@ $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 			$('#txtprodPrecio').val(parseFloat(dato.prodPrecio).toFixed(2));
 			$('#txtprodCosto').val(parseFloat(dato.prodCosto).toFixed(2));
 			$('#txtprodPorcentaje').val(dato.prodPorcentaje);
-			$('#spanCantBarr').text('('+dato.cantBarras+')');
+			$('#spanCantBarr').text(dato.cantBarras);
 			$('#cmbProdCateg').selectpicker('val', dato.idCategoriaProducto);
 			$('#cmbProdProp').selectpicker('val', dato.idPropiedadProducto);
 			$('#cmbProdLaboratorio').selectpicker('val', dato.idLaboratorio);
-
-
-
 		});
 	});
+	verVencimientosPorId(idProd)
+	$.ajax({url: 'php/productos/listarMovimientosProducto.php', type: 'POST', data: {idProducto:idProd }}).done(function(resp) {
+		//console.log(resp)
+		$('#divEntradasYSalidas').html(resp);
+	});
+
+	$('.modal-detalleProductoEncontrado').modal('hide');
+}
+function verVencimientosPorId(idProd){
 	$.ajax({url: 'php/productos/listarLotesYVencimientoPorID.php', type: 'POST', data: {idPro: idProd}}).done(function (resp) {
 		moment().locale('es');
 		$('#spanRowLote').children().remove();
 		$('#spanRowFechaVen').children().remove();
-
-		JSON.parse(resp).map(function (dato, index) {
-			//console.log(dato);
+		$('#divLotesResumen').html(resp);
+		$.each($('#divLotesResumen .fechaVencimiento'), function(index, elem){
+			let fecha1 = moment($(elem).text() + ' 00:00:00' );
+			moment.locale('es')
+			$(elem).next().text(' ('+fecha1.fromNow()+')');
+		});
+		/* JSON.parse(resp).map(function (dato, index) {
+			console.log(dato);
 			$('#spanRowLote').append(`<input type="text" class="form-control text-center"  id="txtprodLote" placeholder="Lote" value="${dato.prodLote}" disabled>`)
 			$('#spanRowFechaVen').append(`<div class="sandbox-container"><input type="text" class="form-control text-center" id="txtprodFecha" placeholder="Fecha" value="${dato.prodFechaVencimiento}" disabled></div>`)
-			$('#emFechaProd').text(moment(dato.prodFechaRegistro).format('dddd, DD [de] MMMM [de] YYYY'));
+			$('#emFechaProd').text(moment(dato.prodFechaRegistro).format('DD/MM/YYYY'));
 			habilitarDivFecha();
 
-		});
-		
+		}); */
 	});
-
-	$('.modal-detalleProductoEncontrado').modal('hide');
-});
+}
 $('#btnVerBarras').click(function () {console.log('btnbarra')
 	$('#divsBarras').children().remove();
 	$.ajax({url: 'php/productos/listarBarrasId.php', type: 'POST', data: {idPro: $('#txtprodCodigo').val()}}).done(function (resp) {
@@ -883,28 +992,28 @@ function calculoCostos(tipoCaso){
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href") // activated tab
-  if(target=='#tabProximosVencer'){//solo selecciona el tabListadoVentas
-	$(`#listasProdVencimiento`).children().remove();
-	var sumaValoriz;
-	
-	$.ajax({url:'php/productos/listarProximosAVencer.php', type:'POST'}).done(function (resp) {
-		$.each(JSON.parse(resp), function (i, arg) { console.log(arg)
-			moment.locale('es')
-			sumaValoriz+=parseFloat(arg.prodPrecio);
-			var dia=moment(arg.prodFechaVencimiento, 'DD/MM/YYYY');
-			$(`#listasProdVencimiento`).append(`
-				<div class="row resulDiv noselect" style="cursor:default">
-					<div class="col-xs-2 col-sm-1 text-center codDivInv" >${arg.idproducto}</div>
-					<div class="col-xs-3 mayuscula"> ${arg.prodNombre}</div>
-					<div class="col-xs-1 text-center argTotal">${arg.prodLote}</div>
-					<div class="col-xs-2 text-center argTotal">${dia.endOf('day').fromNow()}</div>
-					<div class="col-xs-2 text-center argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</div>
-					<div class="col-xs-1 hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
-				`);
-			$('.mitooltip').tooltip();
-			
-		});
-	})
+  if(target=='#tabProximosVencer'){//solo selecciona el tabProximosVencer
+		$(`#listasProdVencimiento`).children().remove();
+		var sumaValoriz;
+		
+		$.ajax({url:'php/productos/listarProximosAVencer.php', type:'POST'}).done(function (resp) {
+			$.each(JSON.parse(resp), function (i, arg) { console.log(arg)
+				moment.locale('es')
+				sumaValoriz+=parseFloat(arg.prodPrecio);
+				var dia=moment(arg.prodFechaVencimiento);
+				$(`#listasProdVencimiento`).append(`
+					<div class="row resulDiv noselect" style="cursor:default">
+						<div class="col-xs-2 col-sm-1 text-center codDivInv" >${arg.idproducto}</div>
+						<div class="col-xs-3 mayuscula"> ${arg.prodNombre}</div>
+						<div class="col-xs-1 text-center argTotal">${arg.prodLote}</div>
+						<div class="col-xs-2 text-center argTotal">${dia.endOf('day').fromNow()}</div>
+						<div class="col-xs-2 text-center argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</div>
+						<div class="col-xs-1 hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+					`);
+				$('.mitooltip').tooltip();
+				
+			});
+		})
   }
 
 });
@@ -919,7 +1028,7 @@ function limpiarCamposNuevo() {
 	$('#tabCrearProducto #txtprodPorcentajeNuevo').val('30');
 	$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '');
 	$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '');
-	$('#tabCrearProducto #cmbProdProp').selectpicker('val', '');
+	$('#tabCrearProducto #cmbProdPropN').selectpicker('val', '');
 
 }
 function activarBtnNuevo(){$('#btnCrearNuevoProducto').removeClass('disabled');}
@@ -931,37 +1040,96 @@ $('#btnCrearNuevoProducto').click(function () {
 
 		var categProd=$('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title');
 		var laborat=$('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title');
-		var propieda=$('#tabCrearProducto #cmbProdProp').parent().find('button').attr('title');
+		var propieda=$('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title');
 
 		if($('#tabCrearProducto #txtprodNombre').val()==''){$('#lblFalta').text('Te olvidaste del nombre para el producto'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
 		else if( $('#txtprodPrecioNuevo').val()<=0 || $('#txtprodPrecioNuevo').val()=='' ){$('#lblFalta').text('Verifique la casilla de precios'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
 		else if( $('#tabCrearProducto #txtprodMinimo').val()<0 ){$('#lblFalta').text('Verifique la casilla de alerta no puede ser negativo'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
 		else if(categProd=='' || categProd=='Tipo de categoría...'  ){$('#lblFalta').text('Debes seleccionar una «Categoría de producto» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
-		else if(laborat=='' || laborat=='Laboratorio...'  ){$('#lblFalta').text('Debes seleccionar una «Propiedad de producto» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
-		else if(propieda=='' || propieda=='Tipo de propiedad...'  ){$('#lblFalta').text('Debes seleccionar un «Laboratorio» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
+		else if(propieda=='' || propieda=='Tipo de propiedad...'  ){$('#lblFalta').text('Debes seleccionar una «Propiedad de producto» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show'); }
+		else if(laborat=='' || laborat=='Laboratorio...'  ){$('#lblFalta').text('Debes seleccionar un «Laboratorio» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
 		else{
 			$.ajax({url: 'php/productos/insertarProductoNuevo.php', type:'POST', data: {
-				nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()), descipt: $('#tabCrearProducto #txtprodDescripcion').val(), stkmin: $('#tabCrearProducto #txtprodMinimo').val(), categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'), precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(), labo:  $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#tabCrearProducto #txtprodCostoNuevo').val(), porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(), propi: $('#tabCrearProducto #cmbProdProp').parent().find('button').attr('title'), stock: $('#tabCrearProducto #txtprodStock').val()
+				nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()), descipt: $('#tabCrearProducto #txtprodDescripcion').val(), stkmin: $('#tabCrearProducto #txtprodMinimo').val(), categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'), precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(), labo:  $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#tabCrearProducto #txtprodCostoNuevo').val(), porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(), propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'), stock: $('#tabCrearProducto #txtprodStock').val()
 			}}).done(function (resp) { console.log(resp)
 				limpiarCamposNuevo();
 				if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 								$('.modal-felicitacion').modal('show');
 							}
 				if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
-					$('.modal-faltaCompletar').modal('show');}
-
-				
+					$('.modal-faltaCompletar').modal('show');}		
 		});
 		}
-
-
-		
-
-		
-
 	}
-	
-})
+});
+$('#btnAddStock').click(function() {
+	$('#txtMovimientoCant').val(1);
+	$('#spModSumaStock').text('sumar');
+	$.ajax({url: 'php/productos/listarMovimientos.php', type: 'POST', data: { tipo: 'suma' }}).done(function(resp) {
+		$('#sltOpcionesMovimiento').html(resp);
+	});
+	$('.modalModificarStock').modal('show');	
+});
+$('#btnLessStock').click(function() {
+	$('#txtMovimientoCant').val(1);
+	$('#spModSumaStock').text('restar');
+	$.ajax({url: 'php/productos/listarMovimientos.php', type: 'POST', data: { tipo: 'resta' }}).done(function(resp) {
+		$('#sltOpcionesMovimiento').html(resp);
+	});
+	$('.modalModificarStock').modal('show');	
+});
+$('#btnModificarSctock').click(function() {
+	if( $('#txtMovimientoCant').val()>0 ){
+		$.ajax({url: 'php/productos/insertarMovimientoProductoStock.php', type: 'POST', data: {idProducto: $('#txtprodCodigo').val(), movimiento: $('#sltOpcionesMovimiento').val(), cantidad: $('#txtMovimientoCant').val(), observacion: $('#txtMovimientoObs').val(), usuario:'<?= $_COOKIE['ckidUsuario']?>' }}).done(function(resp) {
+			//console.log(resp)
+			let suma=[2,4];
+			let resta=[1, 3, 5, 6, 7];
+			let movi= $('#sltOpcionesMovimiento option[value="'+$('#sltOpcionesMovimiento').val()+'"]').text();
+			let stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val()) ;
+
+			if(resp='ok'){
+				$('#txtprodStock').val(stock);
+				if( suma.indexOf($('#sltOpcionesMovimiento').val())){
+					$('#divEntradasYSalidas').prepend(`
+						<tr>
+							<td>-</td>
+							<td>${movi}</td>
+							<td>${$('#txtMovimientoCant').val()}</td>
+							<td>${moment().format('DD/MM/YYYY')}</td>
+							<td><?= $_COOKIE['ckAtiende']; ?></td>
+						</tr>
+					`);
+				}
+				if( suma.indexOf($('#sltOpcionesMovimiento').val())){
+
+				}
+			}
+		});
+	}
+});
+$('#btnInsertarVencimiento').click(function() {
+
+	$.ajax({url: 'php/productos/insertarFechaVencimiento.php', type: 'POST', data: {idProducto: $('#txtprodCodigo').val(), lote: $('#txtCodigoLote').val(), cantidad: $('#txtCantLote').val(), fecha: $('#txtFechaLote').val() }}).done(function(resp) {
+		//console.log(resp)
+		$('#lblMensajeBien').text('Se agregó el vencimiento correctamente.');
+		$('.modal-felicitacion').modal('show');
+		verVencimientosPorId($('#txtprodCodigo').val())
+	});
+});
+function borrarLote(lote){
+	$.lote= lote;
+	$('.modalModificarLotes').modal('show');
+}
+$('#btnModificarLotes').click(function() {
+	$.ajax({url: 'php/productos/borrarLote.php', type: 'POST', data: { lote: $.lote }}).done(function(resp) {
+		console.log(resp)
+		if(resp=='ok'){
+			$('#lblMensajeBien').text('Se retiró el lote correctamente.');
+			$('.modal-felicitacion').modal('show');
+			verVencimientosPorId($('#txtprodCodigo').val())
+		}
+	});
+});
 </script>
 
 </body>

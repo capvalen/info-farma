@@ -64,9 +64,9 @@
 				<li>
 						<a href="#"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 				</li>
-				<li >
+				<!-- <li >
 						<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
-				</li>
+				</li> -->
 				<li>
 						<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 				</li>
@@ -1147,7 +1147,7 @@ $('#btn-BuscarProductoVenta').click(function () {
 	llamarBuscarProducto();
 });
 $('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
-	if(code==13   ){	e.preventDefault();
+	if(code==13){	e.preventDefault();
 		//console.log('enter')
 		llamarBuscarProducto();
 		
@@ -1156,7 +1156,7 @@ $('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
 
 function llamarBuscarProducto() {
 	var filtr= String($('#txtBuscarProductoVenta').val());
-	if(esNumero(filtr)){//es numero llamar al procedure por numero
+	/* if(esNumero(filtr)){//es numero llamar al procedure por numero
 		if($.trim($('#txtBuscarProductoVenta').val())!=''){
 		$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
 		$.ajax({url: 'php/productos/buscarProductoXId.php', type: "POST", data: {filtro: filtr }
@@ -1192,9 +1192,9 @@ function llamarBuscarProducto() {
 		});
 	}
 		}
-	else{//es letras llamar al procedure para que haga el filtro
+	else{//es letras llamar al procedure para que haga el filtro */
 		if(filtr!=''){
-			filtr='%'+filtr.replace(/\ /g,'%')+'%';
+			filtr=filtr.replace(/\ /g,'%');
 			if($.trim($('#txtBuscarProductoVenta').val())!=''){
 				$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
 				$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
@@ -1229,7 +1229,7 @@ function llamarBuscarProducto() {
 			}
 
 		}
-	}
+	
 
 	
 	
@@ -1285,9 +1285,9 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	$.ajax({
 	type: 'POST',
 	url: 'php/ventas/insertarVentas.php',
-	data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata)}
+	data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
 	}).done(function (resp) { //console.log('recibido: ')
-		//console.log(resp);
+		console.log(resp);
 		$('.modal-ventaGuardada').modal('show');
 
 	});
