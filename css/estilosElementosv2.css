@@ -68,6 +68,7 @@ input[type=number] {-moz-appearance:textfield;}
 .tablita>tbody>tr:hover{background-color: #fce7ba; cursor: default;}
 #listadoFinal>thead>tr{background-color: #0277bd; color: #fff;}
 #listadoFinal>tbody>tr>th{background-color: #e0f7fa;/* color: #37474f;*/}
+.text-danger { color: #f7302d; }
 
 #listadoFinal>tbody>tr>td,#listadoFinal>tbody>tr>th{border-top: 1px solid rgba(16, 44, 183, 0.29);}
 .tab-pane{padding-top: 20px;}
@@ -129,15 +130,15 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .btn-morado.btn-outline:active,.btn-morado.btn-outline:hover, .btn-indigo.btn-outline:active,.btn-indigo.btn-outline:hover,
 .btn-morita.btn-outline:active,.btn-morita.btn-outline:hover
 {color: white;}
-.btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: : black;}
+.btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: black;}
 .nav .icofont{font-size: 24px;}.navbar-brand{font-size: 24px;}
 .modal-backdrop.in{filter:alpha(opacity=60);opacity:.6}
 .modal-content{box-shadow: 0 0px 15px rgba(255, 255, 255, 0.65);}
 .resulDiv:hover{background-color: #ffeec9; border-radius: 6px;}
 .resulDiv{padding-top:6px; padding-bottom:6px;transition: all .7s;}
 #detProductoInv>.row{padding-top:6px; padding-bottom:6px;}
-.modal-title >i{color: rgba(5, 16, 16, 0.69);}
-/*.modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
+/*.modal-title >i{color: rgba(5, 16, 16, 0.69);}
+.modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
 
 #listadoDivs>.row:hover{ border-radius: 3px; background-color: #d3e6f9cc; cursor: pointer; transition: all .3s; color: #1e2d82; }
 #listadoDivs>.row{min-height: 37px; padding-top: 10px;}

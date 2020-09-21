@@ -18,7 +18,7 @@ if(isset($_COOKIE['ckAtiende'])){
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/inicio.css?version=1.0" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
-	<link rel="shortcut icon" href="images/peto.png" />
+	<link rel="shortcut icon" href="images/pet2.png" />
 
 
 </head>
