@@ -9,4 +9,13 @@
 	
 	$cadena= new mysqli($server, $username, $password, $db);
 	$cadena->set_charset("utf8");
+
+	$esclavo= new mysqli($server, $username, $password, $db);
+	$esclavo->set_charset("utf8");
+
+	$cautivo= new mysqli($server, $username, $password, $db);
+	$cautivo->set_charset("utf8");
+
+	$dependencia= new mysqli($server, $username, $password, $db);
+	$dependencia->set_charset("utf8");
 ?>

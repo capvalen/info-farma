@@ -1,3 +1,6 @@
+<?php 
+$hayCaja = require("php/comprobarCajaHoy.php");;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,8 +25,8 @@
 	
 	<ul class="nav nav-tabs">
 	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una venta</a></li>
-	<li><a href="#tabListadoVentas" data-toggle="tab">Ventas del día</a></li>
-	<li><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
+	<li class="hidden"><a href="#tabListadoVentas" data-toggle="tab">Ventas del día</a></li>
+	<li class="hidden"><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
 	</ul>
 	
 	<div class="tab-content">
@@ -136,7 +139,11 @@
 					</div>
 				</div><!-- fin de pane cielo-->
 				<div class="row text-center" style="line-height: 60px;">
+				<?php if($hayCaja>=1): ?>
 				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar la venta</button>
+				<?php else: ?>
+				<p>Debe aperturar caja antes de realizar ventas</p>
+				<?php endif; ?>
 				<button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
 				<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
 				</div>
@@ -1171,9 +1178,9 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	var cantProd=$(this).find('.txtCantidadVariableProd').val();
 	var precioProd=$(this).find('.spanPrecio').text();
 	var SubTotalProd=$(this).find('.spanSubTotal').text();
-	var nomProImp= $(this).find('.mProdNom').text();
+	var nomProImp= $(this).find('.mProdNom').text();	
 
-	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' und. '+ nomProImp , 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
+	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
 	
 	
 	})
@@ -1185,7 +1192,6 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	}).done(function (resp) { //console.log('recibido: ')
 		console.log(resp);
 		$('.modal-ventaGuardada').modal('show');
-
 	});
 	}
  $.ticket=Jdata;
@@ -1289,7 +1295,7 @@ $('#btnImprimirVentaFinal').click(function () {
 		else{vuelto = parseFloat($('#spanResiduoCambio').text()).toFixed(2)}
 	
 	/////// Cambiar URL
-	$.ajax({url: 'windows-lpt.php', type: 'POST', data:{
+	$.ajax({url: 'impresion/printTicketv3.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,
@@ -1315,7 +1321,7 @@ function retornarCadenaImprimir(){
 
 $.each($.ticket, function (i, elem) {
 	funProducto= elem.nomProducto;
-	funPrecio= 'S/. '+elem.sub;
+	funPrecio= elem.sub;
 	lineaEntera = funProducto+funPrecio;
 	cantlibres=0;
 

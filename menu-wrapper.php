@@ -30,6 +30,9 @@ function casoActivo($quePagina){
 			<li <?php casoActivo('productos'); ?>>
 					<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
 			</li>
+			<li <?php casoActivo(' aja'); ?>>
+					<a href="caja.php"><i class="icofont icofont-tick-boxed"></i> Caja</a>
+			</li>
 			<li <?php casoActivo('ventas'); ?>>
 					<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
 			</li>
