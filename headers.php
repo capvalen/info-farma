@@ -1,3 +1,5 @@
+<?php
+if (!isset($_COOKIE['ckidUsuario'])): header("location: index.php"); endif; ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
@@ -9,7 +11,7 @@
 <link rel="stylesheet" href="css/bootstrap.css?version=3.4.1" >
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="css/estilosElementosv2.css?version=2.0.2">	
+<link rel="stylesheet" href="css/estilosElementosv2.css?version=2.0.4">	
 <link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.2 " >
 <link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.2">
 <link rel="stylesheet" href="css/icofont.css">

@@ -1,5 +1,5 @@
 <?php 
-$hayCaja = require("php/comprobarCajaHoy.php");;
+$hayCaja = require("php/comprobarCajaHoy.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
