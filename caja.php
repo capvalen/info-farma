@@ -90,13 +90,15 @@ a:focus, a:hover { color: #62286f; }
 			
 			<?php if( isset($_GET['cuadre']) ): ?>		
 			<div class="row container-fluid ">
-				<div class="pheader">
-					<h4> <i class="icofont icofont-plus-circle"></i> Entradas de dinero </h4>
+				<div class="pheader row">
+					<div class="col-xs-10">
+						<h4> <i class="icofont icofont-plus-circle"></i> Entradas de dinero </h4>
+					</div>
 					<?php 
 					if(date('Y-m-d')==$_GET['fecha']){ ?>
-						<div class="dropdown pull-right">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon"><i class="icofont icofont-key-hole"></i></button>
-							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: -37px; color: #a35bb4;"><i class="icofont icofont-ui-rate-add"></i> <span class="caret"></span></button>
+						<div class="col-xs-2">
+							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-add"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasEntradasLI.php"; ?>
 							</ul>
@@ -121,13 +123,15 @@ a:focus, a:hover { color: #62286f; }
 				</div>
 			</div>
 			<div class="row container-fluid  ">
-				<div class="pheader">
-					<h4><i class="icofont icofont-minus-circle"></i> Salidas de dinero</h4>
+				<div class="pheader row">
+					<div class="col-xs-10">
+						<h4><i class="icofont icofont-minus-circle"></i> Salidas de dinero</h4>
+					</div>
 					<?php 
 					if(date('Y-m-d')==$_GET['fecha']){ ?>
-						<div class="dropdown pull-right">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon"><i class="icofont icofont-key-hole"></i></button>
-							<button class="btn btn-default dropdown-toggle  " type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin-top: -37px; color: #a35bb4;"><i class="icofont icofont-ui-rate-remove"></i> <span class="caret"></span></button>
+						<div class="col-xs-2">
+							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
+							<button class="btn btn-default dropdown-toggle  " type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-remove"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasSalidasLI.php"; ?>
 							</ul>
@@ -405,6 +409,7 @@ $('#dtpFechaIniciov3').val('<?php
 			echo date('d/m/Y');
 		}
 		?>');
+		
 moment.locale('es');
 <? if(isset($_GET['cuadre'])){ ?>
 calculoTicketVirtual();

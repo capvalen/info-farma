@@ -23,15 +23,32 @@
 				 <h2><i class="icofont icofont-options"></i> Panel de configuraciones generales</h2>
 
 					<ul class="nav nav-tabs">
-					<li class="active"><a href="#tabAgregarLabo" data-toggle="tab">Agregar laboratorio</a></li>
-					<li><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li>
+					<li class="active"><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li>
+					<li ><a href="#tabAgregarLabo" data-toggle="tab">Agregar laboratorio</a></li>
 					
 					</ul>
 					
 					<div class="tab-content">
 					<!--Panel para buscar productos-->
 						<!--Clase para las tablas-->
-						<div class="tab-pane fade in active container-fluid" id="tabAgregarLabo">
+						
+						<div class="tab-pane fade in active container-fluid" id="tabCambiarPassUser">	
+						<!--Inicio de pestaña 02-->
+							<div class="row">
+								<div class="col-md-6">
+									<p>Contraseña actual </p>
+									<input type="password" class="form-control" id="txtPassAct">
+									<p>Contraseña Nueva </p>
+									<input type="password" class="form-control" id="txtPassNew">
+									<p>Repita su nueva Contraseña</p>
+									<input type="password" class="form-control" id="txtPassReNew">
+									<button class="btn btn-primary has-clear" id="btnCambiarPassw">Cambiar</button>
+								</div>
+							</div>
+						<!--Fin de pestaña 02-->
+						</div>
+
+						<div class="tab-pane fade container-fluid" id="tabAgregarLabo">
 						<!--Inicio de pestaña 01-->
 							<p>Listado de todos los laboratorios registrados:</p>
 							<div class="row">
@@ -43,15 +60,6 @@
 							</div>
 
 						<!--Fin de pestaña 01-->
-						</div>
-
-						
-
-						<!--Panel para nueva compra-->
-						<div class="tab-pane fade container-fluid" id="tabCambiarPassUser">	
-						<!--Inicio de pestaña 02-->
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, quis, facilis beatae recusandae optio molestias ipsam quibusdam aliquid rerum voluptatem incidunt in vero quo illo natus? Asperiores, ipsum placeat dolorum.
-						<!--Fin de pestaña 02-->
 						</div>
 						
 					</div>
@@ -141,6 +149,11 @@ function listarLabs(){
 	});
 	
 }
+$('#btnCambiarPassw').click(function() {
+	$.ajax({url: 'php/config/cambiarContrasena.php', type: 'POST', data: { txtPassAct: $('#txtPassAct').val() }}).done(function(resp) {
+		console.log(resp)
+	});
+});
 
 
 </script>

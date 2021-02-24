@@ -75,7 +75,7 @@ a:hover{color:#462782;}
 			</div>
 			<div class="form-group text-center text-danger hidden" id="divError">Error en alguno de los datos, complételos todos cuidadosamente.</div>
 			
-			<div class="pull-left" ><small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?> <a href="https://facebook.com/pg/infocat.soluciones/photos/?tab=album&album_id=2015441245336874"><br>®  Infocat Soluciones</a></small></div>
+			<div class="pull-left" ><small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?> <a href="https://www.facebook.com/infocatsoluciones/photos/?tab=album&album_id=2015441245336874"><br>®  Infocat Soluciones</a></small></div>
 			</div>
 		</div>
 	</div>

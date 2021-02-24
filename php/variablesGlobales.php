@@ -1,6 +1,7 @@
 <?php
 
 include "conectkarl.php";
+date_default_timezone_set('America/Lima');
 
 $admis=array(1,4,8);
 $soloAdmis=array(1,4,8);

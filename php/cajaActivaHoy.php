@@ -3,16 +3,16 @@ require("conectkarl.php");
 
 date_default_timezone_set('America/Lima');
 
-$existeCajaU = require("comprobarCajaHoy.php");
-
+$existeCajaU= intval(require "comprobarCajaHoy.php");
+$filas=array();
 if (! isset($_GET['fecha'])) { //si existe lista fecha requerida
 	$_GET['fecha']=date('Y-m-d');
 }
-if(isset($_GET['cuadre'])){ 
+if(isset($_GET['cuadre'])){
 	$sql= mysqli_query($conection,"SELECT cu.*, u.usuNombre FROM `cuadre` cu
 	inner join usuario u on u.idUsuario = cu.idUsuario
 	where cu.idCuadre = {$_GET['cuadre']}");
-}else{ 
+}else{
 	$sql = mysqli_query($conection,"call cajaActivaHoy();"); // $_GET['fecha']
 }
 $row = mysqli_fetch_array($sql, MYSQLI_ASSOC);

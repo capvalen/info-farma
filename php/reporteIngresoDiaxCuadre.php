@@ -47,9 +47,10 @@ if($totalRow>=1){
 }
 $btnVentas = "<button class='btn btn-success btn-outline'><i class='icofont icofont-basket'></i></button>";
 $sumaVentas =0;
-$sqlVentas="SELECT `idVenta`, ifnull(`ventRuc`, 'Cliente sin DNI') as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(`idUsuario`) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
+$sqlVentas="SELECT `idVenta`, ifnull(`ventRuc`, 'Cliente sin DNI') as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
-WHERE ventFecha between '" . $_POST['fechaInicio']. "' and '" . $_POST['fechaFin']."' and ventActivo=1;";
+inner join cuadre cu
+WHERE ventFecha between cu.fechaInicio and cu.fechaFin and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1;";
 //echo $sqlVentas;
 $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;

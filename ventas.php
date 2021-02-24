@@ -491,7 +491,7 @@ $hayCaja = require("php/comprobarCajaHoy.php");
 				<strong><i class="icofont icofont-social-smugmug"></i> Enhorabuena,</strong> su venta fue guardada. ¿Desea imprimir su voucher?
 			</div>
 			<div class="modal-footer"> 
-			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, acabó todo</button>
+			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, terminar</button>
 			<button class="btn btn-primary btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
 		</div>
 		</div>
@@ -1160,6 +1160,7 @@ $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 	calcularRowTabla();
 	
 	//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
+	$('#txtBuscarProductoVenta').focus();
 	$('.modal-detalleProductoEncontrado').modal('hide');
 });
 $('#btnGuardarVenta').click(function () {
