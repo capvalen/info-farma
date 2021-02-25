@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (@!$_SESSION['usuario']){//sino existe enviar a index
-	header("Location:index.php");
-}
-
 require_once ( 'php/conectkarl.php');
 require_once ( 'php/comprobarCajaHoy.php');
 $sqlVentas="SELECT format(`sumaVentasCuadre`({$idCaja}),2) as sumaVentasCuadre, format(`sumaGastosCuadre`({$idCaja}),2) as sumaGastosCuadre, format(`sumaIngresosCuadre`({$idCaja}),2) as sumaIngresosCuadre; ";
@@ -73,8 +68,13 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 						</div>
 					</div>
 				</div>
+				<p><br><br><br><br><br><br><br>
+				</p>
 	
-				<h5 class="has-clear"><span class="text-darken-2">Actualmente estás usando la <?php include 'php/version.php' ?></span></h5>
+				<h5 class="has-clear"><small><span class="text-darken-2">Un producto de:</span></small></h5>
+				<h5 ><strong>Infocat Soluciones S.A.C.</strong></h5>
+				<h5><small>RUC: 20602337147</small></h5>
+				<h5 ><small><span class="text-darken-2">Actualmente estás usando la <?php include 'php/version.php' ?></span></small></h5>
 	
 				
 					<!-- Fin de meter contenido principal -->

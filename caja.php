@@ -354,7 +354,7 @@ td{font-size: 0.95em;}
 					<?php require 'php/detallePagosOPT.php'; ?>
 				</select></div>
 				<label for="">Fecha de pago</label>
-				<input id="dtpCajaFechaPago" type="text" class="form-control input-lg text-center" autocomplete="off">
+				<input id="dtpCajaFechaPago" type="text" class="form-control input-lg text-center" autocomplete="off" disabled>
 				<label class="hidden" for="">Método de pago</label>
 				<div class="hidden" id="divCmbMetodoPago">
 					<select class="form-control selectpicker" id="sltCajaMetodopago" title="Métodos..."  data-width="100%" data-live-search="true" data-size="15">

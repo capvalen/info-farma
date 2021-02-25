@@ -112,7 +112,7 @@ a:hover{color:#462782;}
 			success: function(iduser) { //console.log(iduser)
 				if (parseInt(iduser)>0){//console.log('el id es '+data)
 					//console.log(iduser)
-					window.location="ventas.php";
+					window.location="principal.php";
 				}
 				else {
 					$('#divError').removeClass('hidden');

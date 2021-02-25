@@ -24,18 +24,17 @@
 						<h2><i class="icofont icofont-options"></i> Panel de configuraciones generales</h2>
 
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
-							<!-- <li><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li> -->
+							<li class="active"><a href="#tabReporteVentas" data-toggle="tab">Reporte Ventas</a></li>
+							<li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
 
 						</ul>
 
 						<div class="tab-content">
 							<!--Panel para buscar productos-->
 							<!--Clase para las tablas-->
-							<div class="tab-pane fade in active container-fluid" id="tabAgregarLabo">
+							<div class="tab-pane fade container-fluid" id="tabAgregarLabo">
 								<!--Inicio de pestaña 01-->
-								<a class="btn btn-negro btn-outline btn-lg" href="php/productos/reporte_productos_excel.php"><i
-										class="icofont icofont-file-excel"></i> Listado de productos en excel</a>
+								<a class="btn btn-negro btn-outline btn-lg" href="php/productos/reporte_productos_excel.php"><i class="icofont icofont-file-excel"></i> Listado de productos en MS Excel</a>
 
 								<!--Fin de pestaña 01-->
 							</div>
@@ -43,11 +42,39 @@
 
 
 							<!--Panel para nueva compra-->
-							<div class="tab-pane fade container-fluid" id="tabCambiarPassUser">
+							<div class="tab-pane fade in active container-fluid" id="tabReporteVentas">
 								<!--Inicio de pestaña 02-->
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, quis, facilis beatae recusandae
-								optio molestias ipsam quibusdam aliquid rerum voluptatem incidunt in vero quo illo natus? Asperiores,
-								ipsum placeat dolorum.
+								<p>Seleccione entre 2 fechas para generar el reporte:</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="input-daterange input-group " id="dtpReporteVentas">
+											<input type="text" class="input-sm form-control" name="start" autocomplete="off" id="dtpFechaVentaInicial" />
+											<span class="input-group-addon">-</span>
+											<input type="text" class="input-sm form-control" name="end" autocomplete="off" id="dtpFechaVentaFinal" />
+										</div>
+									</div>
+									<div class="col-md-3">
+									<select class="form-control" id="sltOpcionesVenta">
+										<option value="1">General</option>
+										<option value="2">Detallado</option>
+									</select>
+									</div>
+									<div class="col-md-3">
+										<button class="btn btn-primary" id="btnGenerarReporteVentas"><i class="icofont icofont-paper-clip"></i> Generar reporte</button>
+									</div>
+								</div>
+								<div class="row">
+									<table class="table table-hover" id="tableReporteVentas">
+										<thead>
+											
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
+								</div>
+
+
 								<!--Fin de pestaña 02-->
 							</div>
 
@@ -207,6 +234,14 @@
 			daysOfWeekHighlighted: "0",
 			autoclose: true,
 			todayHighlight: true
+		});
+		$('#dtpReporteVentas').datepicker({
+				format: "dd/mm/yyyy",
+				todayBtn: "linked",
+				daysOfWeekHighlighted: "0",
+				language: "es",
+				autoclose: true,
+				todayHighlight: true
 		});
 	}
 	$('#listaProductosNuevoInventario').on('focusout', '.txtMonedas', function() {
@@ -525,6 +560,28 @@
 
 		});
 	})
+	$('#btnGenerarReporteVentas').click(function() {
+		if($('dtpFechaVentaInicial').val()!='' && $('dtpFechaVentaFinal').val()!=''){
+			if($('#sltOpcionesVenta').val()==1){
+				$('#tableReporteVentas thead').html(`<tr>
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Usuario</th>
+				</tr>`)
+				$.ajax({url: 'php/ventas/reporteVentasGeneral.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
+					//console.log(resp)
+					$('#tableReporteVentas tbody').html(resp);
+				});
+			}
+			if($('#sltOpcionesVenta').val()==2){
+				$('#tableReporteVentas thead').html(`<tr>
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Cantidad</th><th>Precio U.</th><th>Precio Parc.</th><th>Producto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Usuario</th>
+				</tr>`)
+				$.ajax({url: 'php/ventas/reporteVentasDetallado.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
+					//console.log(resp)
+					$('#tableReporteVentas tbody').html(resp);
+				});
+			}
+		}
+	});
 	</script>
 
 </body>

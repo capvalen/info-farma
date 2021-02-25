@@ -269,7 +269,7 @@ $hayCaja = require("php/comprobarCajaHoy.php");
 							<div class="col-sm-1 text-center">Precio</div>
 							<div class="col-sm-2 text-center">Clase</div>
 							<div class="col-sm-2 text-center">Lote</div>
-							<div class="col-sm-1 text-center">Vencimiento</div>
+							<div class="col-sm-1 text-center">Vence</div>
 							<div class="col-sm-1 text-center">Stock</div>
 							<div class="col-sm-1 text-center"><i class="icofont icofont-robot"></i></div>
 						</strong></div>
@@ -1116,7 +1116,7 @@ function llamarBuscarProducto() {
 						<div class="row"> 
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
 							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
-							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <span id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</span></div>
+							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>

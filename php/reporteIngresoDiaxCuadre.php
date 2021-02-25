@@ -8,7 +8,7 @@ $boton='';
 
 $i=0;
 $efectivo=0; $banco=0; $tarjeta=0;
-if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==8): $boton = "<button class='btn btn-sm btn-negro btn-outline btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;
+if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2): $boton = "<button class='btn btn-sm btn-negro btn-outline btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;
 
 if($totalRow>=1){
 	while($row = mysqli_fetch_array($sql, MYSQLI_ASSOC)){
@@ -38,7 +38,8 @@ if($totalRow>=1){
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $row['cajaMoneda'];?>" ><?= $row['moneDescripcion'];?></td>
 			<td class='mayuscula tdObservacion'><?= $row['cajaObservacion'];?></td>
-			<td><span class="sr-only fechaPagov3"><?= $row['cajaFecha']; ?></span> <?= $boton; ?></td> </tr>
+			<td><span class="sr-only fechaPagov3 prueba"><?= $row['cajaFecha']; ?></span> <?= $boton; ?></td>
+		</tr>
 		<?php 
 	/* 	if($totalRow==$i){
 			
