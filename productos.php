@@ -1,3 +1,4 @@
+<?php include "php/variablesGlobales.php"; ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -172,9 +173,11 @@
 									
 								</div>
 								
+								<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
 								<div>
 									<button class="btn btn-primary btn-outline pull-right btn-lg" id="btnActualizarDataProducto" style="margin-bottom:20px;"><i class="icofont icofont-checked"></i> Guardar cambios</button>
 								</div>
+								<?php endif; ?>
 								</div>
 								<div class="panel panel-default">
 									<div class="panel-body">
@@ -182,10 +185,12 @@
 										<div class="col-sm-7">
 											<h4>Movimientos:</h4>
 										</div>
+										<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
 										<div class="col-sm-4">
 											<button class="btn btn-default"  id="btnAddStock"> <i class="icofont icofont-circled-up"></i> Agregar Stock </button>
 											<button class="btn btn-default"  id="btnLessStock"> <i class="icofont icofont-circled-down"></i> Restar Stock </button>
 										</div>
+										<?php endif; ?>
 										</div>
 										<table class="table table-dark table-hover" >
 											<thead>
@@ -214,7 +219,9 @@
 													<th>Cod. Lote</th>
 													<th>Fecha Vencimiento</th>
 													<th>Unidades</th>
+													<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
 													<th>@</th>
+													<?php endif; ?>
 												</tr>
 											</thead>
 											<tbody id="divLotesResumen">

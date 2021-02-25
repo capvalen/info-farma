@@ -1296,7 +1296,7 @@ $('#btnImprimirVentaFinal').click(function () {
 		else{vuelto = parseFloat($('#spanResiduoCambio').text()).toFixed(2)}
 	
 	/////// Cambiar URL
-	$.ajax({url: 'impresion/printTicketv3.php', type: 'POST', data:{
+	$.ajax({url: 'php/impresion/printTicketv3.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,

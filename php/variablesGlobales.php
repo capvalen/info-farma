@@ -3,7 +3,7 @@
 include "conectkarl.php";
 date_default_timezone_set('America/Lima');
 
-$admis=array(1,4,8);
+$admis=array(1);
 $soloAdmis=array(1,4,8);
 $soloDios=array(1);
 $soloCaja=array(1,4);

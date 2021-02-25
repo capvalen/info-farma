@@ -34,7 +34,9 @@ while($row=$resultado->fetch_assoc()){
 		<td><?= $row['prodLote']; ?></td>
 		<td><span class="fechaVencimiento"><?= $row['prodFechaVencimiento']; ?></span> <span class="fechaHumana"></span></td>
 		<td><?= $row['prodCantidadXLote']; ?></td>
+		<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
 		<td><button class="btn btn-danger btn-sm btn-outline" onclick='borrarLote(<?= $row['idDetalle']?>)'><i class="icofont icofont-trash"></i></button></td>
+		<?php endif; ?>
 	</tr>
 	<?php $i++;
 }

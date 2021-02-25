@@ -31,9 +31,9 @@ function casoActivo($quePagina){
 			<li <?php casoActivo('index'); ?>>
 					<a href="index.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
 			</li>
-			<li <?php casoActivo('#'); ?>>
+			<!-- <li <?php casoActivo('#'); ?>>
 					<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>
-			</li>
+			</li> -->
 			<li <?php casoActivo('productos'); ?>>
 					<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
 			</li>
