@@ -2,7 +2,9 @@
 include 'conectkarl.php';
 
 $filas=array();
-$log = mysqli_query($conection,"call buscarProductoXNombreOLote('".$_POST['filtro']."');");
+$sql="call buscarProductoXNombreOLote('".$_POST['filtro']."');";
+//echo $sql;
+$log = mysqli_query($conection, $sql);
 
 while($row = mysqli_fetch_array($log))
 {

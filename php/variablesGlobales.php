@@ -4,9 +4,9 @@ include "conectkarl.php";
 date_default_timezone_set('America/Lima');
 
 $admis=array(1);
-$soloAdmis=array(1,4,8);
+$soloAdmis=array(1);
 $soloDios=array(1);
-$soloCaja=array(1,4);
+$soloCaja=array(1,2);
 $soloEspecial=array(8);
 
 $folder = 'info-farma';

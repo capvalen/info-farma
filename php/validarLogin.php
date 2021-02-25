@@ -14,8 +14,8 @@ if ($row['idUsuario']>=1){
 	
 
 	$expira=time()+60*60*24;
-	setcookie('ckAtiende', $row['usuNombre'], $expira, '/');
-	setcookie('cknomCompleto', $row['usuNombre'].', '.$row['usuApellidos'], $expira, '/');
+	setcookie('ckAtiende', ucwords($row['usuNombre']), $expira, '/');
+	setcookie('cknomCompleto', ucwords($row['usuNombre'].', '.$row['usuApellidos']), $expira, '/');
 	setcookie('ckPower', $row['idNivel'], $expira, '/');
 	setcookie('ckidUsuario', $row['idUsuario'], $expira, '/');
 	

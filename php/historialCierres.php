@@ -18,7 +18,7 @@ while($row = $llamadoSQL->fetch_assoc()):
   else{ $fechaFinal = ' - '.date( 'g:i a', strtotime($row['fechaFin'])); }
   ?>
   
-  <option class="optMovesBox" value="<?= $row['idCuadre'] ?>" ><?php if(isset($_GET['cuadre'])){if($_GET['cuadre']==$row['idCuadre']){echo "&#xeb27;";} }?><?= $row['usuNombre'].' ('.date( 'g:i a', strtotime($row['fechaInicio'])).$fechaFinal.")"; ?></option>
+  <option class="optMovesBox" value="<?= $row['idCuadre'] ?>" ><?php if(isset($_GET['cuadre'])){if($_GET['cuadre']==$row['idCuadre']){echo "&#xeb27;";} }?><?= ucwords($row['usuNombre']).' ('.date( 'g:i a', strtotime($row['fechaInicio'])).$fechaFinal.")"; ?></option>
 <?php 
 endwhile;
 ?>

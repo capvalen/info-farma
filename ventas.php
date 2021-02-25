@@ -13,7 +13,7 @@ $hayCaja = require("php/comprobarCajaHoy.php");
 
 <div id="wrapper">
 
-<?php $pagina = 'ventas'; include 'menu-wrapper.php'; ?>	
+<?php $pagina = 'ventas'; include 'menu-wrapper.php'; ?>
 
 <!-- Page Content -->
 <div id="page-content-wrapper">
@@ -140,9 +140,10 @@ $hayCaja = require("php/comprobarCajaHoy.php");
 				</div><!-- fin de pane cielo-->
 				<div class="row text-center" style="line-height: 60px;">
 				<?php if($hayCaja>=1): ?>
-				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar la venta</button>
+				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar Venta</button>
 				<?php else: ?>
-				<p>Debe aperturar caja antes de realizar ventas</p>
+				<p style="line-height: 2rem;">Debe aperturar caja antes de realizar ventas <br> <a href="caja.php"><i class="icofont icofont-arrow-right"></i> Ir a aperturar caja</a></p>
+				
 				<?php endif; ?>
 				<button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
 				<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
@@ -1120,7 +1121,7 @@ function llamarBuscarProducto() {
 							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+							<div class="col-xs-6 col-sm-1 text-center" onclick="pasarACanasta(${index})"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
 						</div>
 						`);
@@ -1132,20 +1133,21 @@ function llamarBuscarProducto() {
 			}
 
 		}
-	
-
-	
-	
 }
-$('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
-	var indexSelec=$(this).attr('id');
-	$.impresion.push({cantItem: 1, 'nombItem': $('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text(), })
+function pasarACanasta(index){
+	var indexSelec=index; //$(this).attr('id');
+	let nombre, idProductoSele, precioProdSele;
+	nombre = $('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text();
+	idProductoSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdID').text();
+	precioProdSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()
+	
+	$.impresion.push({cantItem: 1, 'nombItem': nombre });
 	
 
 	$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft"> <th >
-		<span class="SpanNum">${$('.tablaResultadosCompras  tr').length}. </span> </th>
-		<td class="mProdID hidden">${$('#listadoDivs .row').eq(indexSelec).find('#mProdID').text()}</td>
-		 <td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button>  ${$('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text()}</td> <td class="col-xs-4 col-sm-3 text-center">
+		<span class="SpanNum">${$('.tablaResultadosCompras tr').length}. </span> </th>
+		<td class="mProdID hidden">${idProductoSele}</td>
+		 <td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button>  ${nombre}</td> <td class="col-xs-4 col-sm-3 text-center">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -1155,13 +1157,16 @@ $('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
 					<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
 				</span>
 			</div><!-- /input-group --></td>
-		<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">${$('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()}</span></span></td> <td class="text-center">S/. <span class="spanDescuento">-</span></td> <td class="text-center">S/. <span class="spanSubTotal">${$('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()}</span></td> </tr>`);
+		<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">${precioProdSele}</span></span></td> <td class="text-center">S/. <span class="spanDescuento">-</span></td> <td class="text-center">S/. <span class="spanSubTotal">${precioProdSele}</span></td> </tr>`);
 	sumarSubTotalesInstante();
 	calcularRowTabla();
 	
 	//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
-	$('#txtBuscarProductoVenta').focus();
+	/* $('#txtBuscarProductoVenta').focus(); */
 	$('.modal-detalleProductoEncontrado').modal('hide');
+}
+$('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
+	
 });
 $('#btnGuardarVenta').click(function () {
 	

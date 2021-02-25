@@ -10,6 +10,15 @@
 
 <body>
 
+<style>
+	#tabCrearProducto .bootstrap-select{
+		width: 100%!important;
+	}
+	.dropdown-menu{
+		z-index: 1031;
+	}
+</style>
+
 <div id="wrapper">
 
 <?php $pagina = 'productos'; include 'menu-wrapper.php'; ?>
@@ -272,49 +281,66 @@
 									<input type="text" class="form-control text-center" id="txtprodCodigo" value="Automático" placeholder="Código de producto" disabled>
 									</div>
 								</div>
-								<div class="col-sm-8 ">
+								<div class="col-sm-8 col-md-6 ">
 									<div class="form-group">
 									<label> Nombre de producto</label>
 									<input type="text" class="form-control mayuscula" id="txtprodNombre" placeholder="Ubique el producto por Código, Nombre o Lote">
 									</div>
 								</div>
-								<div class="col-sm-4 col-md-3">
-									<div class="form-group">
-									<label> Descripción</label>
-									<textarea type="text" rows="5" class="form-control mayuscula"  id="txtprodDescripcion" placeholder="Ingrese alguna descripción o algún dato extra que desee recordar luego."></textarea>
-									</div>
-								</div>
-								<div class="col-sm-2">
+							</div>
+								
+							<div class="row">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label>Costo unitario S/.</label>
-									<input type="number" class="form-control text-center" id="txtprodCostoNuevo" placeholder="Precio unitario" value=0.00 step=1 min=0 disabled>
+									<input type="number" class="form-control text-center" id="txtprodCostoNuevo" placeholder="Costo unitario" value=0.00 step=1 min=0 >
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label>% Ganancia </label>
-									<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="Precio unitario" value=30 step=1 min=0>
+									<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="% Ganancia" value=30 step=1 min=0>
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label>Precio unitario: S/.</label>
 									<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
-									<label>Stock en inventario: </label>
+									<label>Stock inicial: </label>
 									<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" value=0 step=1 min=0>
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label>Alerta de escasez:</label>
 									<input type="number" class="form-control text-center" id="txtprodMinimo" placeholder="Alerta unidades" value=10 step=1 min=0>
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-6">
+									<div class="form-group">
+									<label> Descripción</label>
+									<input type="text" class="form-control mayuscula" id="txtprodDescripcion" placeholder="¿Datos extra?">
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+									<label> Código de Barras <small onclick="verBarrasPreGuardar()"><a class="text-decoration-none" href="#!">(Ver códigos) <span class="badge" id="badCantBarras">0</span> </a></small></label>
+									<div class="input-group">
+										<input type="text" class="form-control mayuscula" id="txtBarrasN">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button" id="btnAddBarraN"><i class="icofont icofont-ui-add"></i></button>
+										</span>
+									</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label> Categoría</label>
 									<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
@@ -323,7 +349,7 @@
 									</select>
 									</div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<div class="form-group">
 									<label> Propiedad</label>
 									<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
@@ -333,7 +359,7 @@
 									</div>
 								</div>
 
-								<div class="col-sm-2 ">
+								<div class="col-sm-3 ">
 									<div class="form-group">
 									<label> Laboratorio</label>
 									<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
@@ -342,6 +368,7 @@
 									</select>
 									</div>
 								</div>
+								
 								
 								
 							</div>
@@ -530,8 +557,8 @@
 $(document).ready(function(){
 	
 	$('.selectpicker').selectpicker('refresh');
-
-		$('.mitooltip').tooltip();
+	$('.mitooltip').tooltip();
+	$.listadoBarras=[];
 
 
 	habilitarDivFecha();
@@ -628,28 +655,30 @@ $('.tabConenidoMeses').on('click','.btnDetalleInvLista',function () {
 	});
 });
 function agregarBarraNueva(){
-console.log('Agregar esto: ' + $('#txtprodBarra').val());
-$.ajax({url: 'php/productos/validarBarraEnUso.php', type: 'POST', data: {barra: $('#txtprodBarra').val()}}).done(function (resp) {
-	var devuelto = JSON.parse(resp);
-	if(devuelto.length>0){ 
-		$('#lblFalta').html('La barra que intenta agregar ya está asociada a: <span class="mayuscula">«'+ devuelto[0].prodNombre +'»</span>.');
-		$('.modal-faltaCompletar').modal('show');}
-	else{
-		$.ajax({url: 'php/productos/insertarBarraPorId.php', type: 'POST', data: {barra: $('#txtprodBarra').val() , idProd: $('#txtprodCodigo').val() }}).done(function (resp) {
-				//console.log(resp)
-				if(resp==1){$('#lblMensajeBien').text('El código '+ $('#txtprodBarra').val() + ' se guardó correctamente');
-					let num = parseInt($('#spanCantBarr').text())+1;
-					$('#spanCantBarr').text(num);
-					$('.modal-felicitacion').modal('show');
-				}
-				if(resp==0){$('#lblFalta').text('No se guardó el código, inténtelo de nuevo.');
-					$('.modal-faltaCompletar').modal('show');}
-			});
-	}
-	$('#txtprodBarra').val('');
-	$('#txtprodBarra').focus();
-	});
 
+	if($.trim($('#txtprodBarra').val()).length>0){
+		console.log('Agregar esto: ' + $('#txtprodBarra').val());
+		$.ajax({url: 'php/productos/validarBarraEnUso.php', type: 'POST', data: {barra: $('#txtprodBarra').val()}}).done(function (resp) { //console.log( resp );
+			var devuelto = JSON.parse(resp);
+			if(devuelto.length>0){ 
+				$('#lblFalta').html('La barra que intenta agregar ya está asociada a: <span class="mayuscula">«'+ devuelto[0].prodNombre +'»</span>.');
+				$('.modal-faltaCompletar').modal('show');}
+			else{
+				$.ajax({url: 'php/productos/insertarBarraPorId.php', type: 'POST', data: {barra: $('#txtprodBarra').val() , idProd: $('#txtprodCodigo').val() }}).done(function (resp) {
+						console.log(resp)
+						if(resp==1){$('#lblMensajeBien').text('El código '+ $('#txtprodBarra').val() + ' se guardó correctamente');
+							let num = parseInt($('#spanCantBarr').text())+1;
+							$('#spanCantBarr').text(num);
+							$('.modal-felicitacion').modal('show');
+						}
+						if(resp==0){$('#lblFalta').text('No se guardó el código, inténtelo de nuevo.');
+							$('.modal-faltaCompletar').modal('show');}
+					});
+			}
+			$('#txtprodBarra').val('');
+			$('#txtprodBarra').focus();
+		});
+	}
 
 }
 $('#txtprodBarra').keyup(function (e) {var code = e.which;
@@ -718,7 +747,7 @@ function llamarBuscarProducto() {
 		}
 	else{//es letras llamar al procedure para que haga el filtro
 		if(filtr!=''){
-			filtr='%'+filtr.replace(/\ /g,'%')+'%';
+			filtr=filtr.replace(/\ /g,'%');/* '%'++'%'; */
 
 				if($.trim($('#txtBuscarProductoProd').val())!=''){
 					$('#terminoBusq').text($('#txtBuscarProductoProd').val());
@@ -919,6 +948,11 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			});
 		})
   }
+	if(target=='#tabCrearProducto'){
+		$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '32');
+		$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '354');
+		$('#tabCrearProducto #cmbProdPropN').selectpicker('val', '2');
+	}
 
 });
 function limpiarCamposNuevo() {
@@ -930,9 +964,9 @@ function limpiarCamposNuevo() {
 	$('#tabCrearProducto #txtprodCostoNuevo').val('0.00');
 	$('#tabCrearProducto #txtprodStock').val('0.00');
 	$('#tabCrearProducto #txtprodPorcentajeNuevo').val('30');
-	$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '');
-	$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '');
-	$('#tabCrearProducto #cmbProdPropN').selectpicker('val', '');
+	$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '32');
+	$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '354');
+	$('#tabCrearProducto #cmbProdPropN').selectpicker('val', '2');
 
 }
 function activarBtnNuevo(){$('#btnCrearNuevoProducto').removeClass('disabled');}
@@ -954,13 +988,16 @@ $('#btnCrearNuevoProducto').click(function () {
 		else if(laborat=='' || laborat=='Laboratorio...'  ){$('#lblFalta').text('Debes seleccionar un «Laboratorio» si no encuentras en la lista selecciona «Otros»'); activarBtnNuevo(); $('.modal-faltaCompletar').modal('show');}
 		else{
 			$.ajax({url: 'php/productos/insertarProductoNuevo.php', type:'POST', data: {
-				nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()), descipt: $('#tabCrearProducto #txtprodDescripcion').val(), stkmin: $('#tabCrearProducto #txtprodMinimo').val(), categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'), precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(), labo:  $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#tabCrearProducto #txtprodCostoNuevo').val(), porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(), propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'), stock: $('#tabCrearProducto #txtprodStock').val()
+				nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()), descipt: $('#tabCrearProducto #txtprodDescripcion').val(), stkmin: $('#tabCrearProducto #txtprodMinimo').val(), categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'), precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(), labo:  $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'), costo: $('#tabCrearProducto #txtprodCostoNuevo').val(), porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(), propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'), stock: $('#tabCrearProducto #txtprodStock').val(), barritas: $.listadoBarras
 			}}).done(function (resp) { console.log(resp)
 				limpiarCamposNuevo();
-				if(resp==1){$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
-								$('.modal-felicitacion').modal('show');
-							}
-				if(resp==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
+				if(parseInt(resp)>=1){
+					$('#lblMensajeBien').text('Los datos del producto '+ $('#txtprodBarra').val() + ' se actualizaron correctamente .');
+					$('.modal-felicitacion').modal('show');
+					$.listadoBarras=[];
+					$('#badCantBarras').text( 0 );
+				}
+				if(parseInt(resp)==0){$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
 					$('.modal-faltaCompletar').modal('show');}		
 		});
 		}
@@ -1034,6 +1071,62 @@ $('#btnModificarLotes').click(function() {
 		}
 	});
 });
+function eliminarListaBarras(index, queBarra){
+	
+	$.each($('#divsBarras .contBarra'), function(i, elem){ //console.log( elem );
+		if( queBarra == $(elem).text() ){
+			//console.log( 'te encontre' );
+			$(elem).parent().remove();
+		}
+	})
+	$.listadoBarras.splice(index, 1);
+	$('#badCantBarras').text( $.listadoBarras.length  );
+
+}
+function verBarrasPreGuardar(){
+	//console.log( $.listadoBarras );
+	$('#divsBarras').children().remove();
+	$.each($.listadoBarras, function (i, elem) { //console.log( elem );
+		$('#divsBarras').append(`
+			<div class="row"><button class="btn btn-danger btn-outline btn-xs" onclick="eliminarListaBarras(${i}, ${elem})"><i class="icofont icofont-close"></i></button> <span class="contBarra">${elem}</span></div>`);
+	})
+	$('.modal-barras').modal('show');
+
+}
+function addBarraN(){
+	/* $.listaBarras; */
+	if($.trim($('#txtBarrasN').val()).length>0){
+		
+		$.ajax({url: 'php/productos/validarBarraEnUso.php', type: 'POST', data: {barra: $('#txtBarrasN').val()}}).done(function (resp) { 
+			var devuelto = JSON.parse(resp);
+			if(devuelto.length>0){ 
+				$('#lblFalta').html('La barra que intenta agregar ya está asociada a: <span class="mayuscula">«'+ devuelto[0].prodNombre +'»</span>.');
+				$('.modal-faltaCompletar').modal('show');}
+			else{
+				if( $.listadoBarras.indexOf($('#txtBarrasN').val()) ==-1 ){
+					$.listadoBarras.push( $('#txtBarrasN').val() );
+					$('#badCantBarras').text( $.listadoBarras.length );
+
+					$('#txtBarrasN').val('');
+					$('#txtBarrasN').focus();
+				}
+			}
+		});
+	}else{
+		$('#txtBarrasN').val('');
+		$('#txtBarrasN').focus();
+	}
+
+}
+$('#btnAddBarraN').click(function() {
+	addBarraN();
+});
+$('#txtBarrasN').keypress(function (e) { 
+	if(e.keyCode == 13){ 
+		addBarraN();
+	}
+});
+
 </script>
 
 </body>

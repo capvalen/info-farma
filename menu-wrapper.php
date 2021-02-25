@@ -1,4 +1,3 @@
-
 <?php 
 global $nomArchivo;
 global $pagActual;
@@ -28,8 +27,8 @@ function casoActivo($quePagina){
 			<div class="logoEmpresa ocultar-mostrar-menu">
 				<img class="img-responsive" src="images/farmacovid.png" alt="">
 			</div>
-			<li <?php casoActivo('index'); ?>>
-					<a href="index.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
+			<li <?php casoActivo('principal'); ?>>
+					<a href="principal.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
 			</li>
 			<!-- <li <?php casoActivo('#'); ?>>
 					<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>

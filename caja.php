@@ -16,7 +16,7 @@ if (!isset($_GET['fecha'])) { //si existe lista fecha requerida
 <style>
 hr{ margin-bottom: 5px;}
 h3{ margin-top: 5px;}
-.pheader{background-color: #a35bb4;padding: 10px 10px; color: white; font-size: 17px; display: block;
+.pheader{background-color: #a35bb4;padding: 10px 10px; color: white; font-size: 17px; display: block; margin: 0;
 clear: left; }
 .pheader li>a{color: #a35bb4;}
 .pheader li>a:hover{color: #a35bb4;background: #f2f2f2;}
@@ -39,6 +39,7 @@ a:focus, a:hover { color: #62286f; }
 	background-color: transparent;
 	color: #eabff5;
 }
+td{font-size: 0.95em;}
 </style>
 
 
@@ -58,9 +59,9 @@ a:focus, a:hover { color: #62286f; }
 				<div class="row col-sm-7"><h3 class="purple-text" style="margin-top: 21px;"><span class="glyphicon glyphicon-piggy-bank"></span> Reporte de caja </h3></div>
 			</div>
 
-			<div class="row container-fluid  ">
+			<div class="row container-fluid" >
 				<p class="pheader col-xs-12"><i class="icofont icofont-filter"></i> Filtros</p>
-				<div class="panel panel-default container-fluid ">
+				<div class="panel panel-default container-fluid " style="padding-bottom: 20px;">
 					<div class="col-xs-12 col-sm-6 col-md-3">
 						<p style="color: #a35bb4;"><strong>Seleccione fecha de reporte:</strong></p>
 							<input type="text" id="dtpFechaIniciov3" class="form-control text-center" placeholder="Fecha para controlar citas">
@@ -95,7 +96,7 @@ a:focus, a:hover { color: #62286f; }
 						<h4> <i class="icofont icofont-plus-circle"></i> Entradas de dinero </h4>
 					</div>
 					<?php 
-					if(date('Y-m-d')==$_GET['fecha']){ ?>
+					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
 							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-add"></i> <span class="caret"></span></button>
@@ -128,7 +129,7 @@ a:focus, a:hover { color: #62286f; }
 						<h4><i class="icofont icofont-minus-circle"></i> Salidas de dinero</h4>
 					</div>
 					<?php 
-					if(date('Y-m-d')==$_GET['fecha']){ ?>
+					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
 							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle  " type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-remove"></i> <span class="caret"></span></button>
@@ -186,7 +187,7 @@ a:focus, a:hover { color: #62286f; }
 </div><!-- /#page-content-wrapper -->
 </div><!-- /#wrapper -->
 
-<?php if( $_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==8 || $_COOKIE['ckPower']==4 ){ ?>
+<?php if( $_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ){ ?>
 <!-- Modal para Abrir caja  -->
 
 <div class="modal fade modal-pagoMaestro" tabindex="-1" role="dialog">
@@ -418,7 +419,7 @@ function calculoTicketVirtual() {
 
 	var apertura = parseFloat($('#spanApertura').text().replace(',', '.'));
 	var cierre = parseFloat($('#spanCierrev3').text().replace(',', '.'));
-	var cuadre =0, sobra =0;
+	var cuadre = 0, sobra =0;
 
 	var efectivosEntrada = parseFloat($('#strSumaEntrada').attr('data-efectivo').replace(',', '.'));
 	var tarjetasEntrada = parseFloat($('#strSumaEntrada').attr('data-tarjeta').replace(',', '.'));
@@ -448,10 +449,10 @@ function calculoTicketVirtual() {
 		$('#spanSobra').text('Cuadre exacto');
 	}
 	if(sobra <0){
-		$('#spanSobra').text('Falta S/ '+ (0-sobra).toFixed(2));		
+		$('#spanSobra').text('Sobra S/ '+ sobra.toFixed(2));		
 	}
 	if(sobra > 0){
-		$('#spanSobra').text('Sobra S/ '+ sobra.toFixed(2));		
+		$('#spanSobra').text('Falta S/ '+ (0-sobra).toFixed(2));		
 	}
 	
 	//$('#spanResultadoFinal').text(parseFloat( parseFloat($('#strSumaEntrada').text().replace(',', '.')) - parseFloat($('#strSumaSalida').text().replace(',', '.')) + parseFloat($('#spanApertura').text().replace(',', '.')) ).toFixed(2));
@@ -526,7 +527,7 @@ $('#btnGuardarApertura').click(function () {
 		});
 	}
 });
-$('#btnCajaCerrar').click(()=> {
+$('#btnCajaCerrar').click(()=> { 
 	var sumaIngresos=0;
 	var sumaTarjetas=0;
 	$.each( $("#divEntradas .tdMoneda") , function(i, objeto){
@@ -618,7 +619,7 @@ $('.aLiProcesos').click(function() {
 	$('.modal-pagoMaestro').modal('show');
 });
 $(".modal-pagoMaestro").on("shown.bs.modal", function () { $('#sltMetodopago').selectpicker('val','Efectivo').selectpicker('refresh'); $('#txtMontoPagos').val('0.00').focus(); });
-<?php if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==8 || $_COOKIE['ckPower']==4) { ?>
+<?php if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ) { ?>
 function abriCajon(){
 	$.post('http://127.0.0.1/perucash/soloAbrirCaja.php');
 }

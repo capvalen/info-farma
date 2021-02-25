@@ -47,16 +47,37 @@ if($totalRow>=1){
 }
 $btnVentas = "<button class='btn btn-success btn-outline'><i class='icofont icofont-basket'></i></button>";
 $sumaVentas =0;
+
+if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){
+	$ultimaFecha = 'now()';
+}else{
+	$ultimaFecha = 'cu.fechaFin';
+}
+
 $sqlVentas="SELECT `idVenta`, ifnull(`ventRuc`, 'Cliente sin DNI') as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
 inner join cuadre cu
-WHERE ventFecha between cu.fechaInicio and cu.fechaFin and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1;";
+WHERE ventFecha between cu.fechaInicio and {$ultimaFecha} and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1;";
 //echo $sqlVentas;
 $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
 if($totalVentas>=1){
 	while($rowVentas=$resultadoVentas->fetch_assoc()){ 
-		$sumaVentas+=floatval($rowVentas['ventTotal']); ?>
+		$sumaIngr += floatval($rowVentas['ventTotal']);
+		switch($rowVentas['idMoneda']){
+			case '1': 
+				$efectivo = $efectivo + $rowVentas['ventTotal'];
+			break;
+			case '2': 
+				$banco = $banco + $rowVentas['ventTotal'];
+			break;
+			case '3':
+			case '4':
+				$tarjeta = $tarjeta + $rowVentas['ventTotal'];
+			break;
+			default:
+			break;
+		} ?>
 
 		<tr data-id="<?= $rowVentas['idVenta']; ?>" data-activo="<?= $rowVentas['ventActivo']; ?>" esVenta='si'>
 			<th scope='row'> V-<?= $rowVentas['idVenta'] ?> </th>
@@ -70,11 +91,12 @@ if($totalVentas>=1){
 		<?php 
 	}
 }
-$sumaIngr+=floatval($sumaVentas);
+
 if($totalRow==0 && $totalVentas==0){
 	echo "<tr> <th scope='row'></th> <td >No se encontraron resultados en ésta fecha.</td> <td class='mayuscula'></td> <td></td> <td>S/ <span id='strSumaEntrada' data-efectivo ='{$efectivo}' data-banco ='{$banco}' data-tarjeta ='{$tarjeta}'>0.00</span></td></tr>";
 }else{
-	echo '<tr> <th scope="row"  style="border-top: transparent;"></th> <td style="border-top: transparent;"></td> <td style="border-top: transparent;"></td> <td class="text-center" style="border-top: 1px solid #989898; color: #636363"><strong >Total</strong></td> <td style="border-top: 1px solid #989898; color: #636363"><strong >S/ <span id="strSumaEntrada" data-efectivo ="'.$efectivo.'" data-banco ="'.$banco.'" data-tarjeta ="'.$tarjeta.'">'.number_format(round($sumaIngr,1,PHP_ROUND_HALF_UP),2, ',', '').'</span></strong></td><tr>';
+	echo '<tr> <th scope="row"  style="border-top: transparent;"></th> <td style="border-top: transparent;"></td> <td style="border-top: transparent;"></td> <td class="text-center" style="border-top: 1px solid #989898; color: #636363"><strong >Total</strong></td> <td style="border-top: 1px solid #989898; color: #636363"><strong >S/ <span id="strSumaEntrada" data-efectivo ="'.$efectivo.'" data-banco ="'.$banco.'" 
+	data-tarjeta ="'.$tarjeta.'">'.number_format(round($sumaIngr,1,PHP_ROUND_HALF_UP),2, ',', '').'</span></strong></td><tr>';
 }
 
 mysqli_close($conection); //desconectamos la base de datos

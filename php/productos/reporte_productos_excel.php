@@ -1,13 +1,11 @@
 <?php
 
- header("Content-type: application/vnd.ms-excel");
- header("Content-Disposition: attachment; filename=Reporte_Todos_Productos_Farmacia.xls");
+	header("Content-type: application/vnd.ms-excel");
+	header("Content-Disposition: attachment; filename=Reporte_Todos_Productos_Farmacia.xls");
 
+	date_default_timezone_set('America/Lima');
 
-$conexion=mysql_connect("localhost","root","*123456*");
-mysql_select_db("farmacia",$conexion);	
-mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $conexion);
-
+	require("conectkarl.php");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -31,19 +29,20 @@ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', 
   </tr>
   
 <?php
-		
-$sql=mysql_query("SELECT @rownum:=@rownum+1 AS Num, p.prodNombre, format( p.prodPrecio,2) as Precio, cp.catprodDescipcion, l.labNombre FROM 
+
+$sql="SELECT @rownum:=@rownum+1 AS Num, p.prodNombre, format( p.prodPrecio,2) as Precio, cp.catprodDescipcion, l.labNombre FROM 
 (SELECT @rownum:=0) r,
 `producto` p inner join laboratorio l on p.idLaboratorio = l.idLaboratorio
 inner join categoriaproducto cp on cp.idCategoriaProducto=p.idCategoriaProducto
-order by prodNombre asc");
+order by prodNombre asc";
+$resultado=$cadena->query($sql);
 $i=1;
-while($res=mysql_fetch_array($sql)){		
-	$Correlativo=$res["Num"];
-	$prodNombre=$res["prodNombre"];
-	$Precio=$res["Precio"];
-	$labNombre=$res["labNombre"];
-	$catprodDescipcion=$res["catprodDescipcion"];
+while($row=$resultado->fetch_assoc()){ 
+	$Correlativo=$row["Num"];
+	$prodNombre=$row["prodNombre"];
+	$Precio=$row["Precio"];
+	$labNombre=$row["labNombre"];
+	$catprodDescipcion=$row["catprodDescipcion"];
 
 ?>  
  <tr>

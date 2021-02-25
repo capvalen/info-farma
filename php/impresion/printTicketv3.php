@@ -25,10 +25,11 @@ try {
     // $connector = new FilePrintConnector("LPT1");
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connectorV31);
-	$printer -> bitImage($tux);    
- 
+		
+		
     $printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
+		$printer -> bitImage($tux);    
     $printer -> text("Centro Clínico Araujo\n");
     $printer -> text("Empresa de Servicios Médicos Celendín EIRL\n");
     $printer -> text("JR Ayacucho 268 - Celendin\n");
@@ -52,6 +53,7 @@ try {
     $printer -> cut();
     $printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
+		$printer -> bitImage($tux);    
     $printer -> text("Centro Clínico Araujo\n");
     $printer -> text("Empresa de Servicios Médicos Celendín EIRL\n");
     $printer -> text("JR Ayacucho 268 - Celendin\n");

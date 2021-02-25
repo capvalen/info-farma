@@ -2,7 +2,8 @@
 include '../config/conexion.php';
 
 $filas=array();
-$log = mysqli_query($conection,"call validarBarraEnUso(".$_POST['barra'].");");
+$sql="call validarBarraEnUso('".$_POST['barra']."');";
+$log = mysqli_query($conection, $sql);
 while($row = mysqli_fetch_array($log))
 {
 	$filas[]= array('prodNombre' => $row['prodNombre']); 
