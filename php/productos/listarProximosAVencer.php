@@ -9,7 +9,8 @@ while($row = mysqli_fetch_array($log))
 		'prodFechaVencimiento' => $row['prodFechaVencimiento'],
 		'prodNombre' => $row['prodNombre'],
 		'prodPrecio' => $row['prodPrecio'],
-		'prodLote' => $row['prodLote']
+		'prodLote' => $row['prodLote'],
+		'idDetalle' => $row['idDetalle']
 	); 
 }
  echo json_encode($filas);

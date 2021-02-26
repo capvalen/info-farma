@@ -26,6 +26,7 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tabReporteVentas" data-toggle="tab">Reporte Ventas</a></li>
 							<li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
+							<li><a href="#tabProductosTodos" data-toggle="tab">Inventario Completo</a></li>
 
 						</ul>
 
@@ -71,11 +72,22 @@
 										<tbody>
 											
 										</tbody>
+										<tfoot>
+											
+										
+										</tfoot>
 									</table>
 								</div>
 
 
 								<!--Fin de pestaña 02-->
+							</div>
+							<div class="tab-pane fade container-fluid" id="tabProductosTodos">
+								<h3>Inventario rápido de todos los productos</h3>
+								<p>Haga click en generar reporte. Éste proceso puede demorar dependiendo de la cantidad de productos y la velocidad de su máquina.</p>
+								<button class="btn btn-default btn-outline" onclick="generarInventarioCompleto()">Generar inventario completo</button>
+
+								<div id="tableInventarioCompleto"></div>
 							</div>
 
 						</div>
@@ -565,23 +577,52 @@
 			if($('#sltOpcionesVenta').val()==1){
 				$('#tableReporteVentas thead').html(`<tr>
 					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Usuario</th>
-				</tr>`)
+				</tr>`);
+				$('#tableReporteVentas tfoot').html(`<tr><td colspan=6></td><td><strong id="tdSumatoria"></strong></td></tr>`);
+
 				$.ajax({url: 'php/ventas/reporteVentasGeneral.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
+					sumarTotalesReporte();
 				});
 			}
 			if($('#sltOpcionesVenta').val()==2){
 				$('#tableReporteVentas thead').html(`<tr>
-					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Cantidad</th><th>Precio U.</th><th>Precio Parc.</th><th>Producto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Usuario</th>
-				</tr>`)
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Cantidad</th><th>Precio U.</th><th>Producto</th><th>Total</th><th>Ganancia</th><th>Usuario</th>
+				</tr>`);
+				$('#tableReporteVentas tfoot').html(`<tr><td colspan=7></td><td><strong id="tdSumatoria"></strong></td><td><strong id="tdSumaGanancias"></strong></td></tr>`);
+
 				$.ajax({url: 'php/ventas/reporteVentasDetallado.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
+					sumarTotalesReporte();
 				});
 			}
 		}
 	});
+	function sumarTotalesReporte() {
+		let sumasa =0, ganancias =0;
+		$.each($('.tdTotales'), function(i, dato){
+			sumasa+= parseFloat($(dato).text());
+		});
+		$.each($('.tdGanancia'), function(i, gana){
+			ganancias+= parseFloat($(gana).text());
+		});
+		$('#tdSumatoria').text(sumasa.toFixed(2));
+		$('#tdSumaGanancias').text(((ganancias)).toFixed(2));
+	}
+	$.repInvent=true;
+	function generarInventarioCompleto(){
+		
+		if($.repInvent){
+			$.repInvent=false;
+			$.ajax({url: 'php/productos/inventarioCompleto.php', type: 'POST', data: { }}).done(function(resp) {
+				console.log(resp)
+				$('#tableInventarioCompleto').html(resp);
+				$.repInvent=true;
+			});
+		}
+	}
 	</script>
 
 </body>

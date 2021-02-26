@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<title>Configuración: Info-Farma</title>
 
-	<?php include 'headers.php'; ?>
+	<?php include 'headers.php';
+	include 'php/variablesGlobales.php'; ?>
 
 </head>
 
@@ -92,6 +93,14 @@
 									<button class="btn btn-primary btn-block has-clear" id="btnCrearUsuario">Crear usuario</button>
 
 								</div>
+								<div class="col-md-5">
+									<h3>Usuarios en el sistema</h3>
+									<table class="table table-hover">
+										<tbody>
+											<?php require 'php/config/listarUsuariosSistema.php'; ?>
+										</tbody>
+									</table>
+								</div>
 							</div>
 
 						</div>
@@ -155,6 +164,23 @@
 		</div>
 	</div>
 
+	<!-- Modal para: borrar un usuario-->
+	<div class='modal fade ' id="modalBorrarUsuario" tabindex='-1' role='dialog' aria-hidden='true'>
+		<div class='modal-dialog modal-sm' >
+		<div class='modal-content '>
+			<div class='modal-header-danger'>
+				<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+				<h4 class='modal-tittle'> Eliminar usuario</h4>
+			</div>
+			<div class='modal-body'>
+				<p>¿Desea borrar al usuario?</p>
+			</div>
+			<div class='modal-footer'>
+				<button type='button' class='btn btn-danger' id="btnBorrarUsuarioDef">Borrar usuario</button>
+			</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery -->
 	<script src="js/jquery-2.2.4.min.js"></script>
@@ -223,9 +249,22 @@
 				console.log(resp)
 				if(resp=='ok'){
 					alert('Usuario creado con éxito');
+					location.reload();
 				}
 			});
 		}
+	});
+	function borrarUsuario(user){
+		$.idUser= user;
+		$('#modalBorrarUsuario').modal('show');
+	}
+	$('#btnBorrarUsuarioDef').click(function() {
+		$.ajax({url: 'php/config/eliminarUsuario.php', type: 'POST', data: { idUser: $.idUser }}).done(function(resp) {
+			console.log(resp)
+			if(resp=='ok'){
+				location.reload();
+			}
+		});
 	});
 	</script>
 

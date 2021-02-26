@@ -3,7 +3,7 @@
 date_default_timezone_set('America/Lima');
 include 'conectkarl.php';
 
-$sql="SELECT dv.*, p.prodNombre, date_format( `ventFecha`, '%Y/%m/%d %h:%i') as fechaVenta, `ventSubtotal`, `ventIGV`, `ventTotal`, `ventCambioVuelto`, `idMoneda`, `ventActivo`, returnNombreUsuario(v.`idUsuario`) as usuNombre
+$sql="SELECT dv.*, p.prodNombre, date_format( `ventFecha`, '%Y/%m/%d %h:%i') as fechaVenta, `ventSubtotal`, `ventIGV`, `ventTotal`, `ventCambioVuelto`, `idMoneda`, `ventActivo`, returnNombreUsuario(v.`idUsuario`) as usuNombre, round(detentPrecioparcial - returnCostoProducto(p.idProducto) * detventCantidad,2) as ganancia
 FROM `detalleventas` dv
 inner join ventas v on v.idVenta = dv.idVenta
 inner join producto p on p.idProducto = dv.idProducto
@@ -20,11 +20,9 @@ while($row=$resultado->fetch_assoc()){
 		<td><?= $row['ventCambioVuelto']; ?></td>
 		<td><?= $row['detventCantidad']; ?></td>
 		<td><?= $row['detventPrecio']; ?></td>
-		<td><?= $row['detentPrecioparcial']; ?></td>
 		<td class="mayuscula"><?= $row['prodNombre']; ?></td>
-		<td><?= $row['ventSubtotal']; ?></td>
-		<td><?= $row['ventIGV']; ?></td>
-		<td><?= $row['ventTotal']; ?></td>
+		<td class="tdTotales"><?= $row['detentPrecioparcial']; ?></td>
+		<td class="tdGanancia"><?= $row['ganancia'] ; ?></td>
 		<td><?= $row['usuNombre']; ?></td>
 	</tr>
 <?php	

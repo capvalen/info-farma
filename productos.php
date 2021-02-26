@@ -33,7 +33,9 @@
 					<ul class="nav nav-tabs">
 					<li class="active"><a href="#tabDetallarProducto" data-toggle="tab">Editar un producto</a></li>
 					<li><a href="#tabProximosVencer" data-toggle="tab">Productos por vencerse</a></li>
+					<?php if(in_array($_COOKIE['ckPower'], $admis)){ ?>
 					<li><a href="#tabCrearProducto" data-toggle="tab">Crear nuevo producto</a></li>
+					<?php } ?>
 					
 					</ul>
 					
@@ -241,9 +243,6 @@
 
 									</div>
 								</div>
-							
-						
-							
 							</div>
 
 
@@ -258,6 +257,7 @@
 						<p>Productos ya vencidos y por vencer en  los próximos 3 meses:</p>
 						<div >
 							<div class="row container-fluid"><strong>
+								<div class="col-sm-1 text-center">@</div>
 								<div class="col-sm-1 text-center">Código</div>
 								<div class="col-sm-3">Nombre</div>
 								<div class="col-sm-1 text-center">Lote</div>
@@ -270,6 +270,8 @@
 						<!--Fin de pestaña 02-->
 						</div>
 						
+
+						<?php if(in_array($_COOKIE['ckPower'], $admis)){ ?>
 						<div class="tab-pane fade in  container-fluid" id="tabCrearProducto">
 						<!--Inicio de pestaña 03-->
 							<p>Rellene los campos para crear nuevo producto:</p>
@@ -383,6 +385,7 @@
 							</div>
 						</div>
 					</div>
+					<?php } ?>
 					<!-- Fin de meter contenido principal -->
 					</div>
 					
@@ -533,7 +536,6 @@
 			</div>
 			<div class="modal-body">
 				<p>¿Desea descartar el lote?</p>
-				
 			</div>
 			<div class="modal-footer"> <button class="btn btn-danger" data-dismiss="modal" id="btnModificarLotes"><i class="icofont icofont-clip"></i> Sí, anular</button></div>
 		</div>
@@ -903,8 +905,9 @@ $('#txtprodCosto').keyup(function () {calculoCostos(1);});
 $('#txtprodPorcentaje').keyup(function () {calculoCostos(2);});
 $('#txtprodPrecio').keyup(function () {calculoCostos(3);});
 
+$('#txtprodCostoNuevo').keyup(function () {calculoCostos(5);});
 $('#txtprodPorcentajeNuevo').keyup(function () {calculoCostos(4);});
-$('#txtprodPrecioNuevo').keyup(function () {calculoCostos(4);});
+$('#txtprodPrecioNuevo').keyup(function () {calculoCostos(6);});
 
 
 
@@ -918,7 +921,9 @@ function calculoCostos(tipoCaso){
 	if(tipoCaso==2){$('#txtprodPrecio').val(parseFloat(vproCost*(1+vproGana)/100).toFixed(2))}
 	if(tipoCaso==3){$('#txtprodCosto').val(parseFloat(vproPrec/(1+vproGana/100)).toFixed(2))}
 
-	if(tipoCaso==4){$('#txtprodCostoNuevo').val(parseFloat($('#txtprodPrecioNuevo').val()/(1+$('#txtprodPorcentajeNuevo').val()/100)).toFixed(2))}
+	if(tipoCaso==4){$('#txtprodPrecioNuevo').val(parseFloat($('#txtprodCostoNuevo').val()*(1+$('#txtprodPorcentajeNuevo').val()/100)).toFixed(2))}
+	if(tipoCaso==5){$('#txtprodPrecioNuevo').val(parseFloat($('#txtprodCostoNuevo').val()*(1+$('#txtprodPorcentajeNuevo').val()/100)).toFixed(2))}
+	if(tipoCaso==6){$('#txtprodCostoNuevo').val(parseFloat($('#txtprodPrecioNuevo	').val()/(1+$('#txtprodPorcentajeNuevo').val()/100)).toFixed(2))}
 
 	
 }
@@ -935,7 +940,8 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 				sumaValoriz+=parseFloat(arg.prodPrecio);
 				var dia=moment(arg.prodFechaVencimiento);
 				$(`#listasProdVencimiento`).append(`
-					<div class="row resulDiv noselect" style="cursor:default">
+					<div class="row resulDiv noselect" style="cursor:default" data-id="${arg.idDetalle}">
+						<div class="col-xs-2 col-sm-1 text-center tachoVencimiento" ><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-trash"></i></button></div>
 						<div class="col-xs-2 col-sm-1 text-center codDivInv" >${arg.idproducto}</div>
 						<div class="col-xs-3 mayuscula"> ${arg.prodNombre}</div>
 						<div class="col-xs-1 text-center argTotal">${arg.prodLote}</div>
@@ -1054,7 +1060,7 @@ $('#btnInsertarVencimiento').click(function() {
 		//console.log(resp)
 		$('#lblMensajeBien').text('Se agregó el vencimiento correctamente.');
 		$('.modal-felicitacion').modal('show');
-		verVencimientosPorId($('#txtprodCodigo').val())
+		verVencimientosPorId($('#txtprodCodigo').val());
 	});
 });
 function borrarLote(lote){
@@ -1065,9 +1071,14 @@ $('#btnModificarLotes').click(function() {
 	$.ajax({url: 'php/productos/borrarLote.php', type: 'POST', data: { lote: $.lote }}).done(function(resp) {
 		console.log(resp)
 		if(resp=='ok'){
+			$.each($('#listasProdVencimiento .resulDiv'), function(i, elem){
+				if( $(elem).attr('data-id')== $.lote ){
+					$(elem).remove();
+				}
+			});
 			$('#lblMensajeBien').text('Se retiró el lote correctamente.');
 			$('.modal-felicitacion').modal('show');
-			verVencimientosPorId($('#txtprodCodigo').val())
+			verVencimientosPorId($('#txtprodCodigo').val());
 		}
 	});
 });

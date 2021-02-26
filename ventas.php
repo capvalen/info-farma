@@ -1,5 +1,6 @@
 <?php 
 $hayCaja = require("php/comprobarCajaHoy.php");
+include 'php/variablesGlobales.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -1293,6 +1294,9 @@ $('#btnGuardarMemoria').click(function () {
 	console.log($.impresion)
 });
 
+function abrirCajon(){
+	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
+}
 $('#btnImprimirVentaFinal').click(function () {
 	moment.locale('es');
 	var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
@@ -1301,13 +1305,16 @@ $('#btnImprimirVentaFinal').click(function () {
 		else{vuelto = parseFloat($('#spanResiduoCambio').text()).toFixed(2)}
 	
 	/////// Cambiar URL
+
+	abrirCajon();
+
 	$.ajax({url: 'php/impresion/printTicketv3.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,
 		texto: retornarCadenaImprimir(),
 		hora: fechaImpr
-	}}).done(function (resp) { console.log(resp)
+	}}).done(function (resp) { console.log(resp);
 		/*$('#tablaResultadosCompras tbody').children().remove();
 		calcularRowTabla();
 		sumarSubTotalesInstante();*/

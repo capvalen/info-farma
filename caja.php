@@ -30,9 +30,7 @@ a:focus, a:hover { color: #62286f; }
 .modal-pagoMaestro .close, .modal-pagoMaestro .close { color: #6f5e5e; }
 .modal-pagoMaestro .close:hover, .modal-pagoMaestro .close:hover{color: #ea1010;opacity: 0.7;}
 .btnBotonCajon{
-	margin-top: -37px;
 	height: 40px;
-	margin-bottom: 20px;
 	background-color: transparent;
 }
 .btnBotonCajon:hover, .btnBotonCajon:active,.btnBotonCajon:focus, .btnBotonCajon:active:focus{
@@ -98,7 +96,7 @@ td{font-size: 0.95em;}
 					<?php 
 					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
+							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon"><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-add"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasEntradasLI.php"; ?>
@@ -131,7 +129,7 @@ td{font-size: 0.95em;}
 					<?php 
 					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon hidden"><i class="icofont icofont-key-hole"></i></button>
+							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon "><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle  " type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-remove"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasSalidasLI.php"; ?>
@@ -593,14 +591,33 @@ $('#btnGuardarCierre').click(function () {
 			$('#btnCajaCerrar').remove();
 			$('.modal-cerrarCaja').modal('hide');
 			$('.modal-GuardadoCorrecto #spanBien').text('¿Deseas imprimir el ticket de cierre?');
-			$('.modal-GuardadoCorrecto #h1Bien').html( '<button class="btn btn-negro btn-outline" id="btnPrintTCierre"><i class="icofont icofont-print"></i> Ticket de cierre</button>');
+			$('.modal-GuardadoCorrecto #h1Bien').html( '<button class="btn btn-negro btn-outline" onclick="imprimirTicket()"><i class="icofont icofont-print"></i> Ticket de cierre</button>');
 			$('.modal-GuardadoCorrecto').modal('show');
+			imprimirTicket()
 			$('.modal-GuardadoCorrecto').on('hidden.bs.modal', function () { 
 				location.reload();
 			});
 		});
 	}
 });
+
+$('.modalGuardadoCorrecto').on('click', '#btnPrintTCierre', function (e) {
+	imprimirTicket()
+});
+function imprimirTicket(){ console.log( 'imprimiendo cierre' );
+	$.ajax({url: '<?= $servidorLocal;?>php/impresion/printTicketCierre.php', type: 'POST', data: {
+		apertura: $('#spanApertura').text(),
+		cierre: $('#txtMontoCierre').val(),
+		efectivoEntrada: $('#spanResultadoFinal').attr('sumaEfectivo'),
+		tarjetaEntrada : parseFloat($('#spanResultadoFinal').attr('sumaMastercard')) + parseFloat($('#spanResultadoFinal').attr('sumaVisa')),
+		bancos :$('#spanResultadoFinal').attr('sumaBanco'),
+		efectivoSalida: $('#spanResultadoFinal').attr('sumaSalidaEfectivo'),
+		tarjetaSalida: $('#spanResultadoFinal').attr('sumaSalidaTarjeta'),
+		usuario: '<?= $_COOKIE['ckAtiende']; ?>'
+	}}).done(function(resp) {
+		console.log(resp)
+	});
+}
 
 $('.aLiProcesos').click(function() {
 	//console.log($(this).attr('data-id'));
@@ -621,7 +638,7 @@ $('.aLiProcesos').click(function() {
 $(".modal-pagoMaestro").on("shown.bs.modal", function () { $('#sltMetodopago').selectpicker('val','Efectivo').selectpicker('refresh'); $('#txtMontoPagos').val('0.00').focus(); });
 <?php if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ) { ?>
 function abriCajon(){
-	$.post('http://127.0.0.1/perucash/soloAbrirCaja.php');
+	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
 }
 $('#btnInsertPagoOmiso').click(()=> {
 	pantallaOver(true);
@@ -638,7 +655,7 @@ $('#btnInsertPagoOmiso').click(()=> {
 		}}).done((resp)=> {
 			pantallaOver(false);
 			if(resp== true){
-				$.post('http://127.0.0.1/perucash/soloAbrirCaja.php');
+				$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
 				location.reload();
 			}else{
 				$('.modal-GuardadoError').find('#spanMalo').text('El servidor dice: \n' + resp);

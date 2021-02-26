@@ -1,5 +1,6 @@
 <?php 
-include '../config/conexion.php';
+include 'conectkarl.php';
+include '../variablesGlobales.php';
 
 /* $filas=array();
 $log = mysqli_query($conection,"call listarLotesYVencimientoPorID(".$_POST['idPro'].");");

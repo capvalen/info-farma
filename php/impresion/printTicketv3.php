@@ -16,18 +16,17 @@ use Mike42\Escpos\EscposImage; //librería de imagen
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/TM-U220");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/POS80");
 try {
-	$tux = EscposImage::load("./../../images/empresa.png", false);
+	$tux = EscposImage::load("./../../images/empresa_centro.png", false);
 	
     // A FilePrintConnector will also work, but on non-Windows systems, writes
     // to an actual file called 'LPT1' rather than giving a useful error.
     // $connector = new FilePrintConnector("LPT1");
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connectorV31);
-		
-		
-    $printer -> setEmphasis(true);
+	
+	$printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
 		$printer -> bitImage($tux);    
     $printer -> text("Centro Clínico Araujo\n");
@@ -75,6 +74,7 @@ try {
     $printer -> text("\n¡Gracias por su compra!\n");
     $printer -> text("\nReclame su boleta\n\n\n\n");
     $printer -> cut();
+	
     /* Close printer */
     $printer -> close();
 } catch (Exception $e) {

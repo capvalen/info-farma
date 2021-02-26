@@ -32,12 +32,7 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
 				<h1 class="purple-text text-darken-4"><i class="icofont icofont-animal-cat-alt-4"></i> Software Info-Farma</h1>
 				<h2 class="purple-text text-darken-1"> Te damos la bienvenida</h2>
-				<p>Si requieres de apoyo en el sistema te damos las opciones:</p>
-				<ul>
-					<li>Escribirnos al <a href="https://wa.me/51935458362">Whatsapp</a></li>
-					<li>Llamar al 977-692108</li>
-					<li>Visitar nuestra web <a href="https://infocatsoluciones.com">https://infocatsoluciones.com</a> </li>
-				</ul>
+				
 				<h4>Datos de la caja activa:</h4>
 				<div class="row has-clear">
 					<div class="col-sm-6 col-md-3">

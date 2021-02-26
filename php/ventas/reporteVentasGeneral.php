@@ -18,7 +18,7 @@ while($row=$resultado->fetch_assoc()){
 		<td><?= $row['ventCambioVuelto']; ?></td>
 		<td><?= $row['ventSubtotal']; ?></td>
 		<td><?= $row['ventIGV']; ?></td>
-		<td><?= $row['ventTotal']; ?></td>
+		<td class="tdTotales"><?= $row['ventTotal']; ?></td>
 		<td><?= $row['usuNombre']; ?></td>
 	</tr>
 <?php	
