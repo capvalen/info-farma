@@ -46,7 +46,6 @@ while($row=$resultado->fetch_assoc()){
 
 $sqlVentas="SELECT `idVenta`, ifnull(`ventRuc`, 'Cliente sin DNI') as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
-inner join cuadre cu
 WHERE ventFecha between concat(cu.fechaInicio, ' 00:00:00') and concat(cu.fechaFin , ' 23:59:59')
 and ventActivo=1; ";
 $resultadoVentas=$esclavo->query($sqlVentas);

@@ -7,9 +7,9 @@ $resta=[1, 3, 5, 6, 7];
 
 
 if( in_array($_POST['movimiento'], $suma) ){
-	$sql="UPDATE `producto` SET `prodStock`= `prodStock`+{$_POST['cantidad']} where `idProducto`={$_POST['idProducto']}; ";
+	$sql="UPDATE `producto` SET `prodStock`= `prodStock`+{$_POST['cantidad']}, prodAlertaStock=1 where `idProducto`={$_POST['idProducto']}; ";
 }else{
-	$sql="UPDATE `producto` SET `prodStock`=`prodStock`-{$_POST['cantidad']} where `idProducto`={$_POST['idProducto']}; ";
+	$sql="UPDATE `producto` SET `prodStock`=`prodStock`-{$_POST['cantidad']}, prodAlertaStock=1 where `idProducto`={$_POST['idProducto']}; ";
 }
 
 

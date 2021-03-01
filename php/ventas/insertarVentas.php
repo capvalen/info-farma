@@ -4,7 +4,7 @@ session_start();
 
 $Js= json_decode($_POST['Jdata'], true);
 $Jencabez=json_decode($_POST['Jencabezado'], true);
-$idUser=1;//$_SESSION['idUsuario'];
+$idUser=$_COOKIE['ckidUsuario'];//$_SESSION['idUsuario'];
 
 
 $variable='';

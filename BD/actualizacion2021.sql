@@ -1,3 +1,13 @@
+ALTER TABLE `producto` ADD `prodAlertaStock` BOOLEAN NULL DEFAULT TRUE AFTER `prodActivo`;
+ALTER TABLE `producto` CHANGE `prodActivo` `prodActivo` INT(11) NULL DEFAULT '1';
+
+
+ALTER TABLE `producto` ADD `prodActivo` INT NOT NULL DEFAULT '1' AFTER `prodPorcentaje`;
+
+
+
+
+
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteEgresoDiaxCuadreFechas`(IN `fecha1` TEXT, IN `fecha2` TEXT)
     NO SQL
