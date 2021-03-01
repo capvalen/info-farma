@@ -27,6 +27,7 @@
 							<li class="active"><a href="#tabReporteVentas" data-toggle="tab">Reporte Ventas</a></li>
 							<li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
 							<li><a href="#tabProductosTodos" data-toggle="tab">Inventario Completo</a></li>
+							<li><a href="#tabMovimientosTodos" data-toggle="tab">Todos los movimientos</a></li>
 
 						</ul>
 
@@ -86,8 +87,27 @@
 								<h3>Inventario rápido de todos los productos</h3>
 								<p>Haga click en generar reporte. Éste proceso puede demorar dependiendo de la cantidad de productos y la velocidad de su máquina.</p>
 								<button class="btn btn-default btn-outline" onclick="generarInventarioCompleto()">Generar inventario completo</button>
+								<a class="btn btn-default btn-outline " href="php/productos/inventarioCompleto_Excel.php" >Inventario completo en MS Excel</a>
 
 								<div id="tableInventarioCompleto"></div>
+							</div>
+							<div class="tab-pane fade container-fluid" id="tabMovimientosTodos">
+								<p>Haga click en generar reporte. Éste proceso puede demorar dependiendo de la cantidad de productos y la velocidad de su máquina.</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="input-daterange input-group " id="dtpReporteMovimientos">
+											<input type="text" class="input-sm form-control" name="start" autocomplete="off" id="dtpFechaMovimientosInicial" />
+											<span class="input-group-addon">-</span>
+											<input type="text" class="input-sm form-control" name="end" autocomplete="off" id="dtpFechaMovimientosFinal" />
+										</div>
+									</div>
+
+								</div>
+								<button class="btn btn-default btn-outline" onclick="generarMovimientoCompleto()">Solicitar movimientos completos</button>
+								<a class="btn btn-default btn-outline hidden" id="exportarExcelMovimientos" href="php/ventas/movimientosCompleto_excel.php"">Exportar a MS Excel</a>
+
+
+								<div id="tableMovimientosCompleto"></div>
 							</div>
 
 						</div>
@@ -248,6 +268,14 @@
 			todayHighlight: true
 		});
 		$('#dtpReporteVentas').datepicker({
+				format: "dd/mm/yyyy",
+				todayBtn: "linked",
+				daysOfWeekHighlighted: "0",
+				language: "es",
+				autoclose: true,
+				todayHighlight: true
+		});
+		$('#dtpReporteMovimientos').datepicker({
 				format: "dd/mm/yyyy",
 				todayBtn: "linked",
 				daysOfWeekHighlighted: "0",
@@ -620,6 +648,18 @@
 				console.log(resp)
 				$('#tableInventarioCompleto').html(resp);
 				$.repInvent=true;
+			});
+		}
+	}
+	function generarMovimientoCompleto() {
+		if($.repInvent){
+			$.repInvent=false;
+			$('#exportarExcelMovimientos').addClass('hidden');
+			$.ajax({url: 'php/ventas/movimientosCompleto.php', type: 'POST', data: { fecha1:  moment($('#dtpFechaMovimientosInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaMovimientosFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD') }}).done(function(resp) {
+				console.log(resp)
+				$('#tableMovimientosCompleto').html(resp);
+				$.repInvent=true;
+				$('#exportarExcelMovimientos').removeClass('hidden');
 			});
 		}
 	}

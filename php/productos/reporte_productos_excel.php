@@ -2,6 +2,8 @@
 
 	header("Content-type: application/vnd.ms-excel");
 	header("Content-Disposition: attachment; filename=Reporte_Todos_Productos_Farmacia.xls");
+	header("Pragma: no-cache");
+	header("Expires: 0");
 
 	date_default_timezone_set('America/Lima');
 

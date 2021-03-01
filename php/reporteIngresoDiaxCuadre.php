@@ -46,7 +46,6 @@ if($totalRow>=1){
 		} */
 	}
 }
-$btnVentas = "<button class='btn btn-success btn-outline'><i class='icofont icofont-basket'></i></button>";
 $sumaVentas =0;
 
 if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){
@@ -64,6 +63,8 @@ $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
 if($totalVentas>=1){
 	while($rowVentas=$resultadoVentas->fetch_assoc()){ 
+		if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower	']==2): $boton = "<button class='btn btn-sm btn-negro btn-outline' onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;
+
 		$sumaIngr += floatval($rowVentas['ventTotal']);
 		switch($rowVentas['idMoneda']){
 			case '1': 
@@ -88,7 +89,7 @@ if($totalVentas>=1){
 			<td>S/ <span class='spanCantv3'><?= $rowVentas['ventTotal'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $rowVentas['idMoneda'];?>" ><?= $rowVentas['moneDescripcion'];?></td>
 			<td class='mayuscula tdObservacion'><?= $rowVentas['ventObservacion'];?></td>
-			<td><span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span> <?php /* $boton; */ ?></td> </tr>
+			<td><span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span> <?= $boton; ?></td> </tr>
 		<?php 
 	}
 }

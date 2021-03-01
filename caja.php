@@ -310,6 +310,24 @@ td{font-size: 0.95em;}
 </div>
 </div>
 
+<!-- Modal para: -->
+<div class='modal fade ' id="modalModificarCaja" tabindex='-1' role='dialog' aria-hidden='true'>
+	<div class='modal-dialog modal-sm' >
+	<div class='modal-content '>
+		<div class='modal-header-danger'>
+			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+			<h4 class='modal-tittle'> Modificar caja</h4>
+		</div>
+		<div class='modal-body'>
+			<p>Desea borrar la caja seleccionada</p>
+		</div>
+		<div class='modal-footer'>
+			<button type='button' id="btnBorrarCajita" class='btn btn-danger'><i class="icofont icofont-trash"></i>	Sí</button>
+		</div>
+	</div>
+	</div>
+</div>
+
 <!-- Modal para Cambiar salida de caja  -->
 <div class="modal fade" id="modalCambiarSalidaCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
@@ -640,6 +658,18 @@ $(".modal-pagoMaestro").on("shown.bs.modal", function () { $('#sltMetodopago').s
 function abriCajon(){
 	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
 }
+function editarCajaMaestra(idVenta){
+	$.idVenta=idVenta;
+	$('#modalModificarCaja').modal('show');
+}
+$('#btnBorrarCajita').click(function() {
+	$.ajax({url: 'php/ventas/anularVenta.php', type: 'POST', data: { idVenta:$.idVenta }}).done(function(resp) {
+		console.log(resp)
+		if(resp=='ok'){
+			location.reload();
+		}
+	});
+});
 $('#btnInsertPagoOmiso').click(()=> {
 	pantallaOver(true);
 	var idMoneda= $('#divCmbMetodoPago').find('.selected a').attr('data-tokens');
