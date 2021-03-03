@@ -78,96 +78,93 @@
 													placeholder="Ubique el producto por Código, Nombre o Lote">
 											</div>
 										</div>
-										<div class="col-sm-4 col-md-3">
-											<div class="form-group">
-												<label> Descripción</label>
-												<textarea type="text" rows="5" class="form-control mayuscula" id="txtprodDescripcion"
-													placeholder="Ingrese alguna descripción o algún dato extra que desee recordar luego."></textarea>
+										<div class="row">
+											<div class="col-sm-4 col-md-3">
+												<div class="form-group">
+													<label> Descripción</label>
+													<textarea type="text" rows="5" class="form-control mayuscula" id="txtprodDescripcion"
+														placeholder="Ingrese alguna descripción o algún dato extra que desee recordar luego."></textarea>
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label>Costo unitario S/.</label>
-												<input type="number" class="form-control text-center" id="txtprodCosto"
-													placeholder="Precio unitario">
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label>Costo unitario S/.</label>
+													<input type="number" class="form-control text-center" id="txtprodCosto"
+														placeholder="Precio unitario">
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label>% Ganancia </label>
-												<input type="number" class="form-control text-center" id="txtprodPorcentaje"
-													placeholder="Precio unitario">
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label>% Ganancia </label>
+													<input type="number" class="form-control text-center" id="txtprodPorcentaje"
+														placeholder="Precio unitario">
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label>Precio unitario: S/.</label>
-												<input type="number" class="form-control text-center" id="txtprodPrecio"
-													placeholder="Precio unitario">
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label>Precio unitario: S/.</label>
+													<input type="number" class="form-control text-center" id="txtprodPrecio"
+														placeholder="Precio unitario">
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label>Stock en inventario: </label>
-												<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock"
-													readonly>
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label>Stock en inventario: </label>
+													<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock"
+														readonly>
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label>Alerta de escasez:</label>
-												<input type="number" class="form-control text-center" id="txtprodMinimo"
-													placeholder="Alerta unidades">
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label>Alerta de escasez:</label>
+													<input type="number" class="form-control text-center" id="txtprodMinimo"
+														placeholder="Alerta unidades">
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label> Categoría</label>
-												<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-												<select class="selectpicker mayuscula" id="cmbProdCateg" data-width="auto"
-													data-live-search="true">
-													<?php require 'php/productos/listarCategorias.php'; ?>
-												</select>
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label> Categoría</label>
+													<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+													<select class="selectpicker mayuscula" id="cmbProdCateg" data-width="auto"
+														data-live-search="true">
+														<?php require 'php/productos/listarCategorias.php'; ?>
+													</select>
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="form-group">
-												<label> Propiedad</label>
-												<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-												<select class="selectpicker mayuscula" id="cmbProdProp" data-width="auto"
-													data-live-search="true">
-													<?php require 'php/productos/listarPropiedadProducto.php'; ?>
-												</select>
+											<div class="col-sm-3 col-md-2">
+												<div class="form-group">
+													<label> Propiedad</label>
+													<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+													<select class="selectpicker mayuscula" id="cmbProdProp" data-width="auto"
+														data-live-search="true">
+														<?php require 'php/productos/listarPropiedadProducto.php'; ?>
+													</select>
+												</div>
 											</div>
-										</div>
-
-										<div class="col-sm-2 ">
-											<div class="form-group">
-												<label> Laboratorio</label>
-												<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-												<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%"
-													data-live-search="true" title="Seleccione un laboratorio">
-													<?php require 'php/config/listarLaboratorios.php'; ?>
-												</select>
+											<div class="col-sm-3 col-md-2 ">
+												<div class="form-group">
+													<label> Laboratorio</label>
+													<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+													<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%"
+														data-live-search="true" title="Seleccione un laboratorio">
+														<?php require 'php/config/listarLaboratorios.php'; ?>
+													</select>
+												</div>
 											</div>
 										</div>
 										<div class="clearfix visible-lg"></div>
-										<div class="col-sm-5">
+										<div class="col-sm-12- col-md-5">
 											<label> Códigos de barra</label>
 											<div class="panel panel-default">
 												<div class="panel-body">
 													<div class="col-sm-9">
 														<div class="input-group">
 															<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
-															<span class="input-group-btn"> <button class="btn btn-warning btn-outline"
-																	id="btn-addbarra" type="button"><span
-																		class="icofont icofont-clip"></span></button></span>
+															<span class="input-group-btn"> <button class="btn btn-warning btn-outline"  type="button"><span class="icofont icofont-clip"></span></button></span>
 														</div>
 													</div>
 													<div class="col-sm-3">
-														<button class="btn btn-default btn-outline" id="btnVerBarras"><i
-																class="icofont icofont-idea"></i> Ver códigos <small>(<span
-																	id="spanCantBarr"></span>)</small></button>
+														<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-idea"></i> Ver códigos <small>(<span id="spanCantBarr"></span>)</small></button>
 
 													</div>
 
@@ -175,7 +172,7 @@
 											</div>
 										</div>
 
-										<div class="col-sm-6">
+										<div class="col-sm-12 col-md-6">
 
 											<label> Lotes</label>
 											<div class="panel panel-default">
@@ -221,11 +218,11 @@
 									<div class="panel panel-default">
 										<div class="panel-body">
 											<div class="row">
-												<div class="col-sm-7">
+												<div class="col-sm-6">
 													<h4>Movimientos:</h4>
 												</div>
 												<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
-												<div class="col-sm-4">
+												<div class="col-sm-6">
 													<button class="btn btn-default" id="btnAddStock"> <i class="icofont icofont-circled-up"></i>
 														Agregar Stock </button>
 													<button class="btn btn-default" id="btnLessStock"> <i
@@ -1374,7 +1371,12 @@
 				let suma = [2, 4];
 				let resta = [1, 3, 5, 6, 7];
 				let movi = $('#sltOpcionesMovimiento option[value="' + $('#sltOpcionesMovimiento').val() + '"]').text();
-				let stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val());
+				let stock;
+				if( suma.indexOf($('#sltOpcionesMovimiento').val())>0 ){
+					stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val());
+				}else{
+					stock = parseInt($('#txtprodStock').val()) - parseInt($('#txtMovimientoCant').val());
+				}
 
 				if (resp = 'ok') {
 					$('#txtprodStock').val(stock);
