@@ -370,14 +370,11 @@
 										</div>
 										<div class="col-sm-3">
 											<div class="form-group">
-												<label> Código de Barras <small onclick="verBarrasPreGuardar()"><a class="text-decoration-none"
-															href="#!">(Ver códigos) <span class="badge" id="badCantBarras">0</span>
-														</a></small></label>
+												<label> Código de Barras <small onclick="verBarrasPreGuardar()"><a class="text-decoration-none" href="#!">(Ver códigos) <span class="badge" id="badCantBarras">0</span> </a></small> </label>
 												<div class="input-group">
 													<input type="text" class="form-control mayuscula" id="txtBarrasN">
 													<span class="input-group-btn">
-														<button class="btn btn-default" type="button" id="btnAddBarraN"><i
-																class="icofont icofont-ui-add"></i></button>
+														<button class="btn btn-default" type="button" id="btnAddBarraN"><i class="icofont icofont-ui-add"></i></button>
 													</span>
 												</div>
 											</div>
@@ -410,10 +407,21 @@
 											<div class="form-group">
 												<label> Laboratorio</label>
 												<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-												<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%"
-													data-live-search="true" title="Laboratorio...">
-													<?php require 'php/config/listarLaboratorios.php'; ?>
-												</select>
+												<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true" title="Laboratorio..."> <?php require 'php/config/listarLaboratorios.php'; ?> </select>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div class="form-group">
+											<label> Lotes y vencimientos <small onclick="verLotesPreGuardar()"><a class="text-decoration-none" href="#!">(Ver Lotes) <span class="badge" id="banAddLote">0</span> </a></small></label>
+														<input type="number" class="form-control mayuscula" id="txtCantLoteN" min=0 step=1 value="1" >
+														<input type="text" class="form-control mayuscula" id="txtCodeLoteN" placeholder="Cód. de lote" autocomplete="nope">
+												<div class="input-group">
+													<span class="input-group-btn">
+														<input type="date" class="form-control " id="txtLoteN" style="width:90%">
+														<button class="btn btn-default" type="button" id="btnAddLoteN"><i class="icofont icofont-ui-add"></i></button>
+													</span>
+												</div>
 											</div>
 										</div>
 
@@ -424,17 +432,15 @@
 
 								</div>
 								<div class="row col-sm-12">
-									<button class="btn btn-success btn-outline pull-right btn-lg" id="btnCrearNuevoProducto"><i
-											class="icofont icofont-diskette"></i> Crear nuevo producto</button>
+									<button class="btn btn-success btn-outline pull-right btn-lg" id="btnCrearNuevoProducto"><i class="icofont icofont-diskette"></i> Crear nuevo producto</button>
 								</div>
 
 								<!--Fin de pestaña 03-->
 							</div>
 						</div>
-					</div>
 					<?php } ?>
 					<!-- Fin de meter contenido principal -->
-				</div>
+				
 
 			</div>
 		</div>
@@ -513,22 +519,35 @@
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header-success">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-							aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title"><i class="icofont icofont-help-robot"></i> Listado de barras</h4>
 				</div>
 				<div class="modal-body">
 					<div class="container-fluid" id="divsBarras">
-
-
 					</div>
 				</div>
-				<div class="modal-footer"> <button class="btn btn-default btn-outline" data-dismiss="modal"><i
-							class="icofont icofont-alarm"></i> Ok</button></div>
+				<div class="modal-footer"> <button class="btn btn-default btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button></div>
 			</div>
 		</div>
 	</div>
 
+<!-- Modal para: nuevos lotes -->
+<div class='modal fade modal-LotesN' tabindex='-1' role='dialog' aria-hidden='true'>
+	<div class='modal-dialog modal-sm' >
+	<div class='modal-content '>
+		<div class='modal-header-success'>
+			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+			<h4 class="modal-title"><i class="icofont icofont-help-robot"></i> Listado de Lotes y vencimientos</h4>
+		</div>
+		<div class='modal-body'>
+			<div class="container-fluid" id="divsLotesN"></div>
+		</div>
+		<div class='modal-footer'>
+			<button type='button' class='btn btn-success' data-dismiss="modal">Ok</button>
+		</div>
+		</div>
+	</div>
+</div>
 
 	<!-- Modal para indicar que falta completar campos o datos con error -->
 	<div class="modal fade modal-felicitacion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -669,6 +688,7 @@
 		$('.selectpicker').selectpicker('refresh');
 		$('.mitooltip').tooltip();
 		$.listadoBarras = [];
+		$.listadoLotes = [];
 
 
 		habilitarDivFecha();
@@ -1306,7 +1326,8 @@
 						porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(),
 						propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'),
 						stock: $('#tabCrearProducto #txtprodStock').val(),
-						barritas: $.listadoBarras
+						barritas: $.listadoBarras,
+						lotesN: $.listadoLotes
 					}
 				}).done(function(resp) {
 					console.log(resp)
@@ -1368,32 +1389,37 @@
 				}
 			}).done(function(resp) {
 				//console.log(resp)
-				let suma = [2, 4];
-				let resta = [1, 3, 5, 6, 7];
-				let movi = $('#sltOpcionesMovimiento option[value="' + $('#sltOpcionesMovimiento').val() + '"]').text();
-				let stock;
-				if( suma.indexOf($('#sltOpcionesMovimiento').val())>0 ){
-					stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val());
-				}else{
-					stock = parseInt($('#txtprodStock').val()) - parseInt($('#txtMovimientoCant').val());
-				}
-
+				var suma = ['2', '4'];
+				var resta = ['1', '3', '5', '6', '7'];
+				var movi = $('#sltOpcionesMovimiento option[value="' + $('#sltOpcionesMovimiento').val() + '"]').text();
+				var stock;
+				
+				
+				//console.log( 'agregar '+ stock );
 				if (resp = 'ok') {
+					if( suma.indexOf($('#sltOpcionesMovimiento').val())>=0 ){
+							stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val());
+							$('#divEntradasYSalidas').prepend(`
+								<tr>
+									<td>-</td>
+									<td>${movi}</td>
+									<td>+${$('#txtMovimientoCant').val()}</td>
+									<td>${moment().format('DD/MM/YYYY')}</td>
+									<td><?= $_COOKIE['ckAtiende']; ?></td>
+								</tr>`);}
+						if( resta.indexOf($('#sltOpcionesMovimiento').val())>=0 ){
+							stock = parseInt($('#txtprodStock').val()) - parseInt($('#txtMovimientoCant').val());
+							$('#divEntradasYSalidas').prepend(`
+								<tr>
+									<td>-</td>
+									<td>${movi}</td>
+									<td>-${$('#txtMovimientoCant').val()}</td>
+									<td>${moment().format('DD/MM/YYYY')}</td>
+									<td><?= $_COOKIE['ckAtiende']; ?></td>
+								</tr>`);
+						}
+						
 					$('#txtprodStock').val(stock);
-					if (suma.indexOf($('#sltOpcionesMovimiento').val())) {
-						$('#divEntradasYSalidas').prepend(`
-						<tr>
-							<td>-</td>
-							<td>${movi}</td>
-							<td>${$('#txtMovimientoCant').val()}</td>
-							<td>${moment().format('DD/MM/YYYY')}</td>
-							<td><?= $_COOKIE['ckAtiende']; ?></td>
-						</tr>
-					`);
-					}
-					if (suma.indexOf($('#sltOpcionesMovimiento').val())) {
-
-					}
 				}
 			});
 		}
@@ -1455,6 +1481,24 @@
 		$('#badCantBarras').text($.listadoBarras.length);
 
 	}
+	function eliminarListaLotes(index, loteA, vencimiento) {
+
+		$.each($('#divsLotesN .contLote'), function(i, contenido) { //console.log( lote + vencimiento );
+			if (loteA + ' - ' + vencimiento == $(contenido).text()) {
+				//console.log( 'te encontre' );
+				$(contenido).parent().remove();
+			}
+		})
+		$.each($.listadoLotes, function(i, lotes){ console.log( lotes.vence );
+			if( lotes['lote'] == loteA && lotes['vence'] == vencimiento){
+				$.listadoLotes.splice(i, 1);
+				return false;
+			}
+		})
+
+		$('#banAddLote').text($.listadoLotes.length);
+
+	}
 
 	function verBarrasPreGuardar() {
 		//console.log( $.listadoBarras );
@@ -1466,7 +1510,14 @@
 				);
 		})
 		$('.modal-barras').modal('show');
-
+	}
+	function verLotesPreGuardar() {
+		console.log( $.listadoLotes );
+		$('#divsLotesN').children().remove();
+		$.each($.listadoLotes, function(i, elem) { console.log( elem );
+			$('#divsLotesN').append(`<div class="row"><button class="btn btn-danger btn-outline btn-xs" onclick="eliminarListaLotes(${i}, '${elem.lote}', '${elem.vence}')"><i class="icofont icofont-close"></i></button> <span class="contLote">${elem.lote} - ${elem.vence}</span></div>`);
+		})
+		$('.modal-LotesN').modal('show'); 
 	}
 
 	function addBarraN() {
@@ -1499,7 +1550,20 @@
 			$('#txtBarrasN').val('');
 			$('#txtBarrasN').focus();
 		}
+	}
+	function addLoteN() {
+		/* $.listaBarras; */
+		if ( moment($('#txtLoteN').val()).isValid() && $('#txtCantLoteN').val()!='' ) {
+			$.listadoLotes.push({lote: $('#txtCodeLoteN').val(), vence: $('#txtLoteN').val(), cantidad: $('#txtCantLoteN').val() });
+			
+			$('#banAddLote').text($.listadoLotes.length);
 
+			$('#txtCodeLoteN').val('');
+			$('#txtCodeLoteN').focus();
+		} else {
+			$('#txtCodeLoteN').val('');
+			$('#txtCodeLoteN').focus();
+		}
 	}
 	$('#btnAddBarraN').click(function() {
 		addBarraN();
@@ -1507,6 +1571,14 @@
 	$('#txtBarrasN').keypress(function(e) {
 		if (e.keyCode == 13) {
 			addBarraN();
+		}
+	});
+	$('#btnAddLoteN').click(function() {
+		addLoteN();
+	});
+	$('#txtLoteN').keypress(function(e) {
+		if (e.keyCode == 13) {
+			addLoteN();
 		}
 	});
 	$('#liYaAgotados').click(function() {

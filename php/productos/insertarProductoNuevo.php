@@ -22,14 +22,24 @@ if ($llamadoSQL = $conection->query($sql)) { //Ejecución mas compleja con retor
 
 
 if( $producto>0){
-	$sqlBarras="";
-	
-	foreach ($_POST['barritas'] as $barra) {
-		/* echo $barra." \n"; */
-		$sqlBarras=$sqlBarras."call insertarBarraPorId('".$barra."', ".$producto."); ";
+	$sqlBarras=""; $sqlLotes='';
+
+	if (isset($_POST['barritas'])){
+		foreach ($_POST['barritas'] as $barra) {
+			/* echo $barra." \n"; */
+			$sqlBarras=$sqlBarras."call insertarBarraPorId('".$barra."', ".$producto."); ";
+		}
+		$resultadoBarras=$dependencia->multi_query($sqlBarras);
 	}
 	
-	$resultadoBarras=$dependencia->multi_query($sqlBarras);
+	if (isset($_POST['lotesN'])){
+		foreach ($_POST['lotesN'] as $lotes) {
+			$sqlLotes=$sqlLotes."INSERT INTO `detalleproductos`(`idDetalle`, `idProducto`, `prodPrecioUnitario`, `prodLote`, `prodFechaVencimiento`, `prodFechaRegistro`, `prodCantidadXLote`, `prodDisponible`) VALUES 
+			(null, {$producto}, 0, '{$lotes['lote']}', '{$lotes['vence']}', now(), {$lotes['cantidad']}, 1); ";
+		}
+		$resultadoBarras=$esclavo->multi_query($sqlLotes);
+
+	}
 
 }
 
