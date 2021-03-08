@@ -43,7 +43,7 @@ include 'php/variablesGlobales.php';
 					<div class="panel-body">
 						<div class="row col-md-8" style="padding-bottom: 2rem;"><label class="purple-text text-darken-3">Ubique el producto: </label> <span class="red-text  hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
 							<div class="input-group"> 
-								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote">
+								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote" autocomplete="nope">
 								<span class="input-group-btn">
 									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoVenta" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>

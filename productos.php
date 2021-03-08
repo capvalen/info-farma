@@ -50,8 +50,7 @@
 									<p>Primero ubique el producto a modificar o detallar:</p>
 									<div class="col-sm-6">
 										<div class="input-group">
-											<input type="text" class="form-control control-morado" id="txtBuscarProductoProd"
-												placeholder="Nombre, Cod. interno, Cod. barras">
+											<input type="text" class="form-control control-morado" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
 											<span class="input-group-btn">
 												<button class="btn btn-warning btn-outline" id="btn-BuscarProductoProd" type="button"><span
 														class="glyphicon glyphicon-search"></span></button>
@@ -160,7 +159,7 @@
 													<div class="col-sm-9">
 														<div class="input-group">
 															<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
-															<span class="input-group-btn"> <button class="btn btn-warning btn-outline"  type="button"><span class="icofont icofont-clip"></span></button></span>
+															<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="icofont icofont-clip"></span></button></span>
 														</div>
 													</div>
 													<div class="col-sm-3">

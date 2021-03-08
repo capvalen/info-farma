@@ -28,7 +28,7 @@ $i=1;
 $sql="SELECT `idProducto`, `prodNombre`, `prodStock`, `prodStockMinimo`, `prodPrecio`, `prodCosto`, `prodPorcentaje` , ca.catprodDescipcion
 FROM `producto` pro
 inner join categoriaproducto ca on ca.idCategoriaProducto = pro.idCategoriaProducto
-WHERE 1";
+WHERE pro.prodActivo=1";
 $resultado=$cadena->query($sql);
 while($row=$resultado->fetch_assoc()){ ?>
 		<tr>
