@@ -42,12 +42,22 @@ include 'php/variablesGlobales.php';
 					
 					<div class="panel-body">
 						<div class="row col-md-8" style="padding-bottom: 2rem;"><label class="purple-text text-darken-3">Ubique el producto: </label> <span class="red-text  hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
-							<div class="input-group"> 
-								<input type="text" class="form-control control-morado" id="txtBuscarProductoVenta" placeholder="Busque por Nombre, Cod. interno, # de Lote" autocomplete="nope">
+							
+							<div class="input-group">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="combTipoBusqueda">Busq. Normal <span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li onclick="$(this).parent().prev().html(`Busq. Normal <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre, Cod. interno, Cod. barras')"><a href="#">Búsqueda normal</a></li>
+										<li role="separator" class="divider"></li>
+										<li onclick="$(this).parent().prev().html(`Busq. por Lote <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre del Lote')"><a href="#">Búsqueda por lote</a></li>
+									</ul>
+								</div><!-- /btn-group -->
+								<input type="text" class="form-control" id="txtBuscarProductoVenta" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
 								<span class="input-group-btn">
-									<button class="btn btn-warning btn-outline" id="btn-BuscarProductoVenta" type="button"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-default" type="button" id="btn-BuscarProductoVenta"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
 							</div><!-- /input-group -->
+										
 
 						</div><!-- /.col-lg-6 -->
 						
@@ -1060,7 +1070,7 @@ $('#txtBuscarProductoVenta').keyup(function (e) {var code = e.which;
 });
 
 function llamarBuscarProducto() {
-	var filtr= String($('#txtBuscarProductoVenta').val());
+	var filtr= $.trim($('#txtBuscarProductoVenta').val());
 	/* if(esNumero(filtr)){//es numero llamar al procedure por numero
 		if($.trim($('#txtBuscarProductoVenta').val())!=''){
 		$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
@@ -1098,9 +1108,9 @@ function llamarBuscarProducto() {
 	}
 		}
 	else{//es letras llamar al procedure para que haga el filtro */
-		if(filtr!=''){
-			filtr=filtr.replace(/\ /g,'%');
-			if($.trim($('#txtBuscarProductoVenta').val())!=''){
+		if( $('#combTipoBusqueda').text()=="Busq. Normal "){
+			if(filtr!=''){
+				filtr=filtr.replace(/\ /g,'%');
 				$('#terminoBusq').text($('#txtBuscarProductoVenta').val());
 				$.ajax({url: 'php/productos/buscarProductoXNombreOLote.php', type: "POST", data: {filtro: filtr }
 				}).success(function (resp) {
@@ -1119,7 +1129,7 @@ function llamarBuscarProducto() {
 							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+							<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
 							<div class="col-xs-6 col-sm-1 text-center" onclick="pasarACanasta(${index})"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
@@ -1132,7 +1142,36 @@ function llamarBuscarProducto() {
 					$('.mitooltip').tooltip();			
 				});
 			}
+		}else{
+			$.ajax({url: 'php/productos/buscarProductoXLote.php', type: "POST", data: {filtro: filtr }
+				}).success(function (resp) {
+					if(JSON.parse(resp).length==0){$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«'+$('#txtBuscarProductoVenta').val()+'»'); }
+					else{$('#spanSinCoincidencias').addClass('hidden');}
+					$('#txtBuscarProductoVenta').val('');
+					$('#lblCantidadProd').text(JSON.parse(resp).length);
+					$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+					JSON.parse(resp).map(function (dato, index) {
+						moment.locale('es');
+						var vence='Sin fecha';
+						if(dato.prodFechaVencimiento!=''){moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()}
+						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+						<div class="row"> 
+							<div class="hidden" id="mProdID">${dato.idProducto}</div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
+							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
+							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
+							<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
+							<div class="col-xs-6 col-sm-1 text-center" onclick="pasarACanasta(${index})"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
+						</div>
+						`);
+					$('.modal-detalleProductoEncontrado').modal('show');
+
+					});
+					$('.mitooltip').tooltip();			
+				});
 		}
 }
 function pasarACanasta(index){

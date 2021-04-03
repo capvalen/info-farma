@@ -48,15 +48,25 @@
 								<!--Inicio de pestaña 01-->
 								<div class="row">
 									<p>Primero ubique el producto a modificar o detallar:</p>
-									<div class="col-sm-6">
-										<div class="input-group">
-											<input type="text" class="form-control control-morado" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
-											<span class="input-group-btn">
-												<button class="btn btn-warning btn-outline" id="btn-BuscarProductoProd" type="button"><span
-														class="glyphicon glyphicon-search"></span></button>
-											</span>
-										</div><!-- /input-group -->
-									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="input-group">
+												<div class="input-group-btn">
+													<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="combTipoBusqueda">Busq. Normal <span class="caret"></span></button>
+													<ul class="dropdown-menu">
+														<li onclick="$(this).parent().prev().html(`Busq. Normal <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre, Cod. interno, Cod. barras')"><a href="#">Búsqueda normal</a></li>
+														<li role="separator" class="divider"></li>
+														<li onclick="$(this).parent().prev().html(`Busq. por Lote <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre del Lote')"><a href="#">Búsqueda por lote</a></li>
+													</ul>
+												</div><!-- /btn-group -->
+												<input type="text" class="form-control" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button" id="btn-BuscarProductoProd"><span class="glyphicon glyphicon-search"></span></button>
+												</span>
+											</div><!-- /input-group -->
+										</div><!-- /.col-lg-6 -->
+									</div><!-- /.row -->
+								
 									<div class="sm-6"><span class="red-text hidden" id="spanSinCoincidencias">No hay ninguna coincidencia
 											con <strong><em><span></span></em></strong></span></div>
 								</div>
@@ -882,75 +892,23 @@
 	function llamarBuscarProducto() {
 		$('#divResultadoProducto').addClass('hidden');
 		var filtr = $.trim($('#txtBuscarProductoProd').val());
+		if( filtr != '' ){ /* inicio de Filtr vacio */
 
-		if (esNumero(filtr)) { //es numero llamar al procedure por numero
+			if( $('#combTipoBusqueda').text()=="Busq. Normal "){
+				if (esNumero(filtr)) { //es numero llamar al procedure por numero
 
-			if ($.trim($('#txtBuscarProductoProd').val()) != '') {
-				$('#terminoBusq').text($('#txtBuscarProductoProd').val());
-				$.ajax({
-					url: 'php/productos/buscarProductoXId.php',
-					type: "POST",
-					data: {
-						filtro: filtr
-					}
-				}).success(function(resp) { //console.log(resp)
-
-					if (JSON.parse(resp).length == 0) {
-						$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«' + $('#txtBuscarProductoProd')
-						.val() + '»');
-					} else {
-						$('#spanSinCoincidencias').addClass('hidden');
-					}
-					$('#txtBuscarProductoProd').val('');
-					$('#lblCantidadProd').text(JSON.parse(resp).length);
-					$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-					JSON.parse(resp).map(function(dato, index) {
-
-						moment.locale('es');
-						var vence = 'Sin fecha';
-						if (dato.prodFechaVencimiento != '') {
-							moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
-						}
-
-
-						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
-							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
-							<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
-							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-							<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
-							<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
-							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
-							<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
-
-						</div>
-						`);
-						$('#btnBorrarDataProducto').attr('data-id', dato.idProducto);
-						$('.modal-detalleProductoEncontrado').modal('show');
-
-					});
-					$('.mitooltip').tooltip();
-				});
-
-			}
-		} else { //es letras llamar al procedure para que haga el filtro
-			if (filtr != '') {
-				filtr = filtr.replace(/\ /g, '%'); /* '%'++'%'; */
-
-				if ($.trim($('#txtBuscarProductoProd').val()) != '') {
 					$('#terminoBusq').text($('#txtBuscarProductoProd').val());
 					$.ajax({
-						url: 'php/productos/buscarProductoXNombreOLote.php',
+						url: 'php/productos/buscarProductoXId.php',
 						type: "POST",
 						data: {
 							filtro: filtr
 						}
-					}).success(function(resp) {
+					}).success(function(resp) { //console.log(resp)
 
 						if (JSON.parse(resp).length == 0) {
 							$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«' + $('#txtBuscarProductoProd')
-								.val() + '»');
+							.val() + '»');
 						} else {
 							$('#spanSinCoincidencias').addClass('hidden');
 						}
@@ -958,6 +916,7 @@
 						$('#lblCantidadProd').text(JSON.parse(resp).length);
 						$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
 						JSON.parse(resp).map(function(dato, index) {
+
 							moment.locale('es');
 							var vence = 'Sin fecha';
 							if (dato.prodFechaVencimiento != '') {
@@ -971,7 +930,7 @@
 								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
 								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-								<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 								<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
@@ -985,9 +944,104 @@
 						$('.mitooltip').tooltip();
 					});
 
-				}
+					} else { //es letras llamar al procedure para que haga el filtro
+						filtr = filtr.replace(/\ /g, '%'); /* '%'++'%'; */
+						$('#terminoBusq').text($('#txtBuscarProductoProd').val());
+						$.ajax({
+							url: 'php/productos/buscarProductoXNombreOLote.php',
+							type: "POST",
+							data: {
+								filtro: filtr
+							}
+						}).success(function(resp) {
+
+							if (JSON.parse(resp).length == 0) {
+								$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«' + $('#txtBuscarProductoProd')
+									.val() + '»');
+							} else {
+								$('#spanSinCoincidencias').addClass('hidden');
+							}
+							$('#txtBuscarProductoProd').val('');
+							$('#lblCantidadProd').text(JSON.parse(resp).length);
+							$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+							JSON.parse(resp).map(function(dato, index) {
+								moment.locale('es');
+								var vence = 'Sin fecha';
+								if (dato.prodFechaVencimiento != '') {
+									moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
+								}
+
+
+								$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+								<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
+									<div class="hidden" id="mProdID">${dato.idProducto}</div>
+									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
+									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
+									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+									<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+									<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
+									<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
+
+								</div>
+								`);
+								$('#btnBorrarDataProducto').attr('data-id', dato.idProducto);
+								$('.modal-detalleProductoEncontrado').modal('show');
+
+							});
+							$('.mitooltip').tooltip();
+						});
+					}
 			}
-		}
+			else{
+				$.ajax({
+						url: 'php/productos/buscarProductoXLote.php',
+						type: "POST",
+						data: {
+							filtro: filtr
+						}
+					}).success(function(resp) { //console.log(resp)
+
+						if (JSON.parse(resp).length == 0) {
+							$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«' + $('#txtBuscarProductoProd')
+							.val() + '»');
+						} else {
+							$('#spanSinCoincidencias').addClass('hidden');
+						}
+						$('#txtBuscarProductoProd').val('');
+						$('#lblCantidadProd').text(JSON.parse(resp).length);
+						$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+						JSON.parse(resp).map(function(dato, index) { console.log( dato );
+
+							moment.locale('es');
+							var vence = 'Sin fecha';
+							if (dato.prodFechaVencimiento != '') {
+								moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
+							}
+
+
+							$('.modal-detalleProductoEncontrado #listadoDivs').append(`
+							<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
+								<div class="hidden" id="mProdID">${dato.idProducto}</div>
+								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
+								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
+								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+								<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
+								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
+
+							</div>
+							`);
+							$('#btnBorrarDataProducto').attr('data-id', dato.idProducto);
+							$('.modal-detalleProductoEncontrado').modal('show');
+
+						});
+						$('.mitooltip').tooltip();
+					});
+			}
+
+		} /* Fin de Filtr vacio */
 
 
 
