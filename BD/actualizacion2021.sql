@@ -1,3 +1,45 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarProductoXNombreOLote`(IN `filtro` TEXT)
+BEGIN
+SELECT DISTINCT prd.idProducto, prodNombre, prodPrecio, catprodDescipcion,
+case prodLote when '' then '-' else  upper(prodLote) end as lote,
+returnFechaProximaVencer(prd.idProducto) prodFechaVencimiento, prodStock
+FROM `producto` as prd
+INNER JOIN `detalleproductos` as det ON prd.`idProducto`=det.`idProducto`
+inner join categoriaproducto as cat on cat.idcategoriaproducto= prd.idcategoriaproducto
+left join productobarras as prb on prb.idProducto = prd.idProducto
+WHERE ( concat(catprodDescipcion , ' ', prodnombre  ) like concat('%', filtro, '%')
+or prd.idProducto like concat('%', filtro, '%')
+or prb.barrasCode = filtro )
+and prodDisponible=1 and prd.prodActivo=1
+group by prd.idProducto
+ORDER BY prd.`prodNombre` asc;
+END$$
+DELIMITER ;
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarProdimosAVencer`()
+BEGIN
+
+select p.idproducto, prodFechaVencimiento, prodNombre, prodPrecio, d.prodLote, d.idDetalle
+from detalleproductos d
+inner join producto p on p.idproducto=d.idproducto
+where prodFechaVencimiento<>'' and
+(prodFechaVencimiento <= curdate() or
+prodFechaVencimiento between now() and DATE_ADD(now(), INTERVAL 3 month) ) and prodDisponible=1
+order by prodNombre asc; /*str_to_date(prodFechaVencimiento ,'%d/%m/%Y' ) asc;*/
+/*Cambia de fecha a automatica str_to_date( fecha ,'%d/%m/%Y' )*/
+
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
 ALTER TABLE `producto` ADD `prodAlertaStock` BOOLEAN NULL DEFAULT TRUE AFTER `prodActivo`;
 ALTER TABLE `producto` CHANGE `prodActivo` `prodActivo` INT(11) NULL DEFAULT '1';
 

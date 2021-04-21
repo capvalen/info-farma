@@ -1281,9 +1281,9 @@
 			$.ajax({
 				url: 'php/productos/listarProximosAVencer.php',
 				type: 'POST'
-			}).done(function(resp) {
+			}).done(function(resp) { console.log( resp );
 				$.each(JSON.parse(resp), function(i, arg) {
-					console.log(arg)
+					//console.log(arg)
 					moment.locale('es')
 					sumaValoriz += parseFloat(arg.prodPrecio);
 					var dia = moment(arg.prodFechaVencimiento);
@@ -1384,10 +1384,9 @@
 					}
 				}).done(function(resp) {
 					console.log(resp)
-					limpiarCamposNuevo();
+					//limpiarCamposNuevo();
 					if (parseInt(resp) >= 1) {
-						$('#lblMensajeBien').text('Los datos del producto ' + $('#txtprodBarra').val() +
-							' se actualizaron correctamente .');
+						$('#lblMensajeBien').text('Los datos del producto ' + $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 						$('.modal-felicitacion').modal('show');
 						$.listadoBarras = [];
 						$('#badCantBarras').text(0);

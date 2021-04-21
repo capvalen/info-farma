@@ -37,7 +37,13 @@ if( $producto>0){
 			$sqlLotes=$sqlLotes."INSERT INTO `detalleproductos`(`idDetalle`, `idProducto`, `prodPrecioUnitario`, `prodLote`, `prodFechaVencimiento`, `prodFechaRegistro`, `prodCantidadXLote`, `prodDisponible`) VALUES 
 			(null, {$producto}, 0, '{$lotes['lote']}', '{$lotes['vence']}', now(), {$lotes['cantidad']}, 1); ";
 		}
+		//echo $sqlLotes;
 		$resultadoBarras=$esclavo->multi_query($sqlLotes);
+		/* if($resultadoBarras){
+			echo 'lotes ok';
+		}else{
+			echo 'error lotes';
+		} */
 
 	}
 
