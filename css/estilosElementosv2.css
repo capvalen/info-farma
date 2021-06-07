@@ -121,7 +121,7 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .btn-indigo.btn-outline{color:#3E50B4;}
 .btn-morita.btn-outline{color:#9B26AF;}
  
-.btn-sinBorde, .btnSinBorde {border-color: transparent!important;}
+.btn-sinBorde, .btnSinBorde {border-color: transparent!important; box-shadow: none;}
 
 .btn-primary.btn-outline:focus,.btn-success.btn-outline:focus,.btn-info.btn-outline:focus,.btn-warning.btn-outline:focus,.btn-danger.btn-outline:focus,
 .btn-primary.btn-outline:active,.btn-success.btn-outline:active,.btn-info.btn-outline:active,.btn-warning.btn-outline:active,.btn-danger.btn-outline:active,
@@ -141,7 +141,7 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
 
 #listadoDivs>.row:hover{ border-radius: 3px; background-color: #d3e6f9cc; cursor: pointer; transition: all .3s; color: #1e2d82; }
-#listadoDivs>.row{min-height: 37px; padding-top: 10px;}
+#listadoDivs>.row{min-height: 37px; padding: 0.5rem 0;}
 .close{opacity: 0.5; color: #fff;}
 .badge-morado{background-color: #fff;color: #694D9F;}
 

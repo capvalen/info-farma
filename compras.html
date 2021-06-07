@@ -391,8 +391,8 @@
 	<script src="js/bootstrap-select.min.js"></script>
 
 	<script type="text/javascript">
-	$.ajax({url:'php/config/dataInicial.php'}, type: 'POST').done(function (resultados) {
-		console.log(resultados);
+	$.ajax({url: 'php/config/dataInicial.php', type: 'POST'}).done(function(resultados) {
+		console.log(resultados)
 	});
 	$(document).ready(function(){
 		$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));

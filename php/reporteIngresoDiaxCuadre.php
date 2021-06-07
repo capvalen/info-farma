@@ -82,9 +82,9 @@ if($totalVentas>=1){
 		} ?>
 
 		<tr data-id="<?= $rowVentas['idVenta']; ?>" data-activo="<?= $rowVentas['ventActivo']; ?>" esVenta='si'>
-			<th scope='row'> V-<?= $rowVentas['idVenta'] ?> </th>
+			<th scope='row' style="cursor:pointer;"  onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> V-<?= $rowVentas['idVenta'] ?> </th>
 			<td class='mayuscula'><?= $rowVentas['cliente'] ?></td>
-			<td class='mayuscula tpIdDescripcion'>Venta</td>
+			<td class='mayuscula tpIdDescripcion'> <span style="cursor:pointer;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> Venta <i class="icofont icofont-ui-folder"></i></span></td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $rowVentas['usuNombre'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $rowVentas['ventTotal'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $rowVentas['idMoneda'];?>" ><?= $rowVentas['moneDescripcion'];?></td>

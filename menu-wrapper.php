@@ -25,7 +25,7 @@ function casoActivo($quePagina){
 					</a>
 			</div>
 			<div class="logoEmpresa ocultar-mostrar-menu">
-				<img class="img-responsive" src="images/farmacovid.png" alt="">
+				<img class="img-responsive" src="images/farmacovid.png?v=1.1" alt="">
 			</div>
 			<li <?php casoActivo('principal'); ?>>
 					<a href="principal.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>

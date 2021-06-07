@@ -1124,15 +1124,15 @@ function llamarBuscarProducto() {
 						var vence=''; //console.log( 'fecha '+ dato.prodFechaVencimiento );
 						if(dato.prodFechaVencimiento!='' && dato.prodFechaVencimiento!=null){vence = moment(dato.prodFechaVencimiento).endOf('day').fromNow()}
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row"> 
+						<div class="row" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-							<div class="col-xs-6 col-sm-1 text-center" onclick="pasarACanasta(${index})"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btn-sinBorde btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
 						</div>
 						`);
@@ -1155,15 +1155,15 @@ function llamarBuscarProducto() {
 						var vence='Sin fecha';
 						if(dato.prodFechaVencimiento!='' && !isNaN(dato.prodFechaVencimiento)){vence = moment(dato.prodFechaVencimiento).endOf('day').fromNow()}
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row"> 
+						<div class="row" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> ${index+1}. <span id="mProdNombre">${dato.prodNombre}</span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 							<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
-							<div class="col-xs-6 col-sm-1 text-center" onclick="pasarACanasta(${index})"><button class="form-control btn btn-negro btn-xs btn-outline btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
+							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btn-sinBorde btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
 						</div>
 						`);

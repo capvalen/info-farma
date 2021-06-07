@@ -185,6 +185,21 @@ td{font-size: 0.95em;}
 </div><!-- /#page-content-wrapper -->
 </div><!-- /#wrapper -->
 
+<!-- Modal para: -->
+<div class='modal fade ' id="modalDetallesVenta" tabindex='-1' role='dialog' aria-hidden='true'>
+	<div class='modal-dialog modal-sm' >
+	<div class='modal-content '>
+		<div class='modal-header-success'>
+			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+			<h4 class='modal-tittle'> Vetalles Venta</h4>
+		</div>
+		<div class='modal-body'>
+			
+		</div>
+		</div>
+	</div>
+</div>
+
 <?php if( $_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ){ ?>
 <!-- Modal para Abrir caja  -->
 
@@ -464,10 +479,10 @@ function calculoTicketVirtual() {
 	if(sobra ==0){
 		$('#spanSobra').text('Cuadre exacto');
 	}
-	if(sobra <0){
+	if(sobra > 0){
 		$('#spanSobra').text('Sobra S/ '+ sobra.toFixed(2));		
 	}
-	if(sobra > 0){
+	if(sobra < 0){
 		$('#spanSobra').text('Falta S/ '+ (0-sobra).toFixed(2));		
 	}
 	
@@ -654,6 +669,28 @@ $('.aLiProcesos').click(function() {
 	$('.modal-pagoMaestro').modal('show');
 });
 $(".modal-pagoMaestro").on("shown.bs.modal", function () { $('#sltMetodopago').selectpicker('val','Efectivo').selectpicker('refresh'); $('#txtMontoPagos').val('0.00').focus(); });
+
+function verDetalleVenta(detalle){
+	$.ajax({url: 'php/ventas/verDetalleVenta.php', type: 'POST', data: { detalle }}).done(function(resp) {
+		//console.log(resp)
+		let respuesta=JSON.parse(resp)
+		let miniSuma = 0;
+		let html ='';
+		console.log( respuesta );
+		respuesta.forEach(dato => {
+			miniSuma += parseFloat(dato.detventCantidad)*parseFloat(dato.detventPrecio);
+			$('#modalDetallesVenta .modal-body').append( "<p class='text-capitalize'>" + " S/ " + parseFloat(dato.detventPrecio).toFixed(2) + " x "+ dato.detventCantidad + " Und. <strong>"+ dato.prodNombre + "</strong></p>" )
+			//html + = ;
+
+		});
+		$('#modalDetallesVenta .modal-body' ).append("<hr><p><strong>" + 'Total = S/ ' + parseFloat(miniSuma).toFixed(2) + "</strong></p>");
+		$('#modalDetallesVenta').modal('show');
+		//console.log( miniSuma );
+
+		
+	});
+}
+
 <?php if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ) { ?>
 function abriCajon(){
 	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
