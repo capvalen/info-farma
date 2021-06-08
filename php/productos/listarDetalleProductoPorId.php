@@ -16,7 +16,8 @@ while($row = mysqli_fetch_array($log))
 		'prodPrecio' => $row['prodPrecio'],
 		'prodCosto' => $row['prodCosto'],
 		'prodPorcentaje' => $row['prodPorcentaje'],
-		'cantBarras' => $row['cantBarras']
+		'cantBarras' => $row['cantBarras'],
+		'supervisado' => $row['supervisado']
 	); 
 }
  echo json_encode($filas);

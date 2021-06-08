@@ -10,15 +10,52 @@
 
 <body>
 
-	<style>
-	#tabCrearProducto .bootstrap-select {
+<style>
+	#tabCrearProducto .bootstrap-select{
 		width: 100% !important;
 	}
 
 	.dropdown-menu {
 		z-index: 1031;
 	}
-	</style>
+
+	#panelVariantes{
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		left:0;
+		right:0;
+		background:#000000e3;
+		z-index: 1030;
+		display:none;
+	}
+	#panelEnSi {
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		width: 450px;
+		max-width: 100vw;
+		background: #f7f7f7;
+		right: 0;
+		z-index: 1031;
+		display: block;
+		position: fixed;
+		overflow: hidden;
+	}
+	#panelContenido{
+		overflow:auto;
+		height: 100%;
+	}
+	.cerrar{
+		font-size:2em; color: #fb1a1ab8; cursor:pointer;
+	}
+	.cerrar:hover{
+		color: #fb1a1a;
+	}
+	.eliminarVariante{
+		cursor:pointer;
+	}
+</style>
 
 	<div id="wrapper">
 
@@ -73,106 +110,105 @@
 								<hr>
 								<div class="hidden" id="divResultadoProducto">
 									<div class="row">
-										<div class="col-sm-2">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>Código interno </label>
-												<input type="text" class="form-control text-center" id="txtprodCodigo"
-													placeholder="Código de producto" disabled>
+												<input type="text" class="form-control text-center" id="txtprodCodigo" placeholder="Código de producto" disabled>
 											</div>
 										</div>
 										<div class="col-sm-8 ">
 											<div class="form-group">
 												<label> Nombre de producto</label>
-												<input type="text" class="form-control mayuscula" id="txtprodNombre"
-													placeholder="Ubique el producto por Código, Nombre o Lote">
+												<input type="text" class="form-control mayuscula" id="txtprodNombre" placeholder="Ubique el producto por Código, Nombre o Lote" autocomplete="off">
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-sm-4 col-md-3">
-												<div class="form-group">
-													<label> Descripción</label>
-													<textarea type="text" rows="5" class="form-control mayuscula" id="txtprodDescripcion"
-														placeholder="Ingrese alguna descripción o algún dato extra que desee recordar luego."></textarea>
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label>Costo unitario S/.</label>
-													<input type="number" class="form-control text-center" id="txtprodCosto"
-														placeholder="Precio unitario">
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label>% Ganancia </label>
-													<input type="number" class="form-control text-center" id="txtprodPorcentaje"
-														placeholder="Precio unitario">
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label>Precio unitario: S/.</label>
-													<input type="number" class="form-control text-center" id="txtprodPrecio"
-														placeholder="Precio unitario">
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label>Stock en inventario: </label>
-													<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock"
-														readonly>
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label>Alerta de escasez:</label>
-													<input type="number" class="form-control text-center" id="txtprodMinimo"
-														placeholder="Alerta unidades">
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label> Categoría</label>
-													<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-													<select class="selectpicker mayuscula" id="cmbProdCateg" data-width="auto"
-														data-live-search="true">
-														<?php require 'php/productos/listarCategorias.php'; ?>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2">
-												<div class="form-group">
-													<label> Propiedad</label>
-													<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-													<select class="selectpicker mayuscula" id="cmbProdProp" data-width="auto"
-														data-live-search="true">
-														<?php require 'php/productos/listarPropiedadProducto.php'; ?>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-3 col-md-2 ">
-												<div class="form-group">
-													<label> Laboratorio</label>
-													<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
-													<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%"
-														data-live-search="true" title="Seleccione un laboratorio">
-														<?php require 'php/config/listarLaboratorios.php'; ?>
-													</select>
-												</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Costo unitario (S/)</label>
+												<input type="number" class="form-control text-center" id="txtprodCosto" placeholder="Precio unitario">
 											</div>
 										</div>
-										<div class="clearfix visible-lg"></div>
-										<div class="col-sm-12- col-md-5">
+										<div class=" col-md-4">
+											<div class="form-group">
+												<label>Ganancia (%) </label>
+												<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Precio unitario: (S/) <a href="#!" onclick="panelVariantes()">Gestionar variantes</a></label>
+												<input type="number" class="form-control text-center" id="txtprodPrecio" placeholder="Precio unitario">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Stock en inventario: </label>
+												<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" readonly>
+											</div>
+										</div>
+										
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Alerta de escasez:</label>
+												<input type="number" class="form-control text-center" id="txtprodMinimo" placeholder="Alerta unidades">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Controlado:</label>
+												<select class="selectpicker mayuscula" id="cmbProdControlado" data-width="100%" data-live-search="true">
+													<option value="0">No</option>
+													<option value="1">Sí, cuidado</option>
+												</select>
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label> Categoría</label><br>
+											<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+											<select class="selectpicker mayuscula" id="cmbProdCateg" data-width="100%" data-live-search="true">
+												<?php require 'php/productos/listarCategorias.php'; ?>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label> Propiedad</label><br>
+											<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+											<select class="selectpicker mayuscula" id="cmbProdProp" data-width="100%" data-live-search="true">
+												<?php require 'php/productos/listarPropiedadProducto.php'; ?>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label> Laboratorio</label><br>
+											<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
+											<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true" title="Seleccione un laboratorio">
+												<?php require 'php/config/listarLaboratorios.php'; ?>
+											</select>
+										</div>
+									</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
 											<label> Códigos de barra</label>
 											<div class="panel panel-default">
 												<div class="panel-body">
-													<div class="col-sm-9">
+													<div class="col-md-9">
 														<div class="input-group">
 															<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
 															<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="icofont icofont-clip"></span></button></span>
 														</div>
 													</div>
-													<div class="col-sm-3">
+													<div class="col-md-3">
 														<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-idea"></i> Ver códigos <small>(<span id="spanCantBarr"></span>)</small></button>
 
 													</div>
@@ -180,43 +216,41 @@
 												</div>
 											</div>
 										</div>
-
-										<div class="col-sm-12 col-md-6">
-
+										<div class="col-sm-12">
 											<label> Lotes</label>
 											<div class="panel panel-default">
 												<div class="panel-body">
 													<div class="col-sm-4">
-														<input type="text" class="form-control text-center" id="txtCodigoLote"
-															placeholder="Cod. Lote" autocomplete='nope'>
+														<input type="text" class="form-control text-center" id="txtCodigoLote" placeholder="Cod. Lote" autocomplete='nope'>
 													</div>
 													<div class="col-sm-4">
-														<input type="date" class="form-control text-center" id="txtFechaLote" placeholder="Fecha"
-															value="<?= date('Y-m-d');?>">
+														<input type="date" class="form-control text-center" id="txtFechaLote" placeholder="Fecha" value="<?= date('Y-m-d');?>">
 													</div>
 													<div class="col-sm-3">
 														<div class="input-group">
-															<input type="number" class="form-control text-center" id="txtCantLote" placeholder="Cant"
-																value="1">
+															<input type="number" class="form-control text-center" id="txtCantLote" placeholder="Cant" value="1">
 															<div class="input-group-btn">
-																<button class="btn btn-warning btn-outline" id="btnInsertarVencimiento"
-																	type="button"><span class="icofont icofont-clip"></span></button>
+																<button class="btn btn-warning btn-outline" id="btnInsertarVencimiento" type="button"><span class="icofont icofont-clip"></span></button>
 															</div>
 														</div>
 
 													</div>
-													<!-- <div class="col-sm-3">
-													<button class="btn btn-default btn-outline" id="btnVerLotes"><i class="icofont icofont-idea"></i> Ver lotes</button>
-												</div> -->
 												</div>
-
 											</div>
-
-
 										</div>
 
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label> Información extra</label>
+												<textarea type="text" rows="2" class="form-control mayuscula" id="txtprodDescripcion" placeholder="Datos complementarios"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
 										<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
-										<div class="row col-sm-12">
+										<div class="col-sm-12">
 											<button class="btn btn-danger btn-outline pull-left btn-lg" id="btnBorrarDataProducto"
 												style="margin-bottom:20px;"><i class="icofont icofont-trash"></i> Borrar producto</button>
 											<button class="btn btn-primary btn-outline pull-right btn-lg" id="btnActualizarDataProducto"
@@ -224,14 +258,15 @@
 										</div>
 										<?php endif; ?>
 									</div>
+
 									<div class="panel panel-default">
 										<div class="panel-body">
 											<div class="row">
 												<div class="col-sm-6">
-													<h4>Movimientos:</h4>
+													<h4>Movimientos <small>Los 20 últimos</small></h4>
 												</div>
 												<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
-												<div class="col-sm-6">
+												<div class="col-sm-6 text-center">
 													<button class="btn btn-default" id="btnAddStock"> <i class="icofont icofont-circled-up"></i>
 														Agregar Stock </button>
 													<button class="btn btn-default" id="btnLessStock"> <i
@@ -318,80 +353,68 @@
 								<p>Rellene los campos para crear nuevo producto:</p>
 								<div id="divNuevoProducto">
 									<div class="row">
-										<div class="col-sm-2">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>Código interno </label>
 												<input type="text" class="form-control text-center" id="txtprodCodigo" value="Automático"
 													placeholder="Código de producto" disabled>
 											</div>
 										</div>
-										<div class="col-sm-8 col-md-6 ">
+										<div class="col-sm-8 col-md-8 ">
 											<div class="form-group">
 												<label> Nombre de producto</label>
-												<input type="text" class="form-control mayuscula" id="txtprodNombre"
-													placeholder="Ubique el producto por Código, Nombre o Lote">
+												<input type="text" class="form-control mayuscula" id="txtprodNombre" placeholder="Ubique el producto por Código, Nombre o Lote" autocomplete="off">
 											</div>
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
-												<label>Costo unitario S/.</label>
-												<input type="number" class="form-control text-center" id="txtprodCostoNuevo"
-													placeholder="Costo unitario" value=0.00 step=1 min=0>
+												<label>Costo unitario (S/)</label>
+												<input type="number" class="form-control text-center" id="txtprodCostoNuevo" placeholder="Costo unitario" value=0.00 step=1 min=0>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
-												<label>% Ganancia </label>
-												<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo"
-													placeholder="% Ganancia" value=30 step=1 min=0>
+												<label>Ganancia (%)</label>
+												<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="% Ganancia" value=30 step=1 min=0>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
-												<label>Precio unitario: S/.</label>
-												<input type="number" class="form-control text-center" id="txtprodPrecioNuevo"
-													placeholder="Precio unitario" value="0.00" step=1 min=0>
+												<label>Precio unitario: (S/)</label>
+												<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
 											</div>
 										</div>
-										<div class="col-sm-3">
+									</div>
+
+									<div class="row">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label>Stock inicial: </label>
-												<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock"
-													value=0 step=1 min=0>
+												<input type="number" class="form-control text-center" id="txtprodStock" placeholder="Stock" value=0 step=1 min=0>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label>Alerta de escasez:</label>
-												<input type="number" class="form-control text-center" id="txtprodMinimo"
-													placeholder="Alerta unidades" value=10 step=1 min=0>
+												<input type="number" class="form-control text-center" id="txtprodMinimo" placeholder="Alerta unidades" value=10 step=1 min=0>
 											</div>
 										</div>
-										<div class="col-sm-6">
+										<div class="col-md-4">
 											<div class="form-group">
-												<label> Descripción</label>
-												<input type="text" class="form-control mayuscula" id="txtprodDescripcion"
-													placeholder="¿Datos extra?">
-											</div>
-										</div>
-										<div class="col-sm-3">
-											<div class="form-group">
-												<label> Código de Barras <small onclick="verBarrasPreGuardar()"><a class="text-decoration-none" href="#!">(Ver códigos) <span class="badge" id="badCantBarras">0</span> </a></small> </label>
-												<div class="input-group">
-													<input type="text" class="form-control mayuscula" id="txtBarrasN">
-													<span class="input-group-btn">
-														<button class="btn btn-default" type="button" id="btnAddBarraN"><i class="icofont icofont-ui-add"></i></button>
-													</span>
-												</div>
+												<label>Controlado:</label>
+												<select class="selectpicker mayuscula" id="cmbProductoControlado" data-width="100%" data-live-search="true">
+													<option value="1">Sí, cuidado</option>
+													<option value="0" selected>No</option>
+												</select>
 											</div>
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label> Categoría</label>
 												<!-- <input type="text" class="form-control" id="txtprodCategoria" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
@@ -401,7 +424,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label> Propiedad</label>
 												<!-- <input type="text" class="form-control" id="txtprodPropiedad" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
@@ -412,15 +435,28 @@
 											</div>
 										</div>
 
-										<div class="col-sm-3 ">
+										<div class="col-md-4 ">
 											<div class="form-group">
 												<label> Laboratorio</label>
 												<!-- <input type="text" class="form-control" id="txtprodLaboratorio" placeholder="Ubique el producto por Código, Nombre o Lote"> -->
 												<select class="selectpicker mayuscula" id="cmbProdLaboratorio" data-width="100%" data-live-search="true" title="Laboratorio..."> <?php require 'php/config/listarLaboratorios.php'; ?> </select>
 											</div>
 										</div>
+									</div>
 
-										<div class="col-sm-3">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label> Código de Barras <small onclick="verBarrasPreGuardar()"><a class="text-decoration-none" href="#!">(Ver códigos) <span class="badge" id="badCantBarras">0</span> </a></small> </label>
+												<div class="input-group">
+													<input type="text" class="form-control mayuscula" id="txtBarrasN">
+													<span class="input-group-btn">
+														<button class="btn btn-default" type="button" id="btnAddBarraN"><i class="icofont icofont-ui-add"></i></button>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
 											<div class="form-group">
 											<label> Lotes y vencimientos <small onclick="verLotesPreGuardar()"><a class="text-decoration-none" href="#!">(Ver Lotes) <span class="badge" id="banAddLote">0</span> </a></small></label>
 														<input type="number" class="form-control mayuscula" id="txtCantLoteN" min=0 step=1 value="1" >
@@ -434,14 +470,20 @@
 											</div>
 										</div>
 
-
-
 									</div>
 
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Información adicional</label>
+												<input type="text" class="form-control mayuscula" id="txtprodDescripcion" placeholder="Datos complementarios">
+											</div>
+										</div>
+									</div>
 
 								</div>
-								<div class="row col-sm-12">
-									<button class="btn btn-success btn-outline pull-right btn-lg" id="btnCrearNuevoProducto"><i class="icofont icofont-diskette"></i> Crear nuevo producto</button>
+								<div class="row">
+									<div class="col-md-12"><button class="btn btn-success btn-outline pull-right btn-lg" id="btnCrearNuevoProducto"><i class="icofont icofont-diskette"></i> Crear nuevo producto</button></div>
 								</div>
 
 								<!--Fin de pestaña 03-->
@@ -480,7 +522,7 @@
 
 					</div>
 					<div class="row container-fluid text-right" style="padding-right: 100px"><strong>Total valorizado:</strong>
-						<span id="spanvalorInvent">S/. 3.00</span></div>
+						<span id="spanvalorInvent">S/ 3.00</span></div>
 				</div>
 				<div class="modal-footer"> <button class="btn btn-primary btn-outline" data-dismiss="modal"></i><i
 							class="icofont icofont-alarm"></i> Aceptar</button></div>
@@ -677,6 +719,53 @@
 			</div>
 		</div>
 	</div>
+	<div id="panelVariantes">
+		<div id="panelEnSi">
+			<div id="panelContenido" class="container-fluid">
+				<div class="row">
+					<div class="col" style="padding:1rem">
+						<span class="cerrar" onclick="cerrarPanel()"><i class="icofont icofont-close"></i></span>
+						<h4><strong>Variantes de precio en presentaciones:</strong></h4>
+						<p>Seleccione el item en cual desea agregar para variar</p>
+						<p><strong>Precio por:</strong></p>
+						<div class="form-inline">
+							<div class="form-group">
+									<select id="sltVariantes" class="form-control" name="">
+										<option value="1">Blister</option>
+										<option value="2">Caja</option>
+										<option value="4">Descuento especial</option>
+										<option value="3">Por mayor</option>
+										<option value="5">Six-Pack</option>
+									</select>
+							</div>
+							<button class="btn btn-outline btn-primary" onclick="addVariant()"><i class="icofont icofont-plus"></i></button>
+							<button class="btn btn-outline btn-success" onclick="saveVariant()"><i class="icofont icofont-save"></i> Guardar</button>
+						</div>
+						<div class="panel panel-default" style="margin-top:1em">
+							<div class="panel-body" id="bodyVariantes">
+								<!-- No hay precios variables -->
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Tipo</th>
+											<th>Precio</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- <tr>
+											<td><span class="eliminarVariante" onclick="eliminarVariante()"><i class="icofont icofont-close"></i></span> Descuento especial</td>
+											<td><input type="number" class="form-control esMoneda"></td>
+										</tr> -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 
 	<!-- jQuery -->
@@ -698,7 +787,7 @@
 		$('.mitooltip').tooltip();
 		$.listadoBarras = [];
 		$.listadoLotes = [];
-
+		$.listaVariantes=[];
 
 		habilitarDivFecha();
 
@@ -782,12 +871,12 @@
 				sumaValoriz += parseFloat(arg.total);
 				var dia = moment(arg.comptFecha);
 				$(`.tabConenidoMeses #mes${indMes}`).append(`
-				<div class="row resulDiv noselect" style="cursor:default"><div class="col-xs-2 codDivInv" >${arg.idCompras}</div><div class="col-xs-3">${dia.format('dddd, DD h:mm a')}</div><div class="col-xs-2 argTotal">S/. ${arg.total}</div><div class="col-xs-2">${arg.Usuario}</div> <div class="col-xs-1"><button class="btn btn-danger btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
+				<div class="row resulDiv noselect" style="cursor:default"><div class="col-xs-2 codDivInv" >${arg.idCompras}</div><div class="col-xs-3">${dia.format('dddd, DD h:mm a')}</div><div class="col-xs-2 argTotal">S/ ${arg.total}</div><div class="col-xs-2">${arg.Usuario}</div> <div class="col-xs-1"><button class="btn btn-danger btn-outline btnDetalleInvLista" id="${arg.idSimple}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
 				`);
 				//console.log(arg.comptFecha)
 			});
 			$(`.tabConenidoMeses #mes${indMes}`).prepend(
-				`<p class="text-center"><strong>Suma valorizada: </strong> S/. ${sumaValoriz.toFixed(2)}</p>`);
+				`<p class="text-center"><strong>Suma valorizada: </strong> S/ ${sumaValoriz.toFixed(2)}</p>`);
 		});
 
 
@@ -812,7 +901,7 @@
 				$('#detProductoInv').append(`<div class="row container  "><div class="col-xs-4 text-capitalize">${elem.prodNombre}</div>
 					<div class="col-xs-1 ">${elem.detcomprCantidad}</div>
 					<div class="col-xs-2">${elem.detcomprPrecioUnitario}</div>
-					<div class="col-xs-2">S/. ${elem.detcomprSubTotal}</div></div>`);
+					<div class="col-xs-2">S/ ${elem.detcomprSubTotal}</div></div>`);
 			});
 
 			$('.modal-mostrarDetalleInventario').modal('show');
@@ -923,12 +1012,13 @@
 								moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
 							}
 
-
+							let alerProd ='';
+							if(dato.supervisado=='1'){ alerProd = 'text-danger' }
 							$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-							<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
+							<div class="row ${alerProd}" onclick='mostrarProducto(${dato.idProducto})'>
 								<div class="hidden" id="mProdID">${dato.idProducto}</div>
 								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
-								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
@@ -971,12 +1061,13 @@
 									moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
 								}
 
-
+								let alerProd ='';
+								if(dato.supervisado=='1'){ alerProd = 'text-danger' }
 								$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-								<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
+								<div class="row ${alerProd}" onclick='mostrarProducto(${dato.idProducto})'>
 									<div class="hidden" id="mProdID">${dato.idProducto}</div>
 									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
-									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 									<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
@@ -1024,7 +1115,7 @@
 							<div class="row" onclick='mostrarProducto(${dato.idProducto})'> 
 								<div class="hidden" id="mProdID">${dato.idProducto}</div>
 								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
-								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/. </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
+								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
@@ -1076,6 +1167,7 @@
 				$('#txtprodPorcentaje').val(dato.prodPorcentaje);
 				$('#spanCantBarr').text(dato.cantBarras);
 				$('#cmbProdCateg').selectpicker('val', dato.idCategoriaProducto);
+				$('#cmbProdControlado').selectpicker('val', dato.supervisado);
 				$('#cmbProdProp').selectpicker('val', dato.idPropiedadProducto);
 				$('#cmbProdLaboratorio').selectpicker('val', dato.idLaboratorio);
 			});
@@ -1380,7 +1472,8 @@
 						propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'),
 						stock: $('#tabCrearProducto #txtprodStock').val(),
 						barritas: $.listadoBarras,
-						lotesN: $.listadoLotes
+						lotesN: $.listadoLotes,
+						controlado: $('#cmbProductoControlado').val()
 					}
 				}).done(function(resp) {
 					console.log(resp)
@@ -1390,6 +1483,7 @@
 						$('.modal-felicitacion').modal('show');
 						$.listadoBarras = [];
 						$('#badCantBarras').text(0);
+						$('#btnCrearNuevoProducto').removeClass('disabled')
 					}
 					if (parseInt(resp) == 0) {
 						$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
@@ -1617,6 +1711,69 @@
 			$('#txtCodeLoteN').focus();
 		}
 	}
+	function panelVariantes(){
+		$.listaVariantes=[];
+		redibujarVariables();
+		$.ajax({url: 'php/productos/nombresVariables.php', type: 'POST' }).done(function(resp) {
+			$.nombresVariables = JSON.parse(resp);
+		});
+		$.ajax({url: 'php/productos/precioVariante.php', type: 'POST', data: { idProd: $('#txtprodCodigo').val() }}).done(function(resp) {
+			//console.log(resp)
+			if(resp!='error'){
+				$.listaVariantes = JSON.parse(resp);
+				redibujarVariables();
+			}
+			console.log( $.listaVariantes );
+		});
+		
+		$('#panelVariantes').css('display', 'block');
+	}
+	function cerrarPanel(){
+		$('#panelVariantes').css('display', 'none');
+	}
+	function addVariant(){
+		var variable = $('#sltVariantes').val();
+		var nombre = $.nombresVariables.filter( variante => { return parseInt(variante.id) == parseInt(variable) })[0].nombre;
+		//console.log( "agregando"+ nombre );
+		
+		
+		if($.listaVariantes.map(dato => parseInt(dato.queEs)).indexOf( parseInt(variable) )==-1){
+			$.listaVariantes.push({queEs: variable, nombre, nPrecio: 0});
+		}
+		redibujarVariables();
+
+	}
+	function redibujarVariables(){
+		$('#bodyVariantes tbody').html('');
+		if($.listaVariantes.length ==0){
+			$('#bodyVariantes tbody').append(`<tr><td colspan=2>No hay precios registrados</td></tr>`)
+		}else{
+			$.listaVariantes.forEach((dato, index) => { //console.log( 'inidce '+ index );
+				$('#bodyVariantes tbody').append(`<tr>
+					<td><span class="eliminarVariante" onclick="eliminarVariante(${index})"><i class="icofont icofont-close"></i></span> ${dato.nombre}</td>
+					<td><input type="number" class="form-control esMoneda" onkeyup="cambiarValorVariante(this, ${index})" value="${parseFloat(dato.nPrecio).toFixed(2)}"></td>
+				</tr>`);
+			});
+		}
+	}
+	function cambiarValorVariante(e, indice){
+		//console.log( indice );
+		$.listaVariantes[indice].nPrecio = parseFloat(e.value);
+	}
+	function eliminarVariante(indice){
+		$.listaVariantes.splice(indice,1);
+		redibujarVariables();
+	}
+	function saveVariant(){
+		$.ajax({url: 'php/productos/guardarVariante.php', type: 'POST', data: { idProd: $('#txtprodCodigo').val(), lista: $.listaVariantes }}).done(function(resp) {
+			console.log(resp);
+			if(resp=='ok'){
+				alert('Datos actualizados');
+			}else{
+				alert('Hubo un error, intente nuevamente');
+			}
+		});
+	}
 	$('#btnAddBarraN').click(function() {
 		addBarraN();
 	});
@@ -1655,7 +1812,7 @@
 		}).done(function(resp) {
 			//console.log(resp)
 			$('#modalBorrarProducto').modal('hide');
-			alert('Producto borrado completamente');
+		//	alert('Producto borrado completamente');
 			if (resp == 'ok') {
 				location.reload();
 			}

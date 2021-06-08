@@ -1123,8 +1123,12 @@ function llamarBuscarProducto() {
 						moment.locale('es');
 						var vence=''; //console.log( 'fecha '+ dato.prodFechaVencimiento );
 						if(dato.prodFechaVencimiento!='' && dato.prodFechaVencimiento!=null){vence = moment(dato.prodFechaVencimiento).endOf('day').fromNow()}
+
+						let alerProd ='';
+						if(dato.supervisado=='1'){ alerProd = 'text-danger' }
+
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row" onclick="pasarACanasta(${index})">
+						<div class="row ${alerProd}" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
 							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
@@ -1154,8 +1158,12 @@ function llamarBuscarProducto() {
 						moment.locale('es');
 						var vence='Sin fecha';
 						if(dato.prodFechaVencimiento!='' && !isNaN(dato.prodFechaVencimiento)){vence = moment(dato.prodFechaVencimiento).endOf('day').fromNow()}
+
+						let alerProd ='';
+						if(dato.supervisado=='1'){ alerProd = 'text-danger' }
+
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-						<div class="row" onclick="pasarACanasta(${index})">
+						<div class="row ${alerProd}" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
 							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>

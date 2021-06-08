@@ -675,8 +675,8 @@ function verDetalleVenta(detalle){
 		//console.log(resp)
 		let respuesta=JSON.parse(resp)
 		let miniSuma = 0;
-		let html ='';
-		console.log( respuesta );
+		
+		$('#modalDetallesVenta .modal-body' ).html('')
 		respuesta.forEach(dato => {
 			miniSuma += parseFloat(dato.detventCantidad)*parseFloat(dato.detventPrecio);
 			$('#modalDetallesVenta .modal-body').append( "<p class='text-capitalize'>" + " S/ " + parseFloat(dato.detventPrecio).toFixed(2) + " x "+ dato.detventCantidad + " Und. <strong>"+ dato.prodNombre + "</strong></p>" )
