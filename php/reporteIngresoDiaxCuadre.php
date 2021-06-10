@@ -63,7 +63,7 @@ $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
 if($totalVentas>=1){
 	while($rowVentas=$resultadoVentas->fetch_assoc()){ 
-		if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower	']==2): $boton = "<button class='btn btn-sm btn-negro btn-outline' onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;
+		if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2): $boton = "<button class='btn btn-sm btn-negro btn-outline' onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;
 
 		$sumaIngr += floatval($rowVentas['ventTotal']);
 		switch($rowVentas['idMoneda']){

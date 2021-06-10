@@ -28,6 +28,7 @@
 							<li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
 							<li><a href="#tabProductosTodos" data-toggle="tab">Inventario Completo</a></li>
 							<li><a href="#tabMovimientosTodos" data-toggle="tab">Todos los movimientos</a></li>
+							<li><a href="#tabCompras" data-toggle="tab">Compras</a></li>
 
 						</ul>
 
@@ -109,6 +110,22 @@
 
 								<div id="tableMovimientosCompleto"></div>
 							</div>
+							<div class="tab-pane fade container-fluid" id="tabCompras">
+								<p>Seleccione entre 2 fechas para generar el reporte:</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="input-daterange input-group " id="dtpReporteCompras">
+											<input type="text" class="input-sm form-control" name="start" autocomplete="off" id="dtpFechaCompraInicial" />
+											<span class="input-group-addon">-</span>
+											<input type="text" class="input-sm form-control" name="end" autocomplete="off" id="dtpFechaCompraFinal" />
+										</div>
+									</div>
+									<div class="col-md-3">
+										<button class="btn btn-primary" id="btnGenerarReporteCompras"><i class="icofont icofont-paper-clip"></i> Generar reporte</button>
+									</div>
+								</div>
+								
+								<div id="tableCompras"></div>
 
 						</div>
 						<!-- Fin de meter contenido principal -->
@@ -268,6 +285,14 @@
 			todayHighlight: true
 		});
 		$('#dtpReporteVentas').datepicker({
+				format: "dd/mm/yyyy",
+				todayBtn: "linked",
+				daysOfWeekHighlighted: "0",
+				language: "es",
+				autoclose: true,
+				todayHighlight: true
+		});
+		$('#dtpReporteCompras').datepicker({
 				format: "dd/mm/yyyy",
 				todayBtn: "linked",
 				daysOfWeekHighlighted: "0",
@@ -663,6 +688,14 @@
 			});
 		}
 	}
+	$('#btnGenerarReporteCompras').click(function() {
+		if($('#dtpFechaCompraInicial').val()!='' && $('#dtpFechaCompraFinal').val()!=''){
+			$.ajax({url: 'php/compras/listarComprasCaja.php', type: 'POST', data: { fechaInicio: moment($('#dtpFechaCompraInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fechaFinal: moment($('#dtpFechaCompraFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD') }}).done(function(resp) {
+				console.log(resp)
+				$('#tableCompras').html(resp);
+			});
+		}
+	});
 	</script>
 
 </body>
