@@ -58,7 +58,7 @@ border: none;}
     background: #fff;
 }
 .logoEmpresa{
-	padding-top: 20px;padding-bottom: 40px;
+	padding-top: 20px;padding-bottom: 20px;
 }
 #menuNombreUsuario{color: rgb(255,193,74);} .has-clear{margin-top: 20px;}
 #txtBuscarNivelGod{font-family: 'IcoFont'; width:20%;  transition: all 0.5s ease; top:0; right:0; float: right;}

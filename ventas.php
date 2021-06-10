@@ -11,7 +11,31 @@ include 'php/variablesGlobales.php';
 </head>
 
 <body>
-
+<style>
+	.panel-body{
+		padding: 1em;
+	}
+	#panelResumenes label{
+		margin: 0;
+		font-weight: 500;
+	}
+	#panelResumenes h4{
+		margin: 0;
+	}
+	.tdDescuento a{
+		color: #694d9f!important;
+	}
+	#ulQueDescuento li {
+    margin: 1rem 0;
+    cursor: pointer;
+	}
+	#ulQueDescuento li:hover{
+		font-weight: 700;
+	}
+	.dropdown-menu .divider{
+		margin: 3px 0;
+	}
+</style>
 <div id="wrapper">
 
 <?php $pagina = 'ventas'; include 'menu-wrapper.php'; ?>
@@ -22,145 +46,175 @@ include 'php/variablesGlobales.php';
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				 <h2><i class="icofont icofont-brand-aliexpress"></i> Ventas de productos</h2>
+				 <h2><i class="icofont icofont-brand-aliexpress"></i> Venta de productos</h2>
 	
-	<ul class="nav nav-tabs">
+	<!-- <ul class="nav nav-tabs">
 	<li class="active"><a href="#tabRealizarVenta" data-toggle="tab">Realizar una venta</a></li>
 	<li class="hidden"><a href="#tabListadoVentas" data-toggle="tab">Ventas del día</a></li>
 	<li class="hidden"><a href="#todos" data-toggle="tab">Todas las ventas</a></li>
 	</ul>
+	 -->
+
+	 <div class="container-fluid" style="padding: 0;">
+		<div class="row">
 	
+				<div class="col-sm-12">
+					<div class=" text-right" style="line-height: 6px;">
+						<div class="panel panel-default">
+							<div class="panel-body">
+							<?php if($hayCaja>=1): ?>
+								<div class="form-inline">
+										<div class="form-group">
+											<label for="exampleInputName2">Paga con S/ </label>
+											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" value="0.00">
+										</div>
+										<button  class="btn btn-default " id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
+										<button class="btn btn-negro btn-outline " style="margin-left:2em" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Finalizar venta</button>
+									</div>
+								<?php else: ?>
+								<p style="line-height: 2rem;">Debe aperturar caja antes de realizar ventas <br> <a href="caja.php"><i class="icofont icofont-arrow-right"></i> Ir a aperturar caja</a></p>
+								<?php endif; ?>
+							</div>
+						</div>
+						<!-- <button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
+						<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button> -->
+					</div>
+	
+						<div class="panel panel-morado text-muted conInputPersonalizados" id="panelResumenes">
+							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
+							<div class="panel-body">
+								<div class="row" style="margin: 0.5rem 0;">
+									<div class="col-md-3">
+										<label class="">Sub Total:</label>
+										<h4><strong>S/ <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
+									</div>
+									<div class="col-md-3">
+										<label class="">Impuesto:</label>
+										<h4><strong>S/ <span id="spanImpuestoVenta">0.00</span></strong></h4>
+									</div>
+									<div class="col-md-3">
+										<label class="">Total:</label>
+										<h4><strong>S/ <span id="spanTotalVenta">0.00</span></strong></h4>
+									</div>
+									<div class="col-md-3">
+										<label for="">Cambio:</label><br>
+										<h4>S/ <span id="spanResiduoCambio">-</span></h4>
+									</div>
+								</div>
+								<div class=" text-center">
+	
+	
+	
+	
+								</div>
+							</div>
+						</div><!-- fin de pane cielo-->
+	
+				</div><!-- fin de sm-12 -->
+	
+				<div class="col-sm-12" >
+					<div class="panel panel-morado">
+						<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Cesta de venta
+							<span class="pull-right"><small>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></small></span>
+						</div>
+	
+						<div class="panel-body">
+							<div class="row" style="padding-bottom: 0.5em;">
+								<div class="col-md-10">
+									<label class="grey-text text-darken-2">Ubique el producto: </label> <span class="red-text text-lighten-1 hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
+	
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="combTipoBusqueda">Busq. Normal <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li onclick="$(this).parent().prev().html(`Busq. Normal <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre, Cod. interno, Cod. barras')"><a href="#">Búsqueda normal</a></li>
+												<li role="separator" class="divider"></li>
+												<li onclick="$(this).parent().prev().html(`Busq. por Lote <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre del Lote')"><a href="#">Búsqueda por lote</a></li>
+											</ul>
+										</div><!-- /btn-group -->
+										<input type="text" class="form-control" id="txtBuscarProductoVenta" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button" id="btn-BuscarProductoVenta"><span class="glyphicon glyphicon-search"></span></button>
+										</span>
+									</div><!-- /input-group -->
+								</div>
+	
+	
+							</div><!-- /.col-lg-6 -->
+	
+	
+	
+							<!-- Tabla -->
+							<div class="col-md-12  grey-text text-darken-2 table-responsive">
+							<table class="table table-hover tablaResultadosCompras conInputPersonalizados">
+							<thead>
+							<tr>
+							<th>N°</th> <th class="col-md-5">Producto</th> <th class="text-center">Cant.</th> <th class="text-center">Precio </th> <th class="text-center">Dscto.</th> <th class="text-center">Sub total</th> </tr>
+							</thead>
+							<!-- <div class="container-fluid">
+								<div class="row ">
+									<div class="col-xs-4 col-sm-5">N° - Nombre de producto</div>
+									<div class="col-xs-4 col-sm-1 text-center">Lote</div>
+									<div class="col-xs-4 col-sm-1 text-center">Cantidad</div>
+									<div class="col-xs-4 col-sm-2 text-center">Precio<span class="hidden-xs"> x unidad</span></div>
+									<div class="col-xs-4 col-sm-1 text-center">Desc<span class="hidden-xs">uento</span></div>
+									<div class="col-xs-4 col-sm-2 text-center">Sub-Total</div>
+								</div>
+							</div> -->
+	
+	
+							<tbody>
+							<!--<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">1. </span></th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
+									</span>
+									<input type="number" class="form-control text-center control-morado" value="1" min=1>
+									<span class="input-group-btn">
+										<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
+									</span>
+								</div></td>
+							<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">43</span> </span></td> <td class="text-center">S/. <span class="spanDescuento">0.69</span></td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>
+							<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">2. </span></th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
+							<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
+									</span>
+									<input type="number" class="form-control text-center control-morado" value="1" min=1>
+									<span class="input-group-btn ">
+										<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
+									</span>
+								</div></td>
+							<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">99</span></span></td> <td class="text-center">S/. <span class="spanDescuento">0.23</span></td> <td class="text-center">S/.  <span class="spanSubTotal">198.00</span></td> </tr>
+							<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">3. </span></th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
+							<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
+									</span>
+									<input type="number" class="form-control text-center control-morado" value="1" min=1>
+									<span class="input-group-btn">
+										<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
+									</span>
+								</div></td>
+							<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">25</span></span></td> <td class="text-center">S/. <span class="spanDescuento">6.3</span></td> <td class="text-center">S/. <span class="spanSubTotal">75.00</span></td>  </tr>-->
+	
+							</tbody>
+							</table>
+						</div>
+	
+						</div>
+	
+						</div><!-- fin de pane warning-->
+				</div>
+	
+		</div>
+		</div>
 	<div class="tab-content">
 	<!--Panel para buscar productos-->
 		<!--Clase para las tablas-->
 
 		<div class="tab-pane fade in active" id="tabRealizarVenta">
-		<div class="container-fluid" style="padding: 0;">
-			<div class="col-sm-12 col-md-9" >
-				<div class="panel panel-morado">
-					<div class="panel-heading">Cesta de venta <span class="pull-right"><em>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></em></span></div>
-					
-					<div class="panel-body">
-						<div class="row col-md-8" style="padding-bottom: 2rem;"><label class="purple-text text-darken-3">Ubique el producto: </label> <span class="red-text  hidden" id="spanSinCoincidencias"> No se encontraron coincidencias con <strong><em><span></span></em></strong></span>
-							
-							<div class="input-group">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="combTipoBusqueda">Busq. Normal <span class="caret"></span></button>
-									<ul class="dropdown-menu">
-										<li onclick="$(this).parent().prev().html(`Busq. Normal <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre, Cod. interno, Cod. barras')"><a href="#">Búsqueda normal</a></li>
-										<li role="separator" class="divider"></li>
-										<li onclick="$(this).parent().prev().html(`Busq. por Lote <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre del Lote')"><a href="#">Búsqueda por lote</a></li>
-									</ul>
-								</div><!-- /btn-group -->
-								<input type="text" class="form-control" id="txtBuscarProductoVenta" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button" id="btn-BuscarProductoVenta"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
-							</div><!-- /input-group -->
-										
-
-						</div><!-- /.col-lg-6 -->
-						
-						
-						
-						<!-- Tabla -->
-						<div class="col-md-12 purple-text text-darken-3 table-responsive">
-						<table class="table table-hover tablaResultadosCompras conInputPersonalizados"> 
-						<thead>
-						<tr>
-						<th>#</th> <th class="col-xs-6">Producto</th> <th class="col-xs-1 text-center">Cantidad</th> <th class="col-xs-1 text-center">Precio x Und.</th> <th class="col-xs-1 text-center">Descuento</th> <th class="col-xs-1 text-center">Sub-Total</th> </tr>
-						</thead>
-						<!-- <div class="container-fluid">
-							<div class="row ">
-								<div class="col-xs-4 col-sm-5">N° - Nombre de producto</div>
-								<div class="col-xs-4 col-sm-1 text-center">Lote</div>
-								<div class="col-xs-4 col-sm-1 text-center">Cantidad</div>
-								<div class="col-xs-4 col-sm-2 text-center">Precio<span class="hidden-xs"> x unidad</span></div>
-								<div class="col-xs-4 col-sm-1 text-center">Desc<span class="hidden-xs">uento</span></div>
-								<div class="col-xs-4 col-sm-2 text-center">Sub-Total</div>
-							</div>
-						</div> -->
-
-						
-						<tbody>
-						<!--<tr> <th ><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">1. </span></th> <td class="col-xs-4">Elemento 1 Composición ABC</td> <td class="col-xs-4 col-sm-3 text-center">
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div></td>
-						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">43</span> </span></td> <td class="text-center">S/. <span class="spanDescuento">0.69</span></td> <td class="text-center">S/. <span class="spanSubTotal">42.00</span></td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">2. </span></th> <td class="col-xs-4">Elemento 2</td><td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn ">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div></td>
-						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">99</span></span></td> <td class="text-center">S/. <span class="spanDescuento">0.23</span></td> <td class="text-center">S/.  <span class="spanSubTotal">198.00</span></td> </tr>
-						<tr> <th><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="SpanNum">3. </span></th> <td class="col-xs-4">Elemento 3</td> <td class="col-xs-4 col-sm-3 text-center">
-						<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-								</span>
-								<input type="number" class="form-control text-center control-morado" value="1" min=1>
-								<span class="input-group-btn">
-									<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-								</span>
-							</div></td>
-						<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">25</span></span></td> <td class="text-center">S/. <span class="spanDescuento">6.3</span></td> <td class="text-center">S/. <span class="spanSubTotal">75.00</span></td>  </tr>-->
-						
-						</tbody>
-						</table>
-					</div>
-						
-					</div>
-					
-					</div><!-- fin de pane warning-->
-			</div>
-			<div class="col-sm-3">
-				<div class="panel panel-morado text-muted conInputPersonalizados">
-					<div class="panel-heading">Datos generales de la nueva venta</div>
-					<div class="panel-body">
-						<div class=" text-center">
-							<label class="">Sub-Total de venta:</label>
-							<h4><strong>S/. <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
-							<label class="">Impuesto:</label>
-							<h4><strong>S/. <span id="spanImpuestoVenta">0.00</span></strong></h4>
-							<label class="">Total de venta:</label>
-							<h4><strong>S/. <span id="spanTotalVenta">0.00</span></strong></h4>
-								<label for="">Dinero del cliente (S/.):</label><br>
-								<div class="input-group">
-									<span class="input-group-btn mitooltip" title="Abrir el asistente de contador de monedas" >
-										<button class="btn btn-morado btn-outline" type="button" id="btnContarMoneda" ><i class="icofont icofont-chart-pie-alt"></i></button>
-									</span>
-									<input type="number" class="form-control text-center txtMonedas control-morado" id="txtMonedaEnDuro" value="0" min=0 step=1><br>
-								</div><!-- /input-group -->
-								
-								<label for="">Cambio a entregar:</label><br>
-								<h4>S/. <span id="spanResiduoCambio">-</span></h4>
-						</div>
-					</div>
-				</div><!-- fin de pane cielo-->
-				<div class="row text-center" style="line-height: 60px;">
-				<?php if($hayCaja>=1): ?>
-				<button class="btn btn-morado btn-outline btn-lg btn-block" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Completar Venta</button>
-				<?php else: ?>
-				<p style="line-height: 2rem;">Debe aperturar caja antes de realizar ventas <br> <a href="caja.php"><i class="icofont icofont-arrow-right"></i> Ir a aperturar caja</a></p>
-				
-				<?php endif; ?>
-				<button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
-				<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button>
-				</div>
-			</div><!-- fin de sm-3 -->
-		</div>
+		
 
 		
 
@@ -555,6 +609,24 @@ include 'php/variablesGlobales.php';
 		</div>
 		</div>
 	</div>
+<!-- Modal para indicar que descuento vamos a usar -->
+	<div class="modal fade" id="modalUsarQueDscto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header-wysteria">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Aplicar descuento</h4>
+			</div>
+			<div class="modal-body">
+				<p>Seleccione que precio desea usar:</p>
+				<ul id="ulQueDescuento">
+
+				</ul>
+			</div>
+			
+		</div>
+		</div>
+	</div>
 
 	
 <!-- jQuery -->
@@ -571,6 +643,7 @@ include 'php/variablesGlobales.php';
 <script>
 $(document).ready(function(){
 	$.impresion=[];
+	$.listaVariantes=[];
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
 		$('.mitooltip').tooltip();
@@ -622,9 +695,9 @@ $(document).ready(function(){
 			//$(this).parent().parent().find('input').val(parseInt(valorNue)+1);
 			$('tbody tr').eq(indexRow).find('input').val(valorNue);
 			var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
-			var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
-			if(isNaN(PrecDescuento )){PrecDescuento=0}
-			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)-PrecDescuento).toFixed(2));
+			/* var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text()) * valorNue;
+			if(isNaN(PrecDescuento )){PrecDescuento=0} */
+			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)).toFixed(2));
 			sumarSubTotalesInstante()
 		});
 
@@ -634,9 +707,9 @@ $(document).ready(function(){
 			if(valorNue>=1){
 				$('tbody tr').eq(indexRow).find('input').val(valorNue);
 			var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
-			var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
-			if(isNaN(PrecDescuento )){PrecDescuento=0}
-			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)-PrecDescuento).toFixed(2));
+			/* var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text()) * valorNue;
+			if(isNaN(PrecDescuento )){PrecDescuento=0} */
+			$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)).toFixed(2));
 			sumarSubTotalesInstante()
 			}
 			
@@ -965,7 +1038,7 @@ function calcularVentaVsMonedas(moneda ){
 	var total=parseFloat($('#spanTotalVenta').text());
 	var monedaInput=parseFloat(moneda);
 	var differ=monedaInput-total;
-	if(differ==0){$('#spanResiduoCambio').text('Sin vuelto'); $('#spanResiduoCambio').addClass('text-danger');}
+	if(differ==0){$('#spanResiduoCambio').text('Sin vuelto'); $('#spanResiduoCambio').addClass('purple-text text-darken-1');}
 	if(differ<0){$('#spanResiduoCambio').text('Falta '+Math.abs(differ).toFixed(2)); $('#spanResiduoCambio').addClass('purple-text text-darken-3');}
 	if(differ>0){$('#spanResiduoCambio').text(differ.toFixed(2)); $('#spanResiduoCambio').addClass('purple-text text-darken-3');}
 }
@@ -1185,37 +1258,55 @@ function llamarBuscarProducto() {
 function pasarACanasta(index){
 	var indexSelec=index; //$(this).attr('id');
 	let nombre, idProductoSele, precioProdSele;
+	var spanVariantes = '';
 	nombre = $('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text();
-	idProductoSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdID').text();
-	precioProdSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text()
+	idProductoSele = parseInt($('#listadoDivs .row').eq(indexSelec).find('#mProdID').text());
+	precioProdSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text();
+
+	$.ajax({url: 'php/productos/precioVariante.php', type: 'POST', data: { idProd: idProductoSele }}).done(function(resp) {
+		//console.log(resp)
+		if(resp!='error' && resp!='' ){
+			let data = {idProd: idProductoSele, normal: $('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text(), variantes: JSON.parse(resp)};
+			//console.log( data );
+			if( JSON.parse(resp).length >0  ){
+				$.listaVariantes.push( data );
+				spanVariantes =`<a href="#!" onclick="mostrarDsctos(${idProductoSele}, ${$('.tablaResultadosCompras tr').length})"><i class="icofont icofont-ui-note"></i></a>`;
+			}
+		}
+		//console.log( $.listaVariantes );
+
+		$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft">
+			<th > <span class="SpanNum">${$('.tablaResultadosCompras tr').length}. </span> </th>
+			<td class="mProdID hidden">${idProductoSele}</td>
+			<td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline btn-sinBorde eliminarRowVenta"><i class="icofont icofont-error"></i></button> ${nombre}</td> <td class="col-xs-4 col-sm-3 text-center">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
+					</span>
+					<input type="number" class="form-control text-center control-morado txtCantidadVariableProd" value="1" min=1>
+					<span class="input-group-btn">
+						<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
+					</span>
+				</div>
+			</td>
+			<td class="col-sm-1 text-center">
+				<span> <span class="spanPrecio">${precioProdSele}</span></span>
+			</td>
+			<td class="text-center tdDescuento"> ${spanVariantes} <span class="spanDescuento"></span></td>
+			<td class="text-center"> <span class="spanSubTotal">${precioProdSele}</span></td>
+		</tr>`);
+		sumarSubTotalesInstante();
+		calcularRowTabla();
+		
+		//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
+		/* $('#txtBuscarProductoVenta').focus(); */
+		$('.modal-detalleProductoEncontrado').modal('hide');
+		
+	});
 	
 	$.impresion.push({cantItem: 1, 'nombItem': nombre });
-	
-
-	$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft"> <th >
-		<span class="SpanNum">${$('.tablaResultadosCompras tr').length}. </span> </th>
-		<td class="mProdID hidden">${idProductoSele}</td>
-		 <td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline eliminarRowVenta"><i class="icofont icofont-error"></i></button>  ${nombre}</td> <td class="col-xs-4 col-sm-3 text-center">
-			<div class="input-group">
-				<span class="input-group-btn">
-					<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
-				</span>
-				<input type="number" class="form-control text-center control-morado txtCantidadVariableProd" value="1" min=1>
-				<span class="input-group-btn">
-					<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
-				</span>
-			</div><!-- /input-group --></td>
-		<td class="col-sm-1 text-center"> <span>S/. <span class="spanPrecio">${precioProdSele}</span></span></td> <td class="text-center">S/. <span class="spanDescuento">-</span></td> <td class="text-center">S/. <span class="spanSubTotal">${precioProdSele}</span></td> </tr>`);
-	sumarSubTotalesInstante();
-	calcularRowTabla();
-	
-	//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
-	/* $('#txtBuscarProductoVenta').focus(); */
-	$('.modal-detalleProductoEncontrado').modal('hide');
 }
-$('#listadoDivs').on('click','.btnPasarProductoCanasta',function () {
-	
-});
+
 $('#btnGuardarVenta').click(function () {
 	
 $.ticket = [];
@@ -1233,8 +1324,9 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	var precioProd=$(this).find('.spanPrecio').text();
 	var SubTotalProd=$(this).find('.spanSubTotal').text();
 	var nomProImp= $(this).find('.mProdNom').text();	
+	var dscto= $(this).find('.spanDescuento').text();	
 
-	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, 'sub': SubTotalProd })
+	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd })
 	
 	
 	})
@@ -1249,9 +1341,7 @@ if($('.tablaResultadosCompras tbody tr').length!=0){
 	});
 	}
  $.ticket=Jdata;
-
-
-	
+ 
 });
 
 $('#btnAcaboVenta').click(function () {
@@ -1379,7 +1469,7 @@ function retornarCadenaImprimir(){
 	var cantlibres=0;
 	
 
-$.each($.ticket, function (i, elem) {
+$.each($.ticket, function (i, elem) { console.log( elem );
 	funProducto= elem.nomProducto;
 	funPrecio= elem.sub;
 	lineaEntera = funProducto+funPrecio;
@@ -1396,8 +1486,14 @@ $.each($.ticket, function (i, elem) {
 
 	for (var i = cantlibres - 1; i >= 0; i--) {
 		espacioslibres+=' ';
-	};
-	lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+	}
+
+	if( elem.dscto==""){
+		lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+	}else{
+		lineaImpr+=funProducto +"Dscto: " + elem.dscto + espacioslibres+funPrecio+'\n';
+	}
+
 	// console.log(lineaImpr)
 	// console.log(lineaImpr.length)
 	}
@@ -1408,16 +1504,56 @@ $.each($.ticket, function (i, elem) {
 		for (var i = cantlibres - 1; i >= 0; i--) {
 			espacioslibres+=' ';
 		};
-		lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+		if( elem.dscto==""){
+			lineaImpr+=funProducto+ espacioslibres+funPrecio+'\n';
+		}else{
+			lineaImpr+=funProducto +" Dscto x " + elem.dscto + espacioslibres+funPrecio+'\n';
+		}
 		//console.log(lineaImpr)
 		//console.log(lineaImpr.length)
 
 	}
 	});
 
-return lineaImpr;
+	return lineaImpr;
 }
+function mostrarDsctos(idProd, posicion){
+	$('#ulQueDescuento').html('');
+	let index =  $.listaVariantes.map(variante => variante.idProd).indexOf( idProd );
 
+	$('#ulQueDescuento').append(`<li onclick="aplicarDsctoA(${index}, ${posicion}, 'normal' )">Normal a S/ ${parseFloat($.listaVariantes[index].normal).toFixed(2)}</li>`)
+	
+	//console.log( posicion );
+	$.listaVariantes[index].variantes.forEach(variable => {
+		//console.log( variable );
+		$('#ulQueDescuento').append(`<li onclick="aplicarDsctoA(${index}, ${posicion}, ${variable.queEs} )">${variable.nombre} a S/ ${parseFloat(variable.nPrecio).toFixed(2)}</li>`)
+	});
+	$('#modalUsarQueDscto').modal('show');
+}
+function aplicarDsctoA(index, posicion, esQue){
+	var contenedor = $('.tablaResultadosCompras tbody tr').eq(posicion-1);
+	if(esQue=='normal'){
+		contenedor.find('.spanPrecio').text(parseFloat($.listaVariantes[index].normal).toFixed(2));
+		contenedor.find('.spanDescuento').text('-');
+	}else{
+		let variante = $.listaVariantes[index].variantes
+		let descuentazo = variante.filter( array => { return parseInt(array.queEs) == parseInt(esQue) })[0];
+		//console.log( descuentazo )
+		/* let diferencia = $.listaVariantes[index].normal - descuentazo.nPrecio;
+		contenedor.find('.spanDescuento').text(parseFloat(diferencia).toFixed(2)); */
+		contenedor.find('.spanDescuento').text(descuentazo.nombre);
+		contenedor.find('.spanPrecio').text(parseFloat(descuentazo.nPrecio).toFixed(2));
+	}
+
+	let valorNue= parseFloat(contenedor.find('input').val());
+	var PrecUnidad = parseFloat(contenedor.find('.spanPrecio').text());
+	//var PrecDescuento = parseFloat(contenedor.find('.spanDescuento').text()) *valorNue;
+	//if(isNaN(PrecDescuento )){PrecDescuento=0}
+	contenedor.find('.spanSubTotal').text(parseFloat(PrecUnidad*parseInt(valorNue)).toFixed(2));
+	sumarSubTotalesInstante();
+	$('#modalUsarQueDscto').modal('hide');
+	
+}
 </script>
 
 </body>

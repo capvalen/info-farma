@@ -1,3 +1,16 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `returnCualDsctoEs`(`queDscto` VARCHAR(250)) RETURNS int(11)
+    NO SQL
+BEGIN
+declare descuentoEs int default 0;
+SELECT v.id into descuentoEs
+from variantes v
+where v.nombre = queDscto;
+
+return descuentoEs;
+end$$
+DELIMITER ;
+
 ALTER TABLE `producto` ADD `supervisado` INT NOT NULL DEFAULT '0' COMMENT '0=no; 1=si' AFTER `prodAlertaStock`;
 DROP PROCEDURE `listarDetalleProductoPorId`; 
 DELIMITER $$

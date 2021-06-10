@@ -13,13 +13,14 @@ while($row = mysqli_fetch_array($log))
 		'prodFechaVencimiento' => $row['prodFechaVencimiento'],
 		'prodPrecioUnitario' => $row['prodPrecio'],
 		'prodStock' => $row['prodStock'],
-		'supervisado' => $row['supervisado']
+		'supervisado' => $row['supervisado'],
+		'variante' => $row['variante']
 	);
 	
 }
 
 $sql="SELECT pb.*, p.prodNombre, catprodDescipcion, p.idProducto,
-returnFechaProximaVencer(pb.idProducto) as prodFechaVencimiento, prodStock, prodPrecio
+returnFechaProximaVencer(pb.idProducto) as prodFechaVencimiento, prodStock, prodPrecio, supervisado, variante
 FROM `productobarras` pb inner join producto p on p.idProducto = pb.idProducto
 inner join categoriaproducto as cat on cat.idcategoriaproducto= p.idcategoriaproducto
 where barrasCode = '{$_POST['filtro']}' and barActivo=1";
@@ -32,7 +33,9 @@ while($row=$resultado->fetch_assoc()){
 		'lote' => '',
 		'prodFechaVencimiento' => $row['prodFechaVencimiento'],
 		'prodPrecioUnitario' => $row['prodPrecio'],
-		'prodStock' => $row['prodStock']
+		'prodStock' => $row['prodStock'],
+		'supervisado' => $row['supervisado'],
+		'variante' => $row['variante']
 	);
 }
 

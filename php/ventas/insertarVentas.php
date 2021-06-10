@@ -11,7 +11,6 @@ $variable='';
 $retornoProcedure='';
 $mysqli=new $conection;
 
-
 $sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",".$Jencabez[0]['Total'].",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."')";
 
 $stmt = $conection->prepare($sql);
@@ -34,7 +33,7 @@ $sql22= 'insert INTO `detalleventas` (`idVenta`,`idProducto`,`detventCantidad`,`
 mysqli_query($conection,$sql22) or die(mysql_error()); //Ejecución simple para la sentencia sql2 con envio completo de una JSON con variable unica*/
 
 foreach ($Js as $row) {
-$sql33= 'call insertarDetalleVentaProducto('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].', '.$_POST['usuario'].');' ;
+$sql33= 'call insertarDetalleVentaProducto('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].', '.$_POST['usuario'].', "'.$row['dscto'].'" );' ;
 mysqli_query($conection,$sql33) or die(mysql_error());
 }
 
