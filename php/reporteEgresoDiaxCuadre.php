@@ -31,7 +31,7 @@ if($totalRow==0){
 			break;
 		}
 
-		if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2): $boton = "<button class='btn btn-sm btn-negro btn-outline btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;?>
+		if($_COOKIE['ckPower']==1 ): $boton = "<button class='btn btn-sm btn-negro btn-outline btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;?>
 
 		<tr data-id="<?= $row['idCaja']; ?>" data-activo="<?= $row['cajaActivo']; ?>">
 			<th scope='row'> <?php if($row['idProducto']>0){ ?> <a href='productos.php?idProducto=<?= $row['idProducto'];?>#tabMovEstados'>#<?= $row['idProducto'];?></a> <?php } ?> </th>

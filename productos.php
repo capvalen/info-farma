@@ -1720,7 +1720,10 @@
 		$.ajax({url: 'php/productos/precioVariante.php', type: 'POST', data: { idProd: $('#txtprodCodigo').val() }}).done(function(resp) {
 			//console.log(resp)
 			if(resp!='error'){
+				if(resp==''){$.listaVariantes=[];}
+				else{
 				$.listaVariantes = JSON.parse(resp);
+				}
 				redibujarVariables();
 			}
 			console.log( $.listaVariantes );

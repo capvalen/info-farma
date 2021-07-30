@@ -1,4 +1,5 @@
 <?php session_start();
+ini_set('display_errors', 'Off');
 include 'php/variablesGlobales.php';
 if (!isset($_GET['fecha'])) { //si existe lista fecha requerida
 	$_GET['fecha']=date('Y-m-d');
