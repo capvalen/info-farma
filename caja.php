@@ -19,6 +19,7 @@ hr{ margin-bottom: 5px;}
 h3{ margin-top: 5px;}
 .pheader{background-color: #a35bb4;padding: 10px 10px; color: white; font-size: 17px; display: block; margin: 0;
 clear: left; }
+.pheader h4{color:white;}
 .pheader li>a{color: #a35bb4;}
 .pheader li>a:hover{color: #a35bb4;background: #f2f2f2;}
 table{color:#5f5f5f;}
@@ -125,7 +126,7 @@ td{font-size: 0.95em;}
 			<div class="row container-fluid  ">
 				<div class="pheader row">
 					<div class="col-xs-10">
-						<h4><i class="icofont icofont-minus-circle"></i> Salidas de dinero</h4>
+						<h4 class=""><i class="icofont icofont-minus-circle"></i> Salidas de dinero</h4>
 					</div>
 					<?php 
 					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>

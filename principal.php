@@ -30,10 +30,10 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable fondoGeo">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				<h1 class="purple-text text-darken-4"><i class="icofont icofont-animal-cat-alt-4"></i> Software Info-Farma</h1>
-				<h2 class="purple-text text-darken-1"> Te damos la bienvenida</h2>
+				<h1 class=""><i class="icofont icofont-animal-cat-alt-4"></i> Software Info-Farma</h1>
+				<h2 class="text-muted"> Te damos la bienvenida</h2>
 				
-				<h4>Datos de la caja activa:</h4>
+				<h4 class="text-muted">Datos de la caja activa:</h4>
 				<div class="row has-clear">
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
@@ -67,8 +67,9 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 				</p>
 	
 				<h5 class="has-clear"><small><span class="text-darken-2">Un producto de:</span></small></h5>
-				<h5 ><strong>Infocat Soluciones S.A.C.</strong></h5>
+				<h5 ><strong><a href="https://infocatsoluciones.com" target="_blank">Infocat Soluciones S.A.C.</a></strong></h5>
 				<h5><small>RUC: 20602337147</small></h5>
+				<h5><small>Soporte: <a href="https://infocatsoluciones.com/contacto" target="_blank">Ingrese aquí</a></small></h5>
 				<h5 ><small><span class="text-darken-2">Actualmente estás usando la <?php include 'php/version.php' ?></span></small></h5>
 	
 				

@@ -15,7 +15,7 @@ if(isset($_COOKIE['ckAtiende'])){
 	<link rel="stylesheet" href="css/icofont.css">
 	
 	<title>Bienvenido: Info-Farma</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap5.min.css" rel="stylesheet">
 	<link href="css/inicio.css?version=1.0" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<link rel="shortcut icon" href="images/pet2.png" />
@@ -26,9 +26,11 @@ if(isset($_COOKIE['ckAtiende'])){
 <body >
 <style type="text/css">
 .form-control:focus{    border-color: #FFEB3B;box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(255, 193, 7, 0.55);}
-body{background: linear-gradient(90deg, #100b19 10%, #291c40 90%);}
+body, .bg-plomo{background: #f5f5f5;}
 main{ margin-top:80px; padding:0 50px}
-.wello{padding:40px 50px; border-radius: 6px;padding-bottom: 58px;}
+.wello{padding:40px 50px; border-radius: 6px;padding-bottom: 58px;
+	
+}
 .noselect {
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -48,42 +50,67 @@ margin-left: -25px; opacity: 0.5}
 a{    color: #6d3cca;
     font-weight: 700;}
 a:hover{color:#462782;}
+#rowPadre{
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+.btn-outline-primary {
+    color: #721ecf;
+    border-color: #721ecf;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #721ecf;
+    border-color: #721ecf;
+}
+.bg-blanco{background:#fff;}
+.rounded {
+    border-radius: .75rem!important;
+}
 </style>
 <main class="noselect">
 	<div class="container-fluid">
-		<div class="col-md-12">
-			<div class="wello login-box " style="color: #673ab7"  >
-				<div class="row">
-					<div class="col-xs-4"><img src="images/VirtualCorto.png" class="img-responsive" alt=""></div>
-					<div class="col-xs-8"><h3 class="text-center" style="margin-bottom: 0px;">Info-Cat</h3>
-						<div class="text-center"><span >App para «Farmacias»</span></div>
-						<legend  style="color:#7956C1"><small style=" font-size: 70%;"></small></legend></div>
+		<div class="row">
+			<div class="col-10 col-lg-10 mx-auto ">
+				<div class="row d-flex flex-sm-row-reverse rounded bg-blanco" id="rowPadre">
+					<div class="col-12 col-lg-4 p-4 ">
+						<div class="text-center"><img src="images/VirtualCorto.png" class="mx-auto img-responsive" alt=""></div>
+						<h4 class="text-muted text-center fs-2">Hola! Bienvenido</h4>
+						<h4 class="fs-1 text-start" style="color: #721ecf;">Sistema para Farmacias y Boticas</h4>
+						<p class="text-muted">Ingrese sus credenciales</p>
+					<div>
+					<div class="form-floating mb-3">
+					  <input type="email" class="form-control" id="txtUser_app"  placeholder=" ">
+					  <label for="txtUser_app">Usuario</label>
+					</div>
+					<div class="form-floating">
+					  <input type="password" class="form-control" id="txtPassw" placeholder="Contraseña">
+					  <label for="txtPassw">Contraseña</label>
+					</div>
+					<div class="d-grid gap-1 mt-4">
+						<button class="btn btn-outline-primary btn-lg" id="btnAcceder"><img src="images/door-open.svg"/> Ingresar</button>
+					</div>
+					<div class="mt-5">
+						<small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?></small>
+						<p class="text-end"><a href="https://www.facebook.com/infocatsoluciones/photos/?tab=album&album_id=2015441245336874" class="text-decoration-none">Desarrollado por Infocat Soluciones</a></p>
+					</div>
 				</div>
-				
-			<div class="form-group">
-				<label class="hidden" for="username"><i class="icofont icofont-user"></i> Usuario</label>
-				<input class="form-control text-center" value='' id="txtUser_app" placeholder="Usuario" type="text"  /><div class="icoTransparent"><i class="icofont icofont-user"></i> </div>
 			</div>
-			<div class="form-group">
-				<label class="hidden" for="password"><i class="icofont icofont-key"></i> Contraseña</label>
-				<input class="form-control text-center" id="txtPassw" value='' placeholder="Contraseña" type="password" /><div class="icoTransparent"><i class="icofont icofont-ui-text-loading"></i>
-			</div>
-			
-			<div class="form-group text-center"><br>
-				<button class="btn btn-danger btn-outline hidden" id="btnCancelar"><i class="icofont icofont-logout"></i> Cancelar</button>
-				<button class="btn btn-morado btn-outline btn-block btn-lg" id="btnAcceder"><div class="fa-spin sr-only"><i class="icofont icofont-spinner "></i> </div><i class="icofont icofont-key"></i> Iniciar sesión</button>
-			</div>
-			<div class="form-group text-center text-danger hidden" id="divError">Error en alguno de los datos, complételos todos cuidadosamente.</div>
-			
-			<div class="pull-left" ><small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?> <a href="https://www.facebook.com/infocatsoluciones/photos/?tab=album&album_id=2015441245336874"><br>®  Infocat Soluciones</a></small></div>
+
+				<div class="col-12 col-md p-5 ">
+					<img src="images/portada.jpg" class="img-fluid">
+				</div>
+					
+				</div>
 			</div>
 		</div>
+	
 	</div>
 </main>
 </body>
 
 <script src="js/jquery-2.2.4.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap5.bundle.min.js"></script>
 
 <!-- <script src="./node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script> 
 <script src="js/socketCliente.js"></script>-->

@@ -11,7 +11,7 @@ $variable='';
 $retornoProcedure='';
 $mysqli=new $conection;
 
-$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",".$Jencabez[0]['Total'].",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."')";
+$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",".$Jencabez[0]['Total'].",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', '{$Jencabez[0]['ruc']}', '{$Jencabez[0]['razon']}', '{$Jencabez[0]['direccion']}' )";
 
 $stmt = $conection->prepare($sql);
 $stmt->execute();

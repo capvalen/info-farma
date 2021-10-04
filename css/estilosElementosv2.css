@@ -8,7 +8,8 @@
 html body{ background-color: #eeeeee ; /*background-color: #191617; background: #191617 url("../images/dark_mosaic.png") repeat scroll 0% 0%;*/}
 
 main, .contenedorDeslizable{background-color: #fff; border-radius:8px; margin-bottom: 20px; padding-bottom: 20px; border: 1px solid #e3e3e3;padding-top: 10px}
-
+h1,h2,h4,h5{color: #7030a0;}
+a{color: #7030a0;}
 .breadcrumb {margin-left:20px; margin-top: 10px;margin-right: -20px;}
 .icono-peque{font-size: 15px;}.icono-peque-18{font-size: 16px;}.icono-grande{font-size: 40px;}
 .btn-circle{width: 40px; height: 40px; text-align: center; padding: 6px 0; font-size: 12px; line-height: 1.42; border-radius: 35px;}
@@ -41,6 +42,7 @@ a{text-decoration: none;display: inline-block;}
 .panel-sol{border-color: #f6bb42;}.panel-sol>.panel-heading{color: #f5f7fa;background-color: #F0AD38;border-color: #f6bb42;}
 .panel-rojizo{border-color: #da4453;}.panel-rojizo>.panel-heading{color: #f5f7fa;background-color: #ed5565;border-color: #da4453;}
 .panel-morado{border-color: #694D9F;}.panel-morado>.panel-heading{color: #f5f7fa;background-color: #694D9F;border-color: #694D9F;}
+.panel-blanco{border-color: #b3b2b2;}.panel-blanco>.panel-heading{color: #424242;background-color: #fff;border-color: #b3b2b2;border-bottom:none;} /* 1px solid #b3b2b2*/
 .well {margin-bottom: 0px;}
 
 .panelCuadre{padding-top: 0px;}
@@ -94,6 +96,8 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .modal-header-morado {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #694D9F;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 .modal-header-wysteria {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #8F44AD;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 .modal-header-indigo {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #3E50B4;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.modal-header-blanco {color:#fff;padding:9px 15px; background-color: #fff;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+
 
 .noselect {
 	-webkit-touch-callout: none; /* iOS Safari */
@@ -140,10 +144,11 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 /*.modal-title >i{color: rgba(5, 16, 16, 0.69);}
 .modal-header-negro>.modal-title> i{color: rgba(255, 255, 255, 0.68);}*/
 
-#listadoDivs>.row:hover{ border-radius: 3px; background-color: #d3e6f9cc; cursor: pointer; transition: all .3s; color: #1e2d82; }
+#listadoDivs>.row:hover{ border-radius: 3px; background-color: #9f9f9f30; cursor: pointer; transition: all .3s; color: #000; font-weight: bold; }
 #listadoDivs>.row{min-height: 37px; padding: 0.5rem 0;}
 .close{opacity: 0.5; color: #fff;}
 .badge-morado{background-color: #fff;color: #694D9F;}
+.badge-plomo { background-color: #686868; color: #fff; }
 
 .fondoGeo{background: #fafafa url(../images/geometry2.png);}
 .fondoCuadro{ background: #fafafa url(../images/square_bg.png);}

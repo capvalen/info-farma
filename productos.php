@@ -55,6 +55,14 @@
 	.eliminarVariante{
 		cursor:pointer;
 	}
+	#listadoDivs .row{
+		border-bottom: 1px solid #dfdfdf;
+	}
+	.close {
+    opacity: 0.8;
+    color: #cb0000;
+		font-size: 32px;
+	}
 </style>
 
 	<div id="wrapper">
@@ -325,18 +333,23 @@
 							<!--Panel para nueva compra-->
 							<div class="tab-pane fade container-fluid" id="tabProximosVencer">
 								<!--Inicio de pestaña 02-->
-								<p>Productos ya vencidos y por vencer en los próximos 3 meses:</p>
+								<p>Productos vencidos y por vencer dentro de 3 meses:</p>
 								<div>
-									<div class="row container-fluid"><strong>
-											<div class="col-sm-1 text-center">@</div>
-											<div class="col-sm-1 text-center">Código</div>
-											<div class="col-sm-3">Nombre</div>
-											<div class="col-sm-1 text-center">Lote</div>
-											<div class="col-sm-2 text-center">Vencimiento</div>
-											<div class="col-sm-2 text-center">Fecha</div>
-										</strong>
-									</div>
-									<div class="row container-fluid" id="listasProdVencimiento"></div>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Alerta</th>
+												<th>Cód.</th>
+												<th>Producto</th>
+												<th>Lote</th>
+												<th>Vence en</th>
+												<th>Fecha</th>
+											</tr>
+										</thead>
+										<tbody id="listasProdVencimiento"></tbody>
+									</table>
+									
+									
 								</div>
 								<!--Fin de pestaña 02-->
 							</div>
@@ -534,7 +547,7 @@
 	<div class="modal fade modal-detalleProductoEncontrado " tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg ">
 			<div class="modal-content">
-				<div class="modal-header-indigo">
+				<div class="modal-header-blanco">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
 					<!--Boton para cerrar-->
@@ -557,10 +570,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-info btn-outline" data-dismiss="modal"><i
-							class="icofont icofont-close-circled"></i> Cancelar búsqueda</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -1380,15 +1390,15 @@
 					sumaValoriz += parseFloat(arg.prodPrecio);
 					var dia = moment(arg.prodFechaVencimiento);
 					$(`#listasProdVencimiento`).append(`
-					<div class="row resulDiv noselect" style="cursor:default" data-id="${arg.idDetalle}">
-						<div class="col-xs-2 col-sm-1 text-center tachoVencimiento" ><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-trash"></i></button></div>
-						<div class="col-xs-2 col-sm-1 text-center codDivInv" >${arg.idproducto}</div>
-						<div class="col-xs-3 mayuscula"> ${arg.prodNombre}</div>
-						<div class="col-xs-1 text-center argTotal">${arg.prodLote}</div>
-						<div class="col-xs-2 text-center argTotal">${dia.endOf('day').fromNow()}</div>
-						<div class="col-xs-2 text-center argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</div>
-						<div class="col-xs-1 hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></div></strong></div>
-					`);
+					<tr class="resulDiv noselect" data-id="${arg.idDetalle}">
+						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-trash"></i></button></td>
+						<td class="codDivInv">${arg.idproducto}</td>
+						<td class="mayuscula">${arg.prodNombre}</td>
+						<td class="argTotal">${arg.prodLote}</td>
+						<td class="argTotal">${dia.endOf('day').fromNow()}</td>
+						<td class="argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</td>
+						<td class="hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></td>
+					</tr>`);
 					$('.mitooltip').tooltip();
 
 				});

@@ -35,6 +35,14 @@ include 'php/variablesGlobales.php';
 	.dropdown-menu .divider{
 		margin: 3px 0;
 	}
+	#listadoDivs .row{
+		border-bottom: 1px solid #dfdfdf;
+	}
+	.close {
+    opacity: 0.8;
+    color: #cb0000;
+		font-size: 32px;
+}
 </style>
 <div id="wrapper">
 
@@ -65,6 +73,11 @@ include 'php/variablesGlobales.php';
 							<?php if($hayCaja>=1): ?>
 								<div class="form-inline">
 										<div class="form-group">
+											<label for="exampleInputName2">Tip de pago: </label>
+											<select class="form-control" id="sltMoneda" style="margin: 0 1rem;" >
+												<?php include "php/listarMonedaOPT.php"; ?>
+												
+											</select>
 											<label for="exampleInputName2">Paga con S/ </label>
 											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" value="0.00">
 										</div>
@@ -80,7 +93,7 @@ include 'php/variablesGlobales.php';
 						<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button> -->
 					</div>
 	
-						<div class="panel panel-morado text-muted conInputPersonalizados" id="panelResumenes">
+						<div class="panel panel-blanco conInputPersonalizados" style="color: #222222" id="panelResumenes">
 							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
 							<div class="panel-body">
 								<div class="row" style="margin: 0.5rem 0;">
@@ -113,9 +126,9 @@ include 'php/variablesGlobales.php';
 				</div><!-- fin de sm-12 -->
 	
 				<div class="col-sm-12" >
-					<div class="panel panel-morado">
+					<div class="panel panel-blanco">
 						<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Cesta de venta
-							<span class="pull-right"><small>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-morado" id="itemsCesta">0</strong></small></span>
+							<span class="pull-right"><small>Total de items<span class="hidden-xs"> en la cesta</span>: <strong class="badge badge-plomo" id="itemsCesta">0</strong></small></span>
 						</div>
 	
 						<div class="panel-body">
@@ -205,6 +218,24 @@ include 'php/variablesGlobales.php';
 						</div>
 	
 						</div><!-- fin de pane warning-->
+						<div class="panel panel-blanco">
+							<div class="panel-heading"><i class="icofont icofont-user"></i> Datos del cliente</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-4">
+										<input type="text" class="form-control" placeholder='DNI / RUC' id="txtCliDni">
+									</div>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" placeholder='Razón social o Nombres' id="txtCliRazon">
+									</div>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" placeholder='Dirección' id="txtCliDireccion">
+									</div>
+								
+								</div>
+							</div>
+		
+						</div>
 				</div>
 	
 		</div>
@@ -324,7 +355,7 @@ include 'php/variablesGlobales.php';
 	<div class="modal fade modal-detalleProductoEncontrado " tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg ">
 			<div class="modal-content">
-				<div class="modal-header-indigo">
+				<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button> <!--Boton para cerrar-->
 				<h4 class="modal-tittle "><i class="icofont icofont-help-robot"></i> <span id="lblCantidadProd"></span> Productos coincidentes con: <span id="terminoBusq"></span></h4></div>
 				<div class="modal-body">
@@ -343,9 +374,7 @@ include 'php/variablesGlobales.php';
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-outline" data-dismiss="modal"><i class="icofont icofont-close-circled"></i>Cerrar</button>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -644,6 +673,7 @@ include 'php/variablesGlobales.php';
 $(document).ready(function(){
 	$.impresion=[];
 	$.listaVariantes=[];
+	$('#sltMoneda').val("Efectivo")
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
 		$('.mitooltip').tooltip();
@@ -1313,7 +1343,8 @@ $.ticket = [];
 var Jencabezado=[];
 var Jdata=[];
 Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
-	'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text()
+	'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
+	ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val()
 });
 
 if($('.tablaResultadosCompras tbody tr').length!=0){
