@@ -104,7 +104,7 @@
 														<li onclick="$(this).parent().prev().html(`Busq. por Lote <span class='caret'></span>`); $(this).parent().parent().next().attr('placeholder', 'Nombre del Lote')"><a href="#">Búsqueda por lote</a></li>
 													</ul>
 												</div><!-- /btn-group -->
-												<input type="text" class="form-control" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="nope">
+												<input type="text" class="form-control" id="txtBuscarProductoProd" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="off">
 												<span class="input-group-btn">
 													<button class="btn btn-default" type="button" id="btn-BuscarProductoProd"><span class="glyphicon glyphicon-search"></span></button>
 												</span>
@@ -128,6 +128,14 @@
 											<div class="form-group">
 												<label> Nombre de producto</label>
 												<input type="text" class="form-control mayuscula" id="txtprodNombre" placeholder="Ubique el producto por Código, Nombre o Lote" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label> Principio activo</label>
+												<textarea class="form-control mayuscula" id="txtaPrincipio" cols="30" rows="2"></textarea>
 											</div>
 										</div>
 									</div>
@@ -380,6 +388,15 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12">
+										<div class="form-group">
+												<label> Principio activo</label>
+												<textarea class="form-control mayuscula" id="txtPrincipio" cols="30" rows="2" placeholder='Sustancias del medicamento'></textarea>
+												
+											</div>
+										</div>
+									</div>
 
 									<div class="row">
 										<div class="col-md-4">
@@ -614,7 +631,7 @@
 	<div class="modal fade modal-felicitacion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
-				<div class="modal-header-morado">
+				<div class="modal-header-blanco">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Muy bien!</h4>
@@ -778,16 +795,8 @@
 	</div>
 
 
-	<!-- jQuery -->
-	<script src="js/jquery-2.2.4.min.js"></script>
+	<?php include 'footers.php'; ?>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/moment.js"></script>
-	<script src="js/inicializacion.js"></script>
-	<script src="js/bootstrap-select.js"></script>
-	<script src="js/bootstrap-datepicker.min.js"></script>
-	<script src="js/bootstrap-datepicker.es.min.js"></script>
 
 	<!-- Menu Toggle Script -->
 	<script>
@@ -1032,7 +1041,7 @@
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
-								<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
+								<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
 							</div>
@@ -1076,12 +1085,12 @@
 								$('.modal-detalleProductoEncontrado #listadoDivs').append(`
 								<div class="row ${alerProd}" onclick='mostrarProducto(${dato.idProducto})'>
 									<div class="hidden" id="mProdID">${dato.idProducto}</div>
-									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
+									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre} <em>${dato.principioActivo}</em></span></div>
 									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
 									<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
-									<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
+									<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 									<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
 								</div>
@@ -1161,12 +1170,12 @@
 			data: {
 				idPro: idProd
 			}
-		}).done(function(resp) {
+		}).done(function(resp) { console.log( resp );
 			JSON.parse(resp).map(function(dato, index) {
 				//console.log(dato);
 				$('#txtprodCodigo').val(dato.idProducto);
 				$('#txtprodNombre').val(dato.prodNombre);
-				$('#txtprodDescripcion').val(dato.prodDescripcion);
+				$('#txtaPrincipio').val(dato.prodPrincipioActivo);
 				$('#txtprodStock').val(dato.prodStock);
 				$('#txtprodMinimo').val(dato.prodStockMinimo);
 				/*$('#txtprodCategoria').val(dato.idCategoriaProducto);
@@ -1278,7 +1287,7 @@
 				data: {
 					idProd: $('#txtprodCodigo').val(),
 					nombre: $.trim($('#txtprodNombre').val()),
-					descipt: $('#txtprodDescripcion').val(),
+					obs: $('#txtprodDescripcion').val(),
 					stkmin: $('#txtprodMinimo').val(),
 					categ: $('#cmbProdCateg').parent().find('button').attr('title'),
 					precio: $('#txtprodPrecio').val(),
@@ -1286,7 +1295,8 @@
 					costo: $('#txtprodCosto').val(),
 					porcent: $('#txtprodPorcentaje').val(),
 					propi: $('#cmbProdProp').parent().find('button').attr('title'),
-					stock: $('#txtprodStock').val()
+					stock: $('#txtprodStock').val(),
+					principio: $('#txtaPrincipio').val()
 				}
 			}).done(function(resp) {
 				console.log(resp)
@@ -1483,7 +1493,8 @@
 						stock: $('#tabCrearProducto #txtprodStock').val(),
 						barritas: $.listadoBarras,
 						lotesN: $.listadoLotes,
-						controlado: $('#cmbProductoControlado').val()
+						controlado: $('#cmbProductoControlado').val(),
+						principio: $('#txtPrincipio').val()
 					}
 				}).done(function(resp) {
 					console.log(resp)

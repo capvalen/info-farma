@@ -7,7 +7,7 @@ while($row = mysqli_fetch_array($log))
 {
 	$filas[]= array('idProducto' => $row['idProducto'],
 		'prodNombre' => $row['prodNombre'],
-		'prodDescripcion' => $row['prodDescripcion'],
+		'prodPrincipioActivo' => $row['prodPrincipioActivo'],
 		'prodStock' => $row['prodStock'],
 		'prodStockMinimo' => $row['prodStockMinimo'],
 		'idCategoriaProducto' => $row['idCategoriaProducto'],

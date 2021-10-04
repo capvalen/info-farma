@@ -16,7 +16,9 @@ while($row = mysqli_fetch_array($log))
 		'prodPrecioUnitario' => $row['prodPrecio'],
 		'prodStock' => $row['prodStock'],
 		'supervisado' => $row['supervisado'],
-		'variante' => $row['variante']
+		'variante' => $row['variante'],
+		'principioActivo' => $row['prodPrincipioActivo'],
+		'observaciones' => $row['obs']
 	);
 	
 }
