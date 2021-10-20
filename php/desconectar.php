@@ -1,4 +1,4 @@
-desconectar<?php
+<?php
 //session_start();
 
 

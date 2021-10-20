@@ -1,4 +1,6 @@
-<?php date_default_timezone_set('America/Lima'); ?>
+<?php date_default_timezone_set('America/Lima');
+require_once ( 'php/variablesGlobales.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 

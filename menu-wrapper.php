@@ -25,7 +25,7 @@ function casoActivo($quePagina){
 					</a>
 			</div>
 			<div class="logoEmpresa ocultar-mostrar-menu">
-				<img class="img-responsive" src="images/farmacovid.png?v=1.1" alt="">
+				<img class="img-responsive" src="images/farmacovid.jpg?v=1.2" alt="">
 			</div>
 			<li <?php casoActivo('principal'); ?>>
 					<a href="principal.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
@@ -42,6 +42,7 @@ function casoActivo($quePagina){
 			<li <?php casoActivo('ventas'); ?>>
 					<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
 			</li>
+			<?php if( in_array($_COOKIE['ckPower'], $soloAdmis) ):?>
 			<li <?php casoActivo('reportes'); ?>>
 					<a href="reportes.php"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 			</li>
@@ -51,6 +52,7 @@ function casoActivo($quePagina){
 			<li <?php casoActivo('configuraciones'); ?>>
 					<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 			</li>
+			<?php endif; ?>
 			<li>
 					<a href="#!" class="ocultar-mostrar-menu"><i class="icofont icofont-logout"></i> Ocultar menú</a>
 			</li>
@@ -88,7 +90,7 @@ function casoActivo($quePagina){
 									<span class="form-control-clear glyphicon glyphicon-remove-circle form-control-feedback hidden"></span>
 								</div>
 								</li>
-								<li id="liDatosPersonales"><a href="#!" ><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/gethora.php') ?></span> </small></a></li>
+								<li id="liDatosPersonales"><a href="#!" ><p><strong>Usuario: </strong> <span id="menuNombreUsuario"><?php echo $_COOKIE['cknomCompleto']; ?></span></p><small class="text-muted text-center" id="menuFecha"><span id="fechaServer"></span> <span id="horaServer"><?php require('php/getHora.php') ?></span> </small></a></li>
 								<li class="text-center"><a href="php/desconectar.php"><span class="visible-xs">Cerrar Sesión</span><i class="icofont icofont-sign-out"></i></a></li>
 						</ul>
 						

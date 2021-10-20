@@ -1,5 +1,6 @@
 <?php
 require_once ( 'php/conectkarl.php');
+require_once ( 'php/variablesGlobales.php');
 require_once ( 'php/comprobarCajaHoy.php');
 $sqlVentas="SELECT format(`sumaVentasCuadre`({$idCaja}),2) as sumaVentasCuadre, format(`sumaGastosCuadre`({$idCaja}),2) as sumaGastosCuadre, format(`sumaIngresosCuadre`({$idCaja}),2) as sumaIngresosCuadre; ";
 $resultadoVentas=$cadena->query($sqlVentas);

@@ -482,10 +482,10 @@ function calculoTicketVirtual() {
 		$('#spanSobra').text('Cuadre exacto');
 	}
 	if(sobra > 0){
-		$('#spanSobra').text('Sobra S/ '+ sobra.toFixed(2));		
+		$('#spanSobra').text('Falta S/ '+ sobra.toFixed(2));		
 	}
 	if(sobra < 0){
-		$('#spanSobra').text('Falta S/ '+ (0-sobra).toFixed(2));		
+		$('#spanSobra').text('Sobra S/ '+ (0-sobra).toFixed(2));		
 	}
 	
 	//$('#spanResultadoFinal').text(parseFloat( parseFloat($('#strSumaEntrada').text().replace(',', '.')) - parseFloat($('#strSumaSalida').text().replace(',', '.')) + parseFloat($('#spanApertura').text().replace(',', '.')) ).toFixed(2));

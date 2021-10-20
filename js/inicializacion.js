@@ -12,7 +12,7 @@ $('#agregarBarra').click(function(){
 });
 $(document).ready(function(){
 	$('#fechaServer').load("php/getFecha.php");
-	setInterval(function(){$('#horaServer').load("php/gethora.php");},'60000');
+	setInterval(function(){$('#horaServer').load("php/getHora.php");},'60000');
 	$('#listBarras').hide();
 	
 	//$('.side-nav').hide();
