@@ -6,7 +6,7 @@ $totalRow= mysqli_num_rows($sql);
 $sumaIngr=0;
 $boton='';
  
-$i=0;
+$i=1;
 $efectivo=0; $banco=0; $tarjeta=0;
 
 if($totalRow==0){
@@ -14,7 +14,6 @@ if($totalRow==0){
 }else{
 	while($row = mysqli_fetch_array($sql, MYSQLI_ASSOC))
 	{
-		$i++;
 		$sumaIngr+=floatval($row['pagoMonto']);
 		switch($row['cajaMoneda']){
 			case '1': 
@@ -29,13 +28,16 @@ if($totalRow==0){
 			break;
 			default:
 			break;
+			$i++;
+
 		}
 
-		if($_COOKIE['ckPower']==1 ): $boton = "<button class='btn btn-sm btn-negro btn-outline btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></button>"; else: $boton=''; endif;?>
+		if($_COOKIE['ckPower']==1 ): $boton = "<span class='btnEditarCajaMaestra'><i class='icofont icofont-edit'></i></span>"; 
+		else: $boton=''; endif;?>
 
 		<tr data-id="<?= $row['idCaja']; ?>" data-activo="<?= $row['cajaActivo']; ?>">
-			<th scope='row'> <?php if($row['idProducto']>0){ ?> <a href='productos.php?idProducto=<?= $row['idProducto'];?>#tabMovEstados'>#<?= $row['idProducto'];?></a> <?php } ?> </th>
-			<td class='mayuscula'><?= $row['catprodDescipcion'].' '. $row['prodNombre'];?></td>
+			<th scope='row'> <?= $i; ?> </th>
+			
 			<td class='mayuscula tpIdDescripcion'><?= $row['movDescripcion'];?></td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $row['usuNick'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>

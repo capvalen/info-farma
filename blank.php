@@ -1,3 +1,6 @@
+<?php 
+require_once ( 'php/variablesGlobales.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 

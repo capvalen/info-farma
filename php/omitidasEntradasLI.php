@@ -2,7 +2,7 @@
 require("conectkarl.php");
 
 $sql = mysqli_query($conection,"SELECT * FROM `movimiento`
-where idMovimiento in (1, 8, 10) order by movDescripcion asc");
+where idMovimiento in ( 8, 10) order by movDescripcion asc");
 
 while($row = mysqli_fetch_array($sql, MYSQLI_ASSOC))
 {

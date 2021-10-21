@@ -25,7 +25,7 @@ function casoActivo($quePagina){
 					</a>
 			</div>
 			<div class="logoEmpresa ocultar-mostrar-menu">
-				<img class="img-responsive" src="images/farmacovid.jpg?v=1.2" alt="">
+				<img class="img-responsive" src="images/<?= $_COOKIE['ckLogo']; ?>" alt="">
 			</div>
 			<li <?php casoActivo('principal'); ?>>
 					<a href="principal.php"><i class="icofont icofont-space-shuttle"></i> Inicio</a>
@@ -33,18 +33,22 @@ function casoActivo($quePagina){
 			<!-- <li <?php casoActivo('#'); ?>>
 					<a href="#"><i class="icofont icofont-users"></i> Usuarios</a>
 			</li> -->
-			<li <?php casoActivo('productos'); ?>>
-					<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
-			</li>
+			
 			<li <?php casoActivo('caja'); ?>>
 					<a href="caja.php"><i class="icofont icofont-tick-boxed"></i> Caja</a>
 			</li>
 			<li <?php casoActivo('ventas'); ?>>
 					<a href="ventas.php"><i class="icofont icofont-cart"></i> Ventas</a>
 			</li>
+			<li <?php casoActivo('productos'); ?>>
+					<a href="productos.php"><i class="icofont icofont-blood"></i> Productos</a>
+			</li>
 			<?php if( in_array($_COOKIE['ckPower'], $soloAdmis) ):?>
 			<li <?php casoActivo('reportes'); ?>>
 					<a href="reportes.php"><i class="icofont icofont-envelope-open"></i> Reportes</a>
+			</li>
+			<li <?php casoActivo('clientes'); ?>>
+					<a href="clientes.php"><i class="icofont icofont-users"></i> Clientes</a>
 			</li>
 			<!-- <li>
 					<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>

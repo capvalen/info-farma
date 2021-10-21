@@ -26,6 +26,12 @@ if ( intval($row['idUsuario']) >=1){
 	setcookie('ckPower', $row['idNivel'], time()+(3600*24), "/");
 	setcookie('ckidUsuario', $row['idUsuario'], time()+(3600*24), "/");
 
+	$sql="SELECT * FROM `empresaprincipal`";
+	$resultado=$dependencia->query($sql);
+	$resp = $resultado->fetch_assoc();
+	setcookie('ckLogo', $resp['logo'], time()+(3600*24), "/");
+
+
 
 	echo $row['idUsuario'];
 }

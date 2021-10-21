@@ -1,13 +1,14 @@
 <?php
-	header("Content-type: application/vnd.ms-excel");
-	header("Content-Disposition: attachment; filename=Reporte_Todos_Productos_Farmacia.xls");
-	header("Pragma: no-cache");
+	header("Content-type: application/vnd.ms-excel; charset=utf-8");
+	header('Content-Disposition: attachment; filename="Reporte_Todos_Productos_Farmacia.xls"');
 	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("Cache-Control: private",false);
 	
 	?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<table class="table table-hover">
+<table >
 	<thead>
 		<tr>
 			<th>#</th>

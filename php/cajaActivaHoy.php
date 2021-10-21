@@ -29,7 +29,7 @@ if($existeCajaU>0  ){
 	if( !isset($_GET['cuadre']) ){ //$existeCajaU==$row['idCuadre'] &&  ?>
 	<div class="container-fluid row ">
 		<div class="col-xs-12 col-md-8" >
-				<div class='divTopLinea'></div>
+				<div class='divTopLinea' style="margin-top: 20px;border-bottom: 1px solid #ccc;"></div>
 				<div class="alert alert-success-degradado container-fluid" role="alert">
 					<div class="col-sm-2 col-xs-3 ">
 						<div class="divLargoCircular">
@@ -49,25 +49,32 @@ if($existeCajaU>0  ){
 	<?php } //fin de if get cuadre
 }else{ if( !isset($_GET['cuadre']) ){
 	?>
+	<style>
+		#btnCajaAbrir{
+			font-size: 2rem; padding-left: 1rem; cursor: pointer; border: 1px solid #ffffff7a; padding: 5px 20px; border-radius: 6px;
+		}
+		#btnCajaAbrir:hover{background-color: #ffffff1a;}
+	</style>
 	<div class="container-fluid row ">
 		<div class="col-xs-12 col-md-7 " style="margin-top:2rem;">
-			<div class="alert alert-morado container-fluid" role="alert" >
-				<div class="col-xs-4 col-sm-2 col-md-3" >
-					<img src="images/ghost.png" alt="img-responsive" width="100%">
+			<div class="alert alert-morado container-fluid" role="alert" style="padding: 3rem 2rem;">
+				<div class="col-xs-12 col-sm-2 col-md-3" >
+					<img src="images/ghost.png" alt="img-responsive"  style="margin: 2rem auto;width: 90%; padding: 0 2rem;">
 				</div>
-				<div class="col-xs-8">
-					<strong>Alerta</strong> <p>No se encuentra ninguna caja aperturada.</p>
-				<?php $sqlLast="SELECT idCuadre, date_format(fechaInicio, '%Y-%m-%d') as fechaInicio, date_format(fechaInicio, '%d/%m/%Y') as fechaInicioC FROM `cuadre` order by idCuadre desc limit 1";
+				<div class="col-xs-12 col-sm-10 col-md-9">
+					<strong style="color: #ffbc43;">Alerta</strong>
+					<h4>No hay una caja abierta por el momento.</h4>
+				<?php $sqlLast="SELECT idCuadre, date_format(fechaInicio, '%Y-%m-%d') as fechaInicio, date_format(fechaInicio, '%d/%m/%Y  %h:%m %p') as fechaInicioC FROM `cuadre` order by idCuadre desc limit 1";
 				$resultadoLast=$esclavo->query($sqlLast);
 				$rowLast=$resultadoLast->fetch_assoc();
 				 ?>
-					<p>La última caja se encuentra en
-						<strong style="font-size:14px;">
-							<a href="caja.php?fecha=<?= $rowLast['fechaInicio']; ?>&cuadre=<?= $rowLast['idCuadre'];?>"><i class="icofont icofont-dotted-right"></i> <?= $rowLast['fechaInicioC']; ?></a>
-						</strong>
+					<p style="font-size: 1.2em;">La última sesión de caja fue el <i class="icofont icofont-dotted-right"></i>
+							<a href="caja.php?fecha=<?= $rowLast['fechaInicio']; ?>&cuadre=<?= $rowLast['idCuadre'];?>" style="color: #ffbc43;"> <?= $rowLast['fechaInicioC']; ?></a>
 					</p>
+					<hr style="margin: 5px 50% 20px 0;border-top: 1px solid #eeeeee7a;">
 					<?php if( in_array($_COOKIE['ckPower'], $soloCaja) && date('Y-m-d')== $_GET['fecha'] ){ ?>
-					<span>También puedes: </span><button class="btn btn-default btn-outline btn-sm" id="btnCajaAbrir"><i class="icofont icofont-coins"></i> Aperturar caja nueva</button>
+						<h4>¿Desas aperturar tu caja ahora?</h4>
+						<span class="" id="btnCajaAbrir" style=""><i class="icofont icofont-paper"></i> Sí, abrir nueva caja</span>
 					<?php } ?>
 				</div>
 			</div>
@@ -84,7 +91,7 @@ if( isset($_GET['cuadre']) ){ ?>
 
 
 <div class="col-xs-12 col-sm-4 text-center purple-text text-lighten-1">
-	<h4 class="mayuscula has-clear"><strong>Cajero de turno: </strong> <span><?= $row['usuNombre']; ?></span></h4>
+	<h4 class="mayuscula has-clear"><strong>Cajero de turno: </strong> <span id="spanCajeroTurno"><?= $row['usuNombre']; ?></span></h4>
 	<?php if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 		<button class="btn btn-default" id="btnCajaCerrar"><i class="icofont icofont-tea"></i> Cerrar caja</button>
 	<?php } ?>
@@ -92,14 +99,14 @@ if( isset($_GET['cuadre']) ){ ?>
 <div class="col-xs-12 col-sm-4 text-center purple-text text-lighten-1">
 	<h4>Apertura: <? if( in_array($_COOKIE['ckPower'], $soloDios) ): ?> <button class="btn btn-infocat btn-outline btn-xs" id="btnCambiarApertura"><i class="icofont icofont-cube"></i> Cambiar</button> <? endif;?> </h4>
 	<h4><strong >S/ <span id="spanApertura"><?= str_replace(",", '', number_format($row['cuaApertura'],2)); ?></span></strong></h4>
-	<p><?php $fechaN= new DateTime($row['fechaInicio']); echo $fechaN->format('j/n/Y g:i a'); ?></p>
-	<p><strong>Obs.</strong> <span class="mayuscula"><? if($row['cuaObs']==''){echo '-'; }else{echo $row['cuaObs'];} ?></span></p>
+	<p id="pAperturaFecha"><?php $fechaN= new DateTime($row['fechaInicio']); echo $fechaN->format('j/n/Y g:i a'); ?></p>
+	<p id="pObsApertura"><strong>Obs.</strong> <span class="mayuscula"><? if($row['cuaObs']==''){echo '-'; }else{echo $row['cuaObs'];} ?></span></p>
 </div>
 <div class="col-xs-12 col-sm-4 text-center purple-text text-lighten-1">
 	<h4>Cierre: <? if($row['fechaFin']<>'0000-00-00 00:00:00'): if( in_array($_COOKIE['ckPower'], $soloDios) ): ?> <button class="btn btn-infocat btn-outline btn-xs" id="btnCambiarCierre"><i class="icofont icofont-cube"></i> Cambiar</button> <? endif; endif;?></h4>
 	<h4><strong>S/ <span id="spanCierrev3"><?= str_replace(",", '', number_format($row['cuaCierre'],2)); ?></span></strong></h4>
-	<p><?php if($row['fechaFin']=='0000-00-00 00:00:00'){ echo 'Sin cerrar aún';}else{ $fechaN= new DateTime($row['fechaFin']); echo $fechaN->format('j/n/Y g:i a'); } ?></p>
-	<p><strong>Obs.</strong> <span class="mayuscula"><? if($row['cuaObsCierre']==''){echo '-'; }else{echo $row['cuaObsCierre'];} ?></span></p>
+	<p id="pCierreFecha"><?php if($row['fechaFin']=='0000-00-00 00:00:00'){ echo 'Sin cerrar aún';}else{ $fechaN= new DateTime($row['fechaFin']); echo $fechaN->format('j/n/Y g:i a'); } ?></p>
+	<p id="pObsCierre"><strong>Obs.</strong> <span class="mayuscula"><? if($row['cuaObsCierre']==''){echo '-'; }else{echo $row['cuaObsCierre'];} ?></span></p>
 	
 </div>
 <?php if($_COOKIE['ckidUsuario']==$row['idUsuario'] && $row['cuaVigente']==1  ){ ?>

@@ -61,6 +61,11 @@ input[type=number] {-moz-appearance:textfield;}
 .aprovecharAncho {padding-left: 2px; padding-right: 2px; padding-bottom: 2px}
 .aprovecharAncho i{font-size: 20px;}.affix {top: 20px; }
 
+.modal-header-blanco>.close {
+	opacity: 0.8;
+	color: #cb0000;
+	font-size: 32px;
+}
 
 .btn-amarillo {border-color: #f8b127; color: #fff; background-color: #f8b127;}
 #one { position: sticky; top: 10px; }
@@ -134,7 +139,7 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 .btn-morado.btn-outline:active,.btn-morado.btn-outline:hover, .btn-indigo.btn-outline:active,.btn-indigo.btn-outline:hover,
 .btn-morita.btn-outline:active,.btn-morita.btn-outline:hover
 {color: white;}
-.btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: black;}
+.btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: black;color: #e1e1e1;}
 .nav .icofont{font-size: 24px;}.navbar-brand{font-size: 24px;}
 .modal-backdrop.in{filter:alpha(opacity=60);opacity:.6}
 .modal-content{box-shadow: 0 0px 15px rgba(255, 255, 255, 0.65);}
@@ -247,7 +252,7 @@ h2{margin-top: 0px; } .breadcrumb{margin-bottom: 10px; }
 /*Importado de la V3*/
 .alert-morado{
 	color: white!important;
-	background-color:  #1d1861; /* #332f63; */
+	background-color: #21114c; /* #332f63; */
 	border-color: transparent;
 	border-radius: 10px;}
 .alert-morado strong{ font-size: 20px; }

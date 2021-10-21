@@ -223,13 +223,13 @@ include 'php/variablesGlobales.php';
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder='DNI / RUC' id="txtCliDni">
+										<input type="text" class="form-control" placeholder='DNI / RUC' id="txtCliDni" maxlength="11">
 									</div>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder='Razón social o Nombres' id="txtCliRazon">
+										<input type="text" class="form-control mayuscula" placeholder='Razón social o Nombres' id="txtCliRazon">
 									</div>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder='Dirección' id="txtCliDireccion">
+										<input type="text" class="form-control mayuscula" placeholder='Dirección' id="txtCliDireccion">
 									</div>
 								
 								</div>
@@ -578,16 +578,18 @@ include 'php/variablesGlobales.php';
 	<div class="modal fade modal-ventaGuardada" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-			<div class="modal-header-primary">
+			<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Venta guardada</h4>
 			</div>
 			<div class="modal-body">
-				<strong><i class="icofont icofont-social-smugmug"></i> Enhorabuena,</strong> su venta fue guardada. ¿Desea imprimir su voucher?
+				<img src="images/ventaFinal.webp" class="img-responsive">
+				<h4 class="text-muted text-center" style="margin-botton:0;"><i class="icofont icofont-social-smugmug"></i> Bien! Venta realizada</h4> 
+				<p class="text-center">¿Desea imprimir su voucher?</p>
 			</div>
 			<div class="modal-footer"> 
 			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, terminar</button>
-			<button class="btn btn-primary btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
+			<button class="btn btn-morado btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
 		</div>
 		</div>
 	</div>
@@ -598,7 +600,7 @@ include 'php/variablesGlobales.php';
 	<div class="modal fade modal-mostrarDetalleInventario" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-header-morado">
+			<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Detalles de la venta: <span id="spanIdInventario"></span></h4>
 			</div>
@@ -624,7 +626,7 @@ include 'php/variablesGlobales.php';
 	<div class="modal fade modal-faltaCompletar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-			<div class="modal-header-danger">
+			<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Campos incorrectos o faltantes</h4>
 			</div>
@@ -642,7 +644,7 @@ include 'php/variablesGlobales.php';
 	<div class="modal fade" id="modalUsarQueDscto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-			<div class="modal-header-wysteria">
+			<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Aplicar descuento</h4>
 			</div>
@@ -656,6 +658,7 @@ include 'php/variablesGlobales.php';
 		</div>
 		</div>
 	</div>
+	<?php include 'php/modals.php'; ?>
 
 	
 <!-- jQuery -->
@@ -673,6 +676,7 @@ include 'php/variablesGlobales.php';
 $(document).ready(function(){
 	$.impresion=[];
 	$.listaVariantes=[];
+	$.idCliente = 1;
 	$('#sltMoneda').val("Efectivo")
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
@@ -1338,40 +1342,51 @@ function pasarACanasta(index){
 }
 
 $('#btnGuardarVenta').click(function () {
-	
-$.ticket = [];
-var Jencabezado=[];
-var Jdata=[];
-Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
-	'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
-	ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val()
-});
 
-if($('.tablaResultadosCompras tbody tr').length!=0){
-	$('.tablaResultadosCompras tbody tr').map(function (argument, index) {
-	
-	var indProd=$(this).find('.mProdID').text();
-	var cantProd=$(this).find('.txtCantidadVariableProd').val();
-	var precioProd=$(this).find('.spanPrecio').text();
-	var SubTotalProd=$(this).find('.spanSubTotal').text();
-	var nomProImp= $(this).find('.mProdNom').text();	
-	var dscto= $(this).find('.spanDescuento').text();	
-
-	Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd })
-	
-	
-	})
-	//console.log(data) agrega todo en un solo JSON;
-	$.ajax({
-	type: 'POST',
-	url: 'php/ventas/insertarVentas.php',
-	data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
-	}).done(function (resp) { //console.log('recibido: ')
-		console.log(resp);
-		$('.modal-ventaGuardada').modal('show');
-	});
+	if( $('#txtCliDni').val().length>1 && $.trim($('#txtCliRazon').val())=="" ){
+		console.log( 'bderia error' );
+		$('#mdErrorGenerico').text('La razón social y el RUC/DNI tienen que estar ambos rellenados como mínimo');
+		$('.modal-GuardadoError').modal('show');
+	}else if($('.tablaResultadosCompras tbody tr').length==0){
+		$('#mdErrorGenerico').text('Su lista de venta se encuentra vacía');
+		$('.modal-GuardadoError').modal('show');
 	}
- $.ticket=Jdata;
+	else{
+		$.ticket = [];
+		var Jencabezado=[];
+		var Jdata=[];
+		Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
+			'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
+			idCliente: $.idCliente,
+			ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val()
+		});
+
+		
+			$('.tablaResultadosCompras tbody tr').map(function (argument, index) {
+			
+			var indProd=$(this).find('.mProdID').text();
+			var cantProd=$(this).find('.txtCantidadVariableProd').val();
+			var precioProd=$(this).find('.spanPrecio').text();
+			var SubTotalProd=$(this).find('.spanSubTotal').text();
+			var nomProImp= $(this).find('.mProdNom').text();	
+			var dscto= $(this).find('.spanDescuento').text();	
+
+			Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd })
+			
+			
+			})
+			//console.log(data) agrega todo en un solo JSON;
+			$.ajax({
+			type: 'POST',
+			url: 'php/ventas/insertarVentas.php',
+			data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
+			}).done(function (resp) { //console.log('recibido: ')
+				console.log(resp);
+				$('.modal-ventaGuardada').modal('show');
+			});
+		
+	 	$.ticket=Jdata;
+ }
  
 });
 
@@ -1585,6 +1600,30 @@ function aplicarDsctoA(index, posicion, esQue){
 	$('#modalUsarQueDscto').modal('hide');
 	
 }
+$('#txtCliDni').focusout( ()=>{
+	let tamaño = parseInt($('#txtCliDni').val().length); 
+
+	if( tamaño ==0 || tamaño ==8 || tamaño ==11  ){
+		console.log( 'si tiene formato' );
+		$.ajax({url: 'php/ventas/buscarCliente.php', type: 'POST', data: { ruc: $('#txtCliDni').val() }}).done(function(resp) {
+			resp = JSON.parse(resp);
+			//console.log( resp );
+			if(resp == null){
+				$.idCliente = -1;
+			}else{
+				$.idCliente = resp.id;
+				$('#txtCliRazon').val( resp.razon );
+				$('#txtCliDireccion').val( resp.direccion );
+			}
+		});
+	}else{
+		//console.log( 'no tiene formato' );
+		$.idCliente = 1;
+		$('#txtCliDni').val('');
+		$('#txtCliRazon').val('');
+		$('#txtCliDireccion').val('');
+	}
+})
 </script>
 
 </body>

@@ -61,15 +61,15 @@ td{font-size: 0.95em;}
 
 			<div class="row container-fluid" >
 				<p class="pheader col-xs-12"><i class="icofont icofont-filter"></i> Filtros</p>
-				<div class="panel panel-default container-fluid " style="padding-bottom: 20px;">
-					<div class="col-xs-12 col-sm-6 col-md-3">
-						<p style="color: #a35bb4;"><strong>Seleccione fecha de reporte:</strong></p>
+				<div class="panel panel-default container-fluid " style="padding-bottom: 20px; ">
+					<div class="col-xs-12 col-sm-6 col-md-3"  style="margin-top:1rem">
+						<p style="color: #a35bb4; "><strong>Seleccione fecha de reporte:</strong></p>
 							<input type="text" id="dtpFechaIniciov3" class="form-control text-center" placeholder="Fecha para controlar citas">
 						<!--<div class="sandbox-container"><input id="dtpFechaIniciov3" type="text" class="form-control text-center inputConIco" placeholder="" style="color: #a35bb4;" autocomplete="off"> <span class="icoTransparent"><i class="icofont icofont-caret-down"></i></span></div> -->
 					</div>
-					<div class=" col-xs-12 col-sm-6 col-md-4">
+					<div class=" col-xs-12 col-sm-6 col-md-4" style="margin-top:1rem">
 						<div>
-              <p style="color: #a35bb4;"><strong>Por:</strong> </p> <?php require "php/historialCierres.php"; ?>
+							<p style="color: #a35bb4;"><strong>Por:</strong> </p> <?php require "php/historialCierres.php"; ?>
 							<!-- <p style="color: #a35bb4;">Fecha: <strong id="strFechaAhora"></strong></p> -->
 						</div>
 					</div>
@@ -109,7 +109,7 @@ td{font-size: 0.95em;}
 				
 				<div class=" panel panel-default" id="divEntradas">
 					<div class="table-responsive">
-						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Movimiento</th> <th>Motivo de ingreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
+						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Motivo de ingreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
 						<tbody>
 						<?php
 						if( ! isset($_GET['cuadre']) ):
@@ -141,7 +141,7 @@ td{font-size: 0.95em;}
 				</div>
 				<div class=" panel panel-default " id="divSalidas">
 					<div class="table-responsive">
-						<table class="table table-hover">  <thead> <tr> <th>#</th> <th>Producto</th> <th>Motivo de egreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
+						<table class="table table-hover">  <thead> <tr> <th>#</th> <th>Motivo de egreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
 						<tbody>
 						<?php
 							if( ! isset($_GET['cuadre']) ):
@@ -156,25 +156,47 @@ td{font-size: 0.95em;}
 				</div>
 			</div>
 			<div class="row container-fluid ">
-				<div class="pheader"><h4><i class="icofont icofont-fax"></i> Resumen <strong> <span id="spanResultadoFinal"></span></strong></h4></div>
+				<div class="pheader">
+					<h4><i class="icofont icofont-fax"></i> Resumen <strong> <span id="spanResultadoFinal"></span></strong></h4>
+				</div>
 				<div class="panel panel-default">
 					<div class="container-fluid" style="padding:20px;">
-						<p class=""><strong>Apertura:</strong> S/ <span id="spanAperturaDia"></span></p>
-						<hr>
-						<p class=""><strong>*** Entradas ***</strong></p>
-						<p class=""><strong>Efectivo:</strong> S/ <span id="spanAperturaEfectivo"></span></p>
-						<p class=""><strong>Tarjetas:</strong>  S/ <span id="spanAperturaTarjetas"></span></p>
-						<p class=""><strong>Depósitos bancarios:</strong>  S/ <span id="spanAperturaBancos"></span></p>
-						<hr>
-						<p class=""><strong>*** Salidas ***</strong></p>
-						<p class=""><strong>Efectivo:</strong>  S/ <span id="spanCierreEfectivo"></span></p>
-						<p class=""><strong>Tarjetas:</strong>  S/ <span id="spanCierreTarjetas"></span></p>
-						<p class=""><strong>Depósitos bancarios:</strong>  S/ <span id="spanCierreBancos"></span></p>
-						<hr>
-						<p class=""><strong>Cierre Efectivo Manual:</strong>  S/ <span id="spanTotalEfectivo"></span></p>
-						<p class=""><strong>Cierre Efectivo Sistema:</strong>  S/ <span id="spanTotalSistema"></span></p>
-						<hr>
-						<p class=""><strong>Resumen: <span id="spanSobra"></span> </strong></p>
+						<div class="row">
+							<div class="col-xs-12">
+							<p class=""><strong>Apertura:</strong> S/ <span id="spanAperturaDia"></span></p>
+							<hr>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<h5>*** Entradas ***</h5>
+								<p style="margin-left:1rem"><strong>Efectivo:</strong> S/ <span id="spanAperturaEfectivo"></span></p>
+								<p style="margin-left:1rem"><strong>Tarjetas:</strong>  S/ <span id="spanAperturaTarjetas"></span></p>
+								<p style="margin-left:1rem"><strong>Depósitos bancarios:</strong>  S/ <span id="spanAperturaBancos"></span></p>
+								<hr>
+							</div>
+							<div class="col-lg-6">
+								<h5>*** Salidas ***</h5>
+								<p style="margin-left:1rem" class=""><strong>Efectivo:</strong>  S/ <span id="spanCierreEfectivo"></span></p>
+								<p style="margin-left:1rem" class=""><strong>Tarjetas:</strong>  S/ <span id="spanCierreTarjetas"></span></p>
+								<p style="margin-left:1rem" class=""><strong>Depósitos bancarios:</strong>  S/ <span id="spanCierreBancos"></span></p>
+								<hr>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<p style="margin-left:1rem" class=""><strong>Conteo del efectivo en base al Sistema:</strong>  S/ <span id="spanTotalSistema"></span></p>
+								<p style="margin-left:1rem" class=""><strong>Conteo de dinero real Manual:</strong>  S/ <span id="spanTotalEfectivo"></span></p>
+							</div>
+							<div class="col-xs-6">
+							<h5>Resumen: <strong><span id="spanSobra"></span></strong> </h5>
+							<button class="btn btn-success btn-outline"><i class="icofont icofont-file-excel"></i> Guardar en Excel</button>
+							</div>
+						</div>
+						
+					
+						
 					</div>
 				</div>
 				
@@ -182,8 +204,8 @@ td{font-size: 0.95em;}
 	<?php endif; //if de isset ?>
 			<!-- Fin de contenido 2 -->
 			</div> <!-- col-lg-12 contenedorDeslizable -->
-    </div><!-- row noselect -->
-    </div> <!-- container-fluid -->
+		</div><!-- row noselect -->
+		</div> <!-- container-fluid -->
 </div><!-- /#page-content-wrapper -->
 </div><!-- /#wrapper -->
 
@@ -191,7 +213,7 @@ td{font-size: 0.95em;}
 <div class='modal fade ' id="modalDetallesVenta" tabindex='-1' role='dialog' aria-hidden='true'>
 	<div class='modal-dialog modal-sm' >
 	<div class='modal-content '>
-		<div class='modal-header-success'>
+		<div class='modal-header-blanco'>
 			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
 			<h4 class='modal-tittle'> Vetalles Venta</h4>
 		</div>
@@ -253,7 +275,7 @@ td{font-size: 0.95em;}
 <div class="modal fade modal-aperturarCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-primary">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-animal-cat-alt-4"></i> Apertura de caja</h4>
 		</div>
@@ -268,7 +290,7 @@ td{font-size: 0.95em;}
 		</div>
 		<div class="divError text-left hidden"><i class="icofont icofont-animal-cat-alt-4"></i> Lo sentimos, <span class="spanError"></span></div>	<br>
 		<div class="modal-footer">
-			<button class="btn btn-azul btn-outline" id="btnGuardarApertura"><i class="icofont icofont-save"></i> Guardar</button>
+			<button class="btn btn-success btn-outline" id="btnGuardarApertura"><i class="icofont icofont-save"></i> Aperturar</button>
 		</div>
 	</div>
 	</div>
@@ -279,7 +301,7 @@ td{font-size: 0.95em;}
 <div class="modal fade modal-cerrarCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-warning">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-animal-cat-alt-4"></i> Cierre de caja</h4>
 		</div>
@@ -305,7 +327,7 @@ td{font-size: 0.95em;}
 <div class="modal fade" id="modalCambiarEntradaCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-warning">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-animal-cat-alt-4"></i> Cambiar apertura de caja</h4>
 		</div>
@@ -331,7 +353,7 @@ td{font-size: 0.95em;}
 <div class='modal fade ' id="modalModificarCaja" tabindex='-1' role='dialog' aria-hidden='true'>
 	<div class='modal-dialog modal-sm' >
 	<div class='modal-content '>
-		<div class='modal-header-danger'>
+		<div class='modal-header-blanco'>
 			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
 			<h4 class='modal-tittle'> Modificar caja</h4>
 		</div>
@@ -374,7 +396,7 @@ td{font-size: 0.95em;}
 <div class="modal fade modal-cajaMaestra" tabindex="-1" role="dialog">
 	<div class="modal-dialog moda-sm">
 		<div class="modal-content">
-			<div class="modal-header-success">
+			<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-tittle"><i class="icofont icofont-animal-cat-alt-3"></i> Modificar pago caja</h4>
 			</div>
@@ -681,11 +703,11 @@ function verDetalleVenta(detalle){
 		$('#modalDetallesVenta .modal-body' ).html('')
 		respuesta.forEach(dato => {
 			miniSuma += parseFloat(dato.detventCantidad)*parseFloat(dato.detventPrecio);
-			$('#modalDetallesVenta .modal-body').append( "<p class='text-capitalize'>" + " S/ " + parseFloat(dato.detventPrecio).toFixed(2) + " x "+ dato.detventCantidad + " Und. <strong>"+ dato.prodNombre + "</strong></p>" )
+			$('#modalDetallesVenta .modal-body').append( "<p class='text-capitalize'>" + dato.detventCantidad + " und. × <strong>S/ " + parseFloat(dato.detventPrecio).toFixed(2) + "</strong> <span>"+ dato.prodNombre + "</span></p>" )
 			//html + = ;
 
 		});
-		$('#modalDetallesVenta .modal-body' ).append("<hr><p><strong>" + 'Total = S/ ' + parseFloat(miniSuma).toFixed(2) + "</strong></p>");
+		$('#modalDetallesVenta .modal-body' ).append("<hr><p class='text-right'><strong>" + 'Total: S/ ' + parseFloat(miniSuma).toFixed(2) + "</strong></p>");
 		$('#modalDetallesVenta').modal('show');
 		//console.log( miniSuma );
 
@@ -837,7 +859,29 @@ $('#btnUpdateCierre').click(function() {
 });
 <?php } ?>
 
+function guardarExcel(){
 
+	$.ajax({url: 'php/ventas/guardarReporteCuadreCajaExcel.php', 
+		type: 'POST', 
+		cache: false,
+		
+		data: {
+		variable1: 'HOLA MUNDO'
+
+		}}).success(function(data) {
+			const fileName = `Cuadre_Caja_${moment().format('YYYYMMDD_hmm')}.xls`
+			if (window.navigator.msSaveOrOpenBlob) {
+				 window.navigator.msSaveBlob(res, fileName)
+			 } else {
+				 const downloadLink = window.document.createElement('a')
+				 downloadLink.href = window.URL.createObjectURL(new Blob([data]), { type: 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+				 downloadLink.download = fileName
+				 document.body.appendChild(downloadLink)
+				 downloadLink.click()
+				 document.body.removeChild(downloadLink)
+			 }
+		});
+}
 
 
 

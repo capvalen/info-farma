@@ -2,7 +2,7 @@
 <div class="modal fade modal-GuardadoCorrecto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-primary">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-social-readernaut"></i> Datos guardados</h4>
 		</div>
@@ -28,7 +28,7 @@
 <div class="modal fade modal-algunaAlerta" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-warning">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-social-readernaut"></i> Atención</h4>
 		</div>
@@ -53,22 +53,20 @@
 <div class="modal fade modal-GuardadoError" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-danger">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-animal-cat-alt-4"></i> Hay un problema</h4>
 		</div>
 		<div class="modal-body">
 			<div class="container-fluid">
 			<div class="row">
-			<img src="images/gatodead30.png" class="img-responsive">
-			<p><strong>Ups!</strong> Lo sentimos sucedió un error, el servidor tiene un mensaje.</p>
-			<p><strong id="spanMalo"></strong></p>
+				<img src="images/gatodead30.png" class="img-responsive" style="max-width: 80%; margin: auto;">
+				<p><strong>Ups!</strong> <span id="mdErrorGenerico">Lo sentimos sucedió un error, el servidor tiene un mensaje.</span></p>
+				<p><strong id="spanMalo"></strong></p>
+				<div class="text-right"><button class="btn btn-danger btn-outline" data-dismiss="modal" ><i class="icofont icofont-warning-alt"></i> Ok, revisar</button></div>
 			</div>
 		</div>
 			
-		<div class="modal-footer">
-			<button class="btn btn-danger btn-outline" data-dismiss="modal" ><i class="icofont icofont-warning-alt"></i> Ok</button>
-		</div>
 	</div>
 	</div>
 </div>
@@ -78,7 +76,7 @@
 <div class="modal fade modal-accionesCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
 	<div class="modal-content">
-		<div class="modal-header-danger">
+		<div class="modal-header-blanco">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-animal-cat-alt-4"></i> Acciones para caja</h4>
 		</div>
@@ -124,7 +122,7 @@
 <div class="modal fade modal-mostrarResultadosProducto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-lg" role="document">
 	<div class="modal-content">
-		<div class="modal-header-indigo" style="background-color: #6C5BBB;">
+		<div class="modal-header-blanco" style="background-color: #6C5BBB;">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Resultados de la búsqueda</h4>
 		</div>
