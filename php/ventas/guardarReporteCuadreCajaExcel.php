@@ -51,7 +51,7 @@ echo $_POST['tablaEntradas'];
 	</tbody>
 </table>
 <?php
-echo $_POST['tablaEntradas'];
+echo $_POST['tablaSalidas'];
 
 ?>
 <table>

@@ -191,7 +191,7 @@ td{font-size: 0.95em;}
 							</div>
 							<div class="col-xs-6">
 							<h5>Resumen: <strong><span id="spanSobra"></span></strong> </h5>
-							<button class="btn btn-success btn-outline"><i class="icofont icofont-file-excel"></i> Guardar en Excel</button>
+							<button class="btn btn-success btn-outline" onclick="guardarExcel()"><i class="icofont icofont-file-excel"></i> Guardar en Excel</button>
 							</div>
 						</div>
 						
@@ -866,7 +866,17 @@ function guardarExcel(){
 		cache: false,
 		
 		data: {
-		variable1: 'HOLA MUNDO'
+			abre: $('#spanCajeroTurno').text(),
+			montoAbre: $('#spanApertura').text(),
+			fechaAbre: $('#pAperturaFecha').text(),
+			obsAbre: $('#pObsApertura').text(),
+			montoCierre: $('#spanCierrev3').text(),
+			fechaCierre: $('#pCierreFecha').text(),
+			obsCierre: $('#pObsCierre').text(),
+			tablaEntradas: $('#divEntradas').html(),
+			tablaSalidas: $('#divSalidas').html(),
+			totalSistema: $('#spanTotalSistemaobsCierre').text(),
+			conteoManual: $('#spanTotalEfectivo').text()
 
 		}}).success(function(data) {
 			const fileName = `Cuadre_Caja_${moment().format('YYYYMMDD_hmm')}.xls`

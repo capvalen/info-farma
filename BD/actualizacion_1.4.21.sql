@@ -61,7 +61,7 @@ INSERT INTO `movimiento` (`idMovimiento`, `movDescripcion`) VALUES (NULL, 'Devol
 
 
 
-INSERT INTO `variantes` (`id`, `nombre`, `activo`) VALUES (6, 'Ciento', '1'), (7, 'Docena', '1')
+INSERT INTO `variantes` (`id`, `nombre`, `activo`) VALUES (6, 'Ciento', '1'), (7, 'Docena', '1');
 
 ALTER TABLE `producto` CHANGE `prodAlertaStock` `prodAlertaStock` TINYINT(1) NULL DEFAULT '1' COMMENT '1 sale alerta; 0 no';
 
@@ -97,3 +97,52 @@ where `idProducto`=idprod;
 select 1;
 END$$
 DELIMITER ;
+
+
+drop procedure listarProdimosAVencer;
+DELIMITER $$
+CREATE PROCEDURE `listarProdimosAVencer`()
+BEGIN
+
+select p.idproducto, prodFechaVencimiento, prodNombre, prodPrecio, d.prodLote, d.idDetalle
+from producto p
+inner join detalleproductos d on p.idproducto=d.idproducto
+where prodAlertaStock =1 and prodActivo=1 and idPropiedadProducto<>4
+and datediff(prodFechaVencimiento, now() )<91
+order by prodNombre asc;
+
+/*str_to_date(prodFechaVencimiento ,'%d/%m/%Y' ) asc;*/
+/*Cambia de fecha a automatica str_to_date( fecha ,'%d/%m/%Y' )*/
+/*WHERE (prodFechaVencimiento <= curdate() or
+prodFechaVencimiento between now() and DATE_ADD(now(), INTERVAL 3 month) ) */
+
+END$$
+DELIMITER ;
+
+
+
+/***********************/
+
+DROP PROCEDURE `buscarProductoXNombreOLote`;
+DELIMITER $$
+CREATE PROCEDURE `buscarProductoXNombreOLote`(IN `filtro` TEXT)
+BEGIN
+SELECT DISTINCT prd.idProducto, prodNombre, prodPrecio, catprodDescipcion,
+case prodLote when '' then '-' else  upper(prodLote) end as lote,
+returnFechaProximaVencer(prd.idProducto) as nFecha,prodFechaVencimiento, prodStock, supervisado, variante, prodPrincipioActivo, prd.`obs`
+
+FROM `producto` as prd
+INNER JOIN `detalleproductos` as det ON prd.`idProducto`=det.`idProducto`
+inner join categoriaproducto as cat on cat.idcategoriaproducto= prd.idcategoriaproducto
+left join productobarras as prb on prb.idProducto = prd.idProducto
+WHERE ( ( concat(catprodDescipcion , ' ', prodnombre  ) like concat('%', filtro, '%')
+or prd.idProducto like concat('%', filtro, '%')
+or prb.barrasCode = filtro )
+or prd.prodPrincipioActivo like concat('%', filtro, '%')
+and prodDisponible=1 ) and prd.prodActivo=1
+group by prd.idProducto
+ORDER BY prd.`prodNombre` asc;
+END$$
+DELIMITER ;
+
+

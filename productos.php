@@ -80,9 +80,9 @@
 							<li class="active"><a href="#tabDetallarProducto" data-toggle="tab">Editar un producto</a></li>
 							<li><a href="#tabProximosVencer" data-toggle="tab">Productos por vencerse</a></li>
 							<li id="liYaAgotados"><a href="#tabYaAgotados" data-toggle="tab">Productos agotados</a></li>
-							<?php if(in_array($_COOKIE['ckPower'], $admis)){ ?>
+							<?php /* if(in_array($_COOKIE['ckPower'], $admis)){ */ ?>
 							<li><a href="#tabCrearProducto" data-toggle="tab">Crear nuevo producto</a></li>
-							<?php } ?>
+							<?php /* } */ ?>
 
 						</ul>
 
@@ -269,7 +269,7 @@
 										<div class="col-sm-12">
 											<button class="btn btn-danger btn-outline pull-left btn-lg" id="btnBorrarDataProducto"
 												style="margin-bottom:20px;"><i class="icofont icofont-trash"></i> Borrar producto</button>
-											<button class="btn btn-primary btn-outline pull-right btn-lg" id="btnActualizarDataProducto"
+											<button class="btn btn-morado btn-outline pull-right btn-lg" id="btnActualizarDataProducto"
 												style="margin-bottom:20px;"><i class="icofont icofont-checked"></i> Guardar cambios</button>
 										</div>
 										<?php endif; ?>
@@ -597,7 +597,7 @@
 	<div class="modal fade modal-barras" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
-				<div class="modal-header-success">
+				<div class="modal-header-blanco">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title"><i class="icofont icofont-help-robot"></i> Listado de barras</h4>
 				</div>
@@ -638,11 +638,14 @@
 					<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Muy bien!</h4>
 				</div>
 				<div class="modal-body">
-					<i class="icofont icofont-animal-squirrel"></i> <span id="lblMensajeBien"></span> <i
-						class="icofont icofont-social-smugmug"></i>
+					<img src="images/ok.png" class="img-responsive">
+					 <h4 class="text-center"><span id="lblMensajeBien"></span> <i class="icofont icofont-social-smugmug"></i></h4>
+					 <div class="text-right">
+						 <button class="btn btn-morado btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button>
+
+					 </div>
 				</div>
-				<div class="modal-footer"> <button class="btn btn-morado btn-outline" data-dismiss="modal"><i
-							class="icofont icofont-alarm"></i> Ok</button></div>
+				
 			</div>
 		</div>
 	</div>
@@ -676,7 +679,8 @@
 					<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Modificar stock</h4>
 				</div>
 				<div class="modal-body">
-					<p>¿Cuántas unidades desea <span id="spModSumaStock">sumar</span> al stock?</p>
+					<img src="images/almacen.png" class="img-responsive">
+					<p>¿Cuántas unidades desea <strong id="spModSumaStock">sumar</strong> al stock?</p>
 					<input type="number" class="form-control text-center" id="txtMovimientoCant" step="1">
 					<p>Seleccione el tipo de movimiento:</p>
 
@@ -714,7 +718,7 @@
 	<div class='modal fade' id="modalBorrarProducto" tabindex='-1' role='dialog' aria-hidden='true'>
 		<div class='modal-dialog modal-sm'>
 			<div class='modal-content '>
-				<div class='modal-header-danger'>
+				<div class='modal-header-blanco'>
 					<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span
 							aria-hidden='true'>&times;</span></button>
 					<h4 class='modal-tittle'> Borrar producto</h4>
@@ -768,7 +772,6 @@
 									</select>
 							</div>
 							<button class="btn btn-outline btn-primary" onclick="addVariant()"><i class="icofont icofont-plus"></i></button>
-							<button class="btn btn-outline btn-success" onclick="saveVariant()"><i class="icofont icofont-save"></i> Guardar</button>
 						</div>
 						<div class="panel panel-default" style="margin-top:1em">
 							<div class="panel-body" id="bodyVariantes">
@@ -788,6 +791,10 @@
 									</tbody>
 								</table>
 							</div>
+						</div>
+						<div class="text-right">
+							<button class="btn btn-outline btn-success" onclick="saveVariant()"><i class="icofont icofont-save"></i> Guardar</button>
+
 						</div>
 					</div>
 				</div>
