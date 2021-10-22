@@ -64,6 +64,11 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<?php include 'php/productos/alertaProdVencer.php'; ?>
+					</div>
+				</div>
 				<p><br><br><br><br><br><br><br>
 				</p>
 	

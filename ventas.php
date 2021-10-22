@@ -73,7 +73,7 @@ include 'php/variablesGlobales.php';
 							<?php if($hayCaja>=1): ?>
 								<div class="form-inline">
 										<div class="form-group">
-											<label for="exampleInputName2">Tip de pago: </label>
+											<label for="exampleInputName2">Tipo de pago: </label>
 											<select class="form-control" id="sltMoneda" style="margin: 0 1rem;" >
 												<?php include "php/listarMonedaOPT.php"; ?>
 												

@@ -24,7 +24,7 @@ while($row=$resultado->fetch_assoc()){
 			<td class="mayuscula"><?= $row['prodNombre']; ?></td>
 			<td><?= $row['prodStock']; ?></td>
 			<td><?= $row['prodStockMinimo']; ?></td>
-			<td><button class="btn btn-negro btn-outline btnSinBorde" onclick="resetearStock(<?= $row['idProducto'];?>)"><i class="icofont icofont-ui-text-loading"></i></button></td>
+			<td><button class="btn btn-negro btn-outline btnSinBorde" onclick="resetearStock(<?= $row['idProducto'];?>)"><i class="icofont icofont-rounded-right-down"></i></button></td>
 		</tr>
 	<?php
 $i++; } ?>

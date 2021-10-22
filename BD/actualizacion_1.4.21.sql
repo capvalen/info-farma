@@ -58,3 +58,42 @@ DELIMITER ;
 
 
 INSERT INTO `movimiento` (`idMovimiento`, `movDescripcion`) VALUES (NULL, 'Devolución');
+
+
+
+INSERT INTO `variantes` (`id`, `nombre`, `activo`) VALUES (6, 'Ciento', '1'), (7, 'Docena', '1')
+
+ALTER TABLE `producto` CHANGE `prodAlertaStock` `prodAlertaStock` TINYINT(1) NULL DEFAULT '1' COMMENT '1 sale alerta; 0 no';
+
+drop procedure listarDetalleProductoPorId;
+DELIMITER $$
+CREATE PROCEDURE `listarDetalleProductoPorId`(IN `idproduct` INT)
+BEGIN
+SELECT idProducto, prodNombre, prodStock, prodStockMinimo, idCategoriaProducto,
+idPropiedadProducto, idLaboratorio, prodPrecio, prodCosto, prodPorcentaje, returnCantidadBarras(idproduct) as cantBarras, supervisado, prodPrincipioActivo, obs, prodAlertaStock
+FROM producto
+where idProducto= idproduct;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE `actualizarProductoDetalles`;
+DELIMITER $$
+CREATE PROCEDURE `actualizarProductoDetalles`(IN `idProd` INT, IN `nombre` TEXT, IN `stkmin` INT, IN `categ` TEXT, IN `precio` FLOAT, IN `iduser` INT, IN `labo` TEXT, IN `propi` TEXT, IN `costo` FLOAT, IN `porcent` INT, IN `stock` INT, IN `principio` TEXT, IN `observ` TEXT, IN `alerta` INT)
+BEGIN
+update `producto`
+set 
+`prodNombre`=nombre,
+`prodStockMinimo`=stkmin,
+`idCategoriaProducto`=returnIdCategoriaProducto(categ),
+`idPropiedadProducto`=returnIdPropiedad(propi),
+`idLaboratorio`=returnIdLaboratorio(labo),
+`prodPrecio`=precio, `prodCosto`=costo, `prodPorcentaje`= porcent,
+`prodStock` = stock,
+`prodPrincipioActivo` = principio,
+`obs` = observ,
+`prodAlertaStock` = alerta
+where `idProducto`=idprod;
+
+select 1;
+END$$
+DELIMITER ;

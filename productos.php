@@ -169,7 +169,7 @@
 										
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Alerta de escasez:</label>
+												<label>Alerta de escasez: </label> <label><input type="checkbox" id="chAlerta"> <span>No</span></label>
 												<input type="number" class="form-control text-center" id="txtprodMinimo" placeholder="Alerta unidades">
 											</div>
 										</div>
@@ -346,12 +346,13 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
-												<th>Alerta</th>
-												<th>Cód.</th>
+												<th>N°</th>
+												<th>Cod.</th>
 												<th>Producto</th>
 												<th>Lote</th>
 												<th>Vence en</th>
 												<th>Fecha</th>
+												<th>Alerta</th>
 											</tr>
 										</thead>
 										<tbody id="listasProdVencimiento"></tbody>
@@ -669,7 +670,7 @@
 	<div class="modal fade modalModificarStock" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
-				<div class="modal-header-morado">
+				<div class="modal-header-blanco">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel"><i class="icofont icofont-help-robot"></i> Modificar stock</h4>
@@ -733,7 +734,7 @@
 	<div class='modal fade ' id="modalResetStock" tabindex='-1' role='dialog' aria-hidden='true'>
 		<div class='modal-dialog modal-sm' >
 		<div class='modal-content '>
-			<div class='modal-header-primary'>
+			<div class='modal-header-blanco'>
 				<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
 				<h4 class='modal-tittle'> Borrar de la lista</h4>
 			</div>
@@ -741,7 +742,7 @@
 			<p>¿Desea resetear el stock?</p>
 			</div>
 			<div class='modal-footer'>
-				<button type='button' class='btn btn-primary' id="btnResetStockSi">Sí</button>
+				<button type='button' class='btn btn-outline btn-warning' id="btnResetStockSi">Si, borrar alerta</button>
 			</div>
 			</div>
 		</div>
@@ -760,9 +761,10 @@
 									<select id="sltVariantes" class="form-control" name="">
 										<option value="1">Blister</option>
 										<option value="2">Caja</option>
+										<option value="6">Ciento</option>
+										<option value="7">Docena</option>
 										<option value="4">Descuento especial</option>
 										<option value="3">Por mayor</option>
-										<option value="5">Six-Pack</option>
 									</select>
 							</div>
 							<button class="btn btn-outline btn-primary" onclick="addVariant()"><i class="icofont icofont-plus"></i></button>
@@ -1189,6 +1191,12 @@
 				$('#cmbProdControlado').selectpicker('val', dato.supervisado);
 				$('#cmbProdProp').selectpicker('val', dato.idPropiedadProducto);
 				$('#cmbProdLaboratorio').selectpicker('val', dato.idLaboratorio);
+				if(dato.prodAlertaStock=='1'){
+					$('#chAlerta').prop('checked');
+				}else{
+					$('#chAlerta').prop('checked', false)
+				}
+				$('#chAlerta').change();
 			});
 		});
 		verVencimientosPorId(idProd)
@@ -1205,6 +1213,15 @@
 
 		$('.modal-detalleProductoEncontrado').modal('hide');
 	}
+	$('#chAlerta').change(function() {
+		if($('#chAlerta').prop('checked')){
+			$('#chAlerta').next().text('Sí');
+			$('#txtprodMinimo').attr('readonly', false);
+		}else{
+			$('#chAlerta').next().text('No');
+			$('#txtprodMinimo').attr('readonly', true);
+		}
+	});
 
 	function verVencimientosPorId(idProd) {
 		$.ajax({
@@ -1281,6 +1298,8 @@
 
 		if ($(this).hasClass('disabled')) {} else {
 			$(this).addClass('disabled');
+			let alerta = false;
+			if( $('#chAlerta').prop('checked') ){ alerta =1;}else{alerta =0;}
 			$.ajax({
 				url: 'php/productos/actualizarProductoDetalles.php',
 				type: 'POST',
@@ -1296,7 +1315,8 @@
 					porcent: $('#txtprodPorcentaje').val(),
 					propi: $('#cmbProdProp').parent().find('button').attr('title'),
 					stock: $('#txtprodStock').val(),
-					principio: $('#txtaPrincipio').val()
+					principio: $('#txtaPrincipio').val(),
+					alertaStock: alerta
 				}
 			}).done(function(resp) {
 				console.log(resp)
@@ -1393,7 +1413,7 @@
 			$.ajax({
 				url: 'php/productos/listarProximosAVencer.php',
 				type: 'POST'
-			}).done(function(resp) { console.log( resp );
+			}).done(function(resp) { //console.log( resp );
 				$.each(JSON.parse(resp), function(i, arg) {
 					//console.log(arg)
 					moment.locale('es')
@@ -1401,13 +1421,14 @@
 					var dia = moment(arg.prodFechaVencimiento);
 					$(`#listasProdVencimiento`).append(`
 					<tr class="resulDiv noselect" data-id="${arg.idDetalle}">
-						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-trash"></i></button></td>
+						<td>${i+1}</td>
 						<td class="codDivInv">${arg.idproducto}</td>
 						<td class="mayuscula">${arg.prodNombre}</td>
 						<td class="argTotal">${arg.prodLote}</td>
 						<td class="argTotal">${dia.endOf('day').fromNow()}</td>
-						<td class="argTotal mitooltip" title="${dia.format('DD/MM/YYYY')}">${dia.format('MMMM [de] YYYY')}</td>
+						<td class="argTotal " title="${dia.format('DD/MM/YYYY')}">${dia.format('DD/MM/YYYY')}</td>
 						<td class="hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></td>
+						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-rounded-right-down"></i></button></td>
 					</tr>`);
 					$('.mitooltip').tooltip();
 
@@ -1556,7 +1577,7 @@
 				}
 			}).done(function(resp) {
 				//console.log(resp)
-				var suma = ['2', '4'];
+				var suma = ['2', '4', '15'];
 				var resta = ['1', '3', '5', '6', '7'];
 				var movi = $('#sltOpcionesMovimiento option[value="' + $('#sltOpcionesMovimiento').val() + '"]').text();
 				var stock;
