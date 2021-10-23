@@ -4,87 +4,33 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite6a9fbbd890a04af200de169ddb121c0
+class ComposerStaticInit951ca910b98b786f4c47e3b89c0e8aa6
 {
-    public static $files = array (
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'M' => 
         array (
-            'StephenHill\\Benchmarks\\' => 23,
-            'StephenHill\\' => 12,
-        ),
-        'R' => 
-        array (
-            'ReCaptcha\\' => 10,
-        ),
-        'P' => 
-        array (
-            'Psr\\Http\\Message\\' => 17,
-            'PHPMailer\\PHPMailer\\' => 20,
-        ),
-        'L' => 
-        array (
-            'League\\OAuth2\\Client\\' => 21,
-        ),
-        'G' => 
-        array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
+            'Mike42\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'StephenHill\\Benchmarks\\' => 
+        'Mike42\\' => 
         array (
-            0 => __DIR__ . '/..' . '/stephenhill/base58/benchmarks',
+            0 => __DIR__ . '/..' . '/mike42/escpos-php/src/Mike42',
+            1 => __DIR__ . '/..' . '/mike42/gfx-php/src/Mike42',
         ),
-        'StephenHill\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/stephenhill/base58/src',
-        ),
-        'ReCaptcha\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'PHPMailer\\PHPMailer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'League\\OAuth2\\Client\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/oauth2-client/src',
-            1 => __DIR__ . '/..' . '/league/oauth2-google/src',
-        ),
-        'GuzzleHttp\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite6a9fbbd890a04af200de169ddb121c0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite6a9fbbd890a04af200de169ddb121c0::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit951ca910b98b786f4c47e3b89c0e8aa6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit951ca910b98b786f4c47e3b89c0e8aa6::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit951ca910b98b786f4c47e3b89c0e8aa6::$classMap;
 
         }, null, ClassLoader::class);
     }
