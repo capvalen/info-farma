@@ -146,3 +146,86 @@ END$$
 DELIMITER ;
 
 
+
+
+
+/*************************/
+DELIMITER $$
+CREATE FUNCTION `returnLote`(`idProd` INT) RETURNS varchar(250) CHARSET utf8mb4
+    NO SQL
+BEGIN
+declare loT varchar(250) default '';
+SELECT prodLote into loT FROM `detalleproductos` WHERE `idProducto` = idProd
+and prodDisponible = 1 and IFNULL(DAYNAME(prodFechaVencimiento) , '')<>''
+order by prodFechaVencimiento ASC limit 1;
+return loT;
+
+END$$
+DELIMITER ;
+
+drop function returnFechaProximaVencer;
+DELIMITER $$
+CREATE FUNCTION `returnFechaProximaVencer`(`idProd` INT) RETURNS date
+    NO SQL
+BEGIN
+
+DECLARE fecha date default "0000-00-00";
+
+SELECT prodFechaVencimiento into fecha FROM `detalleproductos`
+WHERE `idProducto` = idProd
+and prodDisponible = 1 and IFNULL(DAYNAME(prodFechaVencimiento) , '')<>''
+order by prodFechaVencimiento ASC
+limit 1;
+
+return fecha;
+
+END$$
+DELIMITER ;
+
+drop procedure buscarProductoXNombreOLote;
+DELIMITER $$
+CREATE  PROCEDURE `buscarProductoXNombreOLote`(IN `filtro` TEXT)
+BEGIN
+SELECT DISTINCT prd.idProducto, prodNombre, prodPrecio, catprodDescipcion,
+returnLote(prd.idProducto) as lote,
+returnFechaProximaVencer(prd.idProducto) as nFecha,prodFechaVencimiento, prodStock, supervisado, variante, prodPrincipioActivo, prd.`obs`
+
+FROM `producto` as prd
+INNER JOIN `detalleproductos` as det ON prd.`idProducto`=det.`idProducto`
+inner join categoriaproducto as cat on cat.idcategoriaproducto= prd.idcategoriaproducto
+left join productobarras as prb on prb.idProducto = prd.idProducto
+WHERE ( ( concat(catprodDescipcion , ' ', prodnombre  ) like concat('%', filtro, '%')
+or prd.idProducto like concat('%', filtro, '%')
+or prb.barrasCode = filtro )
+or prd.prodPrincipioActivo like concat('%', filtro, '%')
+and prodDisponible=1 ) and prd.prodActivo=1
+group by prd.idProducto
+ORDER BY prd.`prodNombre` asc;
+END$$
+DELIMITER ;
+
+
+
+DROP PROCEDURE `actualizarProductoDetalles`;
+DELIMITER $$
+CREATE  PROCEDURE `actualizarProductoDetalles`(IN `idProd` INT, IN `nombre` TEXT, IN `stkmin` INT, IN `categ` INT, IN `precio` FLOAT, IN `iduser` INT, IN `labo` INT, IN `propi` INT, IN `costo` FLOAT, IN `porcent` INT, IN `stock` INT, IN `principio` TEXT, IN `observ` TEXT, IN `alerta` INT, IN `controlado` INT) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN
+update `producto`
+set 
+`prodNombre`=nombre,
+`prodStockMinimo`=stkmin,
+`idCategoriaProducto`= categ,
+`idPropiedadProducto`= propi,
+`idLaboratorio`=labo,
+`prodPrecio`=precio, `prodCosto`=costo, `prodPorcentaje`= porcent,
+`prodStock` = stock,
+`prodPrincipioActivo` = principio,
+`obs` = observ,
+`prodAlertaStock` = alerta,
+`supervisado`=controlado
+where `idProducto`=idprod;
+
+END$$
+DELIMITER ;
+
+
+CREATE TABLE `canjes` ( `id` INT NOT NULL , `idCliente` INT NOT NULL , `idUsuario` INT NOT NULL , `fecha` INT NOT NULL , `puntos` INT NOT NULL , `canje` INT NOT NULL ) ENGINE = InnoDB;

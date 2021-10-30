@@ -28,11 +28,10 @@ try {
     $printer = new Printer($connectorV31);
     $printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
-    $printer -> text("Centro Clínico Araujo\n");
-    $printer -> text("Empresa de Servicios Médicos Celendín EIRL\n");
-    $printer -> text("JR Ayacucho 268 - Celendin\n");
-    $printer -> text("910916461 - 927668593\n");
-    $printer -> text("----------------------------------------\n\n");
+    $printer -> text("CardioFarma\n");
+    $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
+    
+    $printer -> text("----------------------------------\\n\n");
     $printer -> text("CIERRE DE CAJA\n");
 
     $printer -> text(date("d/m/Y, g:i a")."\n");
@@ -46,7 +45,7 @@ try {
     $printer -> text("   ------  Salidas  ----\n");
     $printer -> text("Efectivo: S/ (".number_format($_POST['efectivoSalida'], 2).")\n");
     $printer -> text("Tarjetas: S/ (".number_format($_POST['tarjetaSalida'], 2).")\n");
-    $printer -> text("   ----------------------------------\n");
+    $printer -> text("----------------------------------\n");
     $printer -> text("Cierre manual: S/ ".number_format($_POST['cierre'], 2)."\n");
     $printer -> text("TOTAL: S/ ".number_format($cierreVirtual, 2)."\n");
     $printer -> text($resto." S/ ".number_format($sobra,2)."\n");

@@ -10,7 +10,9 @@ require_once ( 'php/variablesGlobales.php');
 </head>
 
 <body>
-
+<style>
+	.icoSpan{cursor: pointer;}
+</style>
 <div id="wrapper">
 
 <?php $pagina = 'QUE_PAGINA_eS'; include 'menu-wrapper.php'; ?>
@@ -38,6 +40,10 @@ require_once ( 'php/variablesGlobales.php');
 							<div>
 								<a class="mayuscula" href="#!" style="margin-right: 2rem;" v-for="letra in letras" @click="cambiarLetra(letra)">{{letra}}</a>
 							</div>
+							<div class="row col-md-5" style="margin:1rem 0;">
+								<p >O use el filtro y enter</p>
+								<input type="text" class="form-control" placeholder='Buscar por nombre, Dni' id="" v-model="texto" @keyup.enter="buscarCampo()">
+							</div>
 							<hr>
 							<div>
 								<table class="table table-hover">
@@ -50,6 +56,7 @@ require_once ( 'php/variablesGlobales.php');
 											<th>Puntos Globales</th>
 											<th>Antigüedad</th>
 											<th>Última compra</th>
+											<th>@</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -61,6 +68,7 @@ require_once ( 'php/variablesGlobales.php');
 											<td class="mayuscula">{{cliente.puntosTotal}}</td>
 											<td class="mayuscula">{{fechaLatam(cliente.registrado)}}</td>
 											<td class="mayuscula">{{fechaLatam(cliente.actualizacion)}}</td>
+											<td><span class="text-primary icoSpan mitooltip" title="Canjear puntos" @click="modalPuntos()"><i class="icofont icofont-heartbeat"></i></span></td>
 										</tr>
 										<tr v-if="clientes.length==0">
 											<td colspan="6">No hay registros</td>
@@ -81,6 +89,23 @@ require_once ( 'php/variablesGlobales.php');
 					</div>
 					
 				</div>
+			<!-- Modal para: -->
+			<div class='modal fade ' id="modalCanjear" tabindex='-1' role='dialog' aria-hidden='true'>
+				<div class='modal-dialog modal-sm' >
+				<div class='modal-content '>
+					<div class='modal-header-blanco'>
+						<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+						<h4 class='modal-tittle'> Canjear Puntos</h4>
+					</div>
+					<div class='modal-body'>
+						
+					</div>
+					<div class='modal-footer'>
+						<button type='button' class='btn btn-default '><i class="icofont icofont-heart-alt"></i> Canjear puntos</button>
+					</div>
+					</div>
+				</div>
+			</div>
 		</div>
 </div>
 <!-- /#page-content-wrapper -->
@@ -99,7 +124,7 @@ var app = new Vue({
 	el:'#app',
 	data:{
 		letras: ['#', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'],
-		clientes:[]
+		clientes:[], texto:''
 	},
 	mounted() {
 		
@@ -107,13 +132,19 @@ var app = new Vue({
 	methods: {
 		cambiarLetra(queLetra){
 			var that = this;
-			$.ajax({url: 'php/ventas/listadoClientesInicial.php', type: 'POST', data: { letra: queLetra }}).done(function(resp) {
-				//console.log(resp)
+			$.ajax({url: 'php/ventas/listadoClientesInicial.php', type: 'POST', data: { letra: queLetra, extra: this.texto }}).done(function(resp) {
+				console.log(resp)
 				that.clientes = JSON.parse(resp);
 			});
 		},
 		fechaLatam(fecha){
 			return moment(fecha).fromNow();
+		},
+		buscarCampo(){
+			this.cambiarLetra('|');
+		},
+		modalPuntos(){
+			$('#modalCanjear').modal('show');
 		}
 	},
 })

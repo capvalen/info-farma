@@ -1,10 +1,11 @@
 <?php
-
+header("Access-Control-Allow-Origin *");
 /* Change to the correct path if you copy this example! */
-require __DIR__ . './../vendor/mike42/escpos-php/autoload.php';
+require __DIR__ . './../vendor/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\EscposImage; //librería de imagen
+
 /**
  * Assuming your printer is available at LPT1,
  * simpy instantiate a WindowsPrintConnector to it.
@@ -15,42 +16,46 @@ use Mike42\Escpos\EscposImage; //librería de imagen
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/XP-58");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/Print80");
 try {
-	if( isset($_POST['observacion'])){
-		$obs =$_POST['observacion'];
-	}else{
-		$obs='';
-	}
-
-	$tux = EscposImage::load("../images/empresaTicket.jpg", false);
+	$tux = EscposImage::load("logo.jpg", false); //./../../images/empresa_centro
+	
     // A FilePrintConnector will also work, but on non-Windows systems, writes
     // to an actual file called 'LPT1' rather than giving a useful error.
     // $connector = new FilePrintConnector("LPT1");
     /* Print a "Hello world" receipt" */
-		$printer = new Printer($connectorV31);
-		$printer -> bitImage($tux);
-		$printer -> setEmphasis(true);
+    $printer = new Printer($connectorV31);
+	
+	$printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
-    $printer -> text("{$_POST['titulo']}\n");
+		$printer -> bitImage($tux);    
+    $printer -> text("CardioFarma\n");
+    $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
+    $printer -> text("---------------------\n");
+    $printer -> text("Ticket de venta\n\n");
+		$printer->setJustification(Printer::JUSTIFY_LEFT);
 		$printer -> setEmphasis(false);
-		$printer->setJustification(Printer::JUSTIFY_LEFT);
-		$printer -> text("Código: ".ucwords($_POST['codigo'])."\n");
-		$printer -> text("Cliente: ".ucwords($_POST['cliente'])."\n");
-		$printer -> setEmphasis(true);
-		$printer -> text("Monto: S/ {$_POST['monto']}\n");
-				$printer -> setEmphasis(false);
-		if($obs !=''){
-			$printer -> text("Obs: {$obs}\n");
-		}
-		$printer->setJustification(Printer::JUSTIFY_CENTER);
-		$printer -> text("-----------------------------\n");
-		$printer -> text("{$_POST['fecha']}\n\n");
-		$printer -> text("Usuario: {$_POST['usuario']}\n");
-    $printer -> text("Contacto:  933 667330\n");
-		$printer -> text("Gracias por su preferencia\n\n\n");
-		$printer->setJustification(Printer::JUSTIFY_LEFT);
+    $printer -> text($_POST['hora']."\n\n");
+	if( isset($_POST['cliente']) && $_POST['cliente']!='' ){
+		$printer -> text("Sr(a). {$_POST['cliente']}\n\n");
+	}
+    $printer -> text("Cant.  Descripción             SubTotal\n");
+    $printer -> text("---------------------\n");
+    $printer -> text(ucwords($_POST['texto'])); //recipe 40 catacteres por línea
+    
+		$printer->setJustification(Printer::JUSTIFY_RIGHT);
+    $printer -> text("\nTotal de ticket: ".$_POST['total']."\n");
+    $printer -> text("Entregado: ".$_POST['dineroDado']."\n");
+    $printer -> text("Cambio: ".$_POST['dineroVuelto']."\n");
+	if( isset($_POST['puntos']) ){
+		$printer -> text("Acaba de acumular {$_POST['puntos']} puntos.\n\n");
+	}
+	$printer->setJustification(Printer::JUSTIFY_CENTER);
+    $printer -> text("\n¡Gracias por su compra!\n");
+    $printer -> text("Reclame su boleta\n\n\n");
     $printer -> cut();
+    
+	
     /* Close printer */
     $printer -> close();
 } catch (Exception $e) {

@@ -18,7 +18,7 @@ use Mike42\Escpos\EscposImage; //librería de imagen
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
 $connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/POS80");
 try {
-	$tux = EscposImage::load("./../../images/empresa_centro.png", false);
+	$tux = EscposImage::load("logo.jpg", false); //./../../images/empresa_centro
 	
     // A FilePrintConnector will also work, but on non-Windows systems, writes
     // to an actual file called 'LPT1' rather than giving a useful error.
@@ -29,17 +29,15 @@ try {
 	$printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
 		$printer -> bitImage($tux);    
-    $printer -> text("Centro Clínico Araujo\n");
-    $printer -> text("Empresa de Servicios Médicos Celendín EIRL\n");
-    $printer -> text("JR Ayacucho 268 - Celendin\n");
-    $printer -> text("910916461 - 927668593\n");
-    $printer -> text("----------------------------------------\n\n");
-    $printer -> text("Ticket de control interno\n");
+    $printer -> text("CardioFarma\n");
+    $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
+    $printer -> text("---------------------\n");
+    $printer -> text("Ticket de control interno\n\n");
 		$printer->setJustification(Printer::JUSTIFY_LEFT);
 		$printer -> setEmphasis(false);
     $printer -> text($_POST['hora']."\n\n");
     $printer -> text("Cant.  Descripción             SubTotal\n");
-    $printer -> text("----------------------------------------\n");
+    $printer -> text("---------------------\n");
     $printer -> text(ucwords($_POST['texto'])); //recipe 40 catacteres por línea
     
 		$printer->setJustification(Printer::JUSTIFY_RIGHT);
@@ -50,30 +48,7 @@ try {
     $printer -> text("\n¡Gracias por su compra!\n");
     $printer -> text("\nReclame su boleta\n\n\n\n");
     $printer -> cut();
-    $printer -> setEmphasis(true);
-		$printer->setJustification(Printer::JUSTIFY_CENTER);
-		$printer -> bitImage($tux);    
-    $printer -> text("Centro Clínico Araujo\n");
-    $printer -> text("Empresa de Servicios Médicos Celendín EIRL\n");
-    $printer -> text("JR Ayacucho 268 - Celendin\n");
-    $printer -> text("910916461 - 927668593\n");
-    $printer -> text("----------------------------------------\n\n");
-    $printer -> text("Ticket de control interno\n");
-		$printer->setJustification(Printer::JUSTIFY_LEFT);
-		$printer -> setEmphasis(false);
-    $printer -> text($_POST['hora']."\n\n");
-    $printer -> text("Cant.  Descripción             SubTotal\n");
-    $printer -> text("----------------------------------------\n");
-    $printer -> text(ucwords($_POST['texto'])); //recipe 40 catacteres por línea
     
-		$printer->setJustification(Printer::JUSTIFY_RIGHT);
-    $printer -> text("\nTotal de ticket: ".$_POST['total']."\n");
-    $printer -> text("Entregado: ".$_POST['dineroDado']."\n");
-    $printer -> text("Cambio: ".$_POST['dineroVuelto']."\n");
-		$printer->setJustification(Printer::JUSTIFY_CENTER);
-    $printer -> text("\n¡Gracias por su compra!\n");
-    $printer -> text("\nReclame su boleta\n\n\n\n");
-    $printer -> cut();
 	
     /* Close printer */
     $printer -> close();

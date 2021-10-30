@@ -17,11 +17,12 @@ if( $_POST['letra'] =="#"){
 	razon like '#%'
 	and id <>1 order by puntosActual desc
 	; ";
-
+}elseif( $_POST['letra'] == "|"){
+	$sql="SELECT * FROM `clientes` where (razon like '%{$_POST['extra']}%' or ruc like '{$_POST['extra']}') and id <>1 order by puntosActual desc; ";
 }else{
 	$sql="SELECT * FROM `clientes` where razon like '{$_POST['letra']}%' and id <>1 order by puntosActual desc; ";
-
 }
+//echo $sql;
 $filas = array();
 
 $resultado=$cadena->query($sql);

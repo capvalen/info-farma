@@ -15,6 +15,7 @@ $local = '/'.$folder;
 
 $serverLocal= "//{$servidor}/$folder/";
 $servidorLocal = $serverLocal;
+$localServer = "http://localhost/{$folder}/" ;
 
 define('__ROOT__', dirname(dirname(__FILE__)));
 

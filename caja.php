@@ -662,7 +662,7 @@ $('.modalGuardadoCorrecto').on('click', '#btnPrintTCierre', function (e) {
 	imprimirTicket()
 });
 function imprimirTicket(){ console.log( 'imprimiendo cierre' );
-	$.ajax({url: '<?= $servidorLocal;?>php/impresion/printTicketCierre.php', type: 'POST', data: {
+	$.ajax({url: '<?= $localServer;?>impresion/printTicketCierre.php', type: 'POST', data: {
 		apertura: $('#spanApertura').text(),
 		cierre: $('#txtMontoCierre').val(),
 		efectivoEntrada: $('#spanResultadoFinal').attr('sumaEfectivo'),
@@ -717,7 +717,7 @@ function verDetalleVenta(detalle){
 
 <?php if($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 ) { ?>
 function abriCajon(){
-	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
+	$.post('<?= $localServer?>impresion/soloAbrirCaja.php');
 }
 function editarCajaMaestra(idVenta){
 	$.idVenta=idVenta;
@@ -746,7 +746,7 @@ $('#btnInsertPagoOmiso').click(()=> {
 		}}).done((resp)=> {
 			pantallaOver(false);
 			if(resp== true){
-				$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
+				$.post('<?= $localServer?>impresion/soloAbrirCaja.php');
 				location.reload();
 			}else{
 				$('.modal-GuardadoError').find('#spanMalo').text('El servidor dice: \n' + resp);

@@ -298,6 +298,7 @@
 														<th>Cantidad</th>
 														<th>Fecha</th>
 														<th>Usuario</th>
+														<th>@</th>
 													</tr>
 												</thead>
 												<tbody id="divEntradasYSalidas">
@@ -369,7 +370,7 @@
 							</div>
 
 
-							<?php if(in_array($_COOKIE['ckPower'], $admis)){ ?>
+							<?php /* if(in_array($_COOKIE['ckPower'], $admis)){ */ ?>
 							<div class="tab-pane fade in  container-fluid" id="tabCrearProducto">
 								<!--Inicio de pestaña 03-->
 								<p>Rellene los campos para crear nuevo producto:</p>
@@ -520,7 +521,7 @@
 								<!--Fin de pestaña 03-->
 							</div>
 						</div>
-					<?php } ?>
+					<?php /* } */ ?>
 					<!-- Fin de meter contenido principal -->
 				
 
@@ -1032,12 +1033,15 @@
 						$('#txtBuscarProductoProd').val('');
 						$('#lblCantidadProd').text(JSON.parse(resp).length);
 						$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+						let vence ='';
 						JSON.parse(resp).map(function(dato, index) {
 
 							moment.locale('es');
-							var vence = 'Sin fecha';
-							if (dato.prodFechaVencimiento != '') {
-								moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
+						
+							if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
+								vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+							}else{
+								vence ='-';
 							}
 
 							let alerProd ='';
@@ -1048,7 +1052,7 @@
 								<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre}</span></div>
 								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+								<div class="col-xs-6 col-sm-2 "><span class="visible-xs-inline"><strong>Lote: </strong></span> <span class="mayuscula">${dato.lote}</span></div>
 								<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 								<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
@@ -1072,6 +1076,7 @@
 								filtro: filtr
 							}
 						}).success(function(resp) {
+							//console.log( JSON.parse(resp) );
 
 							if (JSON.parse(resp).length == 0) {
 								$('#spanSinCoincidencias').removeClass('hidden').find('span').text('«' + $('#txtBuscarProductoProd')
@@ -1082,11 +1087,15 @@
 							$('#txtBuscarProductoProd').val('');
 							$('#lblCantidadProd').text(JSON.parse(resp).length);
 							$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+							let vence ='';
 							JSON.parse(resp).map(function(dato, index) {
 								moment.locale('es');
-								var vence = 'Sin fecha';
-								if (dato.prodFechaVencimiento != '') {
-									moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').endOf('day').fromNow()
+								
+								//console.log( dato.prodFechaVencimiento !=null + " es " +dato.prodFechaVencimiento   );
+								if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
+									vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+								}else{
+									vence ='-';
 								}
 
 								let alerProd ='';
@@ -1097,8 +1106,8 @@
 									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre} <em>${dato.principioActivo}</em></span></div>
 									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
-									<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Lote: </strong></span> <span class="mayuscula">${dato.lote}</span></div>
+									<div class="col-xs-6 col-sm-1 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento).format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 									<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 									<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
@@ -1179,7 +1188,7 @@
 			data: {
 				idPro: idProd
 			}
-		}).done(function(resp) { console.log( resp );
+		}).done(function(resp) { //console.log( resp );
 			JSON.parse(resp).map(function(dato, index) {
 				//console.log(dato);
 				$('#txtprodCodigo').val(dato.idProducto);
@@ -1207,6 +1216,11 @@
 			});
 		});
 		verVencimientosPorId(idProd)
+		listarMovimientosPhp(idProd);
+
+		$('.modal-detalleProductoEncontrado').modal('hide');
+	}
+	function listarMovimientosPhp(idProd){
 		$.ajax({
 			url: 'php/productos/listarMovimientosProducto.php',
 			type: 'POST',
@@ -1216,9 +1230,8 @@
 		}).done(function(resp) {
 			//console.log(resp)
 			$('#divEntradasYSalidas').html(resp);
+			$('.mitooltip').tooltip();			
 		});
-
-		$('.modal-detalleProductoEncontrado').modal('hide');
 	}
 	$('#chAlerta').change(function() {
 		if($('#chAlerta').prop('checked')){
@@ -1229,6 +1242,26 @@
 			$('#txtprodMinimo').attr('readonly', true);
 		}
 	});
+	function borrarMovimiento(idMovimiento){
+		if(confirm("¿Desea borrar éste movimiento?")){
+			$.ajax({url: 'php/productos/revertirMovimiento.php', type: 'POST', data: { idMovimiento }}).done(function(resp) {
+				let data = JSON.parse(resp);
+				let anterior =0;
+				if( data.operacion =='suma' ){
+					anterior = parseFloat($('#txtprodStock').val());
+					$('#txtprodStock').val( anterior + parseFloat(data.cantidad) );
+				}
+				if( data.operacion =='resta' ){
+					anterior = parseFloat($('#txtprodStock').val());
+					$('#txtprodStock').val( anterior - parseFloat(data.cantidad) );
+				}
+				listarMovimientosPhp($('#txtprodCodigo').val());
+				$('#lblMensajeBien').text('Se revirtió el stock');
+				$('.modal-felicitacion').modal('show');
+
+			});
+		}
+	}
 
 	function verVencimientosPorId(idProd) {
 		$.ajax({
@@ -1315,19 +1348,19 @@
 					nombre: $.trim($('#txtprodNombre').val()),
 					obs: $('#txtprodDescripcion').val(),
 					stkmin: $('#txtprodMinimo').val(),
-					categ: $('#cmbProdCateg').parent().find('button').attr('title'),
+					categ: $('#cmbProdCateg').val(), //$('#cmbProdCateg').parent().find('button').attr('title'),
 					precio: $('#txtprodPrecio').val(),
-					labo: $('#cmbProdLaboratorio').parent().find('button').attr('title'),
+					labo: $('#cmbProdLaboratorio').val(), //$('#cmbProdLaboratorio').parent().find('button').attr('title'),
 					costo: $('#txtprodCosto').val(),
 					porcent: $('#txtprodPorcentaje').val(),
-					propi: $('#cmbProdProp').parent().find('button').attr('title'),
+					propi: $('#cmbProdProp').val(), //$('#cmbProdProp').parent().find('button').attr('title'),
 					stock: $('#txtprodStock').val(),
 					principio: $('#txtaPrincipio').val(),
-					alertaStock: alerta
+					alertaStock: alerta,
+					controlado: $('#cmbProdControlado').val()
 				}
-			}).done(function(resp) {
-				console.log(resp)
-				if (resp == 1) {
+			}).done(function(resp) { //console.log(resp)
+				if (resp == 'ok') {
 					$('#lblMensajeBien').text('Los datos del producto ' + $('#txtprodBarra').val() +
 						' se actualizaron correctamente .');
 					$('.modal-felicitacion').modal('show');
@@ -1349,7 +1382,7 @@
 		calculoCostos(1);
 	});
 	$('#txtprodPorcentaje').keyup(function() {
-		calculoCostos(2);
+		calculoCostos(3);
 	});
 	$('#txtprodPrecio').keyup(function() {
 		calculoCostos(3);
@@ -1359,7 +1392,7 @@
 		calculoCostos(5);
 	});
 	$('#txtprodPorcentajeNuevo').keyup(function() {
-		calculoCostos(4);
+		calculoCostos(6);
 	});
 	$('#txtprodPrecioNuevo').keyup(function() {
 		calculoCostos(6);
@@ -1594,25 +1627,11 @@
 				if (resp = 'ok') {
 					if( suma.indexOf($('#sltOpcionesMovimiento').val())>=0 ){
 							stock = parseInt($('#txtprodStock').val()) + parseInt($('#txtMovimientoCant').val());
-							$('#divEntradasYSalidas').prepend(`
-								<tr>
-									<td>-</td>
-									<td>${movi}</td>
-									<td>+${$('#txtMovimientoCant').val()}</td>
-									<td>${moment().format('DD/MM/YYYY')}</td>
-									<td><?= $_COOKIE['ckAtiende']; ?></td>
-								</tr>`);}
-						if( resta.indexOf($('#sltOpcionesMovimiento').val())>=0 ){
-							stock = parseInt($('#txtprodStock').val()) - parseInt($('#txtMovimientoCant').val());
-							$('#divEntradasYSalidas').prepend(`
-								<tr>
-									<td>-</td>
-									<td>${movi}</td>
-									<td>-${$('#txtMovimientoCant').val()}</td>
-									<td>${moment().format('DD/MM/YYYY')}</td>
-									<td><?= $_COOKIE['ckAtiende']; ?></td>
-								</tr>`);
 						}
+					if( resta.indexOf($('#sltOpcionesMovimiento').val())>=0 ){
+						stock = parseInt($('#txtprodStock').val()) - parseInt($('#txtMovimientoCant').val());
+					}
+					listarMovimientosPhp($('#txtprodCodigo').val());
 						
 					$('#txtprodStock').val(stock);
 				}

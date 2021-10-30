@@ -1,7 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin *");
 date_default_timezone_set('America/Lima');
 /* Change to the correct path if you copy this example! */
-require __DIR__ . '/vendor/mike42/escpos-php/autoload.php';
+require __DIR__ . './../vendor/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 /**
@@ -14,7 +15,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/TM-U220");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/Print80");
 try {
     $cierreVirtual= $_POST['apertura']+$_POST['efectivoEntrada']-$_POST['efectivoSalida']-$_POST['tarjetaSalida'];
     $sobra=$cierreVirtual-$_POST['cierre'];
@@ -26,11 +27,16 @@ try {
     // $connector = new FilePrintConnector("LPT1");
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connectorV31);
-    $printer -> text("         Prestar Huancayo\n");
-    $printer -> setEmphasis(true);    
-    $printer -> text("             Cierre de caja \n");
-    $printer -> text("   ----------------------------------\n");
+    $printer -> setEmphasis(true);
+		$printer->setJustification(Printer::JUSTIFY_CENTER);
+    $printer -> text("CardioFarma\n");
+    $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
+    
+    $printer -> text("----------------------------------\\n\n");
+    $printer -> text("CIERRE DE CAJA\n");
+
     $printer -> text(date("d/m/Y, g:i a")."\n");
+		$printer->setJustification(Printer::JUSTIFY_LEFT);
     $printer -> setEmphasis(false);
     $printer -> text("Apertura: S/ ".number_format($_POST['apertura'], 2)."\n");
     $printer -> text("   ------  Entradas  ----\n");
@@ -40,7 +46,7 @@ try {
     $printer -> text("   ------  Salidas  ----\n");
     $printer -> text("Efectivo: S/ (".number_format($_POST['efectivoSalida'], 2).")\n");
     $printer -> text("Tarjetas: S/ (".number_format($_POST['tarjetaSalida'], 2).")\n");
-    $printer -> text("   ----------------------------------\n");
+    $printer -> text("----------------------------------\n");
     $printer -> text("Cierre manual: S/ ".number_format($_POST['cierre'], 2)."\n");
     $printer -> text("TOTAL: S/ ".number_format($cierreVirtual, 2)."\n");
     $printer -> text($resto." S/ ".number_format($sobra,2)."\n");

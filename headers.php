@@ -19,7 +19,7 @@ if (!isset($_COOKIE['ckidUsuario'])): header("location: index.php"); endif; ?>
 
 <link rel="stylesheet" href="css/bootstrap-select.min.css" > <!-- extraido de: https://silviomoreto.github.io/bootstrap-select/-->
 <link rel="stylesheet" href="css/icofont.css"> <!-- iconos extraidos de: http://icofont.com/-->
-<link rel="shortcut icon" href="images/pet2.png" />
+<link rel="shortcut icon" href="images/icoapp.ico" />
 <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css"> <!-- extraido de: http://flatlogic.github.io/awesome-bootstrap-checkbox/demo/-->
 <link rel="stylesheet" href="css/bootstrap-datepicker3.css"> <!-- extraído de: https://uxsolutions.github.io/bootstrap-datepicker/-->
 <link rel="stylesheet" href="css/panel-with-nav-tabs.css"> <!-- extraído de: http://bootsnipp.com/snippets/featured/panels-with-nav-tabs-->

@@ -1,4 +1,5 @@
 <?php 
+header("Access-Control-Allow-Origin *");
 $hayCaja = require("php/comprobarCajaHoy.php");
 include 'php/variablesGlobales.php';
 ?>
@@ -1226,10 +1227,15 @@ function llamarBuscarProducto() {
 					$('#txtBuscarProductoVenta').val('');
 					$('#lblCantidadProd').text(JSON.parse(resp).length);
 					$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
+					let vence ='';
 					JSON.parse(resp).map(function (dato, index) {
 						moment.locale('es');
-						var vence=''; //console.log( 'fecha '+ dato.prodFechaVencimiento );
-						if(dato.prodFechaVencimiento!='' && dato.prodFechaVencimiento!=null){vence = moment(dato.prodFechaVencimiento).endOf('day').fromNow()}
+						
+						if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
+							vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+						}else{
+							vence ='-';
+						}
 
 						let alerProd ='';
 						if(dato.supervisado=='1'){ alerProd = 'text-danger' }
@@ -1240,7 +1246,7 @@ function llamarBuscarProducto() {
 							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre} <em>${dato.principioActivo}</em></span></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
+							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> <span class="mayuscula">${dato.lote}</span></div>
 							<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 							<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
 							<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btn-sinBorde btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
@@ -1478,7 +1484,7 @@ $('#btnGuardarMemoria').click(function () {
 });
 
 function abrirCajon(){
-	$.post('<?= $servidorLocal?>php/impresion/soloAbrirCaja.php');
+	$.post('<?= $localServer?>impresion/soloAbrirCaja.php');
 }
 $('#btnImprimirVentaFinal').click(function () {
 	moment.locale('es');
@@ -1490,13 +1496,17 @@ $('#btnImprimirVentaFinal').click(function () {
 	/////// Cambiar URL
 
 	abrirCajon();
+    let cliente = $('#txtCliRazon').val();
 
-	$.ajax({url: 'php/impresion/printTicketv3.php', type: 'POST', data:{
+	$.ajax({url: '<?= $localServer?>impresion/printTicketv3.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,
 		texto: retornarCadenaImprimir(),
-		hora: fechaImpr
+		hora: fechaImpr,
+        cliente: cliente,
+        puntos: Math.round(parseInt($('#spanTotalVenta').text()) + parseInt($.puntosActual) )
+        
 	}}).done(function (resp) { console.log(resp);
 		/*$('#tablaResultadosCompras tbody').children().remove();
 		calcularRowTabla();
@@ -1604,16 +1614,18 @@ $('#txtCliDni').focusout( ()=>{
 	let tamaño = parseInt($('#txtCliDni').val().length); 
 
 	if( tamaño ==0 || tamaño ==8 || tamaño ==11  ){
-		console.log( 'si tiene formato' );
+		//console.log( 'si tiene formato' );
 		$.ajax({url: 'php/ventas/buscarCliente.php', type: 'POST', data: { ruc: $('#txtCliDni').val() }}).done(function(resp) {
 			resp = JSON.parse(resp);
-			//console.log( resp );
+			console.log( resp );
 			if(resp == null){
 				$.idCliente = -1;
+				$.puntosActual =0;
 			}else{
 				$.idCliente = resp.id;
 				$('#txtCliRazon').val( resp.razon );
 				$('#txtCliDireccion').val( resp.direccion );
+				$.puntosActual = resp.puntosActual;
 			}
 		});
 	}else{
