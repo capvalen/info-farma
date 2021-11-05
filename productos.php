@@ -146,16 +146,16 @@
 												<input type="number" class="form-control text-center" id="txtprodCosto" placeholder="Precio unitario">
 											</div>
 										</div>
-										<div class=" col-md-4">
-											<div class="form-group">
-												<label>Ganancia (%) </label>
-												<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario">
-											</div>
-										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label>Precio unitario: (S/) <a href="#!" onclick="panelVariantes()">Gestionar variantes</a></label>
 												<input type="number" class="form-control text-center" id="txtprodPrecio" placeholder="Precio unitario">
+											</div>
+										</div>
+										<div class=" col-md-4">
+											<div class="form-group">
+												<label>Ganancia (%) </label>
+												<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario">
 											</div>
 										</div>
 									</div>
@@ -403,8 +403,14 @@
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Costo unitario (S/)</label>
+												<label>Costo (S/)</label>
 												<input type="number" class="form-control text-center" id="txtprodCostoNuevo" placeholder="Costo unitario" value=0.00 step=1 min=0>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Precio Venta Und.: (S/)</label>
+												<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -413,12 +419,7 @@
 												<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="% Ganancia" value=30 step=1 min=0>
 											</div>
 										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>Precio unitario: (S/)</label>
-												<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
-											</div>
-										</div>
+										
 									</div>
 
 									<div class="row">
@@ -1379,23 +1380,23 @@
 	});
 
 	$('#txtprodCosto').keyup(function() {
-		calculoCostos(1);
+		calculoCostos(7);
 	});
-	$('#txtprodPorcentaje').keyup(function() {
+/* 	$('#txtprodPorcentaje').keyup(function() {
 		calculoCostos(3);
-	});
+	}); */
 	$('#txtprodPrecio').keyup(function() {
-		calculoCostos(3);
+		calculoCostos(7);
 	});
 
 	$('#txtprodCostoNuevo').keyup(function() {
-		calculoCostos(5);
+		calculoCostos(8);
 	});
-	$('#txtprodPorcentajeNuevo').keyup(function() {
+	/* $('#txtprodPorcentajeNuevo').keyup(function() {
 		calculoCostos(6);
-	});
+	}); */
 	$('#txtprodPrecioNuevo').keyup(function() {
-		calculoCostos(6);
+		calculoCostos(8);
 	});
 
 
@@ -1405,17 +1406,17 @@
 		if ($('#txtprodCosto').val() == 0) {
 			vproCost = 0
 		} else {
-			vproCost = $('#txtprodCosto').val()
+			vproCost = parseFloat($('#txtprodCosto').val());
 		}
 		if ($('#txtprodPorcentaje').val() == 0) {
 			vproGana = 0
 		} else {
-			vproGana = $('#txtprodPorcentaje').val()
+			vproGana = parseFloat($('#txtprodPorcentaje').val());
 		}
 		if ($('#txtprodPrecio').val() == 0) {
 			vproPrec = 0
 		} else {
-			vproPrec = $('#txtprodPrecio').val()
+			vproPrec = parseFloat($('#txtprodPrecio').val());
 		}
 
 		if (tipoCaso == 1) {
@@ -1439,6 +1440,12 @@
 		if (tipoCaso == 6) {
 			$('#txtprodCostoNuevo').val(parseFloat($('#txtprodPrecioNuevo	').val() / (1 + $('#txtprodPorcentajeNuevo').val() /
 				100)).toFixed(2))
+		}
+		if (tipoCaso == 7) {
+			$('#txtprodPorcentaje').val( Math.round((( vproPrec / vproCost ) -1 ) *100, 2)  )
+		}
+		if (tipoCaso == 8) {
+			$('#txtprodPorcentajeNuevo').val( Math.round( (($('#txtprodPrecioNuevo').val() /  $('#txtprodCostoNuevo').val()) -1 )*100 , 2) )
 		}
 
 
@@ -1558,14 +1565,15 @@
 						principio: $('#txtPrincipio').val()
 					}
 				}).done(function(resp) {
-					console.log(resp)
-					//limpiarCamposNuevo();
+					activarBtnNuevo();
+					//console.log(resp)
 					if (parseInt(resp) >= 1) {
 						$('#lblMensajeBien').text('Los datos del producto ' + $('#txtprodBarra').val() + ' se actualizaron correctamente .');
 						$('.modal-felicitacion').modal('show');
 						$.listadoBarras = [];
 						$('#badCantBarras').text(0);
-						$('#btnCrearNuevoProducto').removeClass('disabled')
+						$('#btnCrearNuevoProducto').removeClass('disabled');
+						limpiarCamposNuevo();
 					}
 					if (parseInt(resp) == 0) {
 						$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
