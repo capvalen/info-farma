@@ -213,49 +213,7 @@
 										</div>
 									</div>
 									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<label> Códigos de barra</label>
-											<div class="panel panel-default">
-												<div class="panel-body">
-													<div class="col-md-9">
-														<div class="input-group">
-															<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
-															<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="icofont icofont-clip"></span></button></span>
-														</div>
-													</div>
-													<div class="col-md-3">
-														<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-idea"></i> Ver códigos <small>(<span id="spanCantBarr"></span>)</small></button>
-
-													</div>
-
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-12">
-											<label> Lotes</label>
-											<div class="panel panel-default">
-												<div class="panel-body">
-													<div class="col-sm-4">
-														<input type="text" class="form-control text-center" id="txtCodigoLote" placeholder="Cod. Lote" autocomplete='nope'>
-													</div>
-													<div class="col-sm-4">
-														<input type="date" class="form-control text-center" id="txtFechaLote" placeholder="Fecha" value="<?= date('Y-m-d');?>">
-													</div>
-													<div class="col-sm-3">
-														<div class="input-group">
-															<input type="number" class="form-control text-center" id="txtCantLote" placeholder="Cant" value="1">
-															<div class="input-group-btn">
-																<button class="btn btn-warning btn-outline" id="btnInsertarVencimiento" type="button"><span class="icofont icofont-clip"></span></button>
-															</div>
-														</div>
-
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
+									
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
@@ -308,9 +266,54 @@
 
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<label> Códigos de barra</label>
+											<div class="panel panel-default">
+												<div class="panel-body">
+													<div class="col-md-9">
+														<div class="input-group">
+															<input type="text" class="form-control" id="txtprodBarra" placeholder="Código de barra">
+															<span class="input-group-btn"> <button class="btn btn-warning btn-outline" id="btn-addbarra" type="button"><span class="icofont icofont-ui-add"></span></button></span>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<button class="btn btn-default btn-outline" id="btnVerBarras"><i class="icofont icofont-idea"></i> Ver códigos <small>(<span id="spanCantBarr"></span>)</small></button>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div class="panel panel-default">
 										<div class="panel-body">
-											<h4>Vencimientos:</h4>
+											<h4>Lotes y Vencimientos:</h4>
+											<div class="row">
+												<div class="col-sm-12">
+													
+													<div class="panel panel-default btnSinBorde">
+														<div class="panel-body btnSinBorde">
+															<div class="col-sm-4">
+																<input type="text" class="form-control text-center" id="txtCodigoLote" placeholder="Cod. Lote" autocomplete='nope'>
+															</div>
+															<div class="col-sm-4">
+																<input type="date" class="form-control text-center" id="txtFechaLote" placeholder="Fecha" value="<?= date('Y-m-d');?>">
+															</div>
+															<div class="col-sm-3">
+																<div class="input-group">
+																	<input type="number" class="form-control text-center" id="txtCantLote" placeholder="Cant" value="1">
+																	<div class="input-group-btn">
+																		<button class="btn btn-warning btn-outline" id="btnInsertarVencimiento" type="button"><span class="icofont icofont-ui-add"></span></button>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 											<table class="table table-dark table-hover">
 												<thead>
 													<tr>
@@ -694,7 +697,7 @@
 
 				</div>
 				<div class="modal-footer"> <button class="btn btn-default" data-dismiss="modal" id="btnModificarSctock"><i
-							class="icofont icofont-clip"></i> Modificar</button></div>
+							class="icofont icofont-ui-add"></i> Modificar</button></div>
 			</div>
 		</div>
 	</div>
@@ -1193,6 +1196,7 @@
 			JSON.parse(resp).map(function(dato, index) {
 				//console.log(dato);
 				$('#txtprodCodigo').val(dato.idProducto);
+				$('#btnBorrarDataProducto').attr('data-id',dato.idProducto);
 				$('#txtprodNombre').val(dato.prodNombre);
 				$('#txtaPrincipio').val(dato.prodPrincipioActivo);
 				$('#txtprodStock').val(dato.prodStock);
@@ -1475,7 +1479,7 @@
 						<td class="argTotal">${dia.endOf('day').fromNow()}</td>
 						<td class="argTotal " title="${dia.format('DD/MM/YYYY')}">${dia.format('DD/MM/YYYY')}</td>
 						<td class="hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></td>
-						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-rounded-right-down"></i></button></td>
+						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-close"></i></button></td>
 					</tr>`);
 					$('.mitooltip').tooltip();
 
@@ -1883,13 +1887,13 @@
 	});
 	$('#btnEliminarProductOk').click(function() {
 		$.ajax({
-			url: 'php/productos/borrarProducto.php',
+			url: 'php/productos/borrarProducto.php', 
 			type: 'POST',
 			data: {
 				idProd: $.ProdBorrar
 			}
 		}).done(function(resp) {
-			//console.log(resp)
+			console.log(resp)
 			$('#modalBorrarProducto').modal('hide');
 		//	alert('Producto borrado completamente');
 			if (resp == 'ok') {
