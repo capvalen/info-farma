@@ -47,12 +47,14 @@ function casoActivo($quePagina){
 			<li <?php casoActivo('reportes'); ?>>
 					<a href="reportes.php"><i class="icofont icofont-envelope-open"></i> Reportes</a>
 			</li>
+			<?php endif; ?>
 			<li <?php casoActivo('clientes'); ?>>
 					<a href="clientes.php"><i class="icofont icofont-users"></i> Clientes</a>
 			</li>
 			<!-- <li>
 					<a href="inventario.php"><i class="icofont icofont-prescription"></i> Inventario</a>
 			</li> -->
+			<?php if( in_array($_COOKIE['ckPower'], $soloAdmis) ):?>
 			<li <?php casoActivo('configuraciones'); ?>>
 					<a href="configuraciones.php"><i class="icofont icofont-options"></i> Configuración</a>
 			</li>

@@ -678,6 +678,7 @@ $(document).ready(function(){
 	$.impresion=[];
 	$.listaVariantes=[];
 	$.idCliente = 1;
+	$.puntosActual =0;
 	$('#sltMoneda').val("Efectivo")
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
@@ -1243,7 +1244,7 @@ function llamarBuscarProducto() {
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
 						<div class="row ${alerProd}" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre} <em>${dato.principioActivo}</em></span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span> <em class="emPrincipio">${dato.principioActivo}</em></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> <span class="mayuscula">${dato.lote}</span></div>
@@ -1278,7 +1279,7 @@ function llamarBuscarProducto() {
 						$('.modal-detalleProductoEncontrado #listadoDivs').append(`
 						<div class="row ${alerProd}" onclick="pasarACanasta(${index})">
 							<div class="hidden" id="mProdID">${dato.idProducto}</div>
-							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span></div>
+							<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span> <em class="emPrincipio">${dato.principioActivo}</em></div>
 							<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 							<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 							<div class="col-xs-6 col-sm-1 "><span class="visible-xs-inline"><strong>Lote: </strong></span> ${dato.lote}</div>
@@ -1300,6 +1301,7 @@ function pasarACanasta(index){
 	let nombre, idProductoSele, precioProdSele;
 	var spanVariantes = '';
 	nombre = $('#listadoDivs .row').eq(indexSelec).find('#mProdNombre').text();
+	principio = $('#listadoDivs .row').eq(indexSelec).find('.emPrincipio').text();
 	idProductoSele = parseInt($('#listadoDivs .row').eq(indexSelec).find('#mProdID').text());
 	precioProdSele = $('#listadoDivs .row').eq(indexSelec).find('#mProdPrecio').text();
 
@@ -1318,7 +1320,7 @@ function pasarACanasta(index){
 		$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft">
 			<th > <span class="SpanNum">${$('.tablaResultadosCompras tr').length}. </span> </th>
 			<td class="mProdID hidden">${idProductoSele}</td>
-			<td class="col-xs-4 mayuscula mProdNom"><button type="button" class="btn btn-danger btn-xs btn-outline btn-sinBorde eliminarRowVenta"><i class="icofont icofont-error"></i></button> ${nombre}</td> <td class="col-xs-4 col-sm-3 text-center">
+			<td class="col-xs-4 mayuscula "><button type="button" class="btn btn-danger btn-xs btn-outline btn-sinBorde eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="mProdNom">${nombre}</span> <em>${principio}</em> </td> <td class="col-xs-4 col-sm-3 text-center">
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
@@ -1387,7 +1389,7 @@ $('#btnGuardarVenta').click(function () {
 			url: 'php/ventas/insertarVentas.php',
 			data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
 			}).done(function (resp) { //console.log('recibido: ')
-				console.log(resp);
+				//console.log(resp);
 				$('.modal-ventaGuardada').modal('show');
 			});
 		
@@ -1497,15 +1499,16 @@ $('#btnImprimirVentaFinal').click(function () {
 
 	abrirCajon();
     let cliente = $('#txtCliRazon').val();
-
+	/* console.log( "----TICKET----" );
+	console.log( retornarCadenaImprimir() ); */
 	$.ajax({url: '<?= $localServer?>impresion/printTicketv3.php', type: 'POST', data:{
 		total: 'S/. '+$('#spanTotalVenta').text(),
 		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
 		dineroVuelto: 'S/. '+vuelto,
 		texto: retornarCadenaImprimir(),
 		hora: fechaImpr,
-        cliente: cliente,
-        puntos: Math.round(parseInt($('#spanTotalVenta').text()) + parseInt($.puntosActual) )
+    cliente: cliente,
+    puntos: Math.round(parseInt($('#spanTotalVenta').text()) + parseInt($.puntosActual) )
         
 	}}).done(function (resp) { console.log(resp);
 		/*$('#tablaResultadosCompras tbody').children().remove();
@@ -1525,8 +1528,8 @@ function retornarCadenaImprimir(){
 	var cantlibres=0;
 	
 
-$.each($.ticket, function (i, elem) { console.log( elem );
-	funProducto= elem.nomProducto;
+$.each($.ticket, function (i, elem) { //console.log( elem );
+	funProducto= $.trim(elem.nomProducto);
 	funPrecio= elem.sub;
 	lineaEntera = funProducto+funPrecio;
 	cantlibres=0;
@@ -1620,7 +1623,6 @@ $('#txtCliDni').focusout( ()=>{
 			console.log( resp );
 			if(resp == null){
 				$.idCliente = -1;
-				$.puntosActual =0;
 			}else{
 				$.idCliente = resp.id;
 				$('#txtCliRazon').val( resp.razon );

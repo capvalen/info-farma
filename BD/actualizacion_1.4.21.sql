@@ -229,3 +229,6 @@ DELIMITER ;
 
 
 CREATE TABLE `canjes` ( `id` INT NOT NULL , `idCliente` INT NOT NULL , `idUsuario` INT NOT NULL , `fecha` INT NOT NULL , `puntos` INT NOT NULL , `canje` INT NOT NULL ) ENGINE = InnoDB;
+
+
+CREATE TABLE `premios` ( `id` INT NOT NULL AUTO_INCREMENT , `idCliente` INT NOT NULL , `premio` VARCHAR(250) NOT NULL , `puntos` INT NOT NULL , `activo` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

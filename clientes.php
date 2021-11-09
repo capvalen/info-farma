@@ -68,7 +68,8 @@ require_once ( 'php/variablesGlobales.php');
 											<td class="mayuscula">{{cliente.puntosTotal}}</td>
 											<td class="mayuscula">{{fechaLatam(cliente.registrado)}}</td>
 											<td class="mayuscula">{{fechaLatam(cliente.actualizacion)}}</td>
-											<td><span class="text-primary icoSpan mitooltip" title="Canjear puntos" @click="modalPuntos()"><i class="icofont icofont-heartbeat"></i></span></td>
+											<td v-if="cliente.puntosActual>=50"><span class="text-primary icoSpan mitooltip" title="Canjear puntos" @click="modalPuntos(cliente.puntosActual, cliente.id, cliente.razon)"><i class="icofont icofont-heartbeat"></i></span></td>
+											<td v-else></td>
 										</tr>
 										<tr v-if="clientes.length==0">
 											<td colspan="6">No hay registros</td>
@@ -98,10 +99,16 @@ require_once ( 'php/variablesGlobales.php');
 						<h4 class='modal-tittle'> Canjear Puntos</h4>
 					</div>
 					<div class='modal-body'>
+						<p>Elija la cantidad de puntos que desea canjear</p>
+						<select class="form-control" name="" id="sltPuntosCanje">
+							<option v-for="cant in maximo" :value="cant">{{cant}}</option>
+						</select>
+						<p>Ingrese el premio:</p>
+						<input type="text" class="form-control" v-model="premio" autocomplete="off">
 						
 					</div>
 					<div class='modal-footer'>
-						<button type='button' class='btn btn-default '><i class="icofont icofont-heart-alt"></i> Canjear puntos</button>
+						<button type='button' class='btn btn-default' @click="canjearPuntos()"><i class="icofont icofont-heart-alt"></i> Canjear puntos</button>
 					</div>
 					</div>
 				</div>
@@ -124,7 +131,7 @@ var app = new Vue({
 	el:'#app',
 	data:{
 		letras: ['#', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'],
-		clientes:[], texto:''
+		clientes:[], texto:'', maximo:[], premio:'', elCliente:'', nomCliente:''
 	},
 	mounted() {
 		
@@ -143,8 +150,36 @@ var app = new Vue({
 		buscarCampo(){
 			this.cambiarLetra('|');
 		},
-		modalPuntos(){
+		modalPuntos(max, id, nombre){
+			this.maximo=[];
+			this.elCliente=id;
+			this.nomCliente=nombre;
+			for(let i =50; i<=max; i+=150 ){
+				if(i<=600){
+					this.maximo.push(i);
+				}
+				if(i>=150){
+					i+=50;
+				}
+			}
+			
 			$('#modalCanjear').modal('show');
+		},
+		canjearPuntos(){
+			let cliente = this.nomCliente;
+			let premio = this.premio;
+			let puntos = $('#sltPuntosCanje').val();
+			if(this.premio!=''){
+				$.ajax({url: 'php/ventas/canjearPremio.php', type: 'POST', data: { idCliente: this.elCliente, puntos, premio }}).done(function(resp) {
+					console.log(resp)
+					if(resp=='ok'){
+						$.ajax({url: '<?= $localServer?>impresion/printCanje.php', type: 'POST', data: { nombre: cliente, puntos, premio }}).done(function(resp) {
+							console.log(resp);
+						});
+					}
+					location.reload();
+				});
+			}
 		}
 	},
 })

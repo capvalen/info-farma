@@ -1,7 +1,7 @@
 <?php
-header("Access-Control-Allow-Origin *");
+
 /* Change to the correct path if you copy this example! */
-require __DIR__ . './../vendor/autoload.php';
+require __DIR__ . './../../mike42/escpos-php/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\EscposImage; //librería de imagen
@@ -16,7 +16,7 @@ use Mike42\Escpos\EscposImage; //librería de imagen
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/Print80");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/POS80");
 try {
 	$tux = EscposImage::load("logo.jpg", false); //./../../images/empresa_centro
 	
@@ -32,27 +32,18 @@ try {
     $printer -> text("CardioFarma\n");
     $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
     $printer -> text("---------------------\n");
-    $printer -> text("Ticket de venta\n\n");
+    $printer -> text("Canje de puntos\n\n");
 		$printer->setJustification(Printer::JUSTIFY_LEFT);
 		$printer -> setEmphasis(false);
-    $printer -> text($_POST['hora']."\n\n");
-	if( isset($_POST['cliente']) && $_POST['cliente']!='' ){
-		$printer -> text("Sr(a). {$_POST['cliente']}\n\n");
-	}
-    $printer -> text("Cant.  Descripción             SubTotal\n");
+    $printer -> text("Acaba de canjear\n");
+		$printer->setJustification(Printer::JUSTIFY_CENTER);
+    $printer -> text("{$_POST['puntos']} puntos\n");
+		$printer->setJustification(Printer::JUSTIFY_LEFT);
+    $printer -> text("A cambio de: {$_POST['premio']} \n");
+    $printer -> text("A nombre de: {$_POST['nombre']} \n");
     $printer -> text("---------------------\n");
-    $printer -> text(ucwords($_POST['texto'])); //recipe 40 catacteres por línea
     
-		$printer->setJustification(Printer::JUSTIFY_RIGHT);
-    $printer -> text("\nTotal de ticket: ".$_POST['total']."\n");
-    $printer -> text("Entregado: ".$_POST['dineroDado']."\n");
-    $printer -> text("Cambio: ".$_POST['dineroVuelto']."\n");
-	if( $_POST['cliente']!='' ){
-		$printer -> text("Acaba de acumular {$_POST['puntos']} puntos.\n\n");
-	}
-	$printer->setJustification(Printer::JUSTIFY_CENTER);
-    $printer -> text("\n¡Gracias por su compra!\n");
-    $printer -> text("Reclame su boleta\n\n\n");
+    $printer -> text("\n¡Gracias por su preferencia!\n\n\n");
     $printer -> cut();
     
 	
