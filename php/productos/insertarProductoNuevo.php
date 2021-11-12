@@ -14,11 +14,20 @@ if ($llamadoSQL = $conection->query($sql)) { //Ejecución mas compleja con retor
 		$producto = $resultado[0];
 		echo $resultado[0]; //Retorna los resultados via post del procedure
 	}
+
+		$_POST['movimiento'] = 16;
+		$_POST['idProducto'] = $producto;
+		$_POST['cantidad'] = $_POST['stock'];
+		$_POST['observacion']='';
+		$_POST['usuario']=$_COOKIE['ckidUsuario'];
+		$sqlStock="INSERT INTO `stock`(`idStock`, `idProducto`, `stoCant`, `idMovimiento`, `stoObservacion`, `idUsuario`) VALUES (null, {$_POST['idProducto']}, {$_POST['cantidad']}, {$_POST['movimiento']}, '{$_POST['observacion']}', {$_POST['usuario']});";
+		$resultadoStock=$dependencia->query($sqlStock);
 	
 	$llamadoSQL->close();
 }else{
 	$producto=-1;
-	echo mysql_error( $conection);}
+	echo mysql_error( $conection);
+}
 
 
 if( $producto>0){

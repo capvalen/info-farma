@@ -39,7 +39,9 @@ a:focus, a:hover { color: #62286f; }
 	background-color: transparent;
 	color: #eabff5;
 }
-td{font-size: 0.95em;}
+.btnEditarCajaMaestra{cursor: pointer;}
+.btnEditarCajaMaestra:hover{color: #ab08c9;}
+
 </style>
 
 
@@ -109,7 +111,7 @@ td{font-size: 0.95em;}
 				
 				<div class=" panel panel-default" id="divEntradas">
 					<div class="table-responsive">
-						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Motivo de ingreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
+						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Motivo de ingreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> </tr> </thead>
 						<tbody>
 						<?php
 						if( ! isset($_GET['cuadre']) ):
@@ -141,7 +143,7 @@ td{font-size: 0.95em;}
 				</div>
 				<div class=" panel panel-default " id="divSalidas">
 					<div class="table-responsive">
-						<table class="table table-hover">  <thead> <tr> <th>#</th> <th>Motivo de egreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> <th>Obs.</th> </tr> </thead>
+						<table class="table table-hover">  <thead> <tr> <th>#</th> <th>Motivo de egreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> </tr> </thead>
 						<tbody>
 						<?php
 							if( ! isset($_GET['cuadre']) ):

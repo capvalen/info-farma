@@ -1,7 +1,7 @@
 <?php 
 include '../config/conexion.php';
 
-$suma=[2,4, 15];
+$suma=[2,4, 15, 16];
 $resta=[1, 3, 5, 6, 7];
 
 $sql="SELECT `idStock`, `idProducto`, `stoCant`, m.movDescripcion , date_format(`stoFecha`, '%d/%m/%Y %h:%m %p') aS stoFecha, `stoObservacion`, `stoActivo`, concat( u.usuNombre,' ', u.usuApellidos) as usuNombre, s.idMovimiento FROM `stock` s 
@@ -31,10 +31,3 @@ while($row=$resultado->fetch_assoc()){
 }
 
 ?>
-<tr>
-	<td><?= $i?></td>
-	<td>Producto registrado</td>
-	<td></td>
-	<td id="emFechaProd"></td>
-	<td>Sistema</td>
-</tr>

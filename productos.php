@@ -142,20 +142,20 @@
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Costo unitario (S/)</label>
+												<label>Costo (S/)</label>
 												<input type="number" class="form-control text-center" id="txtprodCosto" placeholder="Precio unitario">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Precio unitario: (S/) <a href="#!" onclick="panelVariantes()">Gestionar variantes</a></label>
+												<label>Precio Venta (S/) <a href="#!" onclick="panelVariantes()">Gestionar variantes</a></label>
 												<input type="number" class="form-control text-center" id="txtprodPrecio" placeholder="Precio unitario">
 											</div>
 										</div>
 										<div class=" col-md-4">
 											<div class="form-group">
 												<label>Ganancia (%) </label>
-												<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario">
+												<input type="number" class="form-control text-center" id="txtprodPorcentaje" placeholder="Precio unitario" readonly="true">
 											</div>
 										</div>
 									</div>
@@ -412,14 +412,14 @@
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Precio Venta Und.: (S/)</label>
+												<label>Precio Venta (S/)</label>
 												<input type="number" class="form-control text-center" id="txtprodPrecioNuevo" placeholder="Precio unitario" value="0.00" step=1 min=0>
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label>Ganancia (%)</label>
-												<input type="number" class="form-control text-center" id="txtprodPorcentajeNuevo" placeholder="% Ganancia" value=30 step=1 min=0>
+												<input type="number" class="form-control text-center " id="txtprodPorcentajeNuevo" placeholder="% Ganancia" value=30 step=1 min=0 readonly="true">
 											</div>
 										</div>
 										
@@ -1178,6 +1178,14 @@
 
 
 	}
+	$('#tabCrearProducto #txtprodStock').change(function() {
+		if(isNaN($('#tabCrearProducto #txtprodStock').val())){
+			$('#txtCantLoteN').val(0);
+		}else{
+			$('#txtCantLoteN').val($('#tabCrearProducto #txtprodStock').val());
+
+		}
+	});
 
 	$('#listadoDivs').on('click', '.btnPasarProductoCanasta', function() {
 		mostrarProducto($(this).attr('id'));
@@ -1556,12 +1564,12 @@
 						nombre: $.trim($('#tabCrearProducto #txtprodNombre').val()),
 						descipt: $('#tabCrearProducto #txtprodDescripcion').val(),
 						stkmin: $('#tabCrearProducto #txtprodMinimo').val(),
-						categ: $('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'),
+						categ: $('#tabCrearProducto #cmbProdCateg').val(), //$('#tabCrearProducto #cmbProdCateg').parent().find('button').attr('title'),
 						precio: $('#tabCrearProducto #txtprodPrecioNuevo').val(),
-						labo: $('#tabCrearProducto #cmbProdLaboratorio').parent().find('button').attr('title'),
+						labo: $('#tabCrearProducto #cmbProdLaboratorio').val(), //parent().find('button').attr('title'),
 						costo: $('#tabCrearProducto #txtprodCostoNuevo').val(),
 						porcent: $('#tabCrearProducto #txtprodPorcentajeNuevo').val(),
-						propi: $('#tabCrearProducto #cmbProdPropN').parent().find('button').attr('title'),
+						propi: $('#tabCrearProducto #cmbProdPropN').val(), //.parent().find('button').attr('title'),
 						stock: $('#tabCrearProducto #txtprodStock').val(),
 						barritas: $.listadoBarras,
 						lotesN: $.listadoLotes,

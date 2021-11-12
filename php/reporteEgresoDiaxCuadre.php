@@ -38,11 +38,14 @@ if($totalRow==0){
 		<tr data-id="<?= $row['idCaja']; ?>" data-activo="<?= $row['cajaActivo']; ?>">
 			<th scope='row'> <?= $i; ?> </th>
 			
-			<td class='mayuscula tpIdDescripcion'><?= $row['movDescripcion'];?></td>
+			<td class='mayuscula tpIdDescripcion'><span><?= $row['movDescripcion'];?></span>
+				<?php if($row['cajaObservacion']!=''){ ?>
+					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
+				<?php } ?>
+			</td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $row['usuNick'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $row['cajaMoneda'];?>"><?= $row['moneDescripcion'];?></td>
-			<td class='mayuscula tdObservacion'><?= $row['cajaObservacion'];?><?php if($row['idTipoProceso']==74){ echo " ~".$row['cajPorcentaje']."%";} ?></td>
 			<td><span class="sr-only fechaPagov3"><?= $row['cajaFecha'];  ?></span> <?= $boton;?></td> </tr>
 		<?php 
 		if($totalRow==$i){

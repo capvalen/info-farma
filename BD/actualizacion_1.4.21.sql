@@ -232,3 +232,62 @@ CREATE TABLE `canjes` ( `id` INT NOT NULL , `idCliente` INT NOT NULL , `idUsuari
 
 
 CREATE TABLE `premios` ( `id` INT NOT NULL AUTO_INCREMENT , `idCliente` INT NOT NULL , `premio` VARCHAR(250) NOT NULL , `puntos` INT NOT NULL , `activo` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+drop procedure `listarProdimosAVencer`;
+DELIMITER $$
+CREATE PROCEDURE `listarProdimosAVencer`()
+BEGIN
+
+select p.idproducto, prodFechaVencimiento, prodNombre, prodPrecio, d.prodLote, d.idDetalle
+from producto p
+inner join detalleproductos d on p.idproducto=d.idproducto
+where prodAlertaStock =1 and prodActivo=1 and idPropiedadProducto<>4
+and datediff(prodFechaVencimiento, now() )<91 and d.prodDisponible<>0
+order by prodNombre asc;
+
+/*str_to_date(prodFechaVencimiento ,'%d/%m/%Y' ) asc;*/
+/*Cambia de fecha a automatica str_to_date( fecha ,'%d/%m/%Y' )*/
+/*WHERE (prodFechaVencimiento <= curdate() or
+prodFechaVencimiento between now() and DATE_ADD(now(), INTERVAL 3 month) ) */
+
+END$$
+DELIMITER ;
+
+
+
+DROP PROCEDURE `insertarProductoNuevo`;
+DELIMITER $$
+CREATE PROCEDURE `insertarProductoNuevo`(IN `nombre` TEXT, IN `descipt` TEXT, IN `stkmin` INT, IN `categ` TEXT, IN `precio` FLOAT, IN `iduser` INT, IN `labo` TEXT, IN `propi` TEXT, IN `costo` FLOAT, IN `porcent` INT, IN `stock` INT, IN `controlado` INT, IN `principio` TEXT) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN
+INSERT INTO `producto`
+(`idProducto`,
+`prodNombre`,
+`prodStock`,
+`prodStockMinimo`,
+`idCategoriaProducto`,
+`idPropiedadProducto`,
+`idLaboratorio`,
+`prodPrecio`,
+`prodCosto`,
+`prodPorcentaje`, `supervisado`, `prodPrincipioActivo`, `obs`)
+VALUES
+(null,
+nombre, stock, stkmin,
+categ, propi, labo,
+precio, costo, porcent, controlado, principio, descipt);
+
+set @idProducto = (select LAST_INSERT_ID());
+
+INSERT INTO `detalleproductos` (`idProducto`, `prodPrecioUnitario`, `prodLote`, `prodFechaVencimiento`, `prodFechaRegistro`, `prodCantidadXLote`, `prodDisponible`) VALUES (@idProducto, precio, '', '', NOW(), stock, b'1');
+
+select @idProducto;
+END$$
+DELIMITER ;
+
+INSERT INTO `movimiento` (`idMovimiento`, `movDescripcion`) VALUES ('16', 'Registro inicial');
+
+
+INSERT INTO `stock`( `idProducto`, `stoCant`, `idMovimiento`, `stoFecha`, `stoObservacion`, `stoActivo`, `idUsuario`) 
+SELECT dp.idProducto, prodCantidadXLote, 16, prodFechaRegistro, '', 1, 1  FROM `detalleproductos` dp
+where prodFechaVencimiento is null or prodFechaVencimiento ='0000-00-00'

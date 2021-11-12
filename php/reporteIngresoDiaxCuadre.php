@@ -27,24 +27,27 @@ if($totalRow>=1){
 			break;
 			default:
 			break;
-			$i++;
 		}
 		?>
 
 		<tr data-id="<?= $row['idCaja']; ?>" data-activo="<?= $row['cajaActivo']; ?>">
 			<th scope='row'> <?= $i; ?> </th>
 			
-			<td class='mayuscula tpIdDescripcion'><?= $row['movDescripcion'];?></td>
+			<td class='mayuscula tpIdDescripcion'><span><?= $row['movDescripcion'];?></span>
+				<?php if($row['cajaObservacion']!=''){ ?>
+					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
+				<?php } ?>
+			</td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $row['usuNick'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $row['cajaMoneda'];?>" ><?= $row['moneDescripcion'];?></td>
-			<td class='mayuscula tdObservacion'><?= $row['cajaObservacion'];?></td>
+			
 			<td><span class="sr-only fechaPagov3 prueba"><?= $row['cajaFecha']; ?></span> <?= $boton; ?></td>
 		</tr>
 		<?php 
-	/* 	if($totalRow==$i){
-			
-		} */
+
+		$i++;
+
 	}
 }
 $sumaVentas =0;
@@ -64,7 +67,7 @@ $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
 if($totalVentas>=1){
 	while($rowVentas=$resultadoVentas->fetch_assoc()){
-		if($_COOKIE['ckPower']==1 ): $boton = "<span onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></span>";
+		if($_COOKIE['ckPower']==1 ): $boton = "<span class='btnEditarCajaMaestra' onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></span>";
 		else: $boton=''; endif;
 
 		$sumaIngr += floatval($rowVentas['ventTotal']);
@@ -86,11 +89,16 @@ if($totalVentas>=1){
 		<tr data-id="<?= $rowVentas['idVenta']; ?>" data-activo="<?= $rowVentas['ventActivo']; ?>" esVenta='si'>
 			<th scope='row' style="cursor:pointer;"  onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <?= $i; ?> </th>
 			
-			<td class='mayuscula tpIdDescripcion'> <span style="cursor:pointer;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: <span class="mayuscyla"><?= $rowVentas['cliente'] ?></span>  </span></td>
+			<td class='mayuscula tpIdDescripcion'>
+				<span style="cursor:pointer;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: <span class="mayuscyla"><?= $rowVentas['cliente'] ?></span> </span>
+				<?php if($row['cajaObservacion']!=''){ ?>
+					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
+				<?php } ?>
+			</td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $rowVentas['usuNombre'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $rowVentas['ventTotal'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $rowVentas['idMoneda'];?>" ><?= $rowVentas['moneDescripcion'];?></td>
-			<td class='mayuscula tdObservacion'><?= $rowVentas['ventObservacion'];?></td>
+			
 			<td><span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span> <?= $boton; ?></td> </tr>
 		<?php
 		$i++;
