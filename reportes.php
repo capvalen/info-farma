@@ -14,6 +14,10 @@ require_once ( 'php/variablesGlobales.php');
 
 <body>
 
+<style>
+	#tableReporteVentas_filter{display:none;}
+</style>
+
 	<div id="wrapper">
 
 		<?php $pagina = 'reportes'; include 'menu-wrapper.php'; ?>
@@ -192,7 +196,7 @@ require_once ( 'php/variablesGlobales.php');
 
 
 	<!-- jQuery -->
-	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
@@ -202,8 +206,11 @@ require_once ( 'php/variablesGlobales.php');
 	<script src="js/bootstrap-datepicker.min.js"></script>
 	<script src="js/bootstrap-datepicker.es.min.js"></script>
 
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.0.1/b-html5-2.0.1/datatables.min.js"></script>
+
 	<!-- Menu Toggle Script -->
 	<script>
+		
 	$(document).ready(function() {
 		agregarRowInventario();
 		$('.selectpicker').selectpicker('refresh');
@@ -221,7 +228,7 @@ require_once ( 'php/variablesGlobales.php');
 		$('#btnAgregarItem').click(function() {
 			agregarRowInventario();
 		});
-
+		
 	});
 
 	function agregarRowInventario() {
@@ -229,15 +236,15 @@ require_once ( 'php/variablesGlobales.php');
 		$.ajax({
 			url: 'php/productos/listarCategorias.php',
 			type: 'POST'
-		}).success(function(resCategoria) {
+		}).done(function(resCategoria) {
 			$.ajax({
 				url: 'php/config/listarLaboratorios.php',
 				type: 'POST'
-			}).success(function(resLaboratorio) {
+			}).done(function(resLaboratorio) {
 				$.ajax({
 					url: 'php/productos/listarPropiedadProducto.php',
 					type: 'POST'
-				}).success(function(resPropiedad) {
+				}).done(function(resPropiedad) {
 					$('#listaProductosNuevoInventario').append(`<div class="row animated fadeIn filaDeProductoInventario">
 				<div class="col-xs-6 col-sm-3 aprovecharAncho"><input type="text" class="form-control text-capitalize txtNomProducto" placeholder="Nombre"></div>
 				<div class="col-xs-6 col-sm-2 aprovecharAncho"><input type="text" class="form-control text-capitalize txtComposicion" placeholder="Composición (und, gr, ml)"></div>
@@ -628,6 +635,8 @@ require_once ( 'php/variablesGlobales.php');
 		});
 	})
 	$('#btnGenerarReporteVentas').click(function() {
+		
+
 		if($('dtpFechaVentaInicial').val()!='' && $('dtpFechaVentaFinal').val()!=''){
 			if($('#sltOpcionesVenta').val()==1){
 				$('#tableReporteVentas thead').html(`<tr>
@@ -639,6 +648,13 @@ require_once ( 'php/variablesGlobales.php');
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
 					sumarTotalesReporte();
+					$('#tableReporteVentas').DataTable( {
+						dom: 'Bfrtip',
+						paging:false,searching:false,"bInfo" : false,
+						buttons: [
+							{ extend: 'excel', text: '<i class="icofont icofont-file-excel"></i> Exportar Excel', className: 'btn btn-outline btn-success' }
+						]
+					}); 
 				});
 			}
 			if($('#sltOpcionesVenta').val()==2){
@@ -651,6 +667,13 @@ require_once ( 'php/variablesGlobales.php');
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
 					sumarTotalesReporte();
+					$('#tableReporteVentas').DataTable( {
+						dom: 'Bfrtip',
+						paging:false,searching:false,"bInfo" : false,
+						buttons: [
+							{ extend: 'excel', text: '<i class="icofont icofont-file-excel"></i> Exportar Excel', className: 'btn btn-outline btn-success' }
+						]
+					}); 
 				});
 			}
 		}
