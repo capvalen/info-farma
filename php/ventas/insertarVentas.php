@@ -18,7 +18,7 @@ if( $Jencabez[0]['idCliente'] == -1){
 	
 }else{
 	if( $Jencabez[0]['idCliente'] != 1 ){
-		$sentenciaCli = $esclavo -> prepare( "UPDATE clientes set `razon` = ?, `ruc` =?, `direccion` =?, `puntosActual` = `puntosActual`+ convert( ?, int), `puntosTotal` = `puntosTotal` + convert( ?, int)   where id = ?; " );
+		$sentenciaCli = $esclavo -> prepare( "UPDATE clientes set `razon` = ?, `ruc` =?, `direccion` =?, `puntosActual` = `puntosActual`+ convert( ?, int), `puntosTotal` = `puntosTotal` + convert( ?, int), actualizacion=now()  where id = ?; " );
 		$sentenciaCli -> bind_param( 'sssssi', $Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $Jencabez[0]['Total'], $Jencabez[0]['Total'], $Jencabez[0]['idCliente'], );
 		$sentenciaCli-> execute();
 	}
