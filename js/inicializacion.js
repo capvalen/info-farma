@@ -12,11 +12,48 @@ $('#agregarBarra').click(function(){
 });
 $(document).ready(function(){
 	$('#fechaServer').load("php/getFecha.php");
-	setInterval(function(){$('#horaServer').load("php/gethora.php");},'1000');
+	setInterval(function(){$('#horaServer').load("php/getHora.php");},'60000');
 	$('#listBarras').hide();
 	
 	//$('.side-nav').hide();
 	//$('.top-nav').show();
 	
 
+});
+$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static'; //Para que no cierre el modal, cuando hacen clic en cualquier parte
+
+function esNumero(cadena) //true para si es número sólo
+{
+	if (cadena.match(/^[0-9]+$/)){ return true; }
+	else{ return false; }
+}
+
+$(".ocultar-mostrar-menu").click(function() {
+	ocultar()
+});
+function ocultar(){//console.log('oc')
+	$("#wrapper").toggleClass("toggled");
+	//$('.navbar-fixed-top').css('left','0');
+	$('.navbar-fixed-top').toggleClass('encoger');
+	$('#btnColapsador').addClass('collapsed');
+	$('#btnColapsador').attr('aria-expanded','false');
+	$('#navbar').removeClass('in');
+}
+$('.has-clear').mouseenter(function(){$(this).find('input').focus();})
+
+$('.has-clear input[type="text"]').on('input propertychange', function() {
+	var $this = $(this);
+	var visible = Boolean($this.val());
+	$this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+	$(this).siblings('input[type="text"]').val('')
+		.trigger('propertychange').focus();
+});
+/*function returnNumDecimal(numSinFormato){
+return parseFloat(numSinFormato).tof()
+}*/
+$("input").focus(function(){
+  this.select();
 });
