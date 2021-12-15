@@ -150,6 +150,7 @@ DELIMITER ;
 
 
 /*************************/
+drop function returnLote;
 DELIMITER $$
 CREATE FUNCTION `returnLote`(`idProd` INT) RETURNS varchar(250) CHARSET utf8mb4
     NO SQL

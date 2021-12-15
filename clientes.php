@@ -154,13 +154,11 @@ var app = new Vue({
 			this.maximo=[];
 			this.elCliente=id;
 			this.nomCliente=nombre;
-			for(let i =50; i<=max; i+=150 ){
-				if(i<=600){
-					this.maximo.push(i);
-				}
-				if(i>=150){
-					i+=50;
-				}
+			for(let i =50; i<=max; i+=50 ){
+				if(i==50){ this.maximo.push(i);}
+				if(i==100){ this.maximo.push(i);}
+				if(i==200){ this.maximo.push(i);}
+				if(i==400){ this.maximo.push(i);}
 			}
 			
 			$('#modalCanjear').modal('show');
