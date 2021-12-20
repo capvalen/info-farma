@@ -61,7 +61,7 @@ require_once ( 'php/variablesGlobales.php');
 									</thead>
 									<tbody>
 										<tr v-for="(cliente, index) in clientes" :key="cliente.id">
-											<td>{{index+1}}</td>
+											<td :data-id="cliente.id">{{index+1}}</td>
 											<td class="mayuscula">{{cliente.razon}}</td>
 											<td class="mayuscula">{{cliente.ruc}}</td>
 											<td class="mayuscula">{{cliente.puntosActual}}</td>
@@ -130,7 +130,7 @@ require_once ( 'php/variablesGlobales.php');
 var app = new Vue({
 	el:'#app',
 	data:{
-		letras: ['#', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'],
+		letras: ['#', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
 		clientes:[], texto:'', maximo:[], premio:'', elCliente:'', nomCliente:''
 	},
 	mounted() {
