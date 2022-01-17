@@ -8,10 +8,10 @@ $sql="SELECT `idStock`, `idProducto`, `stoCant`, m.movDescripcion , date_format(
 inner join usuario u on u.idUsuario=s.idUsuario
 inner join movimiento m on m.idMovimiento=s.idMovimiento
 where idProducto = {$_POST['idProducto']} and stoActivo =1
-order by stoFecha, idStock desc 
+order by idStock desc 
 limit 20";
 $resultado=$cadena->query($sql);
-$cant=$resultado->num_rows; $i=1;
+$cant=$resultado->num_rows; $i=1; $obs='';
 while($row=$resultado->fetch_assoc()){
 
 	if( in_array( $row['idMovimiento'], $suma )){ $signo='+'; }else{ $signo='-'; }
@@ -19,7 +19,7 @@ while($row=$resultado->fetch_assoc()){
 	?> 
 	<tr>
 		<td><?= $i; ?></td>
-		<td><?= $row['movDescripcion'].$obs; ?></td>
+		<td><?= $row['movDescripcion']. $obs; ?></td>
 		<td><?= $signo.$row['stoCant']; ?></td>
 		<td><?= $row['stoFecha']; ?></td>
 		<td><?= $row['usuNombre']; ?></td>
