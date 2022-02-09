@@ -80,7 +80,7 @@ include 'php/variablesGlobales.php';
 												
 											</select>
 											<label for="exampleInputName2">Paga con S/ </label>
-											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" value="0.00">
+											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00">
 										</div>
 										<button  class="btn btn-default " id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
 										<button class="btn btn-negro btn-outline " style="margin-left:2em" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Finalizar venta</button>
@@ -670,6 +670,7 @@ $(document).ready(function(){
 	$.listaVariantes=[];
 	$.idCliente = 1;
 	$.puntosActual =0;
+	$.estaImprimiendo=false;
 	$('#sltMoneda').val("Efectivo")
 	$('#dtpFechaComprobante').val(moment().format('YYYY-MM-DD'));
 		$('#dtpFechaVencimientoProductoCompra').val(moment().format('YYYY-MM-DD'));
@@ -1480,34 +1481,37 @@ function abrirCajon(){
 	$.post('<?= $localServer?>impresion/soloAbrirCaja.php');
 }
 $('#btnImprimirVentaFinal').click(function () {
-	moment.locale('es');
-	var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
-	var vuelto =''
-	if($('#spanResiduoCambio').text()=='-'){ vuelto='Sin cambio'}
+	if( $.estaImprimiendo==false){
+		$.estaImprimiendo=true;
+		moment.locale('es');
+		var fechaImpr=moment().format('dddd[,] DD/MMMM/YYYY h:mm a') ;
+		var vuelto =''
+		if($('#spanResiduoCambio').text()=='-'){ vuelto='Sin cambio'}
 		else{vuelto = parseFloat($('#spanResiduoCambio').text()).toFixed(2)}
+		
+		/////// Cambiar URL
 	
-	/////// Cambiar URL
-
-	abrirCajon();
-    let cliente = $('#txtCliRazon').val();
-	/* console.log( "----TICKET----" );
-	console.log( retornarCadenaImprimir() ); */
-	$.ajax({url: '<?= $localServer?>impresion/printTicketv3.php', type: 'POST', data:{
-		total: 'S/. '+$('#spanTotalVenta').text(),
-		dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
-		dineroVuelto: 'S/. '+vuelto,
-		texto: retornarCadenaImprimir(),
-		hora: fechaImpr,
-    cliente: cliente,
-    puntos: Math.round(parseInt($('#spanTotalVenta').text()) + parseInt($.puntosActual) )
-        
-	}}).done(function (resp) { console.log(resp);
-		/*$('#tablaResultadosCompras tbody').children().remove();
-		calcularRowTabla();
-		sumarSubTotalesInstante();*/
-		window.location.href ='ventas.php';
-
-	});
+		abrirCajon();
+		let cliente = $('#txtCliRazon').val();
+		/* console.log( "----TICKET----" );
+		console.log( retornarCadenaImprimir() ); */
+		$.ajax({url: '<?= $localServer?>impresion/printTicketv3.php', type: 'POST', data:{
+			total: 'S/. '+$('#spanTotalVenta').text(),
+			dineroDado: 'S/. '+parseFloat($('#txtMonedaEnDuro').val()).toFixed(2),
+			dineroVuelto: 'S/. '+vuelto,
+			texto: retornarCadenaImprimir(),
+			hora: fechaImpr,
+			cliente: cliente,
+			puntos: Math.round(parseInt($('#spanTotalVenta').text()) + parseInt($.puntosActual) )
+					
+		}}).done(function (resp) { console.log(resp);
+			/*$('#tablaResultadosCompras tbody').children().remove();
+			calcularRowTabla();
+			sumarSubTotalesInstante();*/
+			window.location.href ='ventas.php';
+			$.estaImprimiendo=false;
+		});
+	}
 });
 function retornarCadenaImprimir(){
 	var totalImprimir=40;
