@@ -13,7 +13,7 @@ if (!isset($_COOKIE['ckidUsuario'])): header("location: index.php"); endif; ?>
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/estilosElementosv2.css?version=2.0.21">
 <link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.4" >
-<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.4">
+<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.5">
 <link rel="stylesheet" href="css/icofont.css">
 <link rel="stylesheet" href="css/animate.css">
 

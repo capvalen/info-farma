@@ -70,13 +70,12 @@ a:hover{color:#462782;}
 </style>
 <main class="noselect">
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-10 col-lg-10 mx-auto ">
+		<div class="row d-flex flex-row-reverse">
+			<div class="col-10 col-md-12 col-lg-10 mx-auto ">
 				<div class="row d-flex flex-sm-row-reverse rounded bg-blanco" id="rowPadre">
 					<div class="col-12 col-lg-4 p-4 ">
 						<div class="text-center"><img src="images/VirtualCorto.png" class="mx-auto img-responsive" alt=""></div>
 						<h4 class="text-muted text-center fs-2">Hola! Bienvenido</h4>
-						<h4 class="fs-1 text-start" style="color: #721ecf;">Sistema para Farmacias y Boticas</h4>
 						<p class="text-muted">Ingrese sus credenciales</p>
 					<div>
 					<div class="form-floating mb-3">
@@ -90,15 +89,17 @@ a:hover{color:#462782;}
 					<div class="d-grid gap-1 mt-4">
 						<button class="btn btn-outline-primary btn-lg" id="btnAcceder"><img src="images/door-open.svg"/> Ingresar</button>
 					</div>
-					<div class="mt-5">
-						<small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?></small>
-						<p class="text-end"><a href="https://www.facebook.com/infocatsoluciones/photos/?tab=album&album_id=2015441245336874" class="text-decoration-none">Desarrollado por Infocat Soluciones</a></p>
-					</div>
+					
 				</div>
 			</div>
 
-				<div class="col-12 col-md p-5 ">
+				<div class="col-12 col-lg p-5 ">
 					<img src="images/portada.jpg" class="img-fluid">
+					<h4 class="fs-1 text-center" style="color: #721ecf;">Sistema para Farmacias y Boticas</h4>
+					<div class="mt-5">
+						<p class="text-end"><small><?php include 'php/version.php' ?> | 2016 - <?php echo date("Y"); ?></small></p>
+						<p class="text-end"><a href="https://www.facebook.com/infocatsoluciones/photos/?tab=album&album_id=2015441245336874" class="text-decoration-none">Desarrollado por Infocat Soluciones</a></p>
+					</div>
 				</div>
 					
 				</div>

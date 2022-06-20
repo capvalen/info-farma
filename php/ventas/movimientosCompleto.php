@@ -39,10 +39,11 @@ while($row=$resultado->fetch_assoc()){
 	</tr>
 <?php $i++; }
 
-$sqlVentas="SELECT `idVenta`, ifnull(`ventRuc`, 'Cliente sin DNI') as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
+$sqlVentas="SELECT `idVenta`, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
 WHERE ventFecha between concat('{$_POST['fecha1']}', ' 00:00:00') and concat('{$_POST['fecha2']}' , ' 23:59:59')
 and ventActivo=1; ";//echo $sqlVentas;
+//ifnull(`ventRuc`, 'Cliente sin DNI') as cliente,
 $resultadoVentas=$esclavo->query($sqlVentas);
 while($rowVentas=$resultadoVentas->fetch_assoc()){ 
 	$sumaIngesos+=floatval($rowVentas['ventTotal']);
