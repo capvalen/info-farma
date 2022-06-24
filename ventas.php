@@ -44,6 +44,26 @@ include 'php/variablesGlobales.php';
     color: #cb0000;
 		font-size: 32px;
 	}
+	label{height: 2rem;}
+	#listadoDivs .activo{ background-color: cornflowerblue; color:beige }
+	#listadoDivs .activo .text-primary{color:beige;}
+	#listadoDivs .text-danger.activo{ background-color: firebrick; color:white; }
+	#listadoDivs .text-danger.activo .text-primary{color:white;}
+	@media (min-width: 768px){
+		.modal-xl {
+			width: 768px;
+			margin: 30px auto;
+		}
+	}
+	@media (min-width:992px){
+		.modal-xl { width: calc(100vw - 100px); }
+	}
+	#divFlechas{
+		color: transparent;
+  	text-shadow: 0 0 0 #2196f3;
+		border:none;
+		outline:none;
+	}
 </style>
 <div id="wrapper">
 
@@ -75,11 +95,11 @@ include 'php/variablesGlobales.php';
 								<div class="form-inline">
 										<div class="form-group">
 											<label for="exampleInputName2">Tipo de pago: </label>
-											<select class="form-control" id="sltMoneda" style="margin: 0 1rem;" >
+											<select class="form-control" id="sltMoneda" style="margin: 0 1rem;margin-bottom: 1rem;" >
 												<?php include "php/listarMonedaOPT.php"; ?>
 												
 											</select>
-											<label for="exampleInputName2">Paga con S/ </label>
+											<label for="exampleInputName2">Paga con S/: </label>
 											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00">
 										</div>
 										<button  class="btn btn-default " id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
@@ -98,19 +118,19 @@ include 'php/variablesGlobales.php';
 							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
 							<div class="panel-body">
 								<div class="row" style="margin: 0.5rem 0;">
-									<div class="col-md-3">
+									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
 										<label class="">Sub Total:</label>
 										<h4><strong>S/ <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
 										<label class="">Impuesto:</label>
 										<h4><strong>S/ <span id="spanImpuestoVenta">0.00</span></strong></h4>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-6 col-md-3">
 										<label class="">Total:</label>
 										<h4><strong>S/ <span id="spanTotalVenta">0.00</span></strong></h4>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-6 col-md-3">
 										<label for="">Cambio:</label><br>
 										<h4>S/ <span id="spanResiduoCambio">-</span></h4>
 									</div>
@@ -223,13 +243,13 @@ include 'php/variablesGlobales.php';
 							<div class="panel-heading"><i class="icofont icofont-user"></i> Datos del cliente</div>
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col-sm-4" style="margin-bottom: 1rem;">
 										<input type="text" class="form-control" placeholder='DNI / RUC' id="txtCliDni" maxlength="11">
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-4" style="margin-bottom: 1rem;">
 										<input type="text" class="form-control mayuscula" placeholder='Razón social o Nombres' id="txtCliRazon">
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-4" style="margin-bottom: 1rem;">
 										<input type="text" class="form-control mayuscula" placeholder='Dirección' id="txtCliDireccion">
 									</div>
 								
@@ -354,12 +374,15 @@ include 'php/variablesGlobales.php';
 
 	<!-- Modal para mostrar el detalle de Producto Encontrado-->
 	<div class="modal fade modal-detalleProductoEncontrado " tabindex="-1" role="dialog">
-		<div class="modal-dialog modal-lg ">
+		<div class="modal-dialog modal-xl ">
 			<div class="modal-content">
 				<div class="modal-header-blanco">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button> <!--Boton para cerrar-->
 				<h4 class="modal-tittle "><i class="icofont icofont-help-robot"></i> <span id="lblCantidadProd"></span> Productos coincidentes con: <span id="terminoBusq"></span></h4></div>
 				<div class="modal-body">
+					<div>
+						<input type="text"  id="divFlechas">
+					</div>
 					<div class="container-fluid">
 						<div class="row hidden-xs"> <strong>
 							<div class="col-sm-4 text-center">Producto</div>
@@ -665,6 +688,7 @@ include 'php/variablesGlobales.php';
 
 <!-- Menu Toggle Script -->
 <script>
+var indiceTabla = 0;
 $(document).ready(function(){
 	$.impresion=[];
 	$.listaVariantes=[];
@@ -1288,6 +1312,50 @@ function llamarBuscarProducto() {
 				});
 		}
 }
+$('.modal-detalleProductoEncontrado').on('shown.bs.modal', function (e) {
+  $('#divFlechas').focus()
+	indiceTabla=0;
+	cambiarCursor();
+})
+$('.modal-ventaGuardada').on('shown.bs.modal', function (e) {
+  $('#btnAcaboVenta').focus();
+});
+
+$('#divFlechas').on('keydown', function(event) {
+	console.log(event.keyCode);
+	if(event.keyCode==40){
+		indiceTabla++;
+		cambiarCursor(indiceTabla);
+	}
+	if(event.keyCode==38){
+		indiceTabla--;
+		cambiarCursor(indiceTabla);
+	}
+	if(event.keyCode==34){ //Av.Pag
+		indiceTabla+=5;
+		if(indiceTabla> $('#listadoDivs .row').length ){
+			indiceTabla=$('#listadoDivs .row').length-1;
+		}
+		cambiarCursor(indiceTabla);
+	}
+	if(event.keyCode==33){ //Av.RePag
+		indiceTabla-=5;
+		if(indiceTabla< 0 ){
+			indiceTabla=0;
+		}
+		cambiarCursor(indiceTabla);
+	}
+	if(event.keyCode==13){
+		$('#listadoDivs .row').eq(indiceTabla).click();
+	}
+});
+
+function cambiarCursor(){
+	$('#listadoDivs .row').removeClass('activo')
+	
+	$('#listadoDivs .row').eq(indiceTabla).addClass('activo')
+	
+}
 function pasarACanasta(index){
 	var indexSelec=index; //$(this).attr('id');
 	let nombre, idProductoSele, precioProdSele;
@@ -1309,7 +1377,8 @@ function pasarACanasta(index){
 		}
 		//console.log( $.listaVariantes );
 
-		$('.tablaResultadosCompras tbody').append(`<tr class="animated fadeInLeft">
+		//Mostrar los botones de + y - : agregar hidden-xs
+		$('.tablaResultadosCompras tbody').prepend(`<tr class="animated fadeIn">
 			<th > <span class="SpanNum">${$('.tablaResultadosCompras tr').length}. </span> </th>
 			<td class="mProdID hidden">${idProductoSele}</td>
 			<td class="col-xs-4 mayuscula "><button type="button" class="btn btn-danger btn-xs btn-outline btn-sinBorde eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="mProdNom">${nombre}</span> <em>${principio}</em> </td> <td class="col-xs-4 col-sm-3 text-center">
@@ -1335,7 +1404,7 @@ function pasarACanasta(index){
 		//$('#spanTotalVenta').text( parseFloat($('#spanTotalVenta').text()) )
 		/* $('#txtBuscarProductoVenta').focus(); */
 		$('.modal-detalleProductoEncontrado').modal('hide');
-		
+		$('.tablaResultadosCompras .txtCantidadVariableProd').eq(0).focus();
 	});
 	
 	$.impresion.push({cantItem: 1, 'nombItem': nombre });
@@ -1398,20 +1467,29 @@ $('#btnAcaboVenta').click(function () {
 	$('.modal-ventaGuardada').modal('hide');*/
 	window.location.href ='ventas.php';
 });
-$('.tablaResultadosCompras ').on('keyup','.txtCantidadVariableProd', function () {
-	
-	var indexRow=$(this).parent().parent().parent().index();
-	console.log(indexRow)
-	var valorNue=0;
-	if($(this).val()!=''){valorNue=parseInt($(this).val())}
-	
-	var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
-	var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
-	if(isNaN(PrecDescuento )){PrecDescuento=0}
-	$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*valorNue-PrecDescuento).toFixed(2));
-	
-	//console.log(valorNue +' ' +PrecUnidad+' '+ PrecDescuento);
-	sumarSubTotalesInstante()
+$('.tablaResultadosCompras').on('keydown','.txtCantidadVariableProd', function (e) {
+	//console.log('presione ', e.keyCode)
+	if(e.keyCode==9){
+		e.preventDefault();
+		$('#txtBuscarProductoVenta').focus();
+	}
+	if(e.keyCode==13){
+		$('#btnGuardarVenta').click();
+	}
+});
+$('.tablaResultadosCompras').on('keyup','.txtCantidadVariableProd', function (e) {
+		var indexRow=$(this).parent().parent().parent().index();
+		console.log(indexRow)
+		var valorNue=0;
+		if($(this).val()!=''){valorNue=parseInt($(this).val())}
+		
+		var PrecUnidad = parseFloat($('tbody tr').eq(indexRow).find('.spanPrecio').text());
+		var PrecDescuento = parseFloat($('tbody tr').eq(indexRow).find('.spanDescuento').text());
+		if(isNaN(PrecDescuento )){PrecDescuento=0}
+		$('tbody tr').eq(indexRow).find('.spanSubTotal').text(parseFloat(PrecUnidad*valorNue-PrecDescuento).toFixed(2));
+		
+		//console.log(valorNue +' ' +PrecUnidad+' '+ PrecDescuento);
+		sumarSubTotalesInstante()
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

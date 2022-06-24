@@ -1,12 +1,11 @@
 <?php 
 global $nomArchivo;
 global $pagActual;
-$GLOBALS['nomArchivo'] = str_replace( '.php', '', trim(basename($_SERVER['PHP_SELF'])));
+//$GLOBALS['nomArchivo'] = str_replace( '.php', '', trim(basename($_SERVER['PHP_SELF'])));
 
 
 function casoActivo($quePagina){
 	if($GLOBALS['nomArchivo'] == $quePagina ){ echo 'class="active"'; }
-	
 }
 ?>
 <style>
