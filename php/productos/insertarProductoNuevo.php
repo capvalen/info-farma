@@ -26,7 +26,7 @@ if ($llamadoSQL = $conection->query($sql)) { //Ejecución mas compleja con retor
 	$llamadoSQL->close();
 }else{
 	$producto=-1;
-	echo mysql_error( $conection);
+	//echo mysql_error( $conection);
 }
 
 
@@ -57,5 +57,6 @@ if( $producto>0){
 	}
 
 }
+//echo $producto;
 
 ?>

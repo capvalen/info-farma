@@ -8,7 +8,7 @@ FROM `detalleventas` dv
 inner join ventas v on v.idVenta = dv.idVenta
 inner join producto p on p.idProducto = dv.idProducto
 where ventActivo=1 and ventFecha between concat( '{$_POST['fecha1']}' , ' 00:00:00') and concat( '{$_POST['fecha2']}', ' 23:59:59')
-order by dv.idVenta";
+order by ventFecha asc";
 //echo $sql;
 $resultado=$cadena->query($sql);
 $i=0;

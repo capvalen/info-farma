@@ -644,7 +644,7 @@
 				</div>
 				<div class="modal-body">
 					<img src="images/ok.png" class="img-responsive">
-					 <h4 class="text-center"><span id="lblMensajeBien"></span> <i class="icofont icofont-social-smugmug"></i></h4>
+					 <h4 class="text-center"><i class="icofont icofont-social-smugmug"></i> <span id="lblMensajeBien"></span> </h4>
 					 <div class="text-right">
 						 <button class="btn btn-morado btn-outline" data-dismiss="modal"><i class="icofont icofont-alarm"></i> Ok</button>
 
@@ -1505,15 +1505,21 @@
 	function limpiarCamposNuevo() {
 		activarBtnNuevo();
 		$('#tabCrearProducto #txtprodNombre').val('');
+		$('#tabCrearProducto #txtPrincipio').val('');
+		$('#tabCrearProducto #txtprodPorcentajeNuevo').val('-');
+		$('#tabCrearProducto #txtLoteN').text(0);
+		$('#tabCrearProducto #txtLoteN').val('');
+		$('#tabCrearProducto #txtCantLoteN').val(1);
 		$('#tabCrearProducto #txtprodDescripcion').val('');
 		$('#tabCrearProducto #txtprodMinimo').val('0.00');
 		$('#tabCrearProducto #txtprodPrecioNuevo').val('0.00');
 		$('#tabCrearProducto #txtprodCostoNuevo').val('0.00');
 		$('#tabCrearProducto #txtprodStock').val('0.00');
-		$('#tabCrearProducto #txtprodPorcentajeNuevo').val('30');
+		$('#tabCrearProducto #cmbProductoControlado').selectpicker('val', 0);
 		$('#tabCrearProducto #cmbProdCateg').selectpicker('val', '32');
 		$('#tabCrearProducto #cmbProdLaboratorio').selectpicker('val', '354');
 		$('#tabCrearProducto #cmbProdPropN').selectpicker('val', '2');
+		$.listadoLotes=[];
 
 	}
 
@@ -1580,14 +1586,14 @@
 					activarBtnNuevo();
 					//console.log(resp)
 					if (parseInt(resp) >= 1) {
-						$('#lblMensajeBien').text('Los datos del producto ' + $('#txtprodBarra').val() + ' se actualizaron correctamente .');
+						$('#lblMensajeBien').html(`Bien! se guardó correctamente el producto con código: <h3 style="margin-top:5px;">#${resp}</h3>`);
 						$('.modal-felicitacion').modal('show');
 						$.listadoBarras = [];
 						$('#badCantBarras').text(0);
 						$('#btnCrearNuevoProducto').removeClass('disabled');
 						limpiarCamposNuevo();
 					}
-					if (parseInt(resp) == 0) {
+					if (parseInt(resp) <= 0) {
 						$('#lblFalta').text('No se guardó ningun cambio, sugiero que presione F5 e inténtelo de nuevo.');
 						$('.modal-faltaCompletar').modal('show');
 					}

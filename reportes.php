@@ -1,5 +1,6 @@
 <?php date_default_timezone_set('America/Lima');
 require_once ( 'php/variablesGlobales.php');
+if(in_array($soloAdmis, $_COOKIE['ckPower']) ==-1 ) header('Location:caja.php');;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +32,8 @@ require_once ( 'php/variablesGlobales.php');
 
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tabReporteVentas" data-toggle="tab">Reporte Ventas</a></li>
-							<li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li>
+							<!-- <li><a href="#tabAgregarLabo" data-toggle="tab">Listado de productos</a></li> -->
+							<li><a href="#tabReporteUsuarios" data-toggle="tab">Reporte por usuario</a></li>
 							<li><a href="#tabProductosTodos" data-toggle="tab">Inventario Completo</a></li>
 							<li><a href="#tabMovimientosTodos" data-toggle="tab">Todos los movimientos</a></li>
 							<li><a href="#tabCompras" data-toggle="tab">Compras</a></li>
@@ -90,6 +92,25 @@ require_once ( 'php/variablesGlobales.php');
 
 								<!--Fin de pestaña 02-->
 							</div>
+
+							<div class="tab-pane fade container-fluid" id="tabReporteUsuarios">
+								<p>Seleccione entre 2 fechas para generar el reporte:</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="input-daterange input-group " id="dtpReporteUsuarios">
+											<input type="text" class="input-sm form-control" name="start" autocomplete="off" id="dtpFechaUsuarios1" />
+											<span class="input-group-addon">-</span>
+											<input type="text" class="input-sm form-control" name="end" autocomplete="off" id="dtpFechaUsuarios2" />
+										</div>
+									</div>
+									
+									<div class="col-md-3">
+										<button class="btn btn-primary" onclick="generarReporteUsuarios()"><i class="icofont icofont-paper-clip"></i> Generar reporte</button>
+									</div>
+								</div>
+								<div id="divReporteUsuarios"></div>
+							</div>
+
 							<div class="tab-pane fade container-fluid" id="tabProductosTodos">
 								<h3>Inventario rápido de todos los productos</h3>
 								<p>Haga click en generar reporte. Éste proceso puede demorar dependiendo de la cantidad de productos y la velocidad de su máquina.</p>
@@ -285,6 +306,14 @@ require_once ( 'php/variablesGlobales.php');
 
 	}
 
+	const opcionesDtp = {
+		format: "dd/mm/yyyy",
+				todayBtn: "linked",
+				daysOfWeekHighlighted: "0",
+				language: "es",
+				autoclose: true,
+				todayHighlight: true
+	}
 	function habilitarDivFecha() {
 		$('#sandbox-container .input-group.date').datepicker({
 			language: "es",
@@ -293,30 +322,10 @@ require_once ( 'php/variablesGlobales.php');
 			autoclose: true,
 			todayHighlight: true
 		});
-		$('#dtpReporteVentas').datepicker({
-				format: "dd/mm/yyyy",
-				todayBtn: "linked",
-				daysOfWeekHighlighted: "0",
-				language: "es",
-				autoclose: true,
-				todayHighlight: true
-		});
-		$('#dtpReporteCompras').datepicker({
-				format: "dd/mm/yyyy",
-				todayBtn: "linked",
-				daysOfWeekHighlighted: "0",
-				language: "es",
-				autoclose: true,
-				todayHighlight: true
-		});
-		$('#dtpReporteMovimientos').datepicker({
-				format: "dd/mm/yyyy",
-				todayBtn: "linked",
-				daysOfWeekHighlighted: "0",
-				language: "es",
-				autoclose: true,
-				todayHighlight: true
-		});
+		$('#dtpReporteVentas').datepicker(opcionesDtp);
+		$('#dtpReporteUsuarios').datepicker(opcionesDtp);
+		$('#dtpReporteCompras').datepicker(opcionesDtp);
+		$('#dtpReporteMovimientos').datepicker( opcionesDtp );
 	}
 	$('#listaProductosNuevoInventario').on('focusout', '.txtMonedas', function() {
 		var valor = parseFloat($(this).val());
@@ -721,6 +730,18 @@ require_once ( 'php/variablesGlobales.php');
 			});
 		}
 	});
+	function generarReporteUsuarios(){
+		$.ajax({
+			url: 'php/ventas/reportePorUsuario.php',
+			type:'POST',
+			data: {
+				fecha1: moment($('#dtpFechaUsuarios1').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'),
+				fecha2: moment($('#dtpFechaUsuarios2').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')
+			}
+		}).done(resp =>{
+			$('#divReporteUsuarios').html(resp)
+		})
+	}
 	</script>
 
 </body>
