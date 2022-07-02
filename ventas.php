@@ -381,7 +381,7 @@ include 'php/variablesGlobales.php';
 				<h4 class="modal-tittle "><i class="icofont icofont-help-robot"></i> <span id="lblCantidadProd"></span> Productos coincidentes con: <span id="terminoBusq"></span></h4></div>
 				<div class="modal-body">
 					<div>
-						<input type="text"  id="divFlechas">
+						<input type="text"  id="divFlechas" autocomplete="off" >
 					</div>
 					<div class="container-fluid">
 						<div class="row hidden-xs"> <strong>
@@ -608,7 +608,7 @@ include 'php/variablesGlobales.php';
 			</div>
 			<div class="modal-body">
 				<img src="images/ventaFinal.webp" class="img-responsive">
-				<h4 class="text-muted text-center" style="margin-botton:0;"><i class="icofont icofont-social-smugmug"></i> Bien! Venta realizada</h4> 
+				<h4 class="text-muted text-center" style="margin-bottom:0;"><i class="icofont icofont-social-smugmug"></i> Bien! Venta realizada</h4> 
 				<p class="text-center">¿Desea imprimir su voucher?</p>
 			</div>
 			<div class="modal-footer"> 
@@ -1318,17 +1318,26 @@ $('.modal-detalleProductoEncontrado').on('shown.bs.modal', function (e) {
 	cambiarCursor();
 })
 $('.modal-ventaGuardada').on('shown.bs.modal', function (e) {
+	$('#btnAcaboVenta').val('');
   $('#btnAcaboVenta').focus();
 });
 
 $('#divFlechas').on('keydown', function(event) {
 	console.log(event.keyCode);
 	if(event.keyCode==40){
-		indiceTabla++;
+		if(indiceTabla> $('#listadoDivs .row').length ){
+			indiceTabla=$('#listadoDivs .row').length-1;
+		}else{
+			indiceTabla++;
+		}
 		cambiarCursor(indiceTabla);
 	}
 	if(event.keyCode==38){
-		indiceTabla--;
+		if(indiceTabla> $('#listadoDivs .row').length ){
+			indiceTabla=$('#listadoDivs .row').length-1;
+		}else{
+			indiceTabla--;
+		}
 		cambiarCursor(indiceTabla);
 	}
 	if(event.keyCode==34){ //Av.Pag
@@ -1347,6 +1356,7 @@ $('#divFlechas').on('keydown', function(event) {
 	}
 	if(event.keyCode==13){
 		$('#listadoDivs .row').eq(indiceTabla).click();
+		indiceTabla=0;
 	}
 });
 
@@ -1384,11 +1394,11 @@ function pasarACanasta(index){
 			<td class="col-xs-4 mayuscula "><button type="button" class="btn btn-danger btn-xs btn-outline btn-sinBorde eliminarRowVenta"><i class="icofont icofont-error"></i></button> <span class="mProdNom">${nombre}</span> <em>${principio}</em> </td> <td class="col-xs-4 col-sm-3 text-center">
 				<div class="input-group">
 					<span class="input-group-btn">
-						<button class="btn btn-morado btn-outline btnRestarCantidad hidden-xs" type="button"><i class="icofont icofont-minus-circle"></i></button>
+						<button class="btn btn-morado btn-outline btnRestarCantidad hidden" type="button"><i class="icofont icofont-minus-circle"></i></button>
 					</span>
 					<input type="number" class="form-control text-center control-morado txtCantidadVariableProd" value="1" min=1>
 					<span class="input-group-btn">
-						<button class="btn btn-morado btn-outline btnAumentarCantidad hidden-xs" type="button"><i class="icofont icofont-plus-circle"></i></button>
+						<button class="btn btn-morado btn-outline btnAumentarCantidad hidden" type="button"><i class="icofont icofont-plus-circle"></i></button>
 					</span>
 				</div>
 			</td>
@@ -1662,8 +1672,8 @@ function mostrarDsctos(idProd, posicion){
 	});
 	$('#modalUsarQueDscto').modal('show');
 }
-function aplicarDsctoA(index, posicion, esQue){
-	var contenedor = $('.tablaResultadosCompras tbody tr').eq(posicion-1);
+function aplicarDsctoA(index, posicion, esQue){ console.log('datos: ', index, posicion, esQue);
+	var contenedor = $('.tablaResultadosCompras tbody tr').eq(( $('.tablaResultadosCompras tbody tr').length - posicion));
 	if(esQue=='normal'){
 		contenedor.find('.spanPrecio').text(parseFloat($.listaVariantes[index].normal).toFixed(2));
 		contenedor.find('.spanDescuento').text('-');
