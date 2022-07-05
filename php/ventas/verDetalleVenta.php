@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 //echo $_POST['detalle'];
 $filas = array();

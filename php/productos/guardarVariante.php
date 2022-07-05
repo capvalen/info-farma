@@ -1,6 +1,6 @@
 <?php 
 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $variante = '';
 if (isset($_POST['lista'])){ $variante = json_encode($_POST['lista']); };

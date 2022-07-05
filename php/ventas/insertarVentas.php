@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 session_start();
 
 $Js= json_decode($_POST['Jdata'], true);

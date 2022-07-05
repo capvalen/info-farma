@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 	$username=$_POST['usu'];
 	$pass=$_POST['pass'];

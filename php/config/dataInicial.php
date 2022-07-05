@@ -1,5 +1,6 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
+
 $query = "SELECT * FROM economia";
 
 if ($result = mysqli_query($conection, $query)) {

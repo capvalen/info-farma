@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $sql="UPDATE `producto` SET `prodAlertaStock` = '0' WHERE `idProducto` = {$_POST['idProd']};";
 if($cadena->query($sql)){

@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $filas=[];
 $log = mysqli_query($conection,"SELECT *

@@ -1,6 +1,6 @@
 <?php 
 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 
 $sql="SELECT variante FROM `producto` where idProducto = {$_POST['idProd']}; ";

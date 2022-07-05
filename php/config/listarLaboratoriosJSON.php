@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $filas=array();
 $log = mysqli_query($conection,"SELECT idLaboratorio, lower(labNombre) as labNombre

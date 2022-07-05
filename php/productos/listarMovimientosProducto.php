@@ -1,5 +1,5 @@
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $suma=[2,4, 15, 16];
 $resta=[1, 3, 5, 6, 7];

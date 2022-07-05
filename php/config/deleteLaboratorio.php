@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=utf8');
-require("../conectkarl.php");
+include __DIR__.'./../conectkarl.php';
 
 
 $sql= "UPDATE `laboratorio` SET `activo` = 0 WHERE `laboratorio`.`idLaboratorio` = {$_POST['id']};";

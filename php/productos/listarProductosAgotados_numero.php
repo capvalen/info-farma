@@ -1,6 +1,6 @@
 
 <?php 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $sql="SELECT `idProducto`, `prodNombre`, `prodStock`, `prodStockMinimo` FROM `producto` 
 where prodStock<prodStockMinimo and prodActivo=1 and prodAlertaStock=1";

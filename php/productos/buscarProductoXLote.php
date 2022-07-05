@@ -1,6 +1,6 @@
 <?php 
 
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 
 $sql="SELECT pb.*, p.prodNombre, catprodDescipcion, p.idProducto, case prodLote when '' then '-' else  upper(prodLote) end as lote,

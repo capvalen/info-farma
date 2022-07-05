@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=utf8');
-include '../conectkarl.php';
+include __DIR__.'../conectkarl.php';
 
 
 $sql= "INSERT INTO `laboratorio`(`labNombre`) VALUES ('{$_POST['nombre']}');";

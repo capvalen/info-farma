@@ -1,7 +1,7 @@
 
 <?php 
 date_default_timezone_set('America/Lima');
-include '../conectkarl.php';
+include __DIR__.'./../conectkarl.php';
 
 $sql="SELECT `idVenta`, date_format( `ventFecha`, '%Y/%m/%d %h:%i') as fechaVenta, `ventSubtotal`, `ventIGV`, `ventTotal`, ve.`idUsuario`, `ventCambioVuelto`, `idMoneda`, `ventActivo`, u.usuNombre FROM `ventas` ve
 inner join usuario u on u.idUsuario = ve.idUsuario
