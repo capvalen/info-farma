@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include 'conexion.php';
+	include '../conectkarl.php';
 
 	$usuario = $_POST['user'];
 	$pw = $_POST['pw'];

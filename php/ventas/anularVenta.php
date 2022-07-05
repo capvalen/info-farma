@@ -1,5 +1,5 @@
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $sql="UPDATE `ventas` SET `ventActivo` = b'0' WHERE `idVenta` = {$_POST['idVenta']};";
 if($cadena->query($sql)){

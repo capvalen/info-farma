@@ -1,5 +1,5 @@
 <?php 
-include "conectkarl.php";
+include '../conectkarl.php';
 
 $sql="SELECT * FROM `clientes` where ruc = '{$_POST['ruc']}' limit 1; ";
 $resultado=$cadena->query($sql);

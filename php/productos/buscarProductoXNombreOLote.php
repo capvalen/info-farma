@@ -1,5 +1,5 @@
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $filas=array();
 $sql="call buscarProductoXNombreOLote('".$_POST['filtro']."');";

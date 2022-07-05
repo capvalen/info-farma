@@ -1,6 +1,6 @@
 <?php 
 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $variante = '';
 if (isset($_POST['lista'])){ $variante = json_encode($_POST['lista']); };

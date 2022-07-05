@@ -1,8 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=utf8');
-require("conectkarl.php");
-
-
+include '../conectkarl.php';
 
 
 $sql= "call insertarProductoNuevo ('".$_POST['nombre']."','".$_POST['descipt']."',".$_POST['stkmin'].",'".$_POST['categ']."',".$_POST['precio'].",1, '".$_POST['labo']."', '".$_POST['propi']."', ".$_POST['costo'].", ".$_POST['porcent'].", ".$_POST['stock'].", ".$_POST['controlado'].", '{$_POST['principio']}' )";

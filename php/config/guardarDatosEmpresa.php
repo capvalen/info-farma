@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=utf8');
-require("conexion.php");
+include '../conectkarl.php';
 
 
 $sql= "call insertarInfoEmpresa('".$_POST['ruc']."', '".$_POST['social']."', '".$_POST['direccion']."', '".$_POST['telefono']."', '".$_POST['correo']."')";

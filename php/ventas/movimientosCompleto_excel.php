@@ -5,7 +5,7 @@ header("Pragma: no-cache");
 header("Expires: 0");
 
 date_default_timezone_set('America/Lima');
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $sumaIngesos =0; $sumaSalidas=0;
 

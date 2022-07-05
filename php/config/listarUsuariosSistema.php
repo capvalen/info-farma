@@ -1,5 +1,5 @@
 <?php 
-include 'conexion.php';
+include '../conectkarl.php';
 
 $sql="SELECT u.idUsuario, `usuNombre`, `usuApellidos`, `usuUser`, `idNivel`, `usuActivo`, ni.* FROM `usuario` u
 inner join nivelusuario ni on ni.idNivelUsuario = u.idNivel

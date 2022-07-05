@@ -26,7 +26,8 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tabCambiarPassUser" data-toggle="tab">Cambiar contraseña</a></li>
 							<li><a href="#tabUsuariosNuevos" data-toggle="tab">Agregar usuario</a></li>
-							<li><a href="#tabAgregarLabo" data-toggle="tab">Agregar laboratorio</a></li>
+							<li><a href="#tabAgregarLabo" data-toggle="tab">Laboratorios</a></li>
+							<li><a href="#tabCategorias" data-toggle="tab">Categorías</a></li>
 
 						</ul>
 
@@ -51,17 +52,54 @@
 							</div>
 
 							<div class="tab-pane fade container-fluid" id="tabAgregarLabo">
-								<!--Inicio de pestaña 01-->
+								<!--Inicio de pestaña laboratorios-->
+								<button class="btn btn-success btn-outline" @click="crearLaboratorio()">Nuevo Laboratorio</button>
 								<p>Listado de todos los laboratorios registrados:</p>
-								<div class="row">
-									<div class="col-sm-1">Cod. Int</div>
-									<div class="col-sm-4">Nombre de Laboratorio</div>
-								</div>
-								<div id="divListadoLaboratorio">
-
-								</div>
-
-								<!--Fin de pestaña 01-->
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>N°</th>
+											<th>Laboratorio</th>
+											<th>@</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(laboratorio, index) in laboratorios" >
+											<td>{{index+1}}</td>
+											<td class="text-capitalize">{{laboratorio.labNombre}}</td>
+											<td>
+												<button class="btn btn-primary btn-outline btn-sm " @click="editarLaboratorio(laboratorio.idLaboratorio, index)" style="margin: 0 0.5em"><i class="icofont icofont-edit"></i></button>
+												<button class="btn btn-danger btn-outline btn-sm " @click="borrarLaboratorio(laboratorio.idLaboratorio, index)" style="margin: 0 0.5em"><i class="icofont icofont-ui-delete"></i></button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<!--Fin de pestaña laboratorios-->
+							</div>
+							<div class="tab-pane fade container-fluid" id="tabCategorias">
+								<!--Inicio de pestaña categorías -->
+								<button class="btn btn-success btn-outline" @click="crearCategoria()">Nueva categoria</button>
+								<p>Listado de todos las categorías registradas:</p>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>N°</th>
+											<th>Categorías</th>
+											<th>@</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(categoria, index) in categorias" >
+											<td>{{index+1}}</td>
+											<td class="text-capitalize">{{categoria.catprodDescipcion}}</td>
+											<td>
+												<button class="btn btn-primary btn-outline btn-sm " @click="editarCategoria(categoria.idCategoriaProducto, index)" style="margin: 0 0.5em"><i class="icofont icofont-edit"></i></button>
+												<button class="btn btn-danger btn-outline btn-sm " @click="borrarCategoria(categoria.idCategoriaProducto, index)" style="margin: 0 0.5em"><i class="icofont icofont-ui-delete"></i></button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<!--Fin de pestaña categorías -->
 							</div>
 
 							<div class="tab-pane fade container-fluid" id="tabUsuariosNuevos">
@@ -192,6 +230,8 @@
 	<script src="js/bootstrap-select.js"></script>
 	<script src="js/bootstrap-datepicker.min.js"></script>
 	<script src="js/bootstrap-datepicker.es.min.js"></script>
+	<script src="https://unpkg.com/vue@3"></script>
+
 
 	<!-- Menu Toggle Script -->
 	<script>
@@ -199,27 +239,8 @@
 
 		$('.selectpicker').selectpicker('refresh');
 		$('.mitooltip').tooltip();
-		listarLabs();
-
 	});
 
-	function listarLabs() {
-		$.ajax({
-			url: 'php/config/listarLaboratoriosJSON.php',
-			type: 'POST'
-		}).done(function(resp) {
-
-			$.each(JSON.parse(resp), function(index, elem) {
-				//console.log(elem)
-				$('#divListadoLaboratorio').append(`<div class="row">
-			<div class="col-sm-1">${elem.idLaboratorio}</div>
-			<div class="col-sm-4 mayuscula">${elem.labNombre}</div>
-		</div>`);
-			})
-
-		});
-
-	}
 	$('#btnCambiarPassw').click(function() {
 		$.ajax({
 			url: 'php/config/cambiarContrasena.php',
@@ -267,6 +288,135 @@
 		});
 	});
 	</script>
+<script>
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        laboratorios:[], categorias:[], idElegido: -1
+      }
+    },
+		mounted(){
+			this.listarLabs();
+			this.listarCategorias();
+		},
+		methods:{
+			async listarLabs(){
+				let resp = await fetch('php/config/listarLaboratoriosJSON.php');
+				this.laboratorios = await resp.json();
+			},
+			async crearLaboratorio(){
+				var texto = '';
+				if(  texto = prompt('¿Cuál es el nuevo laboratorio?') ){
+					let datos = new FormData();
+					datos.append('nombre', texto)
+					let resp = await fetch('php/config/insertLaboratorio.php',{
+						method:'POST', body:datos
+					});
+					var respuesta =await resp.text();
+					if( parseInt(respuesta)>0){
+						this.laboratorios.push({
+							idLaboratorio: respuesta,
+							catprodDeslabNombrecipcion: texto
+						});
+						alert('Se creó exitosamente')
+					}else{
+						alert('Hubo un error en la operación');
+					}
+				}
+			},
+			async editarLaboratorio(idLaboratorio, mIndex){
+				var texto = '';
+				if(  texto = prompt('¿Cuál es el nombre al que desea cambiar?', this.laboratorios[mIndex].labNombre ) ){
+					let datos = new FormData();
+					datos.append('id', idLaboratorio)
+					datos.append('nombre', texto)
+					let resp = await fetch('php/config/updateLaboratorio.php',{
+						method:'POST', body:datos
+					});
+					if(await resp.text()=='ok'){
+						this.laboratorios[mIndex].labNombre = texto;
+					}else{
+						alert('Hubo un error en la operación');
+					}
+
+				}
+			},
+			async borrarLaboratorio(idLaboratorio, mIndex){
+				if( confirm('¿Desea eliminar el laboratorio ' + this.laboratorios[mIndex].labNombre + '?' ) ){
+					let datos = new FormData();
+					datos.append('id', idLaboratorio)
+					let resp = await fetch('php/config/deleteLaboratorio.php',{
+						method:'POST', body:datos
+					});
+					if(await resp.text()=='ok'){
+						this.laboratorios.splice(mIndex,1)
+					}else{
+						alert('Hubo un error en la operación');
+					}
+
+				}
+			},
+			async listarCategorias(){
+				let resp = await fetch('php/config/listarCategorias.php');
+				this.categorias = await resp.json();
+			},
+			async crearCategoria(){
+				var texto = '';
+				if(  texto = prompt('¿Cuál es la nueva categoría?') ){
+					let datos = new FormData();
+					datos.append('nombre', texto)
+					let resp = await fetch('php/config/insertCategoria.php',{
+						method:'POST', body:datos
+					});
+					var respuesta =await resp.text();
+					if( parseInt(respuesta)>0){
+						this.categorias.push({
+							idCategoriaProducto: respuesta,
+							catprodDescipcion: texto
+						});
+						alert('Se creó exitosamente')
+					}else{
+						alert('Hubo un error en la operación');
+					}
+				}
+			},
+			async editarCategoria(idCategoria, mIndex){
+				var texto = '';
+				if(  texto = prompt('¿Cuál es el nombre al que desea cambiar?', this.categorias[mIndex].catprodDescipcion ) ){
+					let datos = new FormData();
+					datos.append('id', idCategoria)
+					datos.append('nombre', texto)
+					let resp = await fetch('php/config/updateCategoria.php',{
+						method:'POST', body:datos
+					});
+					if(await resp.text()=='ok'){
+						this.categorias[mIndex].catprodDescipcion = texto;
+					}else{
+						alert('Hubo un error en la operación');
+					}
+				}
+			},
+			async borrarCategoria(idCategoria, mIndex){
+				if( confirm('¿Desea eliminar el laboratorio ' + this.categorias[mIndex].catprodDescipcion + '?' ) ){
+					let datos = new FormData();
+					datos.append('id', idCategoria)
+					let resp = await fetch('php/config/deleteCategoria.php',{
+						method:'POST', body:datos
+					});
+					if(await resp.text()=='ok'){
+						this.categorias.splice(mIndex,1)
+					}else{
+						alert('Hubo un error en la operación');
+					}
+
+				}
+			},
+			
+		}
+  }).mount('#wrapper')
+</script>
 
 </body>
 

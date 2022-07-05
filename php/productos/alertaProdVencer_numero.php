@@ -7,7 +7,5 @@ order by prodNombre asc";
 $resultado=$cadena->query($sql);
 $row=$resultado->fetch_assoc();
 
-if($row['contador']>=1):
+$vencera = $row['contador'];
 ?>
-<div class="alert alert-danger" style="color: #ab2320; background-color: #ffd1d15c;" role="alert"><strong>Alerta!</strong> Hay, <?= $row['contador']; ?> productos que están próximos a vencer. </div>
-<?php endif; ?>

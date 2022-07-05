@@ -1,5 +1,5 @@
 <?php 
-include "conectkarl.php";
+include '../conectkarl.php';
 
 if( $_POST['letra'] =="#"){
 	$sql="SELECT * FROM `clientes` where

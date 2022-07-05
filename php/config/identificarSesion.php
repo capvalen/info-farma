@@ -1,5 +1,5 @@
 <?php 
-require("conexion.php");
+include '../conectkarl.php';
 
 $filas=array();
 

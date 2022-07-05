@@ -1,6 +1,6 @@
 <?php
 session_start();
-	require("conexion.php");
+include '../conectkarl.php';
 
 	$username=$_POST['usu'];
 	$pass=$_POST['pass'];

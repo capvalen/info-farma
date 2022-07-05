@@ -1,6 +1,6 @@
 <?php 
 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $filas = array();
 

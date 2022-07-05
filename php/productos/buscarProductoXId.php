@@ -1,5 +1,5 @@
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $filas=array();
 $log = mysqli_query($conection,"call buscarProductoXId(".$_POST['filtro'].");");

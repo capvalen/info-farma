@@ -1,6 +1,6 @@
 <?php 
 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 
 $sql="SELECT variante FROM `producto` where idProducto = {$_POST['idProd']}; ";

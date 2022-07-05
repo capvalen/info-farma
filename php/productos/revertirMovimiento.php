@@ -1,5 +1,5 @@
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $suma=[2,4, 15];
 $resta=[1, 3, 5, 6, 7];

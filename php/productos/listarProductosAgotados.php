@@ -11,7 +11,7 @@
 </thead>
 <tbody>
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $sql="SELECT `idProducto`, `prodNombre`, `prodStock`, `prodStockMinimo` FROM `producto` 
 where prodStock<prodStockMinimo and prodActivo=1 and prodAlertaStock=1";

@@ -1,8 +1,10 @@
 <?php 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $filas=array();
-$log = mysqli_query($conection,"call listarLaboratorios();");
+$log = mysqli_query($conection,"SELECT idLaboratorio, lower(labNombre) as labNombre
+FROM laboratorio where activo = 1
+order by labNombre asc;");
 while($row = mysqli_fetch_array($log))
 {
 	$filas[]= array('idLaboratorio' => $row['idLaboratorio'],

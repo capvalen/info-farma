@@ -1,5 +1,5 @@
 <?php 
-include 'conexion.php';
+include '../conectkarl.php';
 
 $log = mysqli_query($conection,"call retornarAñosCompras();");
 while($row = mysqli_fetch_array($log))

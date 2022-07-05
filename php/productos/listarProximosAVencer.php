@@ -1,5 +1,5 @@
 <?php 
-require("conectkarl.php");
+include '../conectkarl.php';
 
 $filas=array();
 $log = mysqli_query($conection,"call listarProdimosAVencer();");

@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/html; charset=utf8');
-require("../config/conexion.php");
+include '../conectkarl.php';
 
 
 $sql= "call insertarBarraPorId ('".$_POST['barra']."', ".$_POST['idProd'].")";

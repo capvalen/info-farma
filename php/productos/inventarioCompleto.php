@@ -14,7 +14,7 @@
 	</thead>
 	<tbody>
 <?php 
-include 'conectkarl.php';
+include '../conectkarl.php';
 $i=1;
 $sql="SELECT `idProducto`, `prodNombre`, `prodStock`, `prodStockMinimo`, `prodPrecio`, `prodCosto`, `prodPorcentaje` , ca.catprodDescipcion
 FROM `producto` pro

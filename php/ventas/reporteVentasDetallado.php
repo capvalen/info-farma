@@ -1,7 +1,7 @@
 
 <?php 
 date_default_timezone_set('America/Lima');
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 $sql="SELECT dv.*, p.prodNombre, date_format( `ventFecha`, '%Y/%m/%d %h:%i') as fechaVenta, `ventSubtotal`, `ventIGV`, `ventTotal`, `ventCambioVuelto`, `idMoneda`, `ventActivo`, returnNombreUsuario(v.`idUsuario`) as usuNombre, round(detentPrecioparcial - returnCostoProducto(p.idProducto) * detventCantidad,2) as ganancia
 FROM `detalleventas` dv

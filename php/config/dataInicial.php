@@ -1,5 +1,5 @@
 <?php 
-require('conexion.php');
+include '../conectkarl.php';
 $query = "SELECT * FROM economia";
 
 if ($result = mysqli_query($conection, $query)) {

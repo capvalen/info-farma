@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include '../conectkarl.php';
 session_start();
 
 $Js= json_decode($_POST['Jdata'], true);
@@ -52,7 +52,7 @@ mysqli_query($conection,$sql22) or die(mysql_error()); //Ejecución simple para 
 
 foreach ($Js as $row) {
 $sql33= 'call insertarDetalleVentaProducto('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].', '.$_POST['usuario'].', "'.$row['dscto'].'" );' ;
-mysqli_query($conection,$sql33) or die(mysql_error());
+mysqli_query($conection,$sql33) or die();
 }
 
 

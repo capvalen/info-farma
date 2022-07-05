@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('America/Lima');
-include 'conectkarl.php';
+include '../conectkarl.php';
 
 
 $sql="SELECT round(sum(ventTotal),2) as total, lower(returnNombreUsuario(idUsuario)) as usuario, date_format( ventFecha, '%d/%d/%Y') as fecha  FROM `ventas`

@@ -1,6 +1,6 @@
 <?php 
 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $suma=[2,4,15,16];
 $resta=[1, 3, 5, 6, 7];

@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $filas=array();
 echo "call listarTodoInventarios(".$_POST['anio'].", ".$_POST['mes'].");";

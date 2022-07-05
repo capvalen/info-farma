@@ -1,6 +1,6 @@
 <?php 
 
-require("conectkarl.php");
+include '../conectkarl.php';
 
 $sql="UPDATE `producto` SET `prodActivo` = '0' WHERE `idProducto` = {$_POST['idProd']};";
 //echo $sql; die();

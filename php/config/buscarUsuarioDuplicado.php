@@ -1,6 +1,6 @@
 <?php 
 
-include 'conexion.php';
+include '../conectkarl.php';
 
 $sql="SELECT * FROM `usuario` where usuUser = '{$_POST['nick']}' ; ";
 //echo $sql;

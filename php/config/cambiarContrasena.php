@@ -1,5 +1,5 @@
 <?php 
-require("conexion.php");
+include '../conectkarl.php';
 
 $sql="SELECT * FROM usuario WHERE idUsuario='{$_COOKIE['ckidUsuario']}' AND usuPassword=md5('{$_POST['txtPassAct']}')";
 $resultado=$cadena->query($sql);

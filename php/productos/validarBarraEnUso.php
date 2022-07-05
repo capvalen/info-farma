@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $filas=array();
 $sql="call validarBarraEnUso('".$_POST['barra']."');";

@@ -1,5 +1,5 @@
 <?php 
-include 'conexion.php';
+include '../conectkarl.php';
 
 $filas=array();
 $log = mysqli_query($conection,"call retornarMesesAñoCompras(".$_POST['anio'].");");

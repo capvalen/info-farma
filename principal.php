@@ -19,7 +19,15 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 	<style>
 		.thumbnail {
 			background-color: rgb(255 255 255 / 65%);
+			border-color: #ffbc00;
 		}
+		.thumbnail h2, .thumbnail h5, .thumbnail small { color: #ffa500; }
+		#tu_alerta{ border-color: #eb0505; }
+		#tu_alerta h2, #tu_alerta h5 { color: #eb0505; }
+		#tu_alerta h2 i{
+			font-size: 2rem;
+		}
+		.text-darken-2{color: #5e5e5e;}
 	</style>
 
 <div id="wrapper">
@@ -31,17 +39,43 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 			<div class="row">
 				<div class="col-lg-12 contenedorDeslizable fondoGeo">
 				<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-				<h1 class=""><i class="icofont icofont-animal-cat-alt-4"></i> Software Info-Farma</h1>
+				<h1 class=""><i class="icofont icofont-hospital"></i> Software InfoFarma</h1>
 				<h2 class="text-muted"> Te damos la bienvenida</h2>
 				
-				<h4 class="text-muted">Datos de la caja activa:</h4>
+				<h4 class="text-muted">Datos generales del sistema:</h4>
 				<div class="row has-clear">
+					<?php include 'php/productos/alertaProdVencer_numero.php';
+					if( $vencera >0 ){
+					?>
+					<div class="col-sm-6 col-md-3">
+						<div class="thumbnail " id="tu_alerta">
+						<!-- <img src="images/cara.jpg" alt="...">-->
+							<div class="caption">
+								<h2 class="text-center"><span><i class="icofont icofont-exclamation-circle"></i></span> <?= $vencera; ?> </h2>
+								<h5 class="text-center">Productos a vencer</h5>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+					<?php include 'php/productos/listarProductosAgotados_numero.php';
+					if( $agotara >0 ){
+					?>
+					<div class="col-sm-6 col-md-3">
+						<div class="thumbnail " id="tu_alerta">
+						<!-- <img src="images/cara.jpg" alt="...">-->
+							<div class="caption">
+								<h2 class="text-center"><span><i class="icofont icofont-box"></i></span> <?= $agotara; ?> </h2>
+								<h5 class="text-center">Productos por agotar</h5>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
 						<!-- <img src="images/cara.jpg" alt="...">-->
 							<div class="caption">
 								<h2 class="text-center"><small>S/</small> <?= $respuVentas['sumaVentasCuadre']?></h2>
-								<h5 class="text-center">Suma Ventas</h5>
+								<h5 class="text-center">Suma de Ventas</h5>
 							</div>
 						</div>
 					</div>
@@ -50,7 +84,7 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 						<!-- <img src="images/cara.jpg" alt="...">-->
 							<div class="caption">
 								<h2 class="text-center"><small>S/</small> <?= $respuVentas['sumaGastosCuadre']?></h2>
-								<h5 class="text-center">Suma Gastos en caja</h5>
+								<h5 class="text-center">Suma Gastos</h5>
 							</div>
 						</div>
 					</div>
@@ -59,24 +93,19 @@ $respuVentas = $resultadoVentas->fetch_assoc();
 						<!-- <img src="images/cara.jpg" alt="...">-->
 							<div class="caption">
 								<h2 class="text-center"><small>S/</small> <?= $respuVentas['sumaIngresosCuadre']  ?></h2>
-								<h5 class="text-center">Suma de otros ingresos en caja</h5>
+								<h5 class="text-center">Otros ingresos</h5>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<?php include 'php/productos/alertaProdVencer.php'; ?>
-					</div>
-				</div>
-				<p><br><br><br><br><br><br><br>
-				</p>
+				
+				<div style="height: 200px;"></div>
 	
-				<h5 class="has-clear"><small><span class="text-darken-2">Un producto de:</span></small></h5>
-				<h5 ><strong><a href="https://infocatsoluciones.com" target="_blank">Infocat Soluciones S.A.C.</a></strong></h5>
-				<h5><small>RUC: 20602337147</small></h5>
-				<h5><small>Soporte: <a href="https://infocatsoluciones.com/contacto" target="_blank">Ingrese aquí</a></small></h5>
-				<h5 ><small><span class="text-darken-2">Actualmente estás usando la <?php include 'php/version.php' ?></span></small></h5>
+				<h5 class="has-clear"><span class="text-darken-2">Un producto de:</span></h5>
+				<h5 class="text-darken-2"><strong><a href="https://infocatsoluciones.com" target="_blank">Infocat Soluciones S.A.C.</a></strong></h5>
+				<h5 class="text-darken-2">RUC: 20602337147</h5>
+				<h5 class="text-darken-2">Soporte inmediato: <a href="https://wa.me/51977692108?text=Necesito soporte sobre el sistema Infofarma" target="_blank"><i class="icofont-whatsapp"></i> Click aquí</a></h5>
+				<h5 class="text-darken-2"><span class="text-darken-2">Actualmente estás usando la <?php include 'php/version.php' ?></span></h5>
 	
 				
 					<!-- Fin de meter contenido principal -->

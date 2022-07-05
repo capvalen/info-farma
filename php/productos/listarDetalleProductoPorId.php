@@ -1,5 +1,5 @@
 <?php 
-include '../config/conexion.php';
+include '../conectkarl.php';
 
 $filas=array();
 $log = mysqli_query($conection,"call listarDetalleProductoPorId(".$_POST['idPro'].");");
