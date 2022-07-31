@@ -11,9 +11,15 @@ $('#agregarBarra').click(function(){
 	$('#txtBarras').val('');}
 });
 $(document).ready(function(){
-	$('#fechaServer').load("php/getFecha.php");
+	/* $('#fechaServer').load("php/getFecha.php");
 	setInterval(function(){$('#horaServer').load("php/getHora.php");},'60000');
-	$('#listBarras').hide();
+	$('#listBarras').hide(); */
+	moment.locale('es');
+	$('#fechaServer').text(moment().format('DD/MM/YYYY'));
+	setInterval(function(){
+		$('#horaServer').text(moment().format('hh:mm a'));
+	},'1000');
+
 	
 	//$('.side-nav').hide();
 	//$('.top-nav').show();

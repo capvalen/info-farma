@@ -237,32 +237,73 @@
 										<div class="panel-body">
 											<div class="row">
 												<div class="col-sm-6">
-													<h4>Movimientos <small>Los 20 últimos</small></h4>
+													<h4>Movimientos de stock <small>Los 50 últimos</small></h4>
 												</div>
-												<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
-												<div class="col-sm-6 text-center">
-													<button class="btn btn-default" id="btnAddStock"> <i class="icofont icofont-circled-up"></i>
-														Agregar Stock </button>
-													<button class="btn btn-default" id="btnLessStock"> <i
-															class="icofont icofont-circled-down"></i> Restar Stock </button>
-												</div>
-												<?php endif; ?>
 											</div>
-											<table class="table table-dark table-hover">
-												<thead>
-													<tr>
-														<th>N°</th>
-														<th>Tipo de movimiento</th>
-														<th>Cantidad</th>
-														<th>Fecha</th>
-														<th>Usuario</th>
-														<th>@</th>
-													</tr>
-												</thead>
-												<tbody id="divEntradasYSalidas">
+											<ul id="myTabs" class="nav nav-tabs" role="tablist">
+												<li role="presentation" class="active"><a href="#entradas" id="entradas-tab" role="tab" data-toggle="tab" aria-controls="entradas" aria-expanded="false">Entradas</a></li>
+												<li role="presentation" ><a href="#salidas" role="tab" id="salidas-tab" data-toggle="tab" aria-controls="salidas" aria-expanded="true">Salidas</a></li>
+												<li role="presentation" ><a href="#promedios" role="tab" id="promedios-tab" data-toggle="tab" aria-controls="promedios" aria-expanded="true">Promedios</a></li>
+											</ul>
+											<div class="tab-content">
+												<div role="tabpanel" class="tab-pane fade active in container-fluid" id="entradas" aria-labelledby="entradas-tab">
+													<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
+													<div class="row">
+														<div class="col-12 text-right">
+															<button class="btn btn-default" id="btnAddStock"> <i class="icofont icofont-circled-up"></i> Agregar Stock </button>
+														</div>
+													</div>
+													<?php endif; ?>
+													<div class="row">
+														<div class="col">
+															<table class="table table-dark table-hover">
+																<thead>
+																	<tr>
+																		<th>N°</th>
+																		<th>Tipo de movimiento</th>
+																		<th>Cantidad</th>
+																		<th>Fecha</th>
+																		<th>Usuario</th>
+																		<th>@</th>
+																	</tr>
+																</thead>
+																<tbody id="divEntradas"></tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div role="tabpanel" class="tab-pane fade container-fluid" id="salidas" aria-labelledby="salidas-tab">
+												<?php if(in_array( $_COOKIE['ckPower'], $admis)): ?>
+													<div class="row">
+														<div class="col-12 text-right">
+															<button class="btn btn-default" id="btnLessStock"> <i class="icofont icofont-circled-down"></i> Restar Stock </button>
+														</div>
+													</div>
+												<?php endif; ?>
+													<div class="row">
+														<div class="col">
+															<table class="table table-dark table-hover">
+																<thead>
+																	<tr>
+																		<th>N°</th>
+																		<th>Tipo de movimiento</th>
+																		<th>Cantidad</th>
+																		<th>Fecha</th>
+																		<th>Usuario</th>
+																		<th>@</th>
+																	</tr>
+																</thead>
+																<tbody id="divSalidas"></tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div role="tabpanel" class="tab-pane fade container-fluid" id="promedios" aria-labelledby="entradas-tab">
+													<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam quasi ducimus vel ratione fuga consectetur soluta eaque aperiam aliquid nesciunt. Maiores corrupti inventore recusandae esse reprehenderit provident aspernatur. Odit, modi?</p>
+												</div>
+											</div>
 
-												</tbody>
-											</table>
+											
 
 										</div>
 									</div>
@@ -1182,20 +1223,29 @@
 		});
 		verVencimientosPorId(idProd)
 		listarMovimientosPhp(idProd);
-
+		
 		$('.modal-detalleProductoEncontrado').modal('hide');
 	}
 	function listarMovimientosPhp(idProd){
 		$.ajax({
-			url: 'php/productos/listarMovimientosProducto.php',
+			url: 'php/productos/listarMovimientosProducto_xTipo.php',
 			type: 'POST',
 			data: {
-				idProducto: idProd
+				idProducto: idProd, tipo: 'suma'
 			}
-		}).done(function(resp) {
-			//console.log(resp)
-			$('#divEntradasYSalidas').html(resp);
-			$('.mitooltip').tooltip();			
+		}).done(function(resp) {//console.log(resp)
+			$('#divEntradas').html(resp);
+			$('.mitooltip').tooltip();
+		});
+		$.ajax({
+			url: 'php/productos/listarMovimientosProducto_xTipo.php',
+			type: 'POST',
+			data: {
+				idProducto: idProd, tipo: 'resta'
+			}
+		}).done(function(resp) {//console.log(resp)
+			$('#divSalidas').html(resp);
+			$('.mitooltip').tooltip();
 		});
 	}
 	$('#chAlerta').change(function() {

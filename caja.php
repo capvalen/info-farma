@@ -459,14 +459,14 @@ $(document).ready(function () {
 		window.location.href = 'caja.php?fecha='+moment($('#dtpFechaIniciov3').val(),'DD/MM/YYYY').format('YYYY-MM-DD')+'&cuadre='+$('#sltHistorialCierres').val();
 	});
 });
-$('#dtpFechaIniciov3').val('<?php
-		if (isset($_GET['fecha'])) { //si existe lista fecha requerida
-			$date = new DateTime($_GET['fecha']);
-			echo  $date->format('d/m/Y');
-		}else{ //sino existe lista la fecha de hoy
-			echo date('d/m/Y');
-		}
-		?>');
+<?php
+	if (isset($_GET['fecha'])) { //si existe lista fecha requerida
+		$hoy = new DateTime($_GET['fecha']);
+	}else{ //sino existe lista la fecha de hoy
+		$hoy =  new DateTime();
+	}
+?>
+$('#dtpFechaIniciov3').val('<?= $hoy->format('d/m/Y');?>');
 		
 moment.locale('es');
 <? if(isset($_GET['cuadre'])){ ?>
