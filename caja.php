@@ -41,7 +41,7 @@ a:focus, a:hover { color: #62286f; }
 }
 .btnEditarCajaMaestra{cursor: pointer;}
 .btnEditarCajaMaestra:hover{color: #ab08c9;}
-
+#txtObsPagos{margin-bottom: 1rem;}
 </style>
 
 
@@ -111,7 +111,7 @@ a:focus, a:hover { color: #62286f; }
 				
 				<div class=" panel panel-default" id="divEntradas">
 					<div class="table-responsive">
-						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Motivo de ingreso</th> <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> </tr> </thead>
+						<table class="table table-hover"> <thead> <tr> <th>#</th> <th>Motivo de ingreso</th> <th>Hora</th>  <th>Usuario</th> <th>Cantidad</th> <th>Moneda</th> </tr> </thead>
 						<tbody>
 						<?php
 						if( ! isset($_GET['cuadre']) ):

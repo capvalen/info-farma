@@ -43,6 +43,7 @@ if($totalRow==0){
 					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
 				<?php } ?>
 			</td>
+			<td><?= strtolower($row['hora']);?></td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $row['usuNick'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $row['cajaMoneda'];?>"><?= $row['moneDescripcion'];?></td>

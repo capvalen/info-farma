@@ -38,6 +38,7 @@ if($totalRow>=1){
 					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
 				<?php } ?>
 			</td>
+			<td><?= strtolower($row['hora']);?></td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $row['usuNick'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $row['pagoMonto'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $row['cajaMoneda'];?>" ><?= $row['moneDescripcion'];?></td>
@@ -58,10 +59,10 @@ if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GE
 	$ultimaFecha = 'cu.fechaFin';
 }
 
-$sqlVentas="SELECT `idVenta`, lower(returnNombreCliente(idCliente)) as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion
+$sqlVentas="SELECT `idVenta`, lower(returnNombreCliente(idCliente)) as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion, date_format(ventFecha, '%h:%i %p') as hora
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
 inner join cuadre cu
-WHERE ventFecha between cu.fechaInicio and {$ultimaFecha} and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1;";
+WHERE ventFecha between cu.fechaInicio and {$ultimaFecha} and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1 order by ventFecha asc;";
 //echo $sqlVentas;
 $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
@@ -90,11 +91,12 @@ if($totalVentas>=1){
 			<th scope='row' style="cursor:pointer;"  onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <?= $i; ?> </th>
 			
 			<td class='mayuscula tpIdDescripcion'>
-				<span style="cursor:pointer;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: <span class="mayuscyla"><?= $rowVentas['cliente'] ?></span> </span>
+				<span style="cursor:pointer; text-font-weight: bold; color: #7030a0;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: </span> <span class=""><?= $rowVentas['cliente'] ?> </span>
 				<?php if($row['cajaObservacion']!=''){ ?>
 					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
 				<?php } ?>
 			</td>
+			<td><?= strtolower($rowVentas['hora']);?></td>
 			<td><i class="icofont icofont-bubble-right"></i> <em class="mayuscula"><?= $rowVentas['usuNombre'];?></em></td>
 			<td>S/ <span class='spanCantv3'><?= $rowVentas['ventTotal'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $rowVentas['idMoneda'];?>" ><?= $rowVentas['moneDescripcion'];?></td>
