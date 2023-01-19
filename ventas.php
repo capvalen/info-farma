@@ -1,5 +1,6 @@
 <?php 
 header("Access-Control-Allow-Origin *");
+include 'headers.php';
 $hayCaja = require("php/comprobarCajaHoy.php");
 include 'php/variablesGlobales.php';
 ?>

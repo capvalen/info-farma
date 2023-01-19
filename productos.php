@@ -243,7 +243,7 @@
 											<ul id="myTabs" class="nav nav-tabs" role="tablist">
 												<li role="presentation" class="active"><a href="#entradas" id="entradas-tab" role="tab" data-toggle="tab" aria-controls="entradas" aria-expanded="false">Entradas</a></li>
 												<li role="presentation" ><a href="#salidas" role="tab" id="salidas-tab" data-toggle="tab" aria-controls="salidas" aria-expanded="true">Salidas</a></li>
-												<li role="presentation" ><a href="#promedios" role="tab" id="promedios-tab" data-toggle="tab" aria-controls="promedios" aria-expanded="true">Promedios</a></li>
+												<li role="presentation" onclick="buscarPromedios()"><a href="#promedios" role="tab" id="promedios-tab" data-toggle="tab" aria-controls="promedios" aria-expanded="true">Promedios</a></li>
 											</ul>
 											<div class="tab-content">
 												<div role="tabpanel" class="tab-pane fade active in container-fluid" id="entradas" aria-labelledby="entradas-tab">
@@ -298,8 +298,8 @@
 														</div>
 													</div>
 												</div>
-												<div role="tabpanel" class="tab-pane fade container-fluid" id="promedios" aria-labelledby="entradas-tab">
-													<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam quasi ducimus vel ratione fuga consectetur soluta eaque aperiam aliquid nesciunt. Maiores corrupti inventore recusandae esse reprehenderit provident aspernatur. Odit, modi?</p>
+												<div role="tabpanel" class="tab-pane fade container-fluid" id="promedios" aria-labelledby="entradas-tab" >
+													
 												</div>
 											</div>
 
@@ -854,6 +854,7 @@
 
 	<!-- Menu Toggle Script -->
 	<script>
+		var idGlobal;
 	$(document).ready(function() {
 
 		$('.selectpicker').selectpicker('refresh');
@@ -1185,8 +1186,10 @@
 	});
 
 	function mostrarProducto(idProd) {
+		idGlobal = idProd;
 		//var idProd= $('#listadoDivs .row').eq(indexSelec).find('#mProdID').text();
 		$('#divResultadoProducto').removeClass('hidden');
+		document.querySelector('#entradas-tab').click();
 		$.ajax({
 			url: 'php/productos/listarDetalleProductoPorId.php',
 			type: 'POST',
@@ -1895,6 +1898,30 @@
 			$('#tableProdAgotados').html(resp);
 		});
 	});
+	
+	function buscarPromedios(){
+		document.getElementById('promedios').innerHTML =`<p><i class="icofont icofont-clock-time"></i> Solicitando datos</p>`;
+		var datos = new FormData();
+		datos.append('idProducto', idGlobal);
+		fetch('php/productos/reporteAgrupadosxProducto.php',{
+			method: 'POST', body: datos
+		})
+		.then(respuesta =>{
+			respuesta.text()
+			.then(texto =>{ //console.log(texto);			
+				document.getElementById('promedios').innerHTML = texto;
+				
+			})
+			.then( ()=>{
+				let suma = document.querySelector('#promedios .suma').innerText;
+				let tbody = document.querySelector('#promedios tbody');
+				let adderir = document.createElement(`tr`);
+				adderir.innerHTML = `<td></td><td>Suma de los 3 últimos meses</td><td>${suma}</td>`
+				tbody.prepend(adderir)
+				
+			})
+		})
+	}
 
 	<?php if(in_array($_COOKIE['ckPower'], $admis)){  ?>
 	$('#btnBorrarDataProducto').click(function() {

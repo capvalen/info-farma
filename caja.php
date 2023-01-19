@@ -39,8 +39,8 @@ a:focus, a:hover { color: #62286f; }
 	background-color: transparent;
 	color: #eabff5;
 }
-.btnEditarCajaMaestra{cursor: pointer;}
-.btnEditarCajaMaestra:hover{color: #ab08c9;}
+.btnEditarCajaMaestra, .btnEditarVentaMaestra{cursor: pointer;}
+.btnEditarCajaMaestra:hover, .btnEditarVentaMaestra:hover{color: #ab08c9;}
 #txtObsPagos{margin-bottom: 1rem;}
 </style>
 
@@ -351,13 +351,42 @@ a:focus, a:hover { color: #62286f; }
 </div>
 </div>
 
-<!-- Modal para: -->
-<div class='modal fade ' id="modalModificarCaja" tabindex='-1' role='dialog' aria-hidden='true'>
+<!-- Modal para: editar la caja -->
+<div class='modal fade ' id="modalModificarVenta" tabindex='-1' role='dialog' aria-hidden='true'>
 	<div class='modal-dialog modal-sm' >
 	<div class='modal-content '>
 		<div class='modal-header-blanco'>
 			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
-			<h4 class='modal-tittle'> Modificar caja</h4>
+			<h4 class='modal-tittle'> Modificar Venta</h4>
+		</div>
+		<div class='modal-body'>
+			<label for="">Método de pago</label>
+			<div id="divCmbMetodoPago3">
+				<select class="form-control selectpicker" id="sltMetodopago3" title="Métodos..."  data-width="100%" data-live-search="true" data-size="15">
+					<?php include 'php/listarMonedaOPT.php'; ?>
+				</select>
+			</div>
+			<label for="">Observaciones:</label>
+			<input type="text" id="txtObservaciones3" class="form-control">
+			<hr>
+			<p>En caso de que desees eliminar la venta, marca si deseas resetear los stocks:</p>
+			<input type="checkbox" id="chkBorrar" onclick="cambiarBorrado()">
+			<label for="chkBorrar" id="lblBorrar">No resetear</label>
+		</div>
+		<div class='modal-footer' style="display: flex; justify-content: space-between;">
+			<button type='button' id="btnBorrarCajita" class='btn btn-danger' data-dismiss="modal" onclick="eliminarVenta()"><i class="icofont icofont-trash"></i>	Eliminar</button>
+			<button type='button' id="" class='btn btn-success' onclick="actualizarVenta()"><i class="icofont icofont-save"></i>	Actualizar</button>
+		</div>
+	</div>
+	</div>
+</div>
+<!-- Modal para: -->
+<div class='modal fade ' id="modalEliminarCaja" tabindex='-1' role='dialog' aria-hidden='true'>
+	<div class='modal-dialog modal-sm' >
+	<div class='modal-content '>
+		<div class='modal-header-blanco'>
+			<button type='button' class='close' data-dismiss='modal' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+			<h4 class='modal-tittle'> Modificar Venta</h4>
 		</div>
 		<div class='modal-body'>
 			<p>Desea borrar la caja seleccionada</p>
@@ -721,18 +750,51 @@ function verDetalleVenta(detalle){
 function abriCajon(){
 	$.post('<?= $localServer?>impresion/soloAbrirCaja.php');
 }
-function editarCajaMaestra(idVenta){
+function editarVentaMaestra(idVenta, moneda, obs){
 	$.idVenta=idVenta;
-	$('#modalModificarCaja').modal('show');
+	$('#sltMetodopago3').selectpicker('val', moneda ).selectpicker('refresh');
+	$('#txtObservaciones3').val(obs)
+	$('#modalModificarVenta').modal('show');
 }
-$('#btnBorrarCajita').click(function() {
-	$.ajax({url: 'php/ventas/anularVenta.php', type: 'POST', data: { idVenta:$.idVenta }}).done(function(resp) {
-		console.log(resp)
-		if(resp=='ok'){
-			location.reload();
-		}
-	});
-});
+function cambiarBorrado(){
+	if( document.getElementById("chkBorrar").checked == true ){
+		document.getElementById("lblBorrar").textContent = "Resetear stocks";
+	}else{
+		document.getElementById("lblBorrar").textContent = "No resetear";
+	}
+}
+function eliminarVenta(){
+	if( confirm('¿Deseas eliminar la venta?') ){
+		$.ajax({url: 'php/ventas/anularVenta.php', type: 'POST', data: { idVenta:$.idVenta,
+			borrar: document.getElementById("chkBorrar").checked, idUsuario: '<?=$_COOKIE['ckidUsuario'];?>'
+			}}).done(function(resp) {
+			console.log(resp)
+			if(resp=='ok'){
+				location.reload();
+			}
+		});
+	}
+
+	
+}
+function actualizarVenta(){
+	pantallaOver(true);
+
+	var idMoneda= $('#divCmbMetodoPago3').find('.selected a').attr('data-tokens');
+	$.ajax({url: 'php/ventas/actualizarVenta.php', type: 'POST', data: {
+			idVenta : $.idVenta,
+			moneda: idMoneda,
+			obs: $('#txtObservaciones3').val()
+		}}).done((resp)=> {
+			pantallaOver(false);
+
+			if(resp=='ok'){
+				location.reload();
+			}else{
+				alert('Hubo un error guardando los datos, inténtelo nuevamente');
+			}
+		})
+}
 $('#btnInsertPagoOmiso').click(()=> {
 	pantallaOver(true);
 	var idMoneda= $('#divCmbMetodoPago').find('.selected a').attr('data-tokens');
@@ -768,7 +830,7 @@ $('.btnEditarCajaMaestra').click(function() {
 	$('#txtCajaMontoPagos').val( padre.find('.spanCantv3').text() );
 	$('#txtCajaObsPagos').val( padre.find('.tdObservacion').text() );
 	$('#sltMetodopago2').selectpicker('val', padre.find('.tdMoneda').text() );
-	$('#spTipoPago2').selectpicker('val', padre.find('.tpIdDescripcion').text() );
+	$('#spTipoPago2').selectpicker('val', padre.find('.tpIdDescripcion').attr('data-tipo') );
 	$('#btnUpdateCajaMaestra').attr('data-caja', padre.attr('data-id') );
 	$('#sltActivoV2').val(padre.attr('data-activo'));
 	$('#dtpCajaFechaPago').bootstrapMaterialDatePicker('setDate',moment(padre.find('.fechaPagov3').text(), 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY hh:mm a'));

@@ -59,7 +59,7 @@ if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GE
 	$ultimaFecha = 'cu.fechaFin';
 }
 
-$sqlVentas="SELECT `idVenta`, lower(returnNombreCliente(idCliente)) as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, ventObservacion, date_format(ventFecha, '%h:%i %p') as hora
+$sqlVentas="SELECT `idVenta`, lower(returnNombreCliente(idCliente)) as cliente, `ventFecha`, `ventSubtotal`, `ventIGV`, format(`ventTotal`, 2) as ventTotal, returnNombreUsuario(v.idUsuario) as usuNombre, ventActivo, v.idMoneda, m.moneDescripcion, v.ventObservacion, date_format(ventFecha, '%h:%i %p') as hora
 FROM `ventas` v inner join moneda m on m.idMoneda = v.idMoneda
 inner join cuadre cu
 WHERE ventFecha between cu.fechaInicio and {$ultimaFecha} and cu.idCuadre= {$_GET['cuadre']}  and ventActivo=1 order by ventFecha asc;";
@@ -68,9 +68,7 @@ $resultadoVentas=$cadena->query($sqlVentas);
 $totalVentas=$resultadoVentas->num_rows;
 if($totalVentas>=1){
 	while($rowVentas=$resultadoVentas->fetch_assoc()){
-		if($_COOKIE['ckPower']==1 ): $boton = "<span class='btnEditarCajaMaestra' onclick='editarCajaMaestra(".$rowVentas['idVenta'].")'><i class='icofont icofont-edit'></i></span>";
-		else: $boton=''; endif;
-
+	
 		$sumaIngr += floatval($rowVentas['ventTotal']);
 		switch($rowVentas['idMoneda']){
 			case '1': 
@@ -90,10 +88,12 @@ if($totalVentas>=1){
 		<tr data-id="<?= $rowVentas['idVenta']; ?>" data-activo="<?= $rowVentas['ventActivo']; ?>" esVenta='si'>
 			<th scope='row' style="cursor:pointer;"  onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <?= $i; ?> </th>
 			
-			<td class='mayuscula tpIdDescripcion'>
-				<span style="cursor:pointer; text-font-weight: bold; color: #7030a0;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')"> <i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: </span> <span class=""><?= $rowVentas['cliente'] ?> </span>
-				<?php if($row['cajaObservacion']!=''){ ?>
-					<br><em class="mayuscula">Obs: <?= $row['cajaObservacion']; ?></em>
+			<td class='mayuscula tpIdDescripcion' data-tipo="Venta">
+				<span style="cursor:pointer; text-font-weight: bold; color: #7030a0;" onclick="verDetalleVenta('<?= $rowVentas['idVenta']; ?>')">
+					<i class="icofont icofont-ui-folder"></i> Venta #<?= $rowVentas['idVenta']?>: </span>
+					<span class=""><?= $rowVentas['cliente'] ?> </span>
+				<?php if($rowVentas['ventObservacion']<>''){ ?>
+					<br><em class="mayuscula">Obs: <?= $rowVentas['ventObservacion']; ?></em>
 				<?php } ?>
 			</td>
 			<td><?= strtolower($rowVentas['hora']);?></td>
@@ -101,14 +101,22 @@ if($totalVentas>=1){
 			<td>S/ <span class='spanCantv3'><?= $rowVentas['ventTotal'];?></span></td>
 			<td class='mayuscula tdMoneda' data-id="<?= $rowVentas['idMoneda'];?>" ><?= $rowVentas['moneDescripcion'];?></td>
 			
-			<td><span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span> <?= $boton; ?></td> </tr>
+			<td>
+				<span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span>
+				<?php if($_COOKIE['ckPower']==1 ): ?>
+					<span class='btnEditarVentaMaestra' onclick='editarVentaMaestra( <?= $rowVentas['idVenta'] ?>, "<?= $rowVentas['moneDescripcion'] ?>", "<?= $rowVentas['ventObservacion'] ?>")'> <i class='icofont icofont-edit'></i></span>
+				<?php endif; ?>
+			</td>
+		</tr>
 		<?php
 		$i++;
 	}
 }
 
 if($totalRow==0 && $totalVentas==0){
-	echo "<tr> <th scope='row'></th> <td >No se encontraron resultados en ésta fecha.</td> <td class='mayuscula'></td> <td></td> <td>S/ <span id='strSumaEntrada' data-efectivo ='{$efectivo}' data-banco ='{$banco}' data-tarjeta ='{$tarjeta}'>0.00</span></td></tr>";
+	?>
+	<tr> <th scope='row'></th> <td >No se encontraron resultados en ésta fecha.</td> <td class='mayuscula'></td> <td></td> <td>S/ <span id='strSumaEntrada' data-efectivo ='<?= $efectivo;?>' data-banco ='<?= $banco?>' data-tarjeta ='<?= $tarjeta ?>'>0.00</span></td></tr>
+	<?
 }else{
 	echo '<tr> <th scope="row"  style="border-top: transparent;"></th> <td style="border-top: transparent;"></td> <td style="border-top: transparent;"></td> <td class="text-center" style="border-top: 1px solid #989898; color: #636363"><strong >Total</strong></td> <td style="border-top: 1px solid #989898; color: #636363"><strong >S/ <span id="strSumaEntrada" data-efectivo ="'.$efectivo.'" data-banco ="'.$banco.'" 
 	data-tarjeta ="'.$tarjeta.'">'.number_format(round($sumaIngr,1,PHP_ROUND_HALF_UP),2, ',', '').'</span></strong></td><tr>';

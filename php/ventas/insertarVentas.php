@@ -19,8 +19,10 @@ if( $Jencabez[0]['idCliente'] == -1){
 }else{
 	if( $Jencabez[0]['idCliente'] != 1 ){
 		$sentenciaCli = $esclavo -> prepare( "UPDATE clientes set `razon` = ?, `ruc` =?, `direccion` =?, `puntosActual` = `puntosActual`+ convert( ?, int), `puntosTotal` = `puntosTotal` + convert( ?, int), actualizacion=now()  where id = ?; " );
-		$sentenciaCli -> bind_param( 'sssssi', $Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $Jencabez[0]['Total'], $Jencabez[0]['Total'], $Jencabez[0]['idCliente'], );
-		$sentenciaCli-> execute();
+		//$sentenciaCli -> bind_param( 'sssssi',  );
+		$sentenciaCli-> execute([ 
+			$Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $Jencabez[0]['Total'], $Jencabez[0]['Total'], $Jencabez[0]['idCliente']
+		]);
 	}
 	$idCliente = $Jencabez[0]['idCliente'];
 }
@@ -30,7 +32,7 @@ $retornoProcedure='';
 $mysqli=new $conection;
 
 $sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",".$Jencabez[0]['Total'].",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}); ";
-
+//echo $sql;
 $stmt = $conection->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
