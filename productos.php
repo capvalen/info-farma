@@ -63,6 +63,10 @@
     color: #cb0000;
 		font-size: 32px;
 	}
+	.yaVencera {
+    background-color: #ffdbbc;
+    color: #890c0c;
+	}
 </style>
 
 	<div id="wrapper">
@@ -1078,15 +1082,20 @@
 						$('#txtBuscarProductoProd').val('');
 						$('#lblCantidadProd').text(JSON.parse(resp).length);
 						$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-						let vence ='';
+						let vence ='', vencera='';
 						JSON.parse(resp).map(function(dato, index) {
 
 							moment.locale('es');
 						
 							if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
-								vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+								vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
+								if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+									vencera='yaVencera'
+								}else{
+									vencera = '';
+								}
 							}else{
-								vence ='-';
+								vencera = ''; vence ='-';
 							}
 
 							let alerProd ='';
@@ -1098,7 +1107,7 @@
 								<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 								<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
 								
-								<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+								<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center ${vencera}" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 								<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 								<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 
@@ -1132,15 +1141,20 @@
 							$('#txtBuscarProductoProd').val('');
 							$('#lblCantidadProd').text(JSON.parse(resp).length);
 							$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-							let vence ='';
+							let vence ='', vencera = '';
 							JSON.parse(resp).map(function(dato, index) {
 								moment.locale('es');
 								
 								//console.log( dato.prodFechaVencimiento !=null + " es " +dato.prodFechaVencimiento   );
 								if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
-									vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+									vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
+									if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+										vencera='yaVencera'
+									}else{
+										vencera = '';
+									}
 								}else{
-									vence ='-';
+									vencera = ''; vence ='-';
 								}
 
 								let alerProd ='';
@@ -1151,7 +1165,7 @@
 									<div class="col-xs-12 col-sm-4 mayuscula" id="mProdNombre"><span class="visible-xs-inline"><strong>Nombre: </strong></span> <span>${index+1}. ${dato.prodNombre} <em>${dato.principioActivo}</em></span></div>
 									<div class="col-xs-6 col-sm-1 text-center" id="mProdPrecio"><span class="visible-xs-inline"><strong>S/ </strong></span>  ${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</div>
 									<div class="col-xs-6 col-sm-2"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-									<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento).format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+									<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center ${vencera}" title="${moment(dato.prodFechaVencimiento).format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 									<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> <strong>${dato.prodStock}</strong></div>
 									<div class="col-xs-6 col-sm-1 text-center"><button class="btn btn-negro btn-sm btn-outline btnPasarProductoCanasta" id="${dato.idProducto}"><i class="icofont icofont-simple-right"></i></button></div>
 

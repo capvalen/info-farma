@@ -50,6 +50,10 @@ include 'php/variablesGlobales.php';
 	#listadoDivs .activo .text-primary{color:beige;}
 	#listadoDivs .text-danger.activo{ background-color: firebrick; color:white; }
 	#listadoDivs .text-danger.activo .text-primary{color:white;}
+	.yaVencera {
+    background-color: #ffdbbc;
+    color: #890c0c;
+	}
 	@media (min-width: 768px){
 		.modal-xl {
 			width: 768px;
@@ -1219,14 +1223,19 @@ function llamarBuscarProducto() {
 				$('#txtBuscarProductoVenta').val('');
 				$('#lblCantidadProd').text(JSON.parse(resp).length);
 				$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-				let vence ='';
+				let vence ='', vencera='';
 				JSON.parse(resp).map(function (dato, index) {
 					moment.locale('es');
 					
 					if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
-						vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+						vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
+						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+							vencera='yaVencera'
+						}else{
+							vencera = '';
+						}
 					}else{
-						vence ='-';
+						vencera = ''; vence ='-';
 					}
 
 					let alerProd ='';
@@ -1238,7 +1247,7 @@ function llamarBuscarProducto() {
 						<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span> <em class="emPrincipio">${dato.principioActivo}</em></div>
 						<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 						<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-						<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+						<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center ${vencera}" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}" ><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 						<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
 						<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btn-sinBorde btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
@@ -1261,26 +1270,31 @@ function llamarBuscarProducto() {
 				$('#txtBuscarProductoVenta').val('');
 				$('#lblCantidadProd').text(JSON.parse(resp).length);
 				$('.modal-detalleProductoEncontrado #listadoDivs').children().remove();
-				let vence ='';
+				let vence ='', vencera='';
 				JSON.parse(resp).map(function (dato, index) {
 					moment.locale('es');
 					
 					if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
 						vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
+						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+							vencera='yaVencera'
+						}else{
+							vencera = '';
+						}
 					}else{
-						vence ='-';
+						vencera = '';vence ='-';
 					}
 
 					let alerProd ='';
 					if(dato.supervisado=='1'){ alerProd = 'text-danger' }
 
 					$('.modal-detalleProductoEncontrado #listadoDivs').append(`
-					<div class="row ${alerProd}" onclick="pasarACanasta(${index})">
+					<div class="row ${alerProd}"  onclick="pasarACanasta(${index})">
 						<div class="hidden" id="mProdID">${dato.idProducto}</div>
 						<div class="col-xs-12 col-sm-4 mayuscula" ><span class="visible-xs-inline"><strong>Nombre: </strong> </span> <strong>${index+1}.</strong> <span id="mProdNombre">${dato.prodNombre}</span> <em class="emPrincipio">${dato.principioActivo}</em></div>
 						<div class="col-xs-6 col-sm-1 text-center"><span class="visible-xs-inline"><strong>S/. </strong></span> <srtong id="mProdPrecio">${parseFloat(dato.prodPrecioUnitario).toFixed(2)}</srtong></div>
 						<div class="col-xs-6 col-sm-2 text-center"><span class="visible-xs-inline"><strong>Tipo: </strong></span> <small>${dato.catprodDescipcion}</small></div>
-						<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
+						<div class="col-xs-6 col-sm-2 mayuscula mitooltip text-center ${vencera}" title="${moment(dato.prodFechaVencimiento, 'DD/MM/YYYY').format('dddd, DD MMM YYYY')}"><span class="visible-xs-inline"><strong>Vence: </strong></span>  <small>${vence}</small></div>
 						<div class="col-xs-6 col-sm-1 text-center ${dato.prodStock>0? 'text-primary' : 'text-danger'}"><span class="visible-xs-inline"><strong>Stock: </strong></span> ${dato.prodStock}</div>
 						<div class="col-xs-6 col-sm-1 text-center"><button class="form-control btn btn-negro btn-xs btn-outline btn-sinBorde btnPasarProductoCanasta" id="${index}"><i class="icofont icofont-simple-right"></i></button></div>
 
