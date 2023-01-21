@@ -368,10 +368,10 @@ a:focus, a:hover { color: #62286f; }
 			</div>
 			<label for="">Observaciones:</label>
 			<input type="text" id="txtObservaciones3" class="form-control">
-			<hr>
+			<!-- <hr>
 			<p>En caso de que desees eliminar la venta, marca si deseas resetear los stocks:</p>
 			<input type="checkbox" id="chkBorrar" onclick="cambiarBorrado()">
-			<label for="chkBorrar" id="lblBorrar">No resetear</label>
+			<label for="chkBorrar" id="lblBorrar">No resetear</label> -->
 		</div>
 		<div class='modal-footer' style="display: flex; justify-content: space-between;">
 			<button type='button' id="btnBorrarCajita" class='btn btn-danger' data-dismiss="modal" onclick="eliminarVenta()"><i class="icofont icofont-trash"></i>	Eliminar</button>
@@ -764,9 +764,9 @@ function cambiarBorrado(){
 	}
 }
 function eliminarVenta(){
-	if( confirm('¿Deseas eliminar la venta?') ){
+	if( confirm('¿Deseas eliminar la venta?') ){ //document.getElementById("chkBorrar").checked
 		$.ajax({url: 'php/ventas/anularVenta.php', type: 'POST', data: { idVenta:$.idVenta,
-			borrar: document.getElementById("chkBorrar").checked, idUsuario: '<?=$_COOKIE['ckidUsuario'];?>'
+			borrar: true, idUsuario: '<?=$_COOKIE['ckidUsuario'];?>'
 			}}).done(function(resp) {
 			console.log(resp)
 			if(resp=='ok'){

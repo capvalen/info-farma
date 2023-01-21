@@ -103,7 +103,7 @@ if($totalVentas>=1){
 			
 			<td>
 				<span class="sr-only fechaPagov3"><?= $rowVentas['ventFecha']; ?></span>
-				<?php if($_COOKIE['ckPower']==1 ): ?>
+				<?php if( in_array($_COOKIE['ckPower'], $soloCaja) ): ?>
 					<span class='btnEditarVentaMaestra' onclick='editarVentaMaestra( <?= $rowVentas['idVenta'] ?>, "<?= $rowVentas['moneDescripcion'] ?>", "<?= $rowVentas['ventObservacion'] ?>")'> <i class='icofont icofont-edit'></i></span>
 				<?php endif; ?>
 			</td>
