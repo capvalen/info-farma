@@ -69,6 +69,63 @@ include 'php/variablesGlobales.php';
 		border:none;
 		outline:none;
 	}
+	#overlay{
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+}
+#overlay>.text{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 35px;
+	color: white;
+	user-select: none;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	margin-top: 30px;
+}
+.spinner {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height:60px;
+	width:60px;
+	margin:0px auto;
+	-webkit-animation: rotation .6s infinite linear;
+	-moz-animation: rotation .6s infinite linear;
+	-o-animation: rotation .6s infinite linear;
+	animation: rotation .6s infinite linear;
+	border-left:6px solid rgba(0,174,239,.15);
+	border-right:6px solid rgba(0,174,239,.15);
+	border-bottom:6px solid rgba(0,174,239,.15);
+	border-top:6px solid rgba(0,174,239,.8);
+	border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+		from {-webkit-transform: rotate(0deg);}
+		to {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+		from {-moz-transform: rotate(0deg);}
+		to {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+		from {-o-transform: rotate(0deg);}
+		to {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+		from {transform: rotate(0deg);}
+		to {transform: rotate(359deg);}
+    }
 </style>
 <div id="wrapper">
 
@@ -273,9 +330,6 @@ include 'php/variablesGlobales.php';
 
 		<div class="tab-pane fade in active" id="tabRealizarVenta">
 		
-
-		
-
 		</div>
 		<style>.divForm>.row{padding-bottom: 15px}</style>
 
@@ -376,7 +430,20 @@ include 'php/variablesGlobales.php';
 		</div>
 </div>
 <!-- /#page-content-wrapper -->
+
+<!-- Inicio de overlay -->
+<div id="overlay">
+	<div class="spinner"></div>
+	<div class="text">
+		<br>
+		<br>
+		Guardando venta. Espere por favor.
+	</div>
+</div>
+<!-- Fin de overlay -->
+
 </div><!-- /#wrapper -->
+
 
 	<!-- Modal para mostrar el detalle de Producto Encontrado-->
 	<div class="modal fade modal-detalleProductoEncontrado " tabindex="-1" role="dialog">
@@ -1417,14 +1484,17 @@ function pasarACanasta(index){
 }
 
 $('#btnGuardarVenta').click(function () {
+	document.getElementById("overlay").style.display = "block";
 
 	if( $('#txtCliDni').val().length>1 && $.trim($('#txtCliRazon').val())=="" ){
 		console.log( 'bderia error' );
 		$('#mdErrorGenerico').text('La razón social y el RUC/DNI tienen que estar ambos rellenados como mínimo');
 		$('.modal-GuardadoError').modal('show');
+		document.getElementById("overlay").style.display = "none";
 	}else if($('.tablaResultadosCompras tbody tr').length==0){
 		$('#mdErrorGenerico').text('Su lista de venta se encuentra vacía');
 		$('.modal-GuardadoError').modal('show');
+		document.getElementById("overlay").style.display = "none";
 	}
 	else{
 		$.ticket = [];
@@ -1448,8 +1518,8 @@ $('#btnGuardarVenta').click(function () {
 
 			Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd })
 			
+			});
 			
-			})
 			//console.log(data) agrega todo en un solo JSON;
 			$.ajax({
 			type: 'POST',
@@ -1457,6 +1527,7 @@ $('#btnGuardarVenta').click(function () {
 			data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
 			}).done(function (resp) { //console.log('recibido: ')
 				//console.log(resp);
+				document.getElementById("overlay").style.display = "none";
 				$('.modal-ventaGuardada').modal('show');
 			});
 		
