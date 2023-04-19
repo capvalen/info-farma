@@ -21,15 +21,16 @@ if ( intval($row['idUsuario']) >=1){
 	$_SESSION['Power']=$row['idNivel'];
 	$_SESSION['idUsuario']=$row['idUsuario']; */
 		
-	setcookie('ckAtiende',ucwords($row['usuNombre']),time()+(3600*24),'/');
-	setcookie('cknomCompleto', ucwords( "{$row['usuNombre']} {$row['usuApellidos']}" ), time()+(3600*24), "/");
-	setcookie('ckPower', $row['idNivel'], time()+(3600*24), "/");
-	setcookie('ckidUsuario', $row['idUsuario'], time()+(3600*24), "/");
+	setcookie('ckAtiende',ucwords($row['usuNombre']),0 ,'/');
+	setcookie('cknomCompleto', ucwords( "{$row['usuNombre']} {$row['usuApellidos']}" ), 0 , "/");
+	setcookie('ckPower', $row['idNivel'], 0 , "/");
+	setcookie('ckidUsuario', $row['idUsuario'], 0 , "/");
 
 	$sql="SELECT * FROM `empresaprincipal`";
 	$resultado=$dependencia->query($sql);
 	$resp = $resultado->fetch_assoc();
-	setcookie('ckLogo', $resp['logo'], time()+(3600*24), "/");
+	setcookie('ckLogo', $resp['logo'], 0 , "/");
+	setcookie('ckBloqueoApertura', $resp['bloqueoApertura'], 0 , "/");
 
 
 

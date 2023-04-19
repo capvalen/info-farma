@@ -285,7 +285,7 @@ a:focus, a:hover { color: #62286f; }
 			<div class="container-fluid">
 			<div class="row">
 				<p>¿Con qué monto inicias?</p>
-				<input type="number" class="form-control input-lg text-center esDecimal" id="txtMontoApertura" value="0.00" >
+				<input type="number" class="form-control input-lg text-center esDecimal" id="txtMontoApertura" value="0.00" <?= $_COOKIE['ckBloqueoApertura'] ==0 ? : 'readonly="true" disabled="true"' ; ?> >
 				<p>¿Alguna observación?</p>
 				<input type="text" class="form-control input-lg text-center" id="txtObsApertura">
 			</div>
@@ -311,7 +311,7 @@ a:focus, a:hover { color: #62286f; }
 			<div class="container-fluid">
 			<div class="row">
 				<p>¿Con qué monto estás cerrando?</p>
-				<input type="number" class="form-control input-lg text-center esDecimal" id="txtMontoCierre" value="0.00">
+				<input type="number" class="form-control input-lg text-center esDecimal" id="txtMontoCierre" value="0.00" <?= $_COOKIE['ckBloqueoApertura'] ==0 ? : 'readonly="true" disabled="true"' ; ?>>
 				<p>¿Alguna observación?</p>
 				<input type="text" class="form-control input-lg text-center" id="txtObsCierre" autocomplete="off">
 			</div>
@@ -325,6 +325,7 @@ a:focus, a:hover { color: #62286f; }
 </div>
 </div>
 
+<?php if($_COOKIE['ckBloqueoApertura'] ==0) :?>
 <!-- Modal para Cambiar entrada de caja  -->
 <div class="modal fade" id="modalCambiarEntradaCaja" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog modal-sm" role="document">
@@ -350,6 +351,7 @@ a:focus, a:hover { color: #62286f; }
 	</div>
 </div>
 </div>
+<?php endif; //end de bloqueo de caja ?>
 
 <!-- Modal para: editar la caja -->
 <div class='modal fade ' id="modalModificarVenta" tabindex='-1' role='dialog' aria-hidden='true'>
@@ -530,6 +532,7 @@ function calculoTicketVirtual() {
 	sobra = parseFloat(cuadre-cierre);
 	$('#spanTotalEfectivo').text(cierre.toFixed(2));
 	$('#spanTotalSistema').text( cuadre);
+	$('#txtMontoCierre').val( cuadre )
 	
 	if(sobra ==0){
 		$('#spanSobra').text('Cuadre exacto');
@@ -622,11 +625,11 @@ $('#btnCajaCerrar').click(()=> {
 		}else{
 			sumaTarjetas+=parseFloat( $(objeto).prev().find('.spanCantv3').text());
 		}
-		
 	});
 	//console.log(sumaIngresos.toFixed(2))
 	$('#spanResultadoFinal').attr('data-sumaIngreso',sumaIngresos.toFixed(2));
 	$('#spanResultadoFinal').attr('data-sumaTarjetas',sumaTarjetas.toFixed(2));
+
 	$('.modal-cerrarCaja').modal('show');
 });
 $('.modal-cerrarCaja').on('shown.bs.modal', function () { 

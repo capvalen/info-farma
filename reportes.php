@@ -68,6 +68,7 @@ if(in_array($soloAdmis, $_COOKIE['ckPower']) ==-1 ) header('Location:caja.php');
 									<select class="form-control" id="sltOpcionesVenta">
 										<option value="1">General</option>
 										<option value="2">Detallado</option>
+										<option value="3">Por personal agrupado</option>
 									</select>
 									</div>
 									<div class="col-md-3">
@@ -673,6 +674,20 @@ if(in_array($soloAdmis, $_COOKIE['ckPower']) ==-1 ) header('Location:caja.php');
 				$('#tableReporteVentas tfoot').html(`<tr><td colspan=7></td><td><strong id="tdSumatoria"></strong></td><td><strong id="tdSumaGanancias"></strong></td></tr>`);
 
 				$.ajax({url: 'php/ventas/reporteVentasDetallado.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
+					//console.log(resp)
+					$('#tableReporteVentas tbody').html(resp);
+					sumarTotalesReporte();
+					$('#tableReporteVentas').DataTable( {
+						dom: 'Bfrtip',
+						paging:false,searching:false,"bInfo" : false,
+						buttons: [
+							{ extend: 'excel', text: '<i class="icofont icofont-file-excel"></i> Exportar Excel', className: 'btn btn-outline btn-success' }
+						]
+					}); 
+				});
+			}
+			if($('#sltOpcionesVenta').val()==3){
+				$.ajax({url: 'php/ventas/reportePorUsuarioAgrupado.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
 					sumarTotalesReporte();
