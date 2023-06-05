@@ -7,7 +7,8 @@ else if($_POST['principioActivo']=='activo') { $filtro = "prodPrincipioActivo li
 else{ $filtro = "prodNombre like '%{$_POST['filtro']}%'"; }
 $filas=array();
 //$sql="call buscarProductoXNombreOLote('".$_POST['filtro']."');";
-$sql = "SELECT p.*, '' as lote, ultimaFechaxId(p.idProducto) as prodFechaVencimiento, prodPrecio as prodPrecioUnitario, obs as observaciones, catprodDescipcion, prodPrincipioActivo as principioActivo from producto p inner join categoriaproducto cp on cp.idCategoriaProducto = p.idCategoriaProducto where {$filtro} and prodActivo = 1";
+$sql = "SELECT p.*, '' as lote, ultimaFechaxId(p.idProducto) as prodFechaVencimiento, prodPrecio as prodPrecioUnitario, obs as observaciones, catprodDescipcion, prodPrincipioActivo as principioActivo from producto p inner join categoriaproducto cp on cp.idCategoriaProducto = p.idCategoriaProducto where {$filtro} and prodActivo = 1
+order by p.prodNombre asc; ";
 // or prodPrincipioActivo like '%{$_POST['filtro']}%')
 //echo $sql;
 $log = mysqli_query($conection, $sql);
