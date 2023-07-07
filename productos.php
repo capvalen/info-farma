@@ -390,7 +390,7 @@
 							<!--Panel para nueva compra-->
 							<div class="tab-pane fade container-fluid" id="tabProximosVencer">
 								<!--Inicio de pestaña 02-->
-								<p>Productos vencidos y por vencer dentro de 3 meses:</p>
+								<p>Productos vencidos y por vencer dentro de 4 meses:</p>
 								<div>
 									<table class="table table-hover">
 										<thead>
