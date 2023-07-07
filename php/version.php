@@ -1,3 +1,3 @@
 <?php 
-echo "Versión 1.12b Compilación 23.0506";
+echo "Versión 1.13 Compilación 23.0707";
  ?>

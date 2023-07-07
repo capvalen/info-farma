@@ -784,6 +784,27 @@
 		</div>
 	</div>
 	<!-- Modal para: -->
+	<div class='modal fade' id="modalCambiarFechaLote" tabindex='-1' role='dialog' aria-hidden='true'>
+		<div class='modal-dialog modal-sm'>
+			<div class='modal-content '>
+				<div class='modal-header-blanco'>
+					<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span
+							aria-hidden='true'>&times;</span></button>
+					<h4 class='modal-tittle'> Nueva fecha de lote</h4>
+				</div>
+				<div class='modal-body'>
+					<p>Ingrese la nueva fecha</p>
+					<input type="number" class="form-control hidden" id="txtNuevaFechaIDLote">
+					<input type="date" class="form-control" id="txtNuevaFechaLote">
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-success btn-outline' id="btnActualizarFechaLote"><i
+							class="icofont icofont-refresh"></i> Actualizar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal para: -->
 	<div class='modal fade ' id="modalResetStock" tabindex='-1' role='dialog' aria-hidden='true'>
 		<div class='modal-dialog modal-sm' >
 		<div class='modal-content '>
@@ -1089,7 +1110,7 @@
 						
 							if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
 								vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
-								if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+								if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<120 ){
 									vencera='yaVencera'
 								}else{
 									vencera = '';
@@ -1148,7 +1169,7 @@
 								//console.log( dato.prodFechaVencimiento !=null + " es " +dato.prodFechaVencimiento   );
 								if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
 									vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
-									if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+									if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<120 ){
 										vencera='yaVencera'
 									}else{
 										vencera = '';
@@ -1506,7 +1527,9 @@
 						<td class="argTotal">${dia.endOf('day').fromNow()}</td>
 						<td class="argTotal " title="${dia.format('DD/MM/YYYY')}">${dia.format('DD/MM/YYYY')}</td>
 						<td class="hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></td>
-						<td class="tachoVencimiento"><button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="borrarLote(${arg.idDetalle})"><i class="icofont icofont-close"></i></button></td>
+						<td class="tachoVencimiento">
+							<button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="cambiarFecha(${arg.idDetalle})"><i class="icofont icofont-calendar"></i></button>
+						</td>
 					</tr>`);
 					$('.mitooltip').tooltip();
 
@@ -1937,7 +1960,27 @@
 		})
 	}
 
-	<?php if(in_array($_COOKIE['ckPower'], $admis)){  ?>
+	function cambiarFechaLote(id, fecha){
+		$('#txtNuevaFechaIDLote').val(id)
+		$('#txtNuevaFechaLote').val(fecha)
+		$('#modalCambiarFechaLote').modal('show')
+	}
+	$('#btnActualizarFechaLote').click(function (){
+		if( $('#txtNuevaFechaLote').val() ){
+			let datos = new FormData();
+			datos.append('id', $('#txtNuevaFechaIDLote').val())
+			datos.append('fecha', $('#txtNuevaFechaLote').val())
+			fetch('php/productos/actualizarFechaLote.php',{
+				method:'POST', body:datos
+			})
+			.then(serv => serv.text())
+			.then(resp => {
+				if(resp =='ok' ) {alert('Actualizado correctamente'); location.reload()}
+				else alert('Hubo un error actualizando')
+			})
+		}
+	})
+
 	$('#btnBorrarDataProducto').click(function() {
 		$.ProdBorrar = $(this).attr('data-id');
 		$('#modalBorrarProducto').modal('show');
@@ -1972,6 +2015,7 @@
 			}
 		});
 	});
+	<?php if(in_array($_COOKIE['ckPower'], $admis)){  ?>
 	<?php } ?>
 	</script>
 

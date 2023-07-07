@@ -1296,7 +1296,7 @@ function llamarBuscarProducto() {
 					
 					if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
 						vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow();
-						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<120 ){
 							vencera='yaVencera'
 						}else{
 							vencera = '';
@@ -1343,7 +1343,7 @@ function llamarBuscarProducto() {
 					
 					if ( dato.prodFechaVencimiento !=null && dato.prodFechaVencimiento!='0000-00-00' ) {
 						vence = moment(dato.prodFechaVencimiento ).endOf('day').fromNow()
-						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<90 ){
+						if( moment( dato.prodFechaVencimiento ).diff(moment(), 'days')<120 ){
 							vencera='yaVencera'
 						}else{
 							vencera = '';
