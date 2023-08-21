@@ -1528,7 +1528,7 @@
 						<td class="argTotal " title="${dia.format('DD/MM/YYYY')}">${dia.format('DD/MM/YYYY')}</td>
 						<td class="hidden"><button class="btn btn-morita btn-outline btnDetalleInvLista" id="${arg.idproducto}"><i class="icofont icofont-ui-calendar"></i></button></td>
 						<td class="tachoVencimiento">
-							<button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="cambiarFecha(${arg.idDetalle})"><i class="icofont icofont-calendar"></i></button>
+							<button class="btn btn-danger btn-sm btn-outline btnSinBorde" onclick="ocultarListaVencidos(${arg.idDetalle}, event)"><i class="icofont icofont-brush"></i></button>
 						</td>
 					</tr>`);
 					$('.mitooltip').tooltip();
@@ -2016,6 +2016,14 @@
 		});
 	});
 	<?php if(in_array($_COOKIE['ckPower'], $admis)){  ?>
+		function ocultarListaVencidos(idDetalle, event){
+			$.ajax({url: 'php/productos/ocultarListaVencidos.php', type: 'POST', data:{idDetalle: idDetalle}})
+			.done( resp =>{
+				//console.log(event);
+				if($.trim(resp) == 'ok') event.target.closest('tr').remove();
+				else alert('Ocurrió un error intentando actualizar')
+			})
+		}
 	<?php } ?>
 	</script>
 
