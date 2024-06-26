@@ -28,8 +28,9 @@ try {
     $printer = new Printer($connectorV31);
     $printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
-    $printer -> text("CardioFarma\n");
-    $printer -> text("Av. Mario Urteaga N° 152 - Cajamarca\n");
+    $printer -> text("Botica's Clinical Home SAC\n");
+    $printer -> text("RUC: 20612115771\n");
+    $printer -> text("Jr. General Gamarra 1173 Chilca - Huancayo\n");
     
     $printer -> text("----------------------------------\\n\n");
     $printer -> text("CIERRE DE CAJA\n");

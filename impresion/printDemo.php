@@ -27,7 +27,9 @@ try {
 	
     $printer = new Printer($connector);
 	$printer -> bitImage($tux);
-    $printer -> text("CARDIOFARMA\n\n\n");
+		$printer -> text("Botica's Clinical Home SAC\n");
+		$printer -> text("RUC: 20612115771\n");
+		$printer -> text("Jr. General Gamarra 1173 Chilca - Huancayo\n");
     
     $printer -> text("       Gracias por tu preferencia");
     $printer -> cut();
