@@ -88,7 +88,7 @@ function casoActivo($quePagina){
 										</ul>
 								</li>
 						</ul>
-						<ul class="nav navbar-nav navbar-right" style="padding: 0 20px;">
+						<ul class="nav navbar-nav navbar-right" style="padding: 0px;">
 								<li>
 								<div class="btn-group has-clear" style="width:100%"><small class=" visible-xs" style="color:white;">Buscar algo:</small> 
 									<input type="text" class="form-control" id="txtBuscarNivelGod" placeholder="&#xeded;" autocomplete="off">

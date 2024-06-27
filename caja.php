@@ -64,16 +64,21 @@ a:focus, a:hover { color: #62286f; }
 			<div class="row container-fluid" >
 				<p class="pheader col-xs-12"><i class="icofont icofont-filter"></i> Filtros</p>
 				<div class="panel panel-default container-fluid " style="padding-bottom: 20px; ">
-					<div class="col-xs-12 col-sm-6 col-md-3"  style="margin-top:1rem">
+					<div class="col-xs-12 col-md-5 col-lg-3"  style="margin-top:1rem">
 						<p style="color: #a35bb4; "><strong>Seleccione fecha de reporte:</strong></p>
 							<input type="text" id="dtpFechaIniciov3" class="form-control text-center" placeholder="Fecha para controlar citas">
 						<!--<div class="sandbox-container"><input id="dtpFechaIniciov3" type="text" class="form-control text-center inputConIco" placeholder="" style="color: #a35bb4;" autocomplete="off"> <span class="icoTransparent"><i class="icofont icofont-caret-down"></i></span></div> -->
 					</div>
-					<div class=" col-xs-12 col-sm-6 col-md-4" style="margin-top:1rem">
+					<div class=" col-xs-12 col-sm-6 col-lg-4" style="margin-top:1rem">
 						<div>
 							<p style="color: #a35bb4;"><strong>Por:</strong> </p> <?php require "php/historialCierres.php"; ?>
 							<!-- <p style="color: #a35bb4;">Fecha: <strong id="strFechaAhora"></strong></p> -->
 						</div>
+					</div>
+					<div class="col-xs-1">
+						<button class="btn btn-negro btn-outline btn-sm btnBotonCajon" style="margin-top:1rem" >
+							<span class="glyphicon glyphicon-hdd"></span>
+						</button>
 					</div>
 				</div>
 			</div>

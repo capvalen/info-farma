@@ -1,6 +1,6 @@
 <?php date_default_timezone_set('America/Lima');
 require_once ( 'php/variablesGlobales.php');
-if(in_array($soloAdmis, $_COOKIE['ckPower']) ==-1 ) header('Location:caja.php');;
+if(!in_array($_COOKIE['ckPower'], $soloAdmis)) header('Location:caja.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">

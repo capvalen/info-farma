@@ -1,6 +1,6 @@
 <?php
 /* Change to the correct path if you copy this example! */
-require __DIR__ . '/vendor/mike42/escpos-php/autoload.php';
+require __DIR__ . './../vendor/autoload.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 /**
@@ -11,7 +11,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
  * data from the command-line first:
  *  echo "Hello World" > LPT1
  */
-    $connector = new WindowsPrintConnector("smb://127.0.0.1/PRINT80");
+    $connector = new WindowsPrintConnector("smb://127.0.0.1/CAJA");
 	//TM-U220 //Generic Text Only
 try {
     

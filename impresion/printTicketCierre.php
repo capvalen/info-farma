@@ -15,7 +15,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/Print80");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/CAJA");
 try {
     $cierreVirtual= $_POST['apertura']+$_POST['efectivoEntrada']-$_POST['efectivoSalida']-$_POST['tarjetaSalida'];
     $sobra=$cierreVirtual-$_POST['cierre'];

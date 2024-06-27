@@ -16,7 +16,7 @@ use Mike42\Escpos\EscposImage; //librería de imagen
  */
  
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
-$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/Print80");
+$connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/CAJA");
 try {
 	$tux = EscposImage::load("logo.jpg", false); //./../../images/empresa_centro
 	
@@ -28,7 +28,7 @@ try {
 	
 	$printer -> setEmphasis(true);
 		$printer->setJustification(Printer::JUSTIFY_CENTER);
-		$printer -> bitImage($tux);    
+		$printer -> bitImageColumnFormat($tux);    
     $printer -> text("Botica's Clinical Home SAC\n");
     $printer -> text("RUC: 20612115771\n");
     $printer -> text("Jr. General Gamarra 1173 Chilca - Huancayo\n");

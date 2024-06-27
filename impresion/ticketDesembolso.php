@@ -15,12 +15,12 @@ use Mike42\Escpos\EscposImage; //librería de imagen
  *  echo "Hello World" > LPT1
  */
  
-    $connector4 = new WindowsPrintConnector("smb://127.0.0.1/XP-58");
+    $connector4 = new WindowsPrintConnector("smb://127.0.0.1/CAJA");
 try {
     $tux = EscposImage::load("../images/empresaTicket.jpg", false);
 
     $printer = new Printer($connector4);
-    $printer -> bitImage($tux);
+    $printer -> bitImageColumnFormat($tux);
     $printer->setJustification(Printer::JUSTIFY_CENTER);
     $printer -> setEmphasis(true);
     $printer -> text("* {$_POST['queMichiEs']} *\n\n");

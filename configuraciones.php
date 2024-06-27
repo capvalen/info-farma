@@ -128,7 +128,7 @@
 											<option value="3">Sin privilegios</option>
 										</select>
 									</div>
-									<button class="btn btn-primary btn-block has-clear" id="btnCrearUsuario">Crear usuario</button>
+									<button class="btn btn-primary btn-block has-clear" @click="crearNuevoUsuario" id="btnCrearUsuario">Crear usuario</button>
 
 								</div>
 								<div class="col-md-5">
@@ -264,16 +264,6 @@
 		});
 	});
 	$('#btnCrearUsuario').click(function() {
-		if($.crearUsuario){
-			$.ajax({url: 'php/config/crearUsuario.php', type: 'POST', data: {nombre: $('#txtNombre').val(), apellidos: $('#txtApellidos').val(), usuario: $('#txtUsuario').val(), passw: $('#txtContrasena').val(), 
-				nivel: $('#sltNiveles').val() }}).done(function(resp) {
-				console.log(resp)
-				if(resp=='ok'){
-					alert('Usuario creado con éxito');
-					location.reload();
-				}
-			});
-		}
 	});
 	function borrarUsuario(user){
 		$.idUser= user;
@@ -357,6 +347,25 @@
 					}
 
 				}
+			},
+			async crearNuevoUsuario(){
+				<?php if(in_array($_COOKIE['ckPower'], $soloAdmis)):?>
+					let datos = new FormData();
+					datos.append('nombre', $('#txtNombre').val());
+					datos.append('apellidos', $('#txtApellidos').val());
+					datos.append('usuario', $('#txtUsuario').val());
+					datos.append('passw', $('#txtContrasena').val());
+					datos.append('nivel', $('#sltNiveles').val());
+					let resp = await fetch('php/config/crearUsuario.php',{
+						method:'POST', body:datos
+					});
+					if(await resp.text()=='ok'){
+						alert('Usuario creado con éxito');
+						location.reload();
+					}else{
+						alert('Hubo un error en la operación');
+					}
+				<?php endif; ?>
 			},
 			async listarCategorias(){
 				let resp = await fetch('php/config/listarCategorias.php');

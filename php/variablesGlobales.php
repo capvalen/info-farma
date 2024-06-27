@@ -10,7 +10,7 @@ $soloCaja=array(1,2);
 $soloEspecial=array(8);
 
 $servidor ='127.0.0.1';
-$folder = 'info-farma';
+$folder = 'infofarma';
 $local = '/'.$folder;
 
 $serverLocal= "//{$servidor}/$folder/";
