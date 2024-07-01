@@ -14,7 +14,7 @@ $GLOBALS['nomArchivo'] = str_replace( '.php', '', trim(basename($_SERVER['PHP_SE
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/estilosElementosv2.css?version=2.0.21">
 <link rel="stylesheet" href="css/sidebarDeslizable.css?version=1.0.4" >
-<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.5">
+<link rel="stylesheet" href="css/cssBarraTop.css?version=1.0.6">
 <link rel="stylesheet" href="css/icofont.css">
 <link rel="stylesheet" href="css/animate.css">
 

@@ -105,7 +105,6 @@ a:focus, a:hover { color: #62286f; }
 					<?php 
 					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon"><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-add"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasEntradasLI.php"; ?>
@@ -138,7 +137,6 @@ a:focus, a:hover { color: #62286f; }
 					<?php 
 					if( in_array($_COOKIE['ckPower'], $soloCaja) && $rowUltCaja['idCuadre'] === $_GET['cuadre'] && $rowUltCaja['cuaVigente'] === '1' ){ ?>
 						<div class="col-xs-2">
-							<button class="btn btn-default btn-sinBorde btn-outline btnBotonCajon "><i class="icofont icofont-key-hole"></i></button>
 							<button class="btn btn-default dropdown-toggle  " type="button" id="dropdownEntradas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style=" color: #a35bb4;"><i class="icofont icofont-ui-rate-remove"></i> <span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEntradas">
 								<?php include "php/omitidasSalidasLI.php"; ?>

@@ -150,7 +150,7 @@ include 'php/variablesGlobales.php';
 		<div class="row">
 	
 				<div class="col-sm-12">
-					<div class=" text-right" style="line-height: 6px;">
+					<div class="" style="line-height: 6px;">
 						<div class="panel panel-default">
 							<div class="panel-body">
 							<?php if($hayCaja>=1): ?>
@@ -162,9 +162,9 @@ include 'php/variablesGlobales.php';
 												
 											</select>
 											<label for="exampleInputName2">Paga con S/: </label>
-											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00">
+											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00" onchange="calcularVentaVsMonedas()">
 										</div>
-										<button  class="btn btn-default " id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
+										<button  class="btn btn-default hidden" id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
 										<button class="btn btn-negro btn-outline " style="margin-left:2em" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Finalizar venta</button>
 									</div>
 								<?php else: ?>
@@ -179,7 +179,7 @@ include 'php/variablesGlobales.php';
 						<div class="panel panel-blanco conInputPersonalizados" style="color: #222222" id="panelResumenes">
 							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
 							<div class="panel-body">
-								<div class="row" style="margin: 0.5rem 0;">
+								<div class="row" style="margin: 0;">
 									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
 										<label class="">Sub Total:</label>
 										<h4><strong>S/ <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
@@ -189,7 +189,7 @@ include 'php/variablesGlobales.php';
 										<h4><strong>S/ <span id="spanImpuestoVenta">0.00</span></strong></h4>
 									</div>
 									<div class="col-xs-6 col-md-3">
-										<label class="">Total:</label>
+										<label class="">Total a pagar:</label>
 										<h4><strong>S/ <span id="spanTotalVenta">0.00</span></strong></h4>
 									</div>
 									<div class="col-xs-6 col-md-3">
@@ -859,7 +859,7 @@ function sumarSubTotalesInstante(){ var sumTot=0; var imp=0; var sub=0;
 		$('#spanSubTotalVentaFinal').text(parseFloat(sub).toFixed(2));
 		$('#spanImpuestoVenta').text(parseFloat(imp).toFixed(2));
 		$('#spanTotalVenta').text(parseFloat(sumTot).toFixed(2));
-
+		calcularVentaVsMonedas()
 	}
 function agregarRowInventario() {
 	$('#itemsInventarioNuevo').text($('#listaProductosNuevoInventario .row').length+1);
@@ -1160,7 +1160,7 @@ $('body').on('click','.btnDetalleInvLista',function () {
 });
 function calcularVentaVsMonedas(moneda ){
 	var total=parseFloat($('#spanTotalVenta').text());
-	var monedaInput=parseFloat(moneda);
+	var monedaInput=parseFloat($('#txtMonedaEnDuro').val() ?? 0);
 	var differ=monedaInput-total;
 	if(differ==0){$('#spanResiduoCambio').text('Sin vuelto'); $('#spanResiduoCambio').addClass('purple-text text-darken-1');}
 	if(differ<0){$('#spanResiduoCambio').text('Falta '+Math.abs(differ).toFixed(2)); $('#spanResiduoCambio').addClass('purple-text text-darken-3');}
@@ -1172,8 +1172,6 @@ $('#txtMonedaEnDuro').focusout(function () {
 $('#txtMonedaEnDuro').keyup(function () {
 	if($(this).val()==""){calcularVentaVsMonedas(0);}
 		else{calcularVentaVsMonedas($(this).val());}
-	
-	
 });
 $('#btnContarMoneda').click(function () {
 	$('.modal-contarMonedas').modal('show');
@@ -1383,6 +1381,7 @@ $('.modal-detalleProductoEncontrado').on('shown.bs.modal', function (e) {
 $('.modal-ventaGuardada').on('shown.bs.modal', function (e) {
 	$('#btnAcaboVenta').val('');
   $('#btnAcaboVenta').focus();
+	abrirCajon()
 });
 
 $('#divFlechas').on('keydown', function(event) {
@@ -1553,6 +1552,7 @@ $('.tablaResultadosCompras').on('keydown','.txtCantidadVariableProd', function (
 	if(e.keyCode==13){
 		$('#btnGuardarVenta').click();
 	}
+	sumarSubTotalesInstante()
 });
 $('.tablaResultadosCompras').on('keyup','.txtCantidadVariableProd', function (e) {
 		var indexRow=$(this).parent().parent().parent().index();
@@ -1646,7 +1646,7 @@ $('#btnImprimirVentaFinal').click(function () {
 		
 		/////// Cambiar URL
 	
-		abrirCajon();
+		//abrirCajon();
 		let cliente = $('#txtCliRazon').val();
 		/* console.log( "----TICKET----" );
 		console.log( retornarCadenaImprimir() ); */
