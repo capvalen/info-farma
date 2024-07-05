@@ -152,21 +152,32 @@ include 'php/variablesGlobales.php';
 				<div class="col-sm-12">
 					<div class="" style="line-height: 6px;">
 						<div class="panel panel-default">
-							<div class="panel-body">
+							<div class="panel-body" >
 							<?php if($hayCaja>=1): ?>
-								<div class="form-inline">
-										<div class="form-group">
-											<label for="exampleInputName2">Tipo de pago: </label>
-											<select class="form-control" id="sltMoneda" style="margin: 0 1rem;margin-bottom: 1rem;" >
-												<?php include "php/listarMonedaOPT.php"; ?>
-												
-											</select>
-											<label for="exampleInputName2">Paga con S/: </label>
-											<input type="text" style="margin: 0 1rem;" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00" onchange="calcularVentaVsMonedas()">
-										</div>
-										<button  class="btn btn-default hidden" id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
-										<button class="btn btn-negro btn-outline " style="margin-left:2em" id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Finalizar venta</button>
+								<div class="row">
+									<div class="col-xs-12 col-md-3">
+										<label for="">Comprobante</label>
+										<select name="" id="sltComprobante" class="form-control">
+											<option value="-1">Venta Interna</option>
+											<option value="3">Boleta de Venta</option>
+											<option value="1">Factura</option>
+										</select>
 									</div>
+									<div class="col-xs-12 col-md-3">
+										<label for="exampleInputName2">Tipo de pago: </label>
+										<select class="form-control" id="sltMoneda"  >
+											<?php include "php/listarMonedaOPT.php"; ?>
+										</select>
+									</div>
+									<div class="col-xs-12 col-md-3">
+										<label for="exampleInputName2">Paga con S/: </label>
+										<input type="text" class="form-control txtMonedas text-center" id="txtMonedaEnDuro" placeholder="Dinero" autocomplete="off" value="0.00" onchange="calcularVentaVsMonedas()">
+									</div>
+									<div class="col-xs-12 col-md-3">
+										<button class="btn btn-negro btn-outline " id="btnGuardarVenta"><i class="icofont icofont-ui-calculator"></i> Finalizar venta</button>
+									</div>
+								</div>
+								<button  class="btn btn-default hidden" id="btnContarMoneda"><i class="icofont icofont-chart-pie-alt"></i> Contador de monedas</button>
 								<?php else: ?>
 								<p style="line-height: 2rem;">Debe aperturar caja antes de realizar ventas <br> <a href="caja.php"><i class="icofont icofont-arrow-right"></i> Ir a aperturar caja</a></p>
 								<?php endif; ?>
@@ -175,36 +186,6 @@ include 'php/variablesGlobales.php';
 						<!-- <button class="btn btn-morado btn-outline btn-lg btn-block hidden" id="btnGuardarMemoria"><i class="icofont icofont-ui-rate-add"></i> Guardar en la memoria</button>
 						<button class="btn btn-morado btn-outline btn-lg btn-block hidden"><i class="icofont icofont-ui-rate-blank"></i> Liberar de la memoria</button> -->
 					</div>
-	
-						<div class="panel panel-blanco conInputPersonalizados" style="color: #222222" id="panelResumenes">
-							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
-							<div class="panel-body">
-								<div class="row" style="margin: 0;">
-									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
-										<label class="">Sub Total:</label>
-										<h4><strong>S/ <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
-									</div>
-									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
-										<label class="">Impuesto:</label>
-										<h4><strong>S/ <span id="spanImpuestoVenta">0.00</span></strong></h4>
-									</div>
-									<div class="col-xs-6 col-md-3">
-										<label class="">Total a pagar:</label>
-										<h4><strong>S/ <span id="spanTotalVenta">0.00</span></strong></h4>
-									</div>
-									<div class="col-xs-6 col-md-3">
-										<label for="">Cambio:</label><br>
-										<h4>S/ <span id="spanResiduoCambio">-</span></h4>
-									</div>
-								</div>
-								<div class=" text-center">
-	
-	
-	
-	
-								</div>
-							</div>
-						</div><!-- fin de pane cielo-->
 	
 				</div><!-- fin de sm-12 -->
 	
@@ -230,9 +211,9 @@ include 'php/variablesGlobales.php';
 											</ul>
 										</div><!-- /btn-group -->
 										<input type="text" class="form-control" id="txtBuscarProductoVenta" placeholder="Nombre, Cod. interno, Cod. barras" autocomplete="off">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="button" id="btn-BuscarProductoVenta"><span class="glyphicon glyphicon-search"></span></button>
-										</span>
+										<div class="input-group-btn">
+											<button class="btn btn-default" type="button" id="btn-BuscarProductoVenta"><i class="icofont icofont-search"></i> Buscar</button>
+										</div>
 									</div><!-- /input-group -->
 								</div>
 	
@@ -302,6 +283,34 @@ include 'php/variablesGlobales.php';
 						</div>
 	
 						</div><!-- fin de pane warning-->
+
+						<div class="panel panel-blanco conInputPersonalizados" style="color: #222222" id="panelResumenes">
+							<div class="panel-heading"><i class="icofont icofont-cart-alt"></i> Datos generales de la nueva venta</div>
+							<div class="panel-body">
+								<div class="row" style="margin: 0;">
+									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
+										<label class="">Sub Total:</label>
+										<h4><strong>S/ <span id="spanSubTotalVentaFinal">0.00</span></strong></h4>
+									</div>
+									<div class="col-xs-6 col-md-3" style="margin-bottom:1rem;">
+										<label class="">Impuesto:</label>
+										<h4><strong>S/ <span id="spanImpuestoVenta">0.00</span></strong></h4>
+									</div>
+									<div class="col-xs-6 col-md-3">
+										<label class="">Total a pagar:</label>
+										<h4><strong>S/ <span id="spanTotalVenta">0.00</span></strong></h4>
+									</div>
+									<div class="col-xs-6 col-md-3">
+										<label for="">Cambio:</label><br>
+										<h4>S/ <span id="spanResiduoCambio">-</span></h4>
+									</div>
+								</div>
+								<div class=" text-center">
+								</div>
+							</div>
+						</div><!-- fin de pane cielo-->
+
+
 						<div class="panel panel-blanco">
 							<div class="panel-heading"><i class="icofont icofont-user"></i> Datos del cliente</div>
 							<div class="panel-body">
@@ -685,7 +694,9 @@ include 'php/variablesGlobales.php';
 			</div>
 			<div class="modal-footer"> 
 			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, terminar</button>
-			<button class="btn btn-morado btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button></div>
+			<button class="btn btn-morado btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button>
+			<button class="btn btn-morado btn-outline" id="btnFacturar" onclick="crearFacturacion()"><i class="icofont icofont-paper"></i> Facturar</button>
+		</div>
 		</div>
 		</div>
 	</div>
@@ -1381,7 +1392,7 @@ $('.modal-detalleProductoEncontrado').on('shown.bs.modal', function (e) {
 $('.modal-ventaGuardada').on('shown.bs.modal', function (e) {
 	$('#btnAcaboVenta').val('');
   $('#btnAcaboVenta').focus();
-	abrirCajon()
+	//abrirCajon()
 });
 
 $('#divFlechas').on('keydown', function(event) {
@@ -1499,12 +1510,11 @@ $('#btnGuardarVenta').click(function () {
 		$.ticket = [];
 		var Jencabezado=[];
 		var Jdata=[];
-		Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 'igv': $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(),
-			'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
+		Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 			
+			igv: $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(), 'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
 			idCliente: $.idCliente,
 			ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val()
 		});
-
 		
 			$('.tablaResultadosCompras tbody tr').map(function (argument, index) {
 			
@@ -1515,7 +1525,7 @@ $('#btnGuardarVenta').click(function () {
 			var nomProImp= $(this).find('.mProdNom').text();	
 			var dscto= $(this).find('.spanDescuento').text();	
 
-			Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd })
+			Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd, nombre: $.trim(nomProImp) })
 			
 			});
 			
@@ -1527,13 +1537,70 @@ $('#btnGuardarVenta').click(function () {
 			}).done(function (resp) { //console.log('recibido: ')
 				//console.log(resp);
 				document.getElementById("overlay").style.display = "none";
+				crearFacturacion(Jdata)
 				$('.modal-ventaGuardada').modal('show');
 			});
-		
 	 	$.ticket=Jdata;
  }
  
 });
+
+function crearFacturacion(){
+
+	if($('#sltComprobante').val()!=-1){
+		var serie;
+		if($('#sltComprobante').val()==1) serie='FE01'
+		else serie='BE01'
+		var jsonCliente= [];
+		var dniRc ='', razon='', estadoDNI=0;
+		if($('#txtCliDni').val()!=''){
+			dniRc=$('#txtCliDni').val();
+			razon=$('#txtCliRazon').val()
+		}else{
+			dniRc='00000000';
+			if($('#txtCliRazon').val()==''){
+				razon='Cliente sin documento';
+			}else{
+				razon=$('#txtCliRazon').val()
+			}
+		}
+		if(dniRc.length==8) estadoDNI=1
+		if(dniRc.length>8) estadoDNI=6
+		
+		jsonCliente.push({
+			tipo: estadoDNI,
+			dni: dniRc,
+			razon: razon,
+			direccion: $('#txtCliDireccion').val(),
+			contado: 1,
+			adelanto: 0
+		});
+		
+		var jsonProductos = [];
+
+		$.ticket.forEach(producto => {
+			jsonProductos.push({cantidad: producto.cant,
+				descripcionProducto: producto.nombre,
+				precioProducto: producto.sub,
+				unidadProducto: 'UND',
+				unidadSunat: 'NIU',
+				unidadCorto: 'UND' ,
+				subtotal: producto.sub,
+				afecto: 1,
+				idProd: 1
+			});
+		});
+		
+		
+		$.ajax({url: 'http://localhost/pluginSunat/php/insertarBoleta.php', type: 'POST', data: { emitir: 3, queSerie: serie, dniRUC: dniRc, razonSocial: razon, cliDireccion: $('#txtCliDireccion').val(),jsonProductos: jsonProductos, jsonCliente: jsonCliente, fecha: moment().format('YYYY-MM-DD'), idCaja:'1' }}).done(function(resp) { //  placa: $('#txtPlacaBoleta').val(),
+			console.log(resp)
+			$.jTicket = JSON.parse(resp); console.log( $.jTicket );
+			if($.jTicket.length >=1){
+				console.log('boleta')
+			}
+		});
+	}
+}
 
 $('#btnAcaboVenta').click(function () {
 	/*$('.tablaResultadosCompras tbody').children().remove();

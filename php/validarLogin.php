@@ -32,7 +32,8 @@ if ( intval($row['idUsuario']) >=1){
 	setcookie('ckLogo', $resp['logo'], 0 , "/");
 	setcookie('ckBloqueoApertura', $resp['bloqueoApertura'], 0 , "/");
 
-
+	//Cookie de facturación
+	setcookie('crearArchivo', 1, 0 , "/");
 
 	echo $row['idUsuario'];
 }

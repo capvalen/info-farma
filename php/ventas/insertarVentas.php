@@ -58,6 +58,10 @@ foreach ($Js as $row) {
 }
 
 
+ob_start();
+	include('http://localhost/pluginSunat/php/insertarBoleta.php');
+ob_end_clean();
+
 echo $retornoProcedure;
 
 
