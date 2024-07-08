@@ -10,6 +10,7 @@
 <script src="js/bootstrap-datepicker.min.js"></script>
 <script src="js/bootstrap-datepicker.es.min.js"></script>
 <script src="js/anatsunamun.js?version=1.0.1"></script>
+<script src="js/axios.min.js"></script>
 
 <!-- Modal para: -->
 <div class='modal fade ' id="modalResultadoGeneral" tabindex='-1' role='dialog' aria-hidden='true'>

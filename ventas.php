@@ -158,9 +158,10 @@ include 'php/variablesGlobales.php';
 									<div class="col-xs-12 col-md-3">
 										<label for="">Comprobante</label>
 										<select name="" id="sltComprobante" class="form-control">
-											<option value="-1">Venta Interna</option>
+											<option value="0">Venta interna</option>
 											<option value="3">Boleta de Venta</option>
 											<option value="1">Factura</option>
+											<option value="-1">Receta médica</option>
 										</select>
 									</div>
 									<div class="col-xs-12 col-md-3">
@@ -1546,60 +1547,104 @@ $('#btnGuardarVenta').click(function () {
 });
 
 function crearFacturacion(){
+	var serie;
+	let empresa = {"crearArchivo":"1","ruc":"20612115771","razonSocial":"BOTICA'S CLINICAL HOME S.A.C.","nomComercial":" BOTICA'S CLINICAL HOME S.A.C.","direccion":"Dirección: Jr General Gamarra 1173 Chilca - Huancayo - Junín","celular":"939784647","logo":"images/empresa.jpg","ticketera":"CAJA","facturador":"/home/karl/temp/","carpeta":"pluginSunat","serieFactura":"FE01","serieBoleta":"BE01"}
 
 	if($('#sltComprobante').val()!=-1){
-		var serie;
+		serie = '';
+	}else{
 		if($('#sltComprobante').val()==1) serie='FE01'
 		else serie='BE01'
-		var jsonCliente= [];
-		var dniRc ='', razon='', estadoDNI=0;
-		if($('#txtCliDni').val()!=''){
-			dniRc=$('#txtCliDni').val();
-			razon=$('#txtCliRazon').val()
-		}else{
-			dniRc='00000000';
-			if($('#txtCliRazon').val()==''){
-				razon='Cliente sin documento';
-			}else{
-				razon=$('#txtCliRazon').val()
-			}
-		}
-		if(dniRc.length==8) estadoDNI=1
-		if(dniRc.length>8) estadoDNI=6
-		
-		jsonCliente.push({
-			tipo: estadoDNI,
-			dni: dniRc,
-			razon: razon,
-			direccion: $('#txtCliDireccion').val(),
-			contado: 1,
-			adelanto: 0
-		});
-		
-		var jsonProductos = [];
-
-		$.ticket.forEach(producto => {
-			jsonProductos.push({cantidad: producto.cant,
-				descripcionProducto: producto.nombre,
-				precioProducto: producto.sub,
-				unidadProducto: 'UND',
-				unidadSunat: 'NIU',
-				unidadCorto: 'UND' ,
-				subtotal: producto.sub,
-				afecto: 1,
-				idProd: 1
-			});
-		});
-		
-		
-		$.ajax({url: 'http://localhost/pluginSunat/php/insertarBoleta.php', type: 'POST', data: { emitir: 3, queSerie: serie, dniRUC: dniRc, razonSocial: razon, cliDireccion: $('#txtCliDireccion').val(),jsonProductos: jsonProductos, jsonCliente: jsonCliente, fecha: moment().format('YYYY-MM-DD'), idCaja:'1' }}).done(function(resp) { //  placa: $('#txtPlacaBoleta').val(),
-			console.log(resp)
-			$.jTicket = JSON.parse(resp); console.log( $.jTicket );
-			if($.jTicket.length >=1){
-				console.log('boleta')
-			}
-		});
 	}
+	
+	let cabecera = { tipo:$('#sltComprobante').val(), serie: serie, fecha: moment().format('YYYY-MM-DD') }
+	let cliente = [];
+	var jsonCliente= [];
+	var dniRc ='', razon='', estadoDNI=0;
+	if($('#txtCliDni').val()!=''){
+		dniRc=$('#txtCliDni').val();
+		razon=$('#txtCliRazon').val()
+	}else{
+		dniRc='00000000';
+		if($('#txtCliRazon').val()==''){
+			razon='Cliente sin documento';
+		}else{
+			razon=$('#txtCliRazon').val()
+		}
+	}
+	if(dniRc.length==8) estadoDNI=1
+	if(dniRc.length>8) estadoDNI=6
+		
+	jsonCliente.push({
+		tipo: estadoDNI,
+		dni: dniRc,
+		razon: razon,
+		direccion: $('#txtCliDireccion').val(),
+		contado: 1,
+		adelanto: 0
+	});
+	cliente = jsonCliente[0]
+	var jsonProductos = [];
+
+	$.ticket.forEach(producto => {
+		jsonProductos.push({cantidad: producto.cant,
+			nombre: producto.nombre,
+			precioProducto: producto.sub,
+			precio: producto.sub,
+			unidadProducto: 'UND',
+			unidadSunat: 'NIU',
+			unidadCorto: 'UND' ,
+			subTotal: producto.sub,
+			afecto: 1,
+			idProd: 1,
+			id:1, serie:''
+		});
+	});
+	
+	
+	axios.post('http://localhost/pluginSunat/php/insertarBoleta_v4.php', {empresa, cliente, cabecera: cabecera, jsonProductos, idCaja: 1,
+		pagoTotal: 1, //2 indica que se paga en partes
+		creditos: []
+	})
+	.then(response =>{
+		let jTicket = response.data;
+	
+		$.ajax({url: "http://127.0.0.1/pluginSunat/printComprobante.php", type: 'POST', data: {
+			ticketera: empresa.ticketera,
+			tipoComprobante: jTicket[0].tipoComprobante,
+			rucEmisor: jTicket[0].rucEmisor,
+			queEs: jTicket[0].queSoy,
+			serie: jTicket[0].serie,
+			correlativo: jTicket[0].correlativo,
+			tipoCliente: jTicket[0].tipoCliente,
+			fecha: jTicket[0].fechaEmision,
+			fechaLat: moment(jTicket[0].fechaEmision, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+			cliente: jTicket[0].razonSocial,
+			docClient: jTicket[0].ruc,
+			monedas: jTicket[0].letras,
+			descuento: parseFloat(jTicket[0].descuento).toFixed(2),
+			costoFinal: parseFloat(jTicket[0].costoFinal).toFixed(2),
+			igvFinal: parseFloat(jTicket[0].igvFinal).toFixed(2),
+			totalFinal: parseFloat(jTicket[0].totalFinal).toFixed(2),
+			productos: jTicket[1],
+			direccion:jTicket[0].direccion,
+			exonerado: parseFloat(jTicket[0].exonerado).toFixed(2)
+			//placa: jTicket[0].placa,
+		}}).done(function(resp) {
+			console.log(resp)
+			//location.reload();
+		});
+
+		
+				
+	})
+	$.ajax({url: 'http://localhost/pluginSunat/php/insertarBoleta_v4.php', type: 'POST', data: { emitir: $('#sltComprobante').val(), queSerie: serie, cliente, jsonProductos: jsonProductos, jsonCliente: jsonCliente, fecha: moment().format('YYYY-MM-DD'), idCaja:'1', cabecera }}).done(function(resp) { //  placa: $('#txtPlacaBoleta').val(),
+		console.log(resp)
+		$.jTicket = JSON.parse(resp); console.log( $.jTicket );
+		if($.jTicket.length >=1){
+			console.log('boleta')
+		}
+	});
 }
 
 $('#btnAcaboVenta').click(function () {
