@@ -696,7 +696,7 @@ include 'php/variablesGlobales.php';
 			<div class="modal-footer"> 
 			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, terminar</button>
 			<button class="btn btn-morado btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button>
-			<button class="btn btn-morado btn-outline" id="btnFacturar" onclick="crearFacturacion()"><i class="icofont icofont-paper"></i> Facturar</button>
+			<button class="btn btn-morado btn-outline d-nonde hidden" id="btnFacturar" onclick="crearFacturacion()"><i class="icofont icofont-paper"></i> Facturar</button>
 		</div>
 		</div>
 		</div>
@@ -1393,7 +1393,7 @@ $('.modal-detalleProductoEncontrado').on('shown.bs.modal', function (e) {
 $('.modal-ventaGuardada').on('shown.bs.modal', function (e) {
 	$('#btnAcaboVenta').val('');
   $('#btnAcaboVenta').focus();
-	//abrirCajon()
+	abrirCajon()
 });
 
 $('#divFlechas').on('keydown', function(event) {
@@ -1507,6 +1507,11 @@ $('#btnGuardarVenta').click(function () {
 		$('.modal-GuardadoError').modal('show');
 		document.getElementById("overlay").style.display = "none";
 	}
+	else if( $('#sltComprobante').val()==1 && $('#txtCliDni').val().length<11 ){
+		$('#mdErrorGenerico').text('Debe rellenar un RUC válido para generar una factura');
+		$('.modal-GuardadoError').modal('show');
+		document.getElementById("overlay").style.display = "none";
+	}
 	else{
 		$.ticket = [];
 		var Jencabezado=[];
@@ -1514,7 +1519,8 @@ $('#btnGuardarVenta').click(function () {
 		Jencabezado.push({'subT': $('#spanSubTotalVentaFinal').text(), 			
 			igv: $('#spanImpuestoVenta').text(), 'Total': $('#spanTotalVenta').text(), 'moneda': $('#txtMonedaEnDuro').val(), 'regreso': $('#spanResiduoCambio').text(),
 			idCliente: $.idCliente,
-			ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val()
+			ruc: $('#txtCliDni').val(), razon: $('#txtCliRazon').val(), direccion: $('#txtCliDireccion').val(),
+			idMoneda: $('#sltMoneda').find('option:selected').attr('data-tokens')
 		});
 		
 			$('.tablaResultadosCompras tbody tr').map(function (argument, index) {
@@ -1526,7 +1532,10 @@ $('#btnGuardarVenta').click(function () {
 			var nomProImp= $(this).find('.mProdNom').text();	
 			var dscto= $(this).find('.spanDescuento').text();	
 
-			Jdata.push({'id': indProd, 'nomProducto': cantProd + ' UND '+ $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd, nombre: $.trim(nomProImp) })
+			let unidadPack = (dscto=='') ? ' UND ' : ` ${dscto} `
+			let presentacion = $(this).find('.spanDescuento').attr('data-id')
+
+			Jdata.push({'id': indProd, 'nomProducto': cantProd + unidadPack + $.trim(nomProImp) , 'cant': cantProd, 'prec':precioProd, dscto, 'sub': SubTotalProd, nombre: $.trim(nomProImp), presentacion: unidadPack })
 			
 			});
 			
@@ -1534,7 +1543,7 @@ $('#btnGuardarVenta').click(function () {
 			$.ajax({
 			type: 'POST',
 			url: 'php/ventas/insertarVentas.php',
-			data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>'}
+			data: {Jencabezado: JSON.stringify(Jencabezado), Jdata: JSON.stringify(Jdata), usuario: '<?= $_COOKIE['ckidUsuario']; ?>', tipo: $('#sltComprobante').val() }
 			}).done(function (resp) { //console.log('recibido: ')
 				//console.log(resp);
 				document.getElementById("overlay").style.display = "none";
@@ -1548,9 +1557,9 @@ $('#btnGuardarVenta').click(function () {
 
 function crearFacturacion(){
 	var serie;
-	let empresa = {"crearArchivo":"1","ruc":"20612115771","razonSocial":"BOTICA'S CLINICAL HOME S.A.C.","nomComercial":" BOTICA'S CLINICAL HOME S.A.C.","direccion":"Dirección: Jr General Gamarra 1173 Chilca - Huancayo - Junín","celular":"939784647","logo":"images/empresa.jpg","ticketera":"CAJA","facturador":"/home/karl/temp/","carpeta":"pluginSunat","serieFactura":"FE01","serieBoleta":"BE01"}
+	let empresa = {"crearArchivo":"1","ruc":"20612115771","razonSocial":"BOTICA'S CLINICAL HOME S.A.C.","nomComercial":" BOTICA'S CLINICAL HOME S.A.C.","direccion":"Dirección: Jr General Gamarra 1173 Chilca - Huancayo - Junín","celular":"939784647","logo":"images/empresa.jpg","ticketera":"CAJA","facturador":"D:\SFS_2.1","carpeta":"pluginSunat","serieFactura":"FE01","serieBoleta":"BE01"}
 
-	if($('#sltComprobante').val()!=-1){
+	if($('#sltComprobante').val()==-1 || $('#sltComprobante').val()==0){
 		serie = '';
 	}else{
 		if($('#sltComprobante').val()==1) serie='FE01'
@@ -1589,8 +1598,8 @@ function crearFacturacion(){
 	$.ticket.forEach(producto => {
 		jsonProductos.push({cantidad: producto.cant,
 			nombre: producto.nombre,
-			precioProducto: producto.sub,
-			precio: producto.sub,
+			precioProducto: producto.prec,
+			precio: producto.prec,
 			unidadProducto: 'UND',
 			unidadSunat: 'NIU',
 			unidadCorto: 'UND' ,
@@ -1608,6 +1617,7 @@ function crearFacturacion(){
 	})
 	.then(response =>{
 		let jTicket = response.data;
+		console.log('jTicket', jTicket)
 	
 		$.ajax({url: "http://127.0.0.1/pluginSunat/printComprobante.php", type: 'POST', data: {
 			ticketera: empresa.ticketera,
@@ -1638,13 +1648,13 @@ function crearFacturacion(){
 		
 				
 	})
-	$.ajax({url: 'http://localhost/pluginSunat/php/insertarBoleta_v4.php', type: 'POST', data: { emitir: $('#sltComprobante').val(), queSerie: serie, cliente, jsonProductos: jsonProductos, jsonCliente: jsonCliente, fecha: moment().format('YYYY-MM-DD'), idCaja:'1', cabecera }}).done(function(resp) { //  placa: $('#txtPlacaBoleta').val(),
+	/* $.ajax({url: 'http://localhost/pluginSunat/php/insertarBoleta_v4.php', type: 'POST', data: { emitir: $('#sltComprobante').val(), queSerie: serie, cliente, jsonProductos: jsonProductos, jsonCliente: jsonCliente, fecha: moment().format('YYYY-MM-DD'), idCaja:'1', cabecera }}).done(function(resp) { //  placa: $('#txtPlacaBoleta').val(),
 		console.log(resp)
 		$.jTicket = JSON.parse(resp); console.log( $.jTicket );
 		if($.jTicket.length >=1){
 			console.log('boleta')
 		}
-	});
+	}); */
 }
 
 $('#btnAcaboVenta').click(function () {
@@ -1854,8 +1864,9 @@ function mostrarDsctos(idProd, posicion){
 function aplicarDsctoA(index, posicion, esQue){ console.log('datos: ', index, posicion, esQue);
 	var contenedor = $('.tablaResultadosCompras tbody tr').eq(( $('.tablaResultadosCompras tbody tr').length - posicion));
 	if(esQue=='normal'){
+		contenedor.find('.spanDescuento').text('');
+		contenedor.find('.spanDescuento').attr('data-id', '0');
 		contenedor.find('.spanPrecio').text(parseFloat($.listaVariantes[index].normal).toFixed(2));
-		contenedor.find('.spanDescuento').text('-');
 	}else{
 		let variante = $.listaVariantes[index].variantes
 		let descuentazo = variante.filter( array => { return parseInt(array.queEs) == parseInt(esQue) })[0];
@@ -1863,6 +1874,7 @@ function aplicarDsctoA(index, posicion, esQue){ console.log('datos: ', index, po
 		/* let diferencia = $.listaVariantes[index].normal - descuentazo.nPrecio;
 		contenedor.find('.spanDescuento').text(parseFloat(diferencia).toFixed(2)); */
 		contenedor.find('.spanDescuento').text(descuentazo.nombre);
+		contenedor.find('.spanDescuento').attr('data-id', posicion);
 		contenedor.find('.spanPrecio').text(parseFloat(descuentazo.nPrecio).toFixed(2));
 	}
 

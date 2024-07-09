@@ -48,12 +48,12 @@ try {
     $printer -> text("\nTotal de ticket: ".$_POST['total']."\n");
     $printer -> text("Entregado: ".$_POST['dineroDado']."\n");
     $printer -> text("Cambio: ".$_POST['dineroVuelto']."\n");
-	if( $_POST['cliente']!='' ){
+	/* if( $_POST['cliente']!='' ){
 		$printer -> text("Acaba de acumular {$_POST['puntos']} puntos.\n\n");
-	}
+	} */
 	$printer->setJustification(Printer::JUSTIFY_CENTER);
     $printer -> text("\n¡Gracias por su compra!\n");
-    $printer -> text("Reclame su boleta\n\n\n");
+    //$printer -> text("Reclame su boleta\n\n\n");
     $printer -> cut();
     
 	

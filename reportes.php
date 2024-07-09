@@ -69,6 +69,7 @@ if(!in_array($_COOKIE['ckPower'], $soloAdmis)) header('Location:caja.php');
 										<option value="1">General</option>
 										<option value="2">Detallado</option>
 										<option value="3">Por personal agrupado</option>
+										<option value="4">Recetas médicas</option>
 									</select>
 									</div>
 									<div class="col-md-3">
@@ -650,7 +651,7 @@ if(!in_array($_COOKIE['ckPower'], $soloAdmis)) header('Location:caja.php');
 		if($('dtpFechaVentaInicial').val()!='' && $('dtpFechaVentaFinal').val()!=''){
 			if($('#sltOpcionesVenta').val()==1){
 				$('#tableReporteVentas thead').html(`<tr>
-					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Usuario</th>
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Sub-Total</th><th>IGV</th><th>Total</th><th>Tipo</th><th>Usuario</th>
 				</tr>`);
 				$('#tableReporteVentas tfoot').html(`<tr><td colspan=6></td><td><strong id="tdSumatoria"></strong></td></tr>`);
 
@@ -669,7 +670,7 @@ if(!in_array($_COOKIE['ckPower'], $soloAdmis)) header('Location:caja.php');
 			}
 			if($('#sltOpcionesVenta').val()==2){
 				$('#tableReporteVentas thead').html(`<tr>
-					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Cantidad</th><th>Precio U.</th><th>Producto</th><th>Total</th><th>Ganancia</th><th>Usuario</th>
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Vuelto</th><th>Presentacion</th><th>Cantidad</th><th>Precio U.</th><th>Producto</th><th>Total</th><th>Ganancia</th><th>Tipo</th><th>Usuario</th>
 				</tr>`);
 				$('#tableReporteVentas tfoot').html(`<tr><td colspan=7></td><td><strong id="tdSumatoria"></strong></td><td><strong id="tdSumaGanancias"></strong></td></tr>`);
 
@@ -688,6 +689,25 @@ if(!in_array($_COOKIE['ckPower'], $soloAdmis)) header('Location:caja.php');
 			}
 			if($('#sltOpcionesVenta').val()==3){
 				$.ajax({url: 'php/ventas/reportePorUsuarioAgrupado.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
+					//console.log(resp)
+					$('#tableReporteVentas tbody').html(resp);
+					sumarTotalesReporte();
+					$('#tableReporteVentas').DataTable( {
+						dom: 'Bfrtip',
+						paging:false,searching:false,"bInfo" : false,
+						buttons: [
+							{ extend: 'excel', text: '<i class="icofont icofont-file-excel"></i> Exportar Excel', className: 'btn btn-outline btn-success' }
+						]
+					}); 
+				});
+			}
+			if($('#sltOpcionesVenta').val()==4){
+				$('#tableReporteVentas thead').html(`<tr>
+					<th>#</th><th>Cod.</th><th>Fecha</th><th>Presentacion</th><th>Cantidad</th><th>Precio</th><th>Producto</th><th>Total</th><th>DNI</th><th>Paciente</th><th>Usuario</th>
+				</tr>`);
+				$('#tableReporteVentas tfoot').html(`<tr><td colspan=7></td><td><strong id="tdSumatoria"></strong></td><td><strong id="tdSumaGanancias"></strong></td></tr>`);
+
+				$.ajax({url: 'php/ventas/reporteVentasRecetas.php', type: 'POST', data: { fecha1: moment($('#dtpFechaVentaInicial').val(), 'DD/MM/YYYY').format('YYYY-MM-DD'), fecha2: moment($('#dtpFechaVentaFinal').val(), 'DD/MM/YYYY').format('YYYY-MM-DD')}}).done(function(resp) {
 					//console.log(resp)
 					$('#tableReporteVentas tbody').html(resp);
 					sumarTotalesReporte();

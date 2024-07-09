@@ -10,65 +10,6 @@
 
 <body>
 
-<style>
-	#tabCrearProducto .bootstrap-select{
-		width: 100% !important;
-	}
-
-	.dropdown-menu {
-		z-index: 1031;
-	}
-
-	#panelVariantes{
-		position: absolute;
-		top: 0px;
-		bottom: 0;
-		left:0;
-		right:0;
-		background:#000000e3;
-		z-index: 1030;
-		display:none;
-	}
-	#panelEnSi {
-		position: absolute;
-		top: 0px;
-		bottom: 0;
-		width: 450px;
-		max-width: 100vw;
-		background: #f7f7f7;
-		right: 0;
-		z-index: 1031;
-		display: block;
-		position: fixed;
-		overflow: hidden;
-	}
-	#panelContenido{
-		overflow:auto;
-		height: 100%;
-	}
-	.cerrar{
-		font-size:2em; color: #fb1a1ab8; cursor:pointer;
-	}
-	.cerrar:hover{
-		color: #fb1a1a;
-	}
-	.eliminarVariante{
-		cursor:pointer;
-	}
-	#listadoDivs .row{
-		border-bottom: 1px solid #dfdfdf;
-	}
-	.close {
-    opacity: 0.8;
-    color: #cb0000;
-		font-size: 32px;
-	}
-	.yaVencera {
-    background-color: #ffdbbc;
-    color: #890c0c;
-	}
-</style>
-
 	<div id="wrapper">
 
 		<?php $pagina = 'productos'; include 'menu-wrapper.php'; ?>
@@ -1854,7 +1795,7 @@
 			$.nombresVariables = JSON.parse(resp);
 		});
 		$.ajax({url: 'php/productos/precioVariante.php', type: 'POST', data: { idProd: $('#txtprodCodigo').val() }}).done(function(resp) {
-			//console.log(resp)
+			console.log(resp)
 			if(resp!='error'){
 				if(resp==''){$.listaVariantes=[];}
 				else{
@@ -1873,7 +1814,7 @@
 	function addVariant(){
 		var variable = $('#sltVariantes').val();
 		var nombre = $.nombresVariables.filter( variante => { return parseInt(variante.id) == parseInt(variable) })[0].nombre;
-		//console.log( "agregando"+ nombre );
+		console.log( "agregando"+ nombre );
 		
 		
 		if($.listaVariantes.map(dato => parseInt(dato.queEs)).indexOf( parseInt(variable) )==-1){
@@ -2026,7 +1967,64 @@
 		}
 	<?php } ?>
 	</script>
+<style>
+	#tabCrearProducto .bootstrap-select{
+		width: 100% !important;
+	}
 
+	.dropdown-menu {
+		z-index: 1031;
+	}
+
+	#panelVariantes{
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		left:0;
+		right:0;
+		background:#000000e3;
+		z-index: 1030;
+		display:none;
+	}
+	#panelEnSi {
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		width: 450px;
+		max-width: 100vw;
+		background: #f7f7f7;
+		right: 0;
+		z-index: 1031;
+		display: block;
+		position: fixed;
+		overflow: hidden;
+	}
+	#panelContenido{
+		overflow:auto;
+		height: 100%;
+	}
+	.cerrar{
+		font-size:2em; color: #fb1a1ab8; cursor:pointer;
+	}
+	.cerrar:hover{
+		color: #fb1a1a;
+	}
+	.eliminarVariante{
+		cursor:pointer;
+	}
+	#listadoDivs .row{
+		border-bottom: 1px solid #dfdfdf;
+	}
+	.close {
+    opacity: 0.8;
+    color: #cb0000;
+		font-size: 32px;
+	}
+	.yaVencera {
+    background-color: #ffdbbc;
+    color: #890c0c;
+	}
+</style>
 </body>
 
 </html>

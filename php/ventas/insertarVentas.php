@@ -9,11 +9,11 @@ $idUser=$_COOKIE['ckidUsuario'];//$_SESSION['idUsuario'];
 if( $Jencabez[0]['idCliente'] == -1){
 	//insertamos
 		
-	$sentenciaCli = $esclavo -> prepare( "INSERT INTO `clientes`(`razon`, `ruc`, `direccion`, puntosActual, puntosTotal ) VALUES ( ?, ?, ?, convert( ?, int), convert( ?, int) ); " );
+	$sentenciaCli = $esclavo -> prepare( "INSERT INTO `clientes`(`razon`, `ruc`, `direccion`, puntosActual, puntosTotal ) VALUES ( ?, ?, ?, ?, ?); " );
 	$sentenciaCli -> bind_param( 'sssss', $Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $Jencabez[0]['Total'], $Jencabez[0]['Total'] );
 	$sentenciaCli-> execute();
 
-	//$sentenciaCli->get_result();
+	//echo $sentenciaCli->get_result();
 	$idCliente  = $esclavo -> insert_id;
 	
 }else{
@@ -26,13 +26,15 @@ if( $Jencabez[0]['idCliente'] == -1){
 	}
 		$idCliente = $Jencabez[0]['idCliente'];
 }
+//echo $idCliente; die();
 
 $variable='';
 $retornoProcedure='';
 $mysqli=new $conection;
+$total = $_POST['tipo']=='-1' ? 0: $Jencabez[0]['Total'];
 
-$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",".$Jencabez[0]['Total'].",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}); ";
-//echo $sql;
+$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",". $total .",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}, {$Jencabez[0]['idMoneda']}, {$_POST['tipo']}) ; ";
+//echo $sql; die();
 $stmt = $conection->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -49,9 +51,9 @@ foreach ($Js as $row) {$variable.='('.$retornoProcedure.', '.$row['id'] .','.$ro
 $sql22= 'insert INTO `detalleventas` (`idVenta`,`idProducto`,`detventCantidad`,`detventPrecio`,`detentPrecioparcial`) values '.substr($variable,0, strlen($variable)-1 );
 mysqli_query($conection,$sql22) or die(mysql_error()); //Ejecución simple para la sentencia sql2 con envio completo de una JSON con variable unica*/
 foreach ($Js as $row) {
-	$sqlDetalle = $dependencia->prepare("call insertarDetalleVentaProducto(?, ?, ?, ?, ?, ?, ?  );");
+	$sqlDetalle = $dependencia->prepare("call insertarDetalleVentaProducto(?, ?, ?, ?, ?, ?, ?, ? );");
 	$sqlDetalle -> execute([
-		$retornoProcedure, $row['id'], $row['cant'], $row['prec'], $row['sub'], $_POST['usuario'], $row['dscto']
+		$retornoProcedure, $row['id'], $row['cant'], $row['prec'], $row['sub'], $_POST['usuario'], $row['dscto'], $row['presentacion']
 	]);
 	$sqlDetalle = null;
 	//mysqli_query($conection,$sql33) or die();
