@@ -24,6 +24,17 @@ include 'php/variablesGlobales.php';
 	#panelResumenes h4{
 		margin: 0;
 	}
+	/* Alinea al fondo los elementos de cada celda (equivalente a d-flex align-items-end de BS5).
+	   Se aplica a la fila de datos de la venta para que el botón "Finalizar venta"
+	   quede en la parte inferior de la celda aunque las demás columnas tengan label. */
+	.filaDatosVenta{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+	}
+	.filaDatosVenta > div{
+		float: none;
+	}
 	.tdDescuento a{
 		color: #694d9f!important;
 	}
@@ -40,6 +51,10 @@ include 'php/variablesGlobales.php';
 	#listadoDivs .row{
 		border-bottom: 1px solid #dfdfdf;
 	}
+	/* Sobreescribe el azul de Bootstrap (.text-primary) dentro del listado de productos */
+	#listadoDivs .text-primary{
+		color: #094ef0;
+	}
 	.close {
     opacity: 0.8;
     color: #cb0000;
@@ -47,11 +62,13 @@ include 'php/variablesGlobales.php';
 	}
 	label{height: 2rem;}
 	#listadoDivs .activo{ background-color: cornflowerblue; color:beige }
-	#listadoDivs .activo .text-primary{color:beige;}
 	#listadoDivs .text-danger.activo{ background-color: firebrick; color:white; }
-	#listadoDivs .text-danger.activo .text-primary{color:white;}
+	/* La columna Stock conserva un color oscuro cuando la fila está activa (hover/selección),
+	   tanto si su clase es text-primary como text-danger. */
+	#listadoDivs .activo > div.text-primary,
+	#listadoDivs .activo > div.text-danger{ color: #1a237e !important; }
 	.yaVencera {
-    background-color: #ffdbbc;
+    background-color: #f6b9b6;
     color: #890c0c;
 	}
 	@media (min-width: 768px){
@@ -154,7 +171,7 @@ include 'php/variablesGlobales.php';
 						<div class="panel panel-default">
 							<div class="panel-body" >
 							<?php if($hayCaja>=1): ?>
-								<div class="row">
+								<div class="row filaDatosVenta">
 									<div class="col-xs-12 col-md-3">
 										<label for="">Comprobante</label>
 										<select name="" id="sltComprobante" class="form-control">
@@ -1621,25 +1638,25 @@ function crearFacturacion(){
 	
 		$.ajax({url: "http://127.0.0.1/pluginSunat/printComprobante.php", type: 'POST', data: {
 			ticketera: empresa.ticketera,
-			tipoComprobante: jTicket[0].tipoComprobante,
-			rucEmisor: jTicket[0].rucEmisor,
-			queEs: jTicket[0].queSoy,
-			serie: jTicket[0].serie,
-			correlativo: jTicket[0].correlativo,
-			tipoCliente: jTicket[0].tipoCliente,
-			fecha: jTicket[0].fechaEmision,
-			fechaLat: moment(jTicket[0].fechaEmision, 'YYYY-MM-DD').format('DD/MM/YYYY'),
-			cliente: jTicket[0].razonSocial,
-			docClient: jTicket[0].ruc,
-			monedas: jTicket[0].letras,
-			descuento: parseFloat(jTicket[0].descuento).toFixed(2),
-			costoFinal: parseFloat(jTicket[0].costoFinal).toFixed(2),
-			igvFinal: parseFloat(jTicket[0].igvFinal).toFixed(2),
-			totalFinal: parseFloat(jTicket[0].totalFinal).toFixed(2),
+			tipoComprobante: jTicket['cliente'].tipoComprobante,
+			rucEmisor: jTicket['cliente'].rucEmisor,
+			queEs: jTicket['cliente'].queSoy,
+			serie: jTicket['cliente'].serie,
+			correlativo: jTicket['cliente'].correlativo,
+			tipoCliente: jTicket['cliente'].tipoCliente,
+			fecha: jTicket['cliente'].fechaEmision,
+			fechaLat: moment(jTicket['cliente'].fechaEmision, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+			cliente: jTicket['cliente'].razonSocial,
+			docClient: jTicket['cliente'].ruc,
+			monedas: jTicket['cliente'].letras,
+			descuento: parseFloat(jTicket['cliente'].descuento).toFixed(2),
+			costoFinal: parseFloat(jTicket['cliente'].costoFinal).toFixed(2),
+			igvFinal: parseFloat(jTicket['cliente'].igvFinal).toFixed(2),
+			totalFinal: parseFloat(jTicket['cliente'].totalFinal).toFixed(2),
 			productos: jTicket[1],
-			direccion:jTicket[0].direccion,
-			exonerado: parseFloat(jTicket[0].exonerado).toFixed(2)
-			//placa: jTicket[0].placa,
+			direccion:jTicket['cliente'].direccion,
+			exonerado: parseFloat(jTicket['cliente'].exonerado).toFixed(2)
+			//placa: jTicket['cliente'].placa,
 		}}).done(function(resp) {
 			console.log(resp)
 			//location.reload();
@@ -1887,31 +1904,79 @@ function aplicarDsctoA(index, posicion, esQue){ console.log('datos: ', index, po
 	$('#modalUsarQueDscto').modal('hide');
 	
 }
-$('#txtCliDni').focusout( ()=>{
-	let tamaño = parseInt($('#txtCliDni').val().length); 
+/* ===================== Búsqueda de cliente por DNI/RUC ===================== */
+let ultimoDniConsultado = null; // evita consultar dos veces el mismo documento
+let temporizadorDni = null;     // temporizador del debounce
 
-	if( tamaño ==0 || tamaño ==8 || tamaño ==11  ){
-		//console.log( 'si tiene formato' );
-		$.ajax({url: 'php/ventas/buscarCliente.php', type: 'POST', data: { ruc: $('#txtCliDni').val() }}).done(function(resp) {
-			resp = JSON.parse(resp);
-			console.log( resp );
-			if(resp == null){
+// Notificación tipo "toast" con SweetAlert2
+function notificarDni(mensaje, icono){
+	if(typeof Swal === 'undefined'){ return; }
+	// Si el icono es advertencia (DNI no registrado) se pinta en rojo, si no, en verde
+	let colorIcono = (icono === 'warning') ? '#d33' : '#2e7d32';
+	Swal.fire({
+		toast: true,
+		position: 'bottom-end',
+		icon: icono || 'success',
+		title: mensaje,
+		background: '#ffffff', // fondo blanco
+		color: '#222222',
+		iconColor: colorIcono,
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true
+	});
+}
+
+// Consulta el DNI/RUC y avisa si el cliente fue encontrado o no
+function buscarClientePorDni(){
+	let valor = $.trim($('#txtCliDni').val());
+	let tamaño = valor.length;
+
+	if( tamaño ==0 || tamaño >= 8  ){
+
+		if( valor === ultimoDniConsultado ){ return; } // ya se consultó el mismo documento
+		ultimoDniConsultado = valor;
+
+		$.ajax({url: 'php/ventas/buscarCliente.php', type: 'POST', data: { ruc: valor }}).done(function(resp) {
+			let cliente = JSON.parse(resp);
+			if(cliente == null){
 				$.idCliente = -1;
+				$('#txtCliRazon').val('');
+				$('#txtCliDireccion').val('');
+				$.puntosActual = 0;
+				if( tamaño >0 ){ notificarDni('DNI no registrado', 'warning'); }
 			}else{
-				$.idCliente = resp.id;
-				$('#txtCliRazon').val( resp.razon );
-				$('#txtCliDireccion').val( resp.direccion );
-				$.puntosActual = resp.puntosActual;
+				$.idCliente = cliente.id;
+				$('#txtCliRazon').val( cliente.razon );
+				$('#txtCliDireccion').val( cliente.direccion );
+				$.puntosActual = cliente.puntosActual;
+				if( tamaño >0 ){ notificarDni('DNI encontrado', 'success'); }
 			}
 		});
 	}else{
-		//console.log( 'no tiene formato' );
 		$.idCliente = 1;
 		$('#txtCliDni').val('');
 		$('#txtCliRazon').val('');
 		$('#txtCliDireccion').val('');
+		ultimoDniConsultado = null;
 	}
-})
+}
+
+// Debounce: busca automáticamente al terminar de escribir 8 o más dígitos (nunca menos de 8)
+$('#txtCliDni').on('input', function () {
+	let valor = $.trim($(this).val());
+	clearTimeout(temporizadorDni);
+	temporizadorDni = setTimeout(function () {
+		if( valor.length >= 8 ){
+			buscarClientePorDni();
+		}
+	}, 500);
+});
+
+// Al salir del campo se confirma la búsqueda (casos de autocompletado o pegado)
+$('#txtCliDni').focusout( function () {
+	buscarClientePorDni();
+});
 </script>
 
 </body>

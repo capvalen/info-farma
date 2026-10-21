@@ -4,13 +4,18 @@ include __DIR__.'./../conectkarl.php';
 
 $Js= json_decode($_POST['Jdata'], true);
 $Jencabez=json_decode($_POST['Jencabezado'], true);
-$idUser=$_COOKIE['ckidUsuario'];//$_SESSION['idUsuario'];
+$idUser=$_COOKIE['ckidUsuario'];
+
+// Extraemos el monto de la venta y le quitamos el separador de miles (comas y espacios)
+// para quedarnos con el número real (float). Luego los puntos van como entero.
+$montoTotal = (float) str_replace([' ', ','], '', (string) $Jencabez[0]['Total']);
+$puntos     = (int) round( $montoTotal );
 
 if( $Jencabez[0]['idCliente'] == -1){
 	//insertamos
 		
 	$sentenciaCli = $esclavo -> prepare( "INSERT INTO `clientes`(`razon`, `ruc`, `direccion`, puntosActual, puntosTotal ) VALUES ( ?, ?, ?, ?, ?); " );
-	$sentenciaCli -> bind_param( 'sssss', $Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $Jencabez[0]['Total'], $Jencabez[0]['Total'] );
+	$sentenciaCli -> bind_param( 'sssii', $Jencabez[0]['razon'], $Jencabez[0]['ruc'], $Jencabez[0]['direccion'], $puntos, $puntos );
 	$sentenciaCli-> execute();
 
 	//echo $sentenciaCli->get_result();
@@ -19,19 +24,19 @@ if( $Jencabez[0]['idCliente'] == -1){
 }else{
 	if( $Jencabez[0]['idCliente'] != 1 ){
 		$cli = $Jencabez[0];
-		$sqlCli = "UPDATE clientes set `razon` = '{$cli['razon']}', `ruc` = '{$cli['ruc']}', `direccion` = '{$cli['direccion']}', `puntosActual` = `puntosActual`+ convert( '{$cli['Total']}', int), `puntosTotal` = `puntosTotal` + convert( '{$cli['Total']}', int), actualizacion=now()  where id = '{$cli['idCliente']}';";
+		$sqlCli = "UPDATE clientes set `razon` = '{$cli['razon']}', `ruc` = '{$cli['ruc']}', `direccion` = '{$cli['direccion']}', `puntosActual` = `puntosActual` + {$puntos}, `puntosTotal` = `puntosTotal` + {$puntos}, actualizacion=now()  where id = '{$cli['idCliente']}';";
 		$sentenciaCli = $esclavo -> prepare( $sqlCli );
 		$sentenciaCli-> execute();
 		
 	}
-		$idCliente = $Jencabez[0]['idCliente'];
+	$idCliente = $Jencabez[0]['idCliente'];
 }
 //echo $idCliente; die();
 
 $variable='';
 $retornoProcedure='';
-$mysqli=new $conection;
-$total = $_POST['tipo']=='-1' ? 0: $Jencabez[0]['Total'];
+//$mysqli=new $conection;
+$total = $_POST['tipo']=='-1' ? 0 : $montoTotal;
 
 $sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",". $total .",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}, {$Jencabez[0]['idMoneda']}, {$_POST['tipo']}) ; ";
 //echo $sql; die();
