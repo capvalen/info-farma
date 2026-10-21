@@ -35,11 +35,14 @@ if( $Jencabez[0]['idCliente'] == -1){
 
 $variable='';
 $retornoProcedure='';
-//$mysqli=new $conection;
+$mysqli=new $conection;
 $total = $_POST['tipo']=='-1' ? 0 : $montoTotal;
 
-$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",". $total .",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}, {$Jencabez[0]['idMoneda']}, {$_POST['tipo']}) ; ";
-//echo $sql; die();
+$sql= "call insertarVentas (".$Jencabez[0]['subT'].",".$Jencabez[0]['igv'].",". $total .",".$idUser.",".$Jencabez[0]['moneda'].",'".$Jencabez[0]['regreso']."', {$idCliente}, {$Jencabez[0]['idMoneda']}) ; ";
+// --- DEPURACIÓN: sentencia de la cabecera ---
+//error_log('VENTA-CABECERA: '.$sql);
+// echo $sql; die();
+
 $stmt = $conection->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -55,10 +58,16 @@ $result = $stmt->get_result();
 foreach ($Js as $row) {$variable.='('.$retornoProcedure.', '.$row['id'] .','.$row['cant'].','.$row['prec'].','.$row['sub'].'),';}
 $sql22= 'insert INTO `detalleventas` (`idVenta`,`idProducto`,`detventCantidad`,`detventPrecio`,`detentPrecioparcial`) values '.substr($variable,0, strlen($variable)-1 );
 mysqli_query($conection,$sql22) or die(mysql_error()); //Ejecución simple para la sentencia sql2 con envio completo de una JSON con variable unica*/
+
 foreach ($Js as $row) {
-	$sqlDetalle = $dependencia->prepare("call insertarDetalleVentaProducto(?, ?, ?, ?, ?, ?, ?, ? );");
+	// --- DEPURACIÓN: sentencia de cada detalle con los valores ya sustituidos ---
+	$sentenciaDetalle = "call insertarDetalleVentaProducto({$retornoProcedure}, {$row['id']}, {$row['cant']}, {$row['prec']}, {$row['sub']}, {$_POST['usuario']}, '".$row['dscto']."');";
+	//error_log('VENTA-DETALLE: '.$sentenciaDetalle);
+	// echo $sentenciaDetalle.'<br>'; // Úsalo si prefieres verlo en pantalla (rompe el JSON de respuesta)
+
+	$sqlDetalle = $dependencia->prepare("call insertarDetalleVentaProducto(?, ?, ?, ?, ?, ?, ? );");
 	$sqlDetalle -> execute([
-		$retornoProcedure, $row['id'], $row['cant'], $row['prec'], $row['sub'], $_POST['usuario'], $row['dscto'], $row['presentacion']
+		$retornoProcedure, $row['id'], $row['cant'], $row['prec'], $row['sub'], $_POST['usuario'], $row['dscto']
 	]);
 	$sqlDetalle = null;
 	//mysqli_query($conection,$sql33) or die();
