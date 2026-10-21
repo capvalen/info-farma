@@ -711,7 +711,7 @@ include 'php/variablesGlobales.php';
 				<p class="text-center">¿Desea imprimir su voucher?</p>
 			</div>
 			<div class="modal-footer"> 
-			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> No, terminar</button>
+			<button class="btn btn-warning btn-outline" id="btnAcaboVenta"><i class="icofont icofont-close"></i> Terminar</button>
 			<button class="btn btn-morado btn-outline" id="btnImprimirVentaFinal"><i class="icofont icofont-print"></i> Sí, imprimir</button>
 			<button class="btn btn-morado btn-outline d-nonde hidden" id="btnFacturar" onclick="crearFacturacion()"><i class="icofont icofont-paper"></i> Facturar</button>
 		</div>
