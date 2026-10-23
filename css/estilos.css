@@ -1,10 +1,12 @@
 /************ Codigo generado por:
 ************* Pariona Valencia, Carlos Alex
 ************* Para:
-************* Farmacia Virgen Maria.
+************* Farmacia Virgen Maria. Huancayo - Perú.
 */
 ::selection {background: #fff2a8;}::-moz-selection {background: #fff2a8;
 }
+html{background-color: #191617; background: #191617 url("../images/dark_mosaic.png") repeat scroll 0% 0%;}main{background-color: #fff; border-radius:8px; margin-bottom: 20px; padding-bottom: 20px}
+.breadcrumb {margin-left:20px; margin-top: 10px;margin-right: -20px;}
 .navbar-inverse{ background-color: #fcf4db;border-color: rgba(138, 109, 59, 0.35);}
 .navbar-inverse .navbar-nav>li>a{color: #5f3a3a;}
 .navbar-text{margin-left: 0;} .navbar-brand>img {margin-top: -10px; border-radius: 6px;-moz-border-radius: 6px;-webkit-border-radius: 6px;}
@@ -44,7 +46,7 @@ a{text-decoration: none;display: inline-block;}
 .panel-sol{border-color: #f6bb42;}.panel-sol>.panel-heading{color: #f5f7fa;background-color: #F0AD38;border-color: #f6bb42;}
 .panel-rojizo{border-color: #da4453;}.panel-rojizo>.panel-heading{color: #f5f7fa;background-color: #ed5565;border-color: #da4453;}
 .well {margin-bottom: 0px;}
-.btn-negro {border-color: #434A54; color: #fff; background-color: #434A54;}
+.btn-negro, .btn-negro:hover{border-color: #434A54; color: #fff; background-color: #434A54;}
 .panelCuadre{padding-top: 0px;}
 .panelCuadre>ul>li:hover{background-color: #a286e8; cursor: default;}
 .btnAtencion{font-size: 17px;}
@@ -77,12 +79,17 @@ input[type=number] {-moz-appearance:textfield;}
 
 .cabecera{font-size: 13px;}
 
+
 /*.table-responsive>.table>tbody>tr>td,
 .table-responsive>.table>tbody>tr>th,*/
 .table-responsive>.table>thead>tr>td,
 .table-responsive>.table>thead>tr>th{white-space: normal;}
 h2{margin-top: 0px;} .breadcrumb{margin-bottom: 10px; }
-
+.modal-header-success { color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #5cb85c;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px;}
+.modal-header-warning { color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #f0ad4e;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.modal-header-danger {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #d9534f;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.modal-header-info {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #5bc0de;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.modal-header-primary {color:#fff;padding:9px 15px;border-bottom:1px solid #eee;background-color: #428bca;-webkit-border-top-left-radius: 5px;-webkit-border-top-right-radius: 5px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 5px;border-top-left-radius: 5px;border-top-right-radius: 5px;}
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -103,9 +110,12 @@ h2{margin-top: 0px;} .breadcrumb{margin-bottom: 10px; }
 
 .btn-primary.btn-outline:focus,.btn-success.btn-outline:focus,.btn-info.btn-outline:focus,.btn-warning.btn-outline:focus,.btn-danger.btn-outline:focus,
 .btn-primary.btn-outline:active,.btn-success.btn-outline:active,.btn-info.btn-outline:active,.btn-warning.btn-outline:active,.btn-danger.btn-outline:active,
-.btn-primary.btn-outline:hover,.btn-success.btn-outline:hover,.btn-info.btn-outline:hover,.btn-warning.btn-outline:hover,.btn-danger.btn-outline:hover {
-    color: white;}
+.btn-primary.btn-outline:hover,.btn-success.btn-outline:hover,.btn-info.btn-outline:hover,.btn-warning.btn-outline:hover,.btn-danger.btn-outline:hover {color: white;}
+.btn-negro.btn-outline:focus,.btn-negro.btn-outline:active,.btn-negro.btn-outline:hover{background-color: : black;}
 .nav .icofont{font-size: 24px;}.navbar-brand{font-size: 24px;}
+.modal-backdrop.in{filter:alpha(opacity=80);opacity:.8}
+.modal-content{box-shadow: 0 5px 15px rgba(114, 99, 222, 0.65);}
+
 
 .materialize-red{background-color:#e51c23 !important}.materialize-red-text{color:#e51c23 !important}.materialize-red.lighten-5{background-color:#fdeaeb !important}.materialize-red-text.text-lighten-5{color:#fdeaeb !important}.materialize-red.lighten-4{background-color:#f8c1c3 !important}.materialize-red-text.text-lighten-4{color:#f8c1c3 !important}
 .materialize-red.lighten-3{background-color:#f3989b !important}.materialize-red-text.text-lighten-3{color:#f3989b !important}.materialize-red.lighten-2{background-color:#ee6e73 !important}.materialize-red-text.text-lighten-2{color:#ee6e73 !important}

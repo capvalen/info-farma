@@ -288,8 +288,8 @@
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
-    noneSelectedText: 'Nothing selected',
-    noneResultsText: 'No results matched {0}',
+    noneSelectedText: 'Nada seleccionado',
+    noneResultsText: 'No coinciden con {0}',
     countSelectedText: function (numSelected, numTotal) {
       return (numSelected == 1) ? "{0} item selected" : "{0} items selected";
     },
